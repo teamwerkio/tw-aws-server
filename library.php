@@ -21,7 +21,7 @@
 	}
 
 	if(!isset($_SESSION['usr'])){
-		$tab_disp="Hello! Sign Up or Log In";
+		header("Location:usr.php");
 	}
 	else{
 		$home_sql = "SELECT * FROM users WHERE usrID='".$_SESSION['usr']."'";

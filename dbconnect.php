@@ -1,5 +1,5 @@
 <?php
-	$parsed_ini=parse_ini_file("cred.ini");
+	$parsed_ini=parse_ini_file("../cred.ini");
 	
 	$host=$parsed_ini["host"];
 	$uname=$parsed_ini["uname"];
