@@ -3,11 +3,3 @@ os: linux
 files:
   - source: /
     destination: /var/www/html/codes and scripts
-permissions:
-   - object: /var/www/html/codes and scripts
-     pattern: "**"
-     owner: apache
-     group: apache
-     mode: 755
-     type:
-       - file
