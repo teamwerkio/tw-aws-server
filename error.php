@@ -1,3 +1,3 @@
 <?php
-	echo "Sorry yall 404 error";
+	echo "Sorry 404 error";
 ?>
