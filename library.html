@@ -45,17 +45,20 @@
 		}
 	}while($proj_res=mysqli_fetch_assoc($proj_qry));
 ?>
+
+
+
 <!doctype html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Library | Teamwerk</title>
+	<title>Library | Teanwerk</title>
 
 	<!-- Style CSS -->
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link rel="stylesheet" type="text/css" href="css/responsive.css" />
-    <link rel="icon" href="../images/favicon.ico" type="image/x-icon"/>
+    <link rel="icon" href="images/favicon.png" type="image/x-icon"/>
 </head>
 
 <body>
@@ -63,7 +66,7 @@
 		<header id="header" class="site-header">
 			<div class="container">
 				<div class="site-brand">
-					<a href="library.php"><img src="../images/assets/logo.png" style="width: 170px; height: 28px;" alt=""></a>
+					<a href="library.php"><img src="../images/assets/logo.png" alt=""></a>
 				</div><!-- .site-brand -->
 				<div class="right-header">					
 					<nav class="main-menu">
@@ -92,7 +95,8 @@
 										<li><a href="usr.php?action=logout">Logout</a></li>
 
 										<?php
-									} ?>									
+									} ?>
+									
 								</ul>
 							</li>
 						</ul>
@@ -163,6 +167,8 @@
 				<div class="container">
 					<div class="campaign-content">
 						<div class="row">
+
+
 							<?php
 								$trend_sql="SELECT * FROM project where projID='".$trending_proj_id."'";
 								$trend_qry=mysqli_query($dbconnect, $trend_sql);
@@ -175,15 +181,18 @@
 								$owner_p=returnCat('users', 'profilepic', $trend_res['usrID'], $dbconnect, 'usrID');
 								$proj_col=returnCat('colleges', 'colName', $trend_res['colID'], $dbconnect, 'colID');
 							?>
+
+
+
 							<div class="col-lg-12">
 								<div class="campaign-big-item clearfix">
-									<a href="project.php?projID=<?php echo $trending_proj_id;?>" class="campaign-big-image">
+									<a href="campaign_detail.html" class="campaign-big-image">
+
 										<?php echo '<img src="../img_assets/banner_big/'.$trend_res['big_ban'].'" />'; ?>
-											
 									</a>
 									<div class="campaign-big-box wow fadeInUp" data-wow-delay=".1s">
 										<a href="#" class="category"><?php echo $cat; ?></a>
-										<h3><a href="project.php?projID=<?php echo $trending_proj_id;?>"><?php echo $trend_res['projName']; ?></a></h3>
+										<h3><a href="campaign_detail.html"><?php echo $trend_res['projName']; ?></a></h3>
 										<div class="campaign-description"><?php echo $trend_res['sm_desc']; ?></div>
 										<div class="staff-picks-author">
 											<div class="author-profile">
@@ -192,7 +201,7 @@
 											<div class="author-address"><span class="ion-location"></span><?php echo $proj_col; ?>, Amherst, MA</div>
 										</div>
 										<div class="process">
-											<div class="raised"><span style="width: 50%;"></span></div>
+											<div class="raised"><span style="width: 70%;"></span></div>
 											<div class="process-info">
 												<div class="process-pledged"><span><?php echo $trend_res['upvote']; ?></span>upvotes</div>
 												<div class="process-funded"><span><?php echo $trend_res['interest']; ?>%</span>interest</div>
@@ -203,6 +212,29 @@
 									</div>
 								</div>
 							</div>
+<!-- 							<div class="col-lg-4 col-sm-6 col-6">
+								<div class="campaign-item wow fadeInUp" data-wow-delay=".1s">
+									<a class="overlay" href="campaign_detail.html">
+										<img src="images/placeholder/370x240.png" alt="">
+										<span class="ion-ios-search-strong"></span>
+									</a>
+									<div class="campaign-box">
+										<a href="#" class="category">Crafts</a>
+										<h3><a href="campaign_detail.html">The Oreous Pillow</a></h3>
+										<div class="campaign-description">A watch designed to be an heirloom to be passed down to the next generation.</div>
+										<div class="campaign-author"><a class="author-icon" href="#"><img src="images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Sabato Alterio</a></div>
+										<div class="process">
+											<div class="raised"><span style="width: 10%;"></span></div>
+											<div class="process-info">
+												<div class="process-pledged"><span>280</span>upvotes</div>
+												<div class="process-funded"><span>26%</span>interest</div>
+												<div class="process-time"><span style="color: red;">19%</span>virality</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div> -->
+
 
 
 							<?php
@@ -217,44 +249,46 @@
 										$owner_f=returnCat('users', 'firstname', $proj_res['usrID'], $dbconnect, 'usrID');
 										$owner_p=returnCat('users', 'profilepic', $proj_res['usrID'], $dbconnect, 'usrID');
 										?>
+
 											<div class="col-lg-4 col-sm-6 col-6">
 												<div class="campaign-item wow fadeInUp" data-wow-delay=".1s">
-													<a class="overlay" href="project.php?projID=<?php echo $proj_res['projID']; ?>">
+													<a class="overlay" href="campaign_detail.html">
 														<?php echo '<img src="../img_assets/banner_small/'.$proj_res['small_ban'].'" />'; ?>
 														<span class="ion-ios-search-strong"></span>
 													</a>
 													<div class="campaign-box">
 														<a href="#" class="category"><?php echo $cat; ?></a>
-														<h3><a href="project.php?projID=<?php echo $proj_res['projID']; ?>"><?php echo $proj_res['projName']; ?></a></h3>
+														<h3><a href="campaign_detail.html"><?php echo $proj_res['projName']; ?></a></h3>
 														<div class="campaign-description"><?php echo $proj_res['sm_desc']; ?></div>
 														<div class="campaign-author"><a class="author-icon" href="#"><?php echo '<img src="../img_assets/profilepic/'.$owner_p.'" />'; ?></a>by <a class="author-name" href="#"><?php echo $owner_f; ?></a></div>
 														<div class="process">
-															<div class="raised"><span style="width: 10%;"></span></div>
+															<div class="raised"><span style="width: 40%;"></span></div>
 															<div class="process-info">
 																<div class="process-pledged"><span><?php echo $proj_res['upvote']; ?></span>upvotes</div>
 																<div class="process-funded"><span><?php echo $proj_res['interest']; ?>%</span>interest</div>
-																<div class="process-time"><span style="color: red;"><?php echo $proj_res['virality']; ?>%</span>virality</div>
+																<div class="process-time"><span style="color: green;"><?php echo $proj_res['virality']; ?>%</span>virality</div>
 															</div>
 														</div>
 													</div>
 												</div>
 											</div>
+
 										<?php
 
 								}}while($proj_res=mysqli_fetch_assoc($proj_qry));
 
-							?>											
+							?>
 							<!-- <div class="col-lg-4 col-sm-6 col-6">
 								<div class="campaign-item wow fadeInUp" data-wow-delay=".1s">
-									<a class="overlay" href="project.php">
-										<img src="../images/placeholder/370x240.png" alt="">
+									<a class="overlay" href="campaign_detail.html">
+										<img src="images/placeholder/370x240.png" alt="">
 										<span class="ion-ios-search-strong"></span>
 									</a>
 									<div class="campaign-box">
 										<a href="#" class="category">Book</a>
-										<h3><a href="project.php">The Everlast Notebook</a></h3>
+										<h3><a href="campaign_detail.html">The Everlast Notebook</a></h3>
 										<div class="campaign-description">One smart, reusable notebook to last the rest of your life? That's not magic, that's the Everlast.</div>
-										<div class="campaign-author"><a class="author-icon" href="#"><img src="../images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Samino</a></div>
+										<div class="campaign-author"><a class="author-icon" href="#"><img src="images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Samino</a></div>
 										<div class="process">
 											<div class="raised"><span style="width: 40%;"></span></div>
 											<div class="process-info">
@@ -268,15 +302,15 @@
 							</div>
 							<div class="col-lg-4 col-sm-6 col-6">
 								<div class="campaign-item wow fadeInUp" data-wow-delay=".1s">
-									<a class="overlay" href="project.php">
-										<img src="../images/placeholder/370x240.png" alt="">
+									<a class="overlay" href="campaign_detail.html">
+										<img src="images/placeholder/370x240.png" alt="">
 										<span class="ion-ios-search-strong"></span>
 									</a>
 									<div class="campaign-box">
 										<a href="#" class="category">Perfomances</a>
-										<h3><a href="project.php">Uncompromising Ski Gear</a></h3>
+										<h3><a href="campaign_detail.html">Uncompromising Ski Gear</a></h3>
 										<div class="campaign-description">The Orsden Slope Pants don't compromise delivering performance, fit, and value directly to you</div>
-										<div class="campaign-author"><a class="author-icon" href="#"><img src="../images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Andrew Noah</a></div>
+										<div class="campaign-author"><a class="author-icon" href="#"><img src="images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Andrew Noah</a></div>
 										<div class="process">
 											<div class="raised"><span style="width: 21%;"></span></div>
 											<div class="process-info">
@@ -290,15 +324,15 @@
 							</div>
 							<div class="col-lg-4 col-sm-6 col-6">
 								<div class="campaign-item wow fadeInUp" data-wow-delay=".1s">
-									<a class="overlay" href="project.php">
-										<img src="../images/placeholder/370x240.png" alt="">
+									<a class="overlay" href="campaign_detail.html">
+										<img src="images/placeholder/370x240.png" alt="">
 										<span class="ion-ios-search-strong"></span>
 									</a>
 									<div class="campaign-box">
 										<a href="#" class="category">Technology</a>
-										<h3><a href="project.php">Smart Wallet with Solar Charge</a></h3>
+										<h3><a href="campaign_detail.html">Smart Wallet with Solar Charge</a></h3>
 										<div class="campaign-description">A wonderful serenity has taken possession of my entire soul, like these sweet mornings.</div>
-										<div class="campaign-author"><a class="author-icon" href="#"><img src="../images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Andrew Noah</a></div>
+										<div class="campaign-author"><a class="author-icon" href="#"><img src="images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Andrew Noah</a></div>
 										<div class="process">
 											<div class="raised"><span style="width: 56%;"></span></div>
 											<div class="process-info">
@@ -312,15 +346,15 @@
 							</div>
 							<div class="col-lg-4 col-sm-6 col-6">
 								<div class="campaign-item wow fadeInUp" data-wow-delay=".1s">
-									<a class="overlay" href="project.php">
-										<img src="../images/placeholder/370x240.png" alt="">
+									<a class="overlay" href="campaign_detail.html">
+										<img src="images/placeholder/370x240.png" alt="">
 										<span class="ion-ios-search-strong"></span>
 									</a>
 									<div class="campaign-box">
 										<a href="#" class="category">Technology</a>
-										<h3><a href="project.php">Redefine Your VR Experience</a></h3>
+										<h3><a href="campaign_detail.html">Redefine Your VR Experience</a></h3>
 										<div class="campaign-description">I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot.</div>
-										<div class="campaign-author"><a class="author-icon" href="#"><img src="../images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Sabato Alterio</a></div>
+										<div class="campaign-author"><a class="author-icon" href="#"><img src="images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Sabato Alterio</a></div>
 										<div class="process">
 											<div class="raised"><span style="width: 89%;"></span></div>
 											<div class="process-info">
@@ -334,15 +368,15 @@
 							</div>
 							<div class="col-lg-4 col-sm-6 col-6">
 								<div class="campaign-item wow fadeInUp" data-wow-delay=".1s">
-									<a class="overlay" href="project.php">
-										<img src="../images/placeholder/370x240.png" alt="">
+									<a class="overlay" href="campaign_detail.html">
+										<img src="images/placeholder/370x240.png" alt="">
 										<span class="ion-ios-search-strong"></span>
 									</a>
 									<div class="campaign-box">
 										<a href="#" class="category">Design &amp; Art</a>
-										<h3><a href="project.php">Bring back Fun House</a></h3>
+										<h3><a href="campaign_detail.html">Bring back Fun House</a></h3>
 										<div class="campaign-description">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</div>
-										<div class="campaign-author"><a class="author-icon" href="#"><img src="../images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Samino</a></div>
+										<div class="campaign-author"><a class="author-icon" href="#"><img src="images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Samino</a></div>
 										<div class="process">
 											<div class="raised"><span style="width: 91%;"></span></div>
 											<div class="process-info">
@@ -356,15 +390,15 @@
 							</div>
 							<div class="col-lg-4 col-sm-6 col-6">
 								<div class="campaign-item wow fadeInUp" data-wow-delay=".1s">
-									<a class="overlay" href="project.php">
-										<img src="../images/placeholder/370x240.png" alt="">
+									<a class="overlay" href="campaign_detail.html">
+										<img src="images/placeholder/370x240.png" alt="">
 										<span class="ion-ios-search-strong"></span>
 									</a>
 									<div class="campaign-box">
 										<a href="#" class="category">Technology</a>
-										<h3><a href="project.php">Smart Wallet with Solar Charge</a></h3>
+										<h3><a href="campaign_detail.html">Smart Wallet with Solar Charge</a></h3>
 										<div class="campaign-description">A wonderful serenity has taken possession of my entire soul, like these sweet mornings.</div>
-										<div class="campaign-author"><a class="author-icon" href="#"><img src="../images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Andrew Noah</a></div>
+										<div class="campaign-author"><a class="author-icon" href="#"><img src="images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Andrew Noah</a></div>
 										<div class="process">
 											<div class="raised"><span style="width: 29%;"></span></div>
 											<div class="process-info">
@@ -378,15 +412,15 @@
 							</div>
 							<div class="col-lg-4 col-sm-6 col-6">
 								<div class="campaign-item wow fadeInUp" data-wow-delay=".1s">
-									<a class="overlay" href="project.php">
-										<img src="../images/placeholder/370x240.png" alt="">
+									<a class="overlay" href="campaign_detail.html">
+										<img src="images/placeholder/370x240.png" alt="">
 										<span class="ion-ios-search-strong"></span>
 									</a>
 									<div class="campaign-box">
 										<a href="#" class="category">Technology</a>
-										<h3><a href="project.php">Redefine Your VR Experience</a></h3>
+										<h3><a href="campaign_detail.html">Redefine Your VR Experience</a></h3>
 										<div class="campaign-description">I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot.</div>
-										<div class="campaign-author"><a class="author-icon" href="#"><img src="../images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Sabato Alterio</a></div>
+										<div class="campaign-author"><a class="author-icon" href="#"><img src="images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Sabato Alterio</a></div>
 										<div class="process">
 											<div class="raised"><span style="width: 44%;"></span></div>
 											<div class="process-info">
@@ -400,15 +434,15 @@
 							</div>
 							<div class="col-lg-4 col-sm-6 col-6">
 								<div class="campaign-item wow fadeInUp" data-wow-delay=".1s">
-									<a class="overlay" href="project.php">
-										<img src="../images/placeholder/370x240.png" alt="">
+									<a class="overlay" href="campaign_detail.html">
+										<img src="images/placeholder/370x240.png" alt="">
 										<span class="ion-ios-search-strong"></span>
 									</a>
 									<div class="campaign-box">
 										<a href="#" class="category">Design &amp; Art</a>
-										<h3><a href="project.php">Bring back Fun House</a></h3>
+										<h3><a href="campaign_detail.html">Bring back Fun House</a></h3>
 										<div class="campaign-description">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</div>
-										<div class="campaign-author"><a class="author-icon" href="#"><img src="../images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Samino</a></div>
+										<div class="campaign-author"><a class="author-icon" href="#"><img src="images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Samino</a></div>
 										<div class="process">
 											<div class="raised"><span style="width: 48%;"></span></div>
 											<div class="process-info">
@@ -436,7 +470,7 @@
 							<div class="footer-menu-item">
 								<h3>Company</h3>
 								<ul>
-									<li><a href="about_us.php">About</a></li>
+									<li><a href="about_us.html">About</a></li>
 									<li><a href="">Press</a></li>
 									<li><a href="#">Team</a></li>
 									<li><a href="#">Contact</a></li>

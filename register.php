@@ -5,7 +5,6 @@
 		header("Location:library.php");
 	}
 ?>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -16,7 +15,7 @@
 	<!-- Style CSS -->
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link rel="stylesheet" type="text/css" href="css/responsive.css" />
-    <link rel="icon" href="images/favicon.png" type="image/x-icon"/>
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon"/>
 </head>
 
 <body>
@@ -24,7 +23,7 @@
 		<header id="header" class="site-header">
 			<div class="container">
 				<div class="site-brand">
-					<a href="login.php"><img src="../images/assets/logo.png" alt=""></a>
+					<a href="login.php"><img src="../images/assets/logo.png" style="width: 170px; height: 28px;" alt=""></a>
 				</div><!-- .site-brand -->
 				<div class="right-header">					
 					<!-- <nav class="main-menu">
@@ -111,7 +110,6 @@
 				</div><!--. right-header -->
 			</div><!-- .container -->
 		</header><!-- .site-header -->
-
 		<main id="main" class="site-main">
 			<div class="page-title background-page">
 				<div class="container">
@@ -173,7 +171,8 @@
 					</div>
 				</div>
 			</div>	
-		</main><!-- .site-main -->
+		</main>
+		<!-- .site-main -->
 
 		<footer id="footer" class="site-footer">
 			<div class="footer-menu">
@@ -183,7 +182,7 @@
 							<div class="footer-menu-item">
 								<h3>Company</h3>
 								<ul>
-									<li><a href="about_us.html">About</a></li>
+									<li><a href="about_us.php">About</a></li>
 									<li><a href="">Press</a></li>
 									<li><a href="#">Team</a></li>
 									<li><a href="#">Contact</a></li>

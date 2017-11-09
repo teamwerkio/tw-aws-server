@@ -31,7 +31,7 @@
 		<header id="header" class="site-header">
 			<div class="container">
 				<div class="site-brand">
-					<a href="library.php"><img src="../images/assets/logo.png" alt=""></a>
+					<a href="library.html"><img src="../images/assets/logo.png" style="width: 170px; height: 28px;" alt=""></a>
 				</div><!-- .site-brand -->
 				<div class="right-header">					
 					<nav class="main-menu">

@@ -109,6 +109,21 @@ a:hover{
 	color: #73b941;
 	text-decoration:none;
 }
+a-edit:hover{
+	color: #73b941;
+	text-decoration:none;
+	cursor: pointer;
+}
+a-edit-black:hover{
+	color: #242424;
+	text-decoration:none;
+	cursor: pointer;
+}
+a-remove:hover{
+	color: #ed3d3d;
+	text-decoration:none;
+	cursor: pointer;
+}
 a:focus{
 	text-decoration: none;
 	color: inherit;
@@ -476,7 +491,7 @@ ul.socials-top li:hover i{
 .site-main .sideshow{
 	position: relative;
 	height: 674px;
-	background-image: url('images/placeholder/1920x680.png');
+	background-image: url('../images/placeholder/1920x680.png');
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center center;
@@ -835,6 +850,8 @@ ul.menu-category li.active:after{
 .project-love-item a.project-love-image,
 .campaign-big-item a.campaign-big-image{
 	float: left;
+	width: 570px;
+	height: 350px;
 }
 .staff-picks-item .staff-picks-item-content h3,
 .project-love-item .project-love-item-content h3,
@@ -1162,16 +1179,16 @@ ul.menu-category li.active:after{
 	background-repeat: no-repeat;
 }
 .page-title.background-page{
-	background-image: url('images/placeholder/1920x220.png');
+	background-image: url('../images/placeholder/1920x220.png');
 }
 .page-title.background-blog{
-	background-image: url('images/placeholder/1920x220.png');
+	background-image: url('../images/placeholder/1920x220.png');
 }
 .page-title.background-campaign{
-	background-image: url('images/placeholder/1920x220.png');
+	background-image: url('../images/placeholder/1920x220.png');
 }
 .page-title.background-cart{
-	background-image: url('images/placeholder/1920x220.png');
+	background-image: url('../images/placeholder/1920x220.png');
 }
 .page-title:before{
 	content: '';
@@ -1619,7 +1636,7 @@ ul.menu-category li.active:after{
 	11. ABOUT US
 ==========================================================*/
 .top-site{
-	background-image: url('images/placeholder/1920x860.png');
+	background-image: url('../images/placeholder/1920x860.png');
 	height: 860px;
 	background-size: cover;
 	background-position: center center;
@@ -2307,7 +2324,7 @@ form .create-account input[type="checkbox"]{
 	16. COMING SOON
 ==========================================================*/
 .coming-soon #wrapper{
-	background-image: url(images/placeholder/1920x1080.png);
+	background-image: url(../images/placeholder/1920x1080.png);
 	background-position: center center;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -2788,6 +2805,24 @@ form .create-account input[type="checkbox"]{
 .campaign-history .campaign-content p:last-child{
 	margin-bottom: 0px;
 }
+.support.support-campaign button{
+	background-color: #73b941;
+	padding: 0 20px;
+	border-radius: 2px 2px 2px 2px;
+	-moz-border-radius: 2px 2px 2px 2px;
+	-webkit-border-radius: 2px 2px 2px 2px;
+	height: 45px;
+	line-height: 46px;
+	border: none;
+	display: inline-block;
+	color: white;
+	font-weight: medium;
+	margin-top: 10px;
+	width: 100%;
+}
+.support.support-campaign button:hover{
+	background-color: #5aab21; 
+}
 .support-campaign{
 	background-color: initial;
 	padding: 0;
@@ -2822,19 +2857,26 @@ form .create-account input[type="checkbox"]{
 	display: block;
 	background-color: #f5f6f6;
 	padding: 40px 25px;
+	cursor: pointer;
 }
-.support-campaign .plan a:focus{
+/*.support-campaign .plan a:focus{
 	background-color: #73b941;
-	color: #fff;
-}
-.support-campaign .plan a:focus:hover{
-	color: #fff;
+	color: white;
+}*/
+/*.support-campaign .plan a:focus:hover{
+	color: white;
 }
 .support-campaign .plan a:focus h4{
-	color: #fff;
-}
+	color: white;
+}*/
 .support-campaign .plan a:hover{
-	color: #555555;
+	background-color: #73b941;
+	color: white;
+	cursor: pointer;
+}
+.support-campaign .plan a:hover h4{
+	color: white;
+	cursor: pointer;
 }
 .support-campaign .plan h4{
 	font-size: 16px;
@@ -2875,7 +2917,7 @@ form .create-account input[type="checkbox"]{
 	left: -13px;
 	top: 0;
 	transition: all 0.6s;
-	z-index: 9;
+	z-index: 1;
 }
 #updates li:after{
 	content: '';
@@ -2892,8 +2934,30 @@ form .create-account input[type="checkbox"]{
 #updates li p{
 	margin-bottom: 5px;
 }
+#updates li p2{
+	float: right;
+	margin-bottom: 5px;
+}
 #updates li h3{
 	margin-bottom: 10px;
+}
+#updates button{
+	background-color: #73b941;
+	padding: 0 20px;
+	border-radius: 2px 2px 2px 2px;
+	-moz-border-radius: 2px 2px 2px 2px;
+	-webkit-border-radius: 2px 2px 2px 2px;
+	height: 45px;
+	line-height: 46px;
+	border: none;
+	display: inline-block;
+	color: white;
+	font-weight: medium;
+	margin-top: 10px;
+	width: 100%;
+}
+#updates button:hover{
+	background-color: #5aab21;
 }
 #comments h3,#faq h2{
 	margin-bottom: 20px;
@@ -3145,6 +3209,8 @@ form .create-account input[type="checkbox"]{
 .product a:hover img{
 	-webkit-transform: scale(1.1);
 	transform: scale(1.1);
+	width: 370px;
+	height: 240px;
 }
 .featured-places-item:hover a.featured-places-image img{
   -moz-transform: scale(1.05);
@@ -3594,4 +3660,290 @@ form .create-account input[type="checkbox"]{
    right: 5px;
    top: 5px;
    width: 24px;
+}
+
+#datepicker {
+}
+
+/*POPUP*/
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    height: 650px;
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/*TOOLTIP*/
+
+/**
+ * Tooltip Styles
+ */
+
+/* Base styles for the element that has a tooltip */
+[data-tooltip],
+.tooltip {
+  position: relative;
+  cursor: pointer;
+}
+
+/* Base styles for the entire tooltip */
+[data-tooltip]:before,
+[data-tooltip]:after,
+.tooltip:before,
+.tooltip:after {
+  position: absolute;
+  visibility: hidden;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  -webkit-transition: 
+      opacity 0.2s ease-in-out,
+        visibility 0.2s ease-in-out,
+        -webkit-transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
+    -moz-transition:    
+        opacity 0.2s ease-in-out,
+        visibility 0.2s ease-in-out,
+        -moz-transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
+    transition:         
+        opacity 0.2s ease-in-out,
+        visibility 0.2s ease-in-out,
+        transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform:    translate3d(0, 0, 0);
+  transform:         translate3d(0, 0, 0);
+  pointer-events: none;
+}
+
+/* Show the entire tooltip on hover and focus */
+[data-tooltip]:hover:before,
+[data-tooltip]:hover:after,
+[data-tooltip]:focus:before,
+[data-tooltip]:focus:after,
+.tooltip:hover:before,
+.tooltip:hover:after,
+.tooltip:focus:before,
+.tooltip:focus:after {
+  visibility: visible;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  opacity: 1;
+}
+
+/* Base styles for the tooltip's directional arrow */
+.tooltip:before,
+[data-tooltip]:before {
+  z-index: 1001;
+  border: 6px solid transparent;
+  background: transparent;
+  content: "";
+}
+
+/* Base styles for the tooltip's content area */
+.tooltip:after,
+[data-tooltip]:after {
+  z-index: 1000;
+  padding: 8px;
+  width: 160px;
+  background-color: #000;
+  background-color: hsla(0, 0%, 20%, 0.9);
+  color: #fff;
+  content: attr(data-tooltip);
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: normal;
+  text-align: center;
+  border-radius: 3px;
+}
+
+/* Directions */
+
+/* Top (default) */
+[data-tooltip]:before,
+[data-tooltip]:after,
+.tooltip:before,
+.tooltip:after,
+.tooltip-top:before,
+.tooltip-top:after {
+  bottom: 100%;
+  left: 50%;
+}
+
+[data-tooltip]:before,
+.tooltip:before,
+.tooltip-top:before {
+  margin-left: -6px;
+  margin-bottom: -12px;
+  border-top-color: #000;
+  border-top-color: hsla(0, 0%, 20%, 0.9);
+}
+
+/* Horizontally align top/bottom tooltips */
+[data-tooltip]:after,
+.tooltip:after,
+.tooltip-top:after {
+  margin-left: -80px;
+}
+
+[data-tooltip]:hover:before,
+[data-tooltip]:hover:after,
+[data-tooltip]:focus:before,
+[data-tooltip]:focus:after,
+.tooltip:hover:before,
+.tooltip:hover:after,
+.tooltip:focus:before,
+.tooltip:focus:after,
+.tooltip-top:hover:before,
+.tooltip-top:hover:after,
+.tooltip-top:focus:before,
+.tooltip-top:focus:after {
+  -webkit-transform: translateY(-12px);
+  -moz-transform:    translateY(-12px);
+  transform:         translateY(-12px); 
+}
+
+/* Left */
+.tooltip-left:before,
+.tooltip-left:after {
+  right: 100%;
+  bottom: 50%;
+  left: auto;
+}
+
+.tooltip-left:before {
+  margin-left: 0;
+  margin-right: -12px;
+  margin-bottom: 0;
+  border-top-color: transparent;
+  border-left-color: #000;
+  border-left-color: hsla(0, 0%, 20%, 0.9);
+}
+
+.tooltip-left:hover:before,
+.tooltip-left:hover:after,
+.tooltip-left:focus:before,
+.tooltip-left:focus:after {
+  -webkit-transform: translateX(-12px);
+  -moz-transform:    translateX(-12px);
+  transform:         translateX(-12px); 
+}
+
+/* Bottom */
+.tooltip-bottom:before,
+.tooltip-bottom:after {
+  top: 100%;
+  bottom: auto;
+  left: 50%;
+}
+
+.tooltip-bottom:before {
+  margin-top: -12px;
+  margin-bottom: 0;
+  border-top-color: transparent;
+  border-bottom-color: #000;
+  border-bottom-color: hsla(0, 0%, 20%, 0.9);
+}
+
+.tooltip-bottom:hover:before,
+.tooltip-bottom:hover:after,
+.tooltip-bottom:focus:before,
+.tooltip-bottom:focus:after {
+  -webkit-transform: translateY(12px);
+  -moz-transform:    translateY(12px);
+  transform:         translateY(12px); 
+}
+
+/* Right */
+.tooltip-right:before,
+.tooltip-right:after {
+  bottom: 50%;
+  left: 100%;
+}
+
+.tooltip-right:before {
+  margin-bottom: 0;
+  margin-left: -12px;
+  border-top-color: transparent;
+  border-right-color: #000;
+  border-right-color: hsla(0, 0%, 20%, 0.9);
+}
+
+.tooltip-right:hover:before,
+.tooltip-right:hover:after,
+.tooltip-right:focus:before,
+.tooltip-right:focus:after {
+  -webkit-transform: translateX(12px);
+  -moz-transform:    translateX(12px);
+  transform:         translateX(12px); 
+}
+
+/* Move directional arrows down a bit for left/right tooltips */
+.tooltip-left:before,
+.tooltip-right:before {
+  top: 3px;
+}
+
+/* Vertically center tooltip content for left/right tooltips */
+.tooltip-left:after,
+.tooltip-right:after {
+  margin-left: 0;
+  margin-bottom: -16px;
+}
+
+#circle {
+	border:1px solid;    
+	height:25px;
+	border-radius:50%;
+	width:25px;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 21px;
+	margin-bottom: 2px;
+}
+
+.team {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	vertical-align: middle;
+}
+
+.team img {
+	width: 90px;
+	height: 90px;
+	border-radius: 3px;
+	cursor: pointer;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-right: 3px;
 }
