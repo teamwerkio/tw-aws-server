@@ -140,7 +140,7 @@
 											$proj_qry=mysqli_query($dbconnect, $proj_sql);
 											$proj_res=mysqli_fetch_assoc($proj_qry);
 											do{
-												if($proj_res['projID']===$key){
+												if(strcmp($proj_res['projName'], "") !==0 && $proj_res['projID']===$key){
 													
 											?>
 

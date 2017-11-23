@@ -168,11 +168,13 @@
 												
 												$count=0;
 
+												
 												foreach ($min_times as &$time) {
 
 													do{
-														if($proj_res['dt']===$time && $count<2){
+														if(strcmp($proj_res['projName'], "")!==0 && $proj_res['dt']===$time && $count<2){
 															$count=$count+1;
+															
 															?>
 																<li>
 																	<a href="#"><?php echo '<img src="'.getimgURL($proj_res['proj_icon'], "proj_icon").'" />'; ?></a>

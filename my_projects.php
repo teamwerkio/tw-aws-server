@@ -120,6 +120,9 @@
 										}
 
 										do{
+											if(strcmp($proj_res['projName'], "")!==0){
+											
+										
 											?>
 
 												<div class="campaign-item">
@@ -133,6 +136,7 @@
 
 											<?php
 
+											}
 										} while($proj_res=mysqli_fetch_assoc($proj_qry));
 
 									?>
