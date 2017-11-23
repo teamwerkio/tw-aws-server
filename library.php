@@ -221,13 +221,15 @@
 												<div class="campaign-item wow fadeInUp" data-wow-delay=".1s">
 													<a class="overlay" style="height: 240px;" href="project.php?projID=<?php echo $proj_res['projID']; ?>">
 														<?php echo '<img src="'.getimgURL($proj_res['small_ban'], "banner_small").'" style="height: 240px;" />'; ?>
-														<span class="ion-ios-search-strong"></span>
+														<span class="ion-paper-airplane"></span>
 													</a>
 													<div class="campaign-box">
 														<a href="#" class="category"><?php echo $cat; ?></a>
 														<h3><a href="project.php?projID=<?php echo $proj_res['projID']; ?>"><?php echo $proj_res['projName']; ?></a></h3>
 														<div class="campaign-description"><?php echo $proj_res['sm_desc']; ?></div>
-														<div class="campaign-author"><a class="author-icon" href="#"><?php echo '<img src="'.getimgURL($owner_p, "profilepic").'" />'; ?></a>by <a class="author-name" href="#"><?php echo $owner_f; ?></a></div>
+														<div class="campaign-author"><a class="author-icon" href="#">
+															<?php echo '<img src="'.getimgURL($owner_p, "profilepic").'" />'; ?></a>by <a class="author-name" href="#"><?php echo $owner_f; ?>		
+														</a></div>
 														<div class="process">
 															<div class="raised"><span style="width: 10%;"></span></div>
 															<div class="process-info">
