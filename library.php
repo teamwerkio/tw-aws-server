@@ -178,9 +178,8 @@
 							?>
 							<div class="col-lg-12">
 								<div class="campaign-big-item clearfix">
-									<a href="project.php?projID=<?php echo $trending_proj_id;?>" class="campaign-big-image">
-										<?php echo '<img src="'.getimgURL($trend_res['big_ban'], "banner_big").'" />'; ?>
-											
+									<a href="project.php?projID=<?php echo $trending_proj_id;?>" class="campaign-big-image" style="height: 350px; width: 570px;">
+										<?php echo '<img src="'.getimgURL($trend_res['big_ban'], "banner_big").'" style="height: 350px; width: 570px;" />'; ?>		
 									</a>
 									<div class="campaign-big-box wow fadeInUp" data-wow-delay=".1s">
 										<a href="#" class="category"><?php echo $cat; ?></a>
@@ -220,8 +219,8 @@
 										?>
 											<div class="col-lg-4 col-sm-6 col-6">
 												<div class="campaign-item wow fadeInUp" data-wow-delay=".1s">
-													<a class="overlay" href="project.php?projID=<?php echo $proj_res['projID']; ?>">
-														<?php echo '<img src="'.getimgURL($proj_res['small_ban'], "banner_small").'" />'; ?>
+													<a class="overlay" style="height: 240px;" href="project.php?projID=<?php echo $proj_res['projID']; ?>">
+														<?php echo '<img src="'.getimgURL($proj_res['small_ban'], "banner_small").'" style="height: 240px;" />'; ?>
 														<span class="ion-ios-search-strong"></span>
 													</a>
 													<div class="campaign-box">
