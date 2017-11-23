@@ -1,9 +1,12 @@
 <?php
-	$parsed_ini=parse_ini_file("../../cred.ini");
-	$host=$parsed_ini["host"];
-	$uname=$parsed_ini["uname"];
-	$pass=$parsed_ini["pass"];
-	$db=$parsed_ini["db"];
+	
+
+	$parsed_ini=parse_ini_file("../../cred.ini", true);
+	
+	$host=$parsed_ini["DB"]["host"];
+	$uname=$parsed_ini["DB"]["uname"];
+	$pass=$parsed_ini["DB"]["pass"];
+	$db=$parsed_ini["DB"]["db"];
 	$dbconnect = mysqli_connect($host, $uname, $pass, $db);
 	
 
@@ -11,4 +14,6 @@
 		echo "Connection failed: ".mysqli_connect_error();
 		exit;
 	}
+
+
 ?>

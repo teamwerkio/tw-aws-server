@@ -2,7 +2,8 @@
 	error_reporting(E_ALL);
 	ini_set('display_errors', 'on');
 	include("dbconnect.php");
-	
+	include("upload_photo.php");
+
 	date_default_timezone_set('US/Eastern');
 	$name_f=$_POST['firstname'];
 	$name_l=$_POST['lastname'];
@@ -35,15 +36,20 @@
 			mysqli_real_escape_string($dbconnect, $date)."')";
 		}
 		else{
-			$img_name=$name_l.$date.'.'.end(explode(".", $_FILES['profilepic']['name']));
-			$target_dir="../img_assets/profilepic/";
-			move_uploaded_file($_FILES['profilepic']['tmp_name'], $target_dir.$img_name);
+			$new_name=$name_l.$date;
+			img_uploader($_FILES['profilepic'], "profilepic", $new_name);
+
+
+			
+			// $img_name=$name_l.$date.'.'.end(explode(".", $_FILES['profilepic']['name']));
+			// $target_dir="../img_assets/profilepic/";
+			// move_uploaded_file($_FILES['profilepic']['tmp_name'], $target_dir.$img_name);
 			$signup_sql = "INSERT INTO users (firstname, lastname, email, pitch, password, profilepic, dt) VALUES ('".mysqli_real_escape_string($dbconnect, $name_f)."', '".
 			mysqli_real_escape_string($dbconnect, $name_l)."', '".
 			mysqli_real_escape_string($dbconnect, $email)."', '".
 			mysqli_real_escape_string($dbconnect, $pitch)."', '".
 			mysqli_real_escape_string($dbconnect, $pass)."', '".
-			mysqli_real_escape_string($dbconnect, $img_name)."', '".
+			mysqli_real_escape_string($dbconnect, $new_name)."', '".
 			mysqli_real_escape_string($dbconnect, $date)."')";
 
 		}

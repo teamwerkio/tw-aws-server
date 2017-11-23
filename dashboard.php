@@ -1,7 +1,7 @@
 <?php
 	include("dbconnect.php");
 	session_start();
-
+	include("img_url.php");
 
 	function timedifference($time){
 		date_default_timezone_set('US/Eastern');
@@ -69,7 +69,7 @@
 		<header id="header" class="site-header">
 			<div class="container">
 				<div class="site-brand">
-					<a href="library.html"><img src="../images/assets/logo.png" style="width: 170px; height: 28px;" alt=""></a>
+					<a href="library.php"><img src="../images/assets/logo.png" style="width: 170px; height: 28px;" alt=""></a>
 				</div><!-- .site-brand -->
 				<div class="right-header">					
 					<nav class="main-menu">
@@ -142,7 +142,7 @@
 								<div class="account-main">
 									<div class="author clearfix">
 										<a class="author-avatar" href="#">
-											<?php echo '<img src="../img_assets/profilepic/'.$dash_res['profilepic'].'"/>'; ?>
+											<?php echo '<img src="'.getimgURL($dash_res['profilepic'], "profilepic").'"/>'; ?>
 										</a>
 										<div class="author-content">
 											<div class="author-title"><h3><a href="#"><?php echo $dash_res['firstname'].' '.$dash_res['lastname']; ?></a></h3><a class="edit-profile" href="#">Edit Profile</a></div>
@@ -175,7 +175,7 @@
 															$count=$count+1;
 															?>
 																<li>
-																	<a href="#"><?php echo '<img src="../img_assets/proj_icon/'.$proj_res['proj_icon'].'" />'; ?></a>
+																	<a href="#"><?php echo '<img src="'.getimgURL($proj_res['proj_icon'], "proj_icon").'" />'; ?></a>
 																	<div class="dashboard-latest-box">
 																		<div class="category"><a href="#"><?php echo returnCat('proj_categories', 'catName', $proj_res['catID'], $dbconnect); ?></a></div>
 																		<h4><a href="#"><?php echo $proj_res['projName']; ?></a></h4>

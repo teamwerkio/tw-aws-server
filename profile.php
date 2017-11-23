@@ -1,5 +1,6 @@
 <?php
 	include("dbconnect.php");
+	include("img_url.php");
 	session_start();
 
 	if(!isset($_SESSION['usr'])){
@@ -9,6 +10,8 @@
 		$prof_sql = "SELECT * FROM users WHERE usrID='".$_SESSION['usr']."'";
 		$prof_qry = mysqli_query($dbconnect, $prof_sql);
 		$prof_res = mysqli_fetch_assoc($prof_qry);
+
+		
 	}
 ?>
 <!doctype html>
@@ -29,7 +32,7 @@
 		<header id="header" class="site-header">
 			<div class="container">
 				<div class="site-brand">
-					<a href="library.html"><img src="../images/assets/logo.png" style="width: 170px; height: 28px;" alt=""></a>
+					<a href="library.php"><img src="../images/assets/logo.png" style="width: 170px; height: 28px;" alt=""></a>
 				</div><!-- .site-brand -->
 				<div class="right-header">					
 					<nav class="main-menu">
@@ -101,7 +104,8 @@
 								<h3 class="account-title">Profile</h3>
 								<div class="account-main">
 									<div class="author clearfix">
-										<a class="author-avatar" href="#"><?php echo '<img src="../img_assets/profilepic/'.$prof_res['profilepic'].'"/>'; ?></a>
+										<a class="author-avatar" href="#">
+											<?php echo '<img src="'.getimgURL($prof_res['profilepic'], 'profilepic').'"/>'; ?></a>
 										<div class="author-content">
 											<div class="author-title"><h3><a href="#"><?php echo $prof_res['firstname'];?> <?php echo $prof_res['lastname']; ?></a></h3></div>
 											<div class="author-info">

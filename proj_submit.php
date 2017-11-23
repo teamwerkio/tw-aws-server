@@ -1,5 +1,6 @@
 <?php
 	include("dbconnect.php");
+	include("upload_photo.php");
 	session_start();
 	date_default_timezone_set('US/Eastern');
 	if(!isset($_POST['addp'])){
@@ -27,20 +28,17 @@
 
 
 		if($varbool==False){
-			$big_ban_dir="../img_assets/banner_big/";
-			$big_ban_name=$usrID."big_ban".$date.'.'.end(explode('.', $big_ban['name']));
-			move_uploaded_file($big_ban['tmp_name'], $big_ban_dir.$big_ban_name);
+
+			$big_ban_name=$usrID."big_ban".$date;
+			img_uploader($big_ban, "banner_big", $big_ban_name);
 
 
-			$sm_ban_dir="../img_assets/banner_small/";
-			$sm_ban_name=$usrID."sm_ban".$date.'.'.end(explode('.', $sm_ban['name']));
-			move_uploaded_file($sm_ban['tmp_name'], $sm_ban_dir.$sm_ban_name);
+			
+			$sm_ban_name=$usrID."sm_ban".$date;
+			img_uploader($sm_ban, "banner_small", $sm_ban_name);
 
-
-			$icon_dir="../img_assets/proj_icon/";
-			$icon_name=$usrID."icon".$date.'.'.end(explode('.', $proj_icon['name']));
-			move_uploaded_file($proj_icon['tmp_name'], $icon_dir.$icon_name);
-
+			$icon_name=$usrID."icon".$date;
+			img_uploader($proj_icon, "proj_icon", $icon_name);
 
 			$tag_arr=explode(',', $tags);
 

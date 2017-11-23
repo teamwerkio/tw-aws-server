@@ -1,6 +1,7 @@
 <?php
 	include("dbconnect.php");
 	session_start();
+	include("img_url.php");
 
 
 	function timedifference_d($time){
@@ -178,7 +179,7 @@
 							<div class="col-lg-12">
 								<div class="campaign-big-item clearfix">
 									<a href="project.php?projID=<?php echo $trending_proj_id;?>" class="campaign-big-image">
-										<?php echo '<img src="../img_assets/banner_big/'.$trend_res['big_ban'].'" />'; ?>
+										<?php echo '<img src="'.getimgURL($trend_res['big_ban'], "banner_big").'" />'; ?>
 											
 									</a>
 									<div class="campaign-big-box wow fadeInUp" data-wow-delay=".1s">
@@ -187,7 +188,7 @@
 										<div class="campaign-description"><?php echo $trend_res['sm_desc']; ?></div>
 										<div class="staff-picks-author">
 											<div class="author-profile">
-												<a class="author-avatar" href="#"><?php echo '<img src="../img_assets/profilepic/'.$owner_p.'" />'; ?></a>by <a class="author-name" href="#"><?php echo $owner_f.' '.$owner_l; ?></a>
+												<a class="author-avatar" href="#"><?php echo '<img src="'.getimgURL($owner_p, "profilepic").'" />'; ?></a>by <a class="author-name" href="#"><?php echo $owner_f.' '.$owner_l; ?></a>
 											</div>
 											<div class="author-address"><span class="ion-location"></span><?php echo $proj_col; ?>, Amherst, MA</div>
 										</div>
@@ -220,14 +221,14 @@
 											<div class="col-lg-4 col-sm-6 col-6">
 												<div class="campaign-item wow fadeInUp" data-wow-delay=".1s">
 													<a class="overlay" href="project.php?projID=<?php echo $proj_res['projID']; ?>">
-														<?php echo '<img src="../img_assets/banner_small/'.$proj_res['small_ban'].'" />'; ?>
+														<?php echo '<img src="'.getimgURL($proj_res['small_ban'], "banner_small").'" />'; ?>
 														<span class="ion-ios-search-strong"></span>
 													</a>
 													<div class="campaign-box">
 														<a href="#" class="category"><?php echo $cat; ?></a>
 														<h3><a href="project.php?projID=<?php echo $proj_res['projID']; ?>"><?php echo $proj_res['projName']; ?></a></h3>
 														<div class="campaign-description"><?php echo $proj_res['sm_desc']; ?></div>
-														<div class="campaign-author"><a class="author-icon" href="#"><?php echo '<img src="../img_assets/profilepic/'.$owner_p.'" />'; ?></a>by <a class="author-name" href="#"><?php echo $owner_f; ?></a></div>
+														<div class="campaign-author"><a class="author-icon" href="#"><?php echo '<img src="'.getimgURL($owner_p, "profilepic").'" />'; ?></a>by <a class="author-name" href="#"><?php echo $owner_f; ?></a></div>
 														<div class="process">
 															<div class="raised"><span style="width: 10%;"></span></div>
 															<div class="process-info">

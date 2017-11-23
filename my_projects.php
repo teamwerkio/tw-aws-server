@@ -1,6 +1,7 @@
 <?php
 	include("dbconnect.php");
 	session_start();
+	include("img_url.php");
 	if(!isset($_SESSION['usr'])){
 		header("Location:library.php");
 	}
@@ -31,7 +32,7 @@
 		<header id="header" class="site-header">
 			<div class="container">
 				<div class="site-brand">
-					<a href="library.html"><img src="../images/assets/logo.png" style="width: 170px; height: 28px;" alt=""></a>
+					<a href="library.php"><img src="../images/assets/logo.png" style="width: 170px; height: 28px;" alt=""></a>
 				</div><!-- .site-brand -->
 				<div class="right-header">					
 					<nav class="main-menu">
@@ -122,7 +123,7 @@
 											?>
 
 												<div class="campaign-item">
-													<a class="campaign-image" href="#"><?php echo '<img src="../img_assets/proj_icon/'.$proj_res['proj_icon'].'" />'; ?></a>
+													<a class="campaign-image" href="#"><?php echo '<img src="'.getimgURL($proj_res['proj_icon'], "proj_icon").'" />'; ?></a>
 													<div class="campaign-box">
 														<div class="campaign-category"><a href="#"><?php echo returnCat('proj_categories', 'catName', $proj_res['catID'], $dbconnect); ?></a></div>
 														<div class="campaign-title"><a href="#"><?php echo $proj_res['projName']; ?></a></div>
