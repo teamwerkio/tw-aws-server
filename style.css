@@ -3661,6 +3661,31 @@ form .create-account input[type="checkbox"]{
    top: 5px;
    width: 24px;
 }
+.choicefile3{
+   display:block;
+   background:#f5f6f6;
+   text-align:center;
+   text-decoration:none;
+   cursor:pointer;
+   height: 120px;
+   line-height: 120px;
+   border-radius: 3px;
+}
+#uploadfile3,
+.removeimg3{
+    display:none;
+}
+#thumbbox3{
+    position:relative;
+}
+.removeimg3{
+   background:  url("http://png-3.findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_05.png")  repeat scroll 0 0 transparent;
+   height: 24px;
+   position: absolute;
+   right: 5px;
+   top: 5px;
+   width: 24px;
+}
 
 #datepicker {
 }
