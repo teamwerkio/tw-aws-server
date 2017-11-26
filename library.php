@@ -210,9 +210,11 @@
 								$proj_sql = "SELECT * FROM project";
 								$proj_qry=mysqli_query($dbconnect, $proj_sql);
 								$proj_res=mysqli_fetch_assoc($proj_qry);
+								$count=0;
 
 								do{
-									if($proj_res['projID']!==$trending_proj_id){
+									if($proj_res['projID']!==$trending_proj_id && $count<=9){
+										$count+=1;
 										$cat=returnCat('proj_categories', 'catName', $proj_res['catID'], $dbconnect, 'catID');
 										$owner_f=returnCat('users', 'firstname', $proj_res['usrID'], $dbconnect, 'usrID');
 										$owner_p=returnCat('users', 'profilepic', $proj_res['usrID'], $dbconnect, 'usrID');
@@ -424,7 +426,14 @@
 							</div> -->
 						</div>
 					</div>
+					<?php
+					if($count>9){
+						?>
+					
 					<div class="latest-button wow fadeInUp" data-wow-delay=".1s"><a href="#" class="btn-primary">Load more</a></div>
+					<?php
+					}
+					?>
 				</div>
 			</div><!-- .latest -->
 		</main><!-- .site-main -->
