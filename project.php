@@ -122,8 +122,6 @@
 							<div class="campaign-image">
 								<div id="owl-campaign" class="campaign-slider">
 									<div class="item"><img src="../images/placeholder/570x400.png" alt=""></div>
-									<div class="item"><img src="../images/placeholder/570x400.png" alt=""></div>
-									<div class="item"><img src="../images/placeholder/570x400.png" alt=""></div>
 								</div>
 							</div>
 							<div class="campaign-box">
@@ -250,14 +248,14 @@
 									</form>
 									<a href="#" class="btn-secondary"><i class="fa fa-hand-o-up" aria-hidden="true"></i>Keep me posted</a>
 								</div>
-								<div class="share" style="margin-top: 42px;">
+								<!-- <div class="share" style="margin-top: 42px;">
 									<p style="margin-bottom: 5px;">Share this project</p>
 									<ul>
 										<li class="share-facebook"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
 										<li class="share-twitter"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
 										<li class="share-code"><a href="#"><i class="fa fa-code" aria-hidden="true"></i></a></li>
 									</ul>
-								</div>
+								</div> -->
 							</div>
 						</div>
 					</div>
@@ -273,7 +271,7 @@
 									<!-- <li data-tab="backer"><a href="#">Backer List</a></li> -->
 									<li data-tab="story"><a href="#">Story</a></li>
 									<!-- <li data-tab="faq"><a href="#">Details</a></li> -->
-									<li data-tab="faq"><a href="#">Settings</a></li>
+									<li data-tab="settings"><a href="#">Settings</a></li>
 									<!-- <li data-tab="comment"><a href="#">Comments</a></li> -->
 								</ul>
 								<div class="campaign-content">
@@ -440,6 +438,45 @@
 										<h2>Frequently Asked Questions</h2>
 										<p>Looks like there aren't any frequently asked questions yet. Ask the project creator directly.</p>
 										<a href="#" class="btn-primary">Ask a question</a>
+									</div>
+									<div id="settings" class="tabs">
+										<h2 style="margin-bottom: 10px;">Settings</h2>
+										<p>Use the settings below to change items displayed on this project.</p>
+
+										<h3 style="margin-bottom: 10px; margin-top: 30px;">Team details</h3>
+										<div class="field clearfix">
+						  					<label for="">Team size *</label>
+							  				<div class="field">
+							  					<div class="field-select">
+													<select name="teamsize" id="">
+														<option value="">Medium</option>
+														<option value="1">Small</option>
+														<option value="2">Large</option>
+														<option value="3">Extra Large</option>
+													</select>
+												</div>
+							  				</div>
+										</div>
+										<div class="field clearfix" style="margin-top: 10px; margin-bottom: 30px;">
+						  					<label for="">Approx. time commitment needed from each member *</label>
+							  				<div class="field">
+							  					<div class="field-select">
+													<select name="teamsize" id="">
+														<option value="">Less than 10 hrs/week</option>
+														<option value="1">11 to 20 hrs/week</option>
+														<option value="2">21 to 30 hrs/week</option>
+														<option value="3">More than 31 hrs/week</option>
+													</select>
+												</div>
+							  				</div>
+										</div>
+
+										<h3 style="margin-bottom: 10px;">Project details</h3>
+					  					<label style="margin-bottom: 2px;">How far is this project from completion? *</label><br>
+						  				<input type="range" value="20" id="projectProgress"></input>
+						  				<p>This project is <strong><span id="progressOutput"></span>%</strong> complete</p>
+
+						  				<a href="#" class="btn-primary" style="margin-top: 5px;">Save and Apply settings</a>
 									</div>
 									<div id="updates" class="tabs">
 										<ul>
@@ -789,6 +826,7 @@
     <script type="text/javascript" src="libs/isotope/isotope.pkgd.min.js"></script>
     <script type="text/javascript" src="libs/bxslider/jquery.bxslider.min.js"></script>
     <!-- orther script -->
+    <script type="text/javascript" src="js/range.js"></script>
     <script  type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="js/changes.js"></script>
     <script type="text/javascript" src="js/popup.js"></script>
