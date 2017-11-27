@@ -163,7 +163,7 @@
 			<div class="campaigns">
 				<div class="container">
 					<div class="campaign-content">
-						<div class="row">
+						<div class="row" id="lib-pg">
 							<?php
 								$trend_sql="SELECT * FROM project where projID='".$trending_proj_id."'";
 								$trend_qry=mysqli_query($dbconnect, $trend_sql);
@@ -207,7 +207,7 @@
 
 							<?php
 
-								$proj_sql = "SELECT * FROM project";
+								$proj_sql = "SELECT * FROM project LIMIT 10";
 								$proj_qry=mysqli_query($dbconnect, $proj_sql);
 								$proj_res=mysqli_fetch_assoc($proj_qry);
 								$count=0;
@@ -244,6 +244,7 @@
 												</div>
 											</div>
 										<?php
+										$final_id=$proj_res['projID'];
 
 								}}while($proj_res=mysqli_fetch_assoc($proj_qry));
 
@@ -426,14 +427,9 @@
 							</div> -->
 						</div>
 					</div>
-					<?php
-					if($count>9){
-						?>
 					
-					<div class="latest-button wow fadeInUp" data-wow-delay=".1s"><a href="#" class="btn-primary">Load more</a></div>
-					<?php
-					}
-					?>
+					<div class="latest-button wow fadeInUp" name="loading" data-last-id="<?php echo $final_id;?>" data-trend="<?php echo $trending_proj_id; ?>" data-wow-delay=".1s"><a href="#" class="btn-primary">Load more</a></div>
+
 				</div>
 			</div><!-- .latest -->
 		</main><!-- .site-main -->
@@ -517,3 +513,28 @@
     <script  type="text/javascript" src="js/main.js"></script>
 </body>
 </html>
+<script>  
+$(document).ready(function(){  
+  $(document).on('click', '#loading', function(){  
+       var last_video_id = $(this).data("last-id");
+       var trend = $(this).data("trend");  
+       $('#loading').html("Loading...");  
+       $.ajax({  
+            url:"load_more.php",  
+            method:"POST",  
+            data:{last_video_id: last_video_id, trend: trend},  
+            dataType:"text",  
+            success:function(data)  
+            {  
+                 if(data != '')  
+                 {   
+                      $('#lib-pg').append(data);  
+                 }
+                 else{
+                 	$('#loading').html("Sorry, no more projects left to show.");
+                 }
+            }  
+       });  
+  });  
+});  
+</script>
