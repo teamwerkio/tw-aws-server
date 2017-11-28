@@ -140,7 +140,7 @@
 								<div class="campaign-description"><p><?php echo $p_res['sm_desc']; ?></p></div>
 								<div class="campaign-author clearfix">
 									<div class="author-profile">
-										<a class="author-icon" href="#"><?php echo '<img src="'.getimgURL($owner_p, "profilepic").'" />'; ?></a>by <a class="author-name" href="#"><?php echo $owner_f; ?> <?php echo $owner_l; ?></a>
+										<a class="author-icon" href="profile.php?other_usr=<?php echo $p_res['usrID']; ?>"><?php echo '<img src="'.getimgURL($owner_p, "profilepic").'" />'; ?></a>by <a class="author-name" href="profile.php?other_usr=<?php echo $p_res['usrID']; ?>"><?php echo $owner_f; ?> <?php echo $owner_l; ?></a>
 									</div>
 									<div class="author-address"><span class="ion-location"></span><?php echo $proj_col; ?>, Amherst, MA</div>
 								</div>

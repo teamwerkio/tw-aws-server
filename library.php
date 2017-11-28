@@ -186,7 +186,7 @@
 										<div class="campaign-description"><?php echo $trend_res['sm_desc']; ?></div>
 										<div class="staff-picks-author">
 											<div class="author-profile">
-												<a class="author-avatar" href="#"><?php echo '<img src="'.getimgURL($owner_p, "profilepic").'" />'; ?></a>by <a class="author-name" href="#"><?php echo $owner_f.' '.$owner_l; ?></a>
+												<a class="author-avatar" href="profile.php?other_usr=<?php echo $trend_res['usrID']; ?>"><?php echo '<img src="'.getimgURL($owner_p, "profilepic").'" />'; ?></a>by <a class="author-name" href="profile.php?other_usr=<?php echo $trend_res['usrID']; ?>"><?php echo $owner_f.' '.$owner_l; ?></a>
 											</div>
 											<div class="author-address"><span class="ion-location"></span><?php echo $proj_col; ?>, Amherst, MA</div>
 										</div>
@@ -228,8 +228,8 @@
 														<a href="#" class="category"><?php echo $cat; ?></a>
 														<h3><a href="project.php?projID=<?php echo $proj_res['projID']; ?>"><?php echo $proj_res['projName']; ?></a></h3>
 														<div class="campaign-description"><?php echo $proj_res['sm_desc']; ?></div>
-														<div class="campaign-author"><a class="author-icon" href="#">
-															<?php echo '<img src="'.getimgURL($owner_p, "profilepic").'" />'; ?></a>by <a class="author-name" href="#"><?php echo $owner_f; ?>		
+														<div class="campaign-author"><a class="author-icon" href="profile.php?other_usr=<?php echo $proj_res['usrID']; ?>">
+															<?php echo '<img src="'.getimgURL($owner_p, "profilepic").'" />'; ?></a>by <a class="author-name" href="profile.php?other_usr=<?php echo $proj_res['usrID']; ?>"><?php echo $owner_f; ?>		
 														</a></div>
 														<div class="process">
 															<div class="raised"><span style="width: 10%;"></span></div>
