@@ -4,11 +4,10 @@
 	include("img_url.php");
 	function timedifference_d($time){
 		date_default_timezone_set('US/Eastern');
-		$currtime=date('Y-m-d H:i:s:u');
-		$currtime=strtotime($currtime);
-		$time=strtotime($time);
-		$diff=$time-$currtime;
-		return floor($diff/(100*1000*60*60*24));
+		$currtime=new DateTime();
+		$time=new DateTime($time);
+		$interval=$currtime->diff($time);
+		return $interval->format('%a');
 	}
 
 
@@ -121,7 +120,7 @@
 						<div class="campaign-item clearfix">
 							<div class="campaign-image">
 								<div id="owl-campaign" class="campaign-slider">
-									<div class="item"><img src="../images/placeholder/570x400.png" alt=""></div>
+									<div class="item"><img src="<?php echo getimgURL($p_res['big_ban'], "banner_big"); ?>" alt=""></div>
 								</div>
 							</div>
 							<div class="campaign-box">
@@ -152,8 +151,8 @@
 										<!-- INTEREST -->
 
 										<div class="process-funded"><span>
-										<a data-tooltip="9999 ppl. interested to join">
-											9999
+										<a data-tooltip="<?php echo $p_res['interest']; ?> people interested to join">
+											<?php echo $p_res['interest']; ?>
 										</a>
 										</span>interest</div>
 
@@ -233,8 +232,8 @@
 										<!-- DAYS AGO -->
 
 										<div class="process-time"><span>
-										<a data-tooltip="Project started 9999 days ago">
-											9999
+										<a data-tooltip="Project started <?php echo timedifference_d($p_res['dt']);?> days ago">
+											<?php echo timedifference_d($p_res['dt']);?>
 										</a>
 										</span>days ago</div>
 
@@ -271,7 +270,13 @@
 									<!-- <li data-tab="backer"><a href="#">Backer List</a></li> -->
 									<li data-tab="story"><a href="#">Story</a></li>
 									<!-- <li data-tab="faq"><a href="#">Details</a></li> -->
+									<?php
+										if($_SESSION['usr']==$p_res['usrID']){
+									?>
 									<li data-tab="settings"><a href="#">Settings</a></li>
+									<?php
+										}
+									?>
 									<!-- <li data-tab="comment"><a href="#">Comments</a></li> -->
 								</ul>
 								<div class="campaign-content">

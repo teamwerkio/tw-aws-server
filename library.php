@@ -6,11 +6,10 @@
 
 	function timedifference_d($time){
 		date_default_timezone_set('US/Eastern');
-		$currtime=date('Y-m-d H:i:s:u');
-		$currtime=strtotime($currtime);
-		$time=strtotime($time);
-		$diff=$time-$currtime;
-		return floor($diff/(100*1000*60*60*24));
+		$currtime=new DateTime();
+		$time=new DateTime($time);
+		$interval=$currtime->diff($time);
+		return $interval->format('%a');
 	}
 
 
