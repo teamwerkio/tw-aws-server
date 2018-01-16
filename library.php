@@ -191,10 +191,15 @@
 											<div class="author-address"><span class="ion-location"></span><?php echo $proj_col; ?>, Amherst, MA</div>
 										</div>
 										<div class="process">
-											<div class="raised"><span style="width: 50%;"></span></div>
+											<div class="raised"><span style="width: <?php echo $trend_res
+											['progress']; ?>%;"></span></div>
 											<div class="process-info">
 												<div class="process-pledged"><span><?php echo $trend_res['upvote']; ?></span>upvotes</div>
-												<div class="process-funded"><span><?php echo $trend_res['interest']; ?>%</span>interest</div>
+												<div class="process-funded"><span>
+													<?php
+														$json=$trend_res['subs'];
+														$json=json_decode($json, true);
+														echo count($json['subs']);?></span>interest</div>
 												<div class="process-time"><span style="color: green;"><?php echo $trend_res['virality']; ?>%</span>virality</div>
 												<div class="process-time"><span><?php echo $days_elapsed; ?></span>days ago</div>
 											</div>
@@ -210,9 +215,10 @@
 								$proj_qry=mysqli_query($dbconnect, $proj_sql);
 								$proj_res=mysqli_fetch_assoc($proj_qry);
 								$count=0;
+								$final_id=0;
 
 								do{
-									if($proj_res['projID']!==$trending_proj_id && $count<=9){
+									if($proj_res['projID']!==$trending_proj_id && $count<9){
 										$count+=1;
 										$cat=returnCat('proj_categories', 'catName', $proj_res['catID'], $dbconnect, 'catID');
 										$owner_f=returnCat('users', 'firstname', $proj_res['usrID'], $dbconnect, 'usrID');
@@ -232,10 +238,14 @@
 															<?php echo '<img src="'.getimgURL($owner_p, "profilepic").'" />'; ?></a>by <a class="author-name" href="profile.php?other_usr=<?php echo $proj_res['usrID']; ?>"><?php echo $owner_f; ?>		
 														</a></div>
 														<div class="process">
-															<div class="raised"><span style="width: 10%;"></span></div>
+															<div class="raised"><span style="width: <?php echo $proj_res['progress'];?>%;"></span></div>
 															<div class="process-info">
 																<div class="process-pledged"><span><?php echo $proj_res['upvote']; ?></span>upvotes</div>
-																<div class="process-funded"><span><?php echo $proj_res['interest']; ?>%</span>interest</div>
+																<div class="process-funded"><span>
+																	<?php
+																		$json=$proj_res['subs'];
+																		$json=json_decode($json, true);
+																		echo count($json['subs']);?></span>interest</div>
 																<div class="process-time"><span style="color: red;"><?php echo $proj_res['virality']; ?>%</span>virality</div>
 															</div>
 														</div>
@@ -427,7 +437,7 @@
 						</div>
 					</div>
 					
-					<div class="latest-button wow fadeInUp" name="loading" data-last-id="<?php echo $final_id;?>" data-trend="<?php echo $trending_proj_id; ?>" data-wow-delay=".1s"><a href="#" class="btn-primary">Load more</a></div>
+					<div class="latest-button wow fadeInUp" name="loading" data-wow-delay=".1s" ><a data-finalID="<?php echo $final_id;?>" id="load_more" href="#" class="btn-primary">Load more</a></div>
 
 				</div>
 			</div><!-- .latest -->
@@ -510,30 +520,43 @@
     <script type="text/javascript" src="libs/bxslider/jquery.bxslider.min.js"></script>
     <!-- orther script -->
     <script  type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript">
+    	var trend=<?php echo $trending_proj_id;?>;
+    	$(document).on('click', '#load_more', function(){
+    		var button=$(this);
+    		var finID=button.attr("data-finalID");
+    		button.html("Loading...");
+    		$.ajax({
+    			url: 'load_more_req.php',
+    			type: 'POST',
+    			data: {
+    				'load': 1,
+    				'finID': finID,
+    				'trend': trend,
+    			},
+    			success: function(data){
+    				if(data==="0"){
+    					button.html("All showing");
+
+    				}
+    				else{
+    					var json=JSON.parse(data);
+    					
+    					$("#lib-pg").append(json.html);
+    					if(json.count==="0"){
+    						button.html("All showing");
+    					}
+    					else{
+    						$("#load_more").attr("data-finalID",json.final);
+
+    						button.html("Load more");
+    					}
+    					
+    				}
+    			}
+    		});
+    	});
+    </script>
+    
 </body>
 </html>
-<script>  
-$(document).ready(function(){  
-  $(document).on('click', '#loading', function(){  
-       var last_video_id = $(this).data("last-id");
-       var trend = $(this).data("trend");  
-       $('#loading').html("Loading...");  
-       $.ajax({  
-            url:"load_more.php",  
-            method:"POST",  
-            data:{last_video_id: last_video_id, trend: trend},  
-            dataType:"text",  
-            success:function(data)  
-            {  
-                 if(data != '')  
-                 {   
-                      $('#lib-pg').append(data);  
-                 }
-                 else{
-                 	$('#loading').html("Sorry, no more projects left to show.");
-                 }
-            }  
-       });  
-  });  
-});  
-</script>
