@@ -447,6 +447,41 @@ $(document).ready(function () {
       	$(".filename2").text("");
     });
 })
+function  readURL3(input,thumbimage) {
+    if  (input.files && input.files[0]) { 
+    var  reader = new FileReader();
+    reader.onload = function (e) {
+    $("#thumbimage3").attr('src', e.target.result);
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+    else  { // Sử dụng cho IE
+        $("#thumbimage3").attr('src', input.value);
+    }
+    $("#thumbimage3").show();
+    $('.filename3').text($("#uploadfile").val());
+    $('.choicefile3').css('background', '#C4C4C4');
+    $('.choicefile3').css('cursor', 'default');
+    $(".removeimg3").show();
+    $(".choicefile3").hide();       
+}
+$(document).ready(function () {
+    $(".choicefile3").bind('click', function  () { 
+      $("#uploadfile3").click();
+    });
+    $(".removeimg3").click(function () {
+      $("#thumbimage3").attr('src', '').hide();
+        $("#myfileupload3").html('<input type="file" id="uploadfile3"  onchange="readURL3(this);" />');
+        $(".removeimg3").hide();
+        $(".choicefile3").show();
+        $(".choicefile3").bind('click', function  () {
+          $("#uploadfile3").click();
+        });
+        $('.choicefile3').css('background','#C4C4C4');
+        $('.choicefile3').css('cursor', 'pointer');
+        $(".filename3").text("");
+    });
+})
 
 // popup examples
 $( document ).on( "pagecreate", function() {

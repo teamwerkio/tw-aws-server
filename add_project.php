@@ -114,7 +114,7 @@
 								<span class="label-desc">This image shows up in a large project details dialog. A size of 570 x 350 is preferred.</span>
 			  					<div class="file-upload">
 			  						<div class="upload-bg">
-				  						<div id="myfileupload1">
+				  						<div id="myfileupload">
 									   		<input type="file" id="uploadfile1" name="big_ban" onchange="readURL1(this);" />	  
 									 	</div>
 									 	<div id="thumbbox1">
@@ -130,13 +130,13 @@
 			  					</div>
 			  				</div>
 		  				</div>
-		  				<div>
-		  					<div class="field">
-								<label for="">Small Banner *</label>
+						<div>
+			  				<div class="field">
+			  					<label for="">Small Banner *</label>
 								<span class="label-desc">This image shows up in a small project details dialog. A size of 370 x 240 is preferred.</span>
-								<div class="file-upload">
+			  					<div class="file-upload">
 			  						<div class="upload-bg">
-				  						<div id="myfileupload2">
+				  						<div id="myfileupload">
 									   		<input type="file" id="uploadfile2" name="sm_ban" onchange="readURL2(this);" />	  
 									 	</div>
 									 	<div id="thumbbox2">
@@ -148,18 +148,18 @@
 									  		<p style="clear:both"></p>
 									 	</div>
 									  	<label class="filename2"></label>
-			  						</div>
+				  					</div>
 			  					</div>
 			  				</div>
 		  				</div>
 		  				<div>
-		  					<div class="field">
-								<label for="">Project Icon *</label>
+			  				<div class="field">
+			  					<label for="">Project Icon *</label>
 								<span class="label-desc">This image shows up in a smaller project details dialog. A size of 150 x 150 is preferred.</span>
-								<div class="file-upload">
+			  					<div class="file-upload">
 			  						<div class="upload-bg">
-				  						<div id="myfileupload3">
-									   		<input type="file" id="uploadfile3" name="proj_icon" onchange="readURL2(this);" />	  
+				  						<div id="myfileupload">
+									   		<input type="file" id="uploadfile3" name="proj_icon" onchange="readURL3(this);" />	  
 									 	</div>
 									 	<div id="thumbbox3">
 									 		<img height="100" width="100" alt="Thumb image" id="thumbimage3" style="display: none" />
@@ -170,7 +170,7 @@
 									  		<p style="clear:both"></p>
 									 	</div>
 									  	<label class="filename3"></label>
-			  						</div>
+				  					</div>
 			  					</div>
 			  				</div>
 		  				</div>

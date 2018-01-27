@@ -1,14 +1,13 @@
 <?php
 	include("dbconnect.php");
 	session_start();
-
+	include("img_url.php");
 	function timedifference_d($time){
 		date_default_timezone_set('US/Eastern');
-		$currtime=date('Y-m-d H:i:s:u');
-		$currtime=strtotime($currtime);
-		$time=strtotime($time);
-		$diff=$time-$currtime;
-		return floor($diff/(100*1000*60*60*24));
+		$currtime=new DateTime();
+		$time=new DateTime($time);
+		$interval=$currtime->diff($time);
+		return $interval->format('%a');
 	}
 
 
@@ -121,9 +120,7 @@
 						<div class="campaign-item clearfix">
 							<div class="campaign-image">
 								<div id="owl-campaign" class="campaign-slider">
-									<div class="item"><img src="../images/placeholder/570x400.png" alt=""></div>
-									<div class="item"><img src="../images/placeholder/570x400.png" alt=""></div>
-									<div class="item"><img src="../images/placeholder/570x400.png" alt=""></div>
+									<div class="item"><img src="<?php echo getimgURL($p_res['big_ban'], "banner_big"); ?>" alt=""></div>
 								</div>
 							</div>
 							<div class="campaign-box">
@@ -143,26 +140,74 @@
 								<div class="campaign-description"><p><?php echo $p_res['sm_desc']; ?></p></div>
 								<div class="campaign-author clearfix">
 									<div class="author-profile">
-										<a class="author-icon" href="#"><?php echo '<img src="../img_assets/profilepic/'.$owner_p.'" />'; ?></a>by <a class="author-name" href="#"><?php echo $owner_f; ?> <?php echo $owner_l; ?></a>
+										<a class="author-icon" href="profile.php?other_usr=<?php echo $p_res['usrID']; ?>"><?php echo '<img src="'.getimgURL($owner_p, "profilepic").'" />'; ?></a>by <a class="author-name" href="profile.php?other_usr=<?php echo $p_res['usrID']; ?>"><?php echo $owner_f; ?> <?php echo $owner_l; ?></a>
 									</div>
 									<div class="author-address"><span class="ion-location"></span><?php echo $proj_col; ?>, Amherst, MA</div>
 								</div>
 								<div class="process">
-									<div class="raised"><span></span></div>
+									<div class="raised"><span style="width: <?php echo $p_res
+											['progress']; ?>%;"></span></div>
 									<div class="process-info">
 
 										<!-- INTEREST -->
 
 										<div class="process-funded"><span>
-										<a data-tooltip="9999 ppl. interested to join">
-											9999
+										<a id="interest" data-tooltip="">
+											
 										</a>
 										</span>interest</div>
 
 										<!-- =============== -->
 
 										<!-- TEAM SIZE -->
-
+										<?php
+											$size_id=$p_res['tsizeID'];
+											if($size_id==1){
+												?>
+												<!-- Small Team -->
+												<div class="process-pledged"><span>
+													<a data-tooltip="Small team">
+													<i class="fa fa-user"></i>
+													<i class="fa fa-user"></i></a>
+												</span>team size</div>
+												<?php
+											}
+											elseif ($size_id==2) {
+												?>
+												<!-- Medium Team -->
+												<div class="process-pledged"><span>
+													<a data-tooltip="Medium team">
+													<i class="fa fa-user"></i>
+													<i class="fa fa-user"></i>
+													<i class="fa fa-user"></i></a>
+												</span>team size</div>
+												<?php
+											}
+											elseif ($size_id==3) {
+												?>
+												<!-- Large Team -->
+												<div class="process-pledged"><span>
+													<a data-tooltip="Large team">
+													<i class="fa fa-user"></i>
+													<i class="fa fa-user"></i>
+													<i class="fa fa-user"></i>
+													<i class="fa fa-user"></i></a>
+												</span>team size</div>
+												<?php
+											}
+											elseif ($size_id==4) {
+												?>
+												<!-- Extra Large Team -->
+												<div class="process-pledged"><span>
+													<a data-tooltip="Extra large team">
+													<i class="fa fa-user"></i>
+													<i class="fa fa-user"></i>
+													<i class="fa fa-user"></i>
+													<i class="fa fa-user-plus"></i></a>
+												</span>team size</div>
+												<?php
+											}
+										?>
 										<!-- Small Team -->
 										<!-- <div class="process-pledged"><span>
 											<a data-tooltip="Small team">
@@ -188,16 +233,60 @@
 										</span>team size</div> -->
 
 										<!-- Extra Large Team -->
-										<div class="process-pledged"><span>
+										<!-- <div class="process-pledged"><span>
 											<a data-tooltip="Extra large team">
 											<i class="fa fa-user"></i>
 											<i class="fa fa-user"></i>
 											<i class="fa fa-user"></i>
 											<i class="fa fa-user-plus"></i></a>
-										</span>team size</div>
+										</span>team size</div> -->
 
 										<!-- =============== -->
-
+										<?php
+											$inv_id=$p_res['commID'];
+											if($inv_id==1){
+												?>
+												<!-- < 10 hrs/week -->
+												<div class="process-time"><span>
+													<a data-tooltip="< 10 hrs/week (approx.)">
+													<i class="fa fa-clock-o"></i></a>
+												</span>involvement</div>
+												<?php
+											}
+											elseif ($inv_id==2) {
+												?>
+												<!-- 11 to 20 hrs/week -->
+												<div class="process-time"><span>
+													<a data-tooltip="11 to 20 hrs/week (approx.)">
+													<i class="fa fa-clock-o"></i>
+													<i class="fa fa-clock-o"></i></a>
+												</span>involvement</div>
+												<?php
+											}
+											elseif ($inv_id==3) {
+												?>
+												<!-- 21 to 30 hrs/week -->
+												<div class="process-time"><span>
+													<a data-tooltip="21 to 30 hrs/week (approx.)">
+													<i class="fa fa-clock-o"></i>
+													<i class="fa fa-clock-o"></i>
+													<i class="fa fa-clock-o"></i></a>
+												</span>involvement</div>
+												<?php
+											}
+											elseif ($inv_id==4) {
+												?>
+												<!-- > 31 hrs/week -->
+												<div class="process-time"><span>
+													<a data-tooltip="> 31 hrs/week (approx.)">
+													<i class="fa fa-clock-o"></i>
+													<i class="fa fa-clock-o"></i>
+													<i class="fa fa-clock-o"></i>
+													<i class="fa fa-clock-o"></i></a>
+												</span>involvement</div>
+												<?php
+											}
+										?>
 										<!-- INVOLVEMENT -->
 
 										<!-- < 10 hrs/week -->
@@ -222,42 +311,46 @@
 										</span>involvement</div> -->
 
 										<!-- > 31 hrs/week -->
-										<div class="process-time"><span>
+										<!-- <div class="process-time"><span>
 											<a data-tooltip="> 31 hrs/week (approx.)">
 											<i class="fa fa-clock-o"></i>
 											<i class="fa fa-clock-o"></i>
 											<i class="fa fa-clock-o"></i>
 											<i class="fa fa-clock-o"></i></a>
-										</span>involvement</div>
+										</span>involvement</div> -->
 
 										<!-- =============== -->
 
 										<!-- DAYS AGO -->
 
 										<div class="process-time"><span>
-										<a data-tooltip="Project started 9999 days ago">
-											9999
+										<a data-tooltip="Project started <?php echo timedifference_d($p_res['dt']);?> days ago">
+											<?php echo timedifference_d($p_res['dt']);?>
 										</a>
 										</span>days ago</div>
 
 										<!-- =============== -->
 									</div>
 								</div>
+								<?php if($_SESSION['usr']!=$owner_ID){
 
+								?>
 								<div class="button">
 									<form action="" id="priceForm" class="campaign-price quantity">
 										<button class="btn-primary" type="submit" style="cursor: pointer;">Join this project</button>
 									</form>
-									<a href="#" class="btn-secondary"><i class="fa fa-hand-o-up" aria-hidden="true"></i>Keep me posted</a>
+									<a id="upvote" href="#" class="btn-secondary"><i class="fa fa-hand-o-up" aria-hidden="true"></i>Keep me posted</a>
 								</div>
-								<div class="share" style="margin-top: 42px;">
+								<?php
+								} ?>
+								<!-- <div class="share" style="margin-top: 42px;">
 									<p style="margin-bottom: 5px;">Share this project</p>
 									<ul>
 										<li class="share-facebook"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
 										<li class="share-twitter"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
 										<li class="share-code"><a href="#"><i class="fa fa-code" aria-hidden="true"></i></a></li>
 									</ul>
-								</div>
+								</div> -->
 							</div>
 						</div>
 					</div>
@@ -273,7 +366,13 @@
 									<!-- <li data-tab="backer"><a href="#">Backer List</a></li> -->
 									<li data-tab="story"><a href="#">Story</a></li>
 									<!-- <li data-tab="faq"><a href="#">Details</a></li> -->
-									<li data-tab="faq"><a href="#">Settings</a></li>
+									<?php
+										if($_SESSION['usr']==$p_res['usrID']){
+									?>
+									<li data-tab="settings"><a href="#">Settings</a></li>
+									<?php
+										}
+									?>
 									<!-- <li data-tab="comment"><a href="#">Comments</a></li> -->
 								</ul>
 								<div class="campaign-content">
@@ -292,8 +391,72 @@
 										</div>
 
 										<!-- <h1 style="margin-bottom: 3px; font-weight: 500; font-size: 20px;">Open</h1> -->
+										<?php
+											$role_sql="SELECT * FROM team_roles WHERE (projID=".$p_res['projID'].") AND (status=0)";
+											$role_qry=mysqli_query($dbconnect,$role_sql);
+											if(mysqli_num_rows($role_qry)!=0){
 
-										<div class="plan" style="margin-bottom: 15px;">
+
+											$role_res=mysqli_fetch_assoc($role_qry);
+
+											do{
+												?>
+													<div class="plan" style="margin-bottom: 15px;">
+														<a href="javascript:void(0)">
+															<h4><?php echo $role_res['title'];
+																
+																	if($sess_ID==$owner_ID){
+
+
+																?>
+																<p2 style="float: right;">
+																	<a-remove>
+																		<i data-id="<?php echo $role_res['roleID'];?>" data-id2="<?php echo $role_res['projID'];?>" class="fa fa-times remove-role"></i>
+																	</a-remove>
+																</p2>
+																<p2 style="margin-right: 5px; float: right;">
+																	<a-edit-black>
+																		<i data-id="<?php echo $role_res['roleID'];?>" data-id2="<?php echo $role_res['projID'];?>" class="fa fa-pencil edit-role" onclick="MyWindow=window.open('role_update.php?edit=1&roleID=<?php echo $role_res['roleID'];?>&projID=<?php echo $p_res['projID'];?>','MyWindow',width=450,height=300)"></i>
+																	</a-edit-black>
+																</p2>
+																<p2 style="margin-right: 5px; float: right;">
+																	<a-edit-black>
+																		<i data-id="<?php echo $role_res['roleID'];?>" data-id2="<?php echo $role_res['projID'];?>" class="fa fa-check check-role"></i>
+																		</script>
+																	</a-edit-black>
+																</p2>
+																<?php
+																	}
+																?>
+															</h4>
+															<div class="plan-desc"><p><?php echo $role_res['description'];?></p></div>
+															<!-- <div class="plan-author">End    : 15 November 2018</div> -->
+															<div class="backer"><?php echo $role_res['meet_time'];?><i>(<?php if($role_res['meet_freq']==1){
+																echo "Weekly";
+															}
+															elseif ($role_res['meet_freq']==2) {
+																echo "Bi-Weekly";
+															}
+															else{
+																echo "Monthly";
+															}
+															?>)</i><br>
+																<?php echo returnCat('colleges', 'colName', $role_res['colID'], $dbconnect, 'colID'); ?>, <?php echo $role_res['location']; ?><br>
+															</div>
+														</a>
+													</div>
+
+
+												<?php
+
+											}while($role_res=mysqli_fetch_assoc($role_qry));
+										}
+										else{
+											echo "No roles available at this moment.";
+										}
+										?>
+										<p id="no-roles"></p>
+										<!-- <div class="plan" style="margin-bottom: 15px;">
 											<a href="javascript:void(0)">
 												<h4>Backend Developer
 													<?php
@@ -322,7 +485,7 @@
 												</h4>
 												<div class="plan-desc"><p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master builder of human happiness.</p></div>
 												<!-- <div class="plan-author">End    : 15 November 2018</div> -->
-												<div class="backer">
+												<!-- <div class="backer">
 													TTH 7:00PM to 8:00PM <i>(weekly)</i><br>
 													Hampshire College, ASH 221<br>
 												</div>
@@ -397,11 +560,11 @@
 													Hampshire College, FPH 108<br>
 												</div>
 											</a>
-										</div>
+										</div> --> 
 										<?php
 											if($sess_ID==$owner_ID){
 										?>
-										<button style="margin-top: 0px;" onclick="MyWindow=window.open('add_role.php','MyWindow',width=450,height=300)">+ Role</button>
+										<button style="margin-top: 0px;" onclick="MyWindow=window.open('add_role.php?projID=<?php echo $p_res['projID'];?>','MyWindow',width=450,height=300)">+ Role</button>
 										<?php
 											}
 										?>
@@ -440,6 +603,83 @@
 										<h2>Frequently Asked Questions</h2>
 										<p>Looks like there aren't any frequently asked questions yet. Ask the project creator directly.</p>
 										<a href="#" class="btn-primary">Ask a question</a>
+									</div>
+									<div id="settings" class="tabs">
+										<h2 style="margin-bottom: 10px;">Settings</h2>
+										<p>Use the settings below to change items displayed on this project.</p>
+
+										<h3 style="margin-bottom: 10px; margin-top: 30px;">Team details</h3>
+										<form name="proj_set" action="proj_set_submit.php?projID=<?php echo $_GET['projID'];?>" method="post" enctype="multipart/form-data">
+											<div class="field clearfix">
+							  					<label for="">Team size *</label>
+								  				<div class="field">
+								  					<div class="field-select">
+														<select name="teamsize" id="">
+															<?php
+																$tsize_sql="SELECT * from teamsize";
+																$tsize_qry=mysqli_query($dbconnect, $tsize_sql);
+																$tsize_res=mysqli_fetch_assoc($tsize_qry);
+																do{
+																	if($p_res['tsizeID']==$tsize_res['tsizeID']){
+																		?>
+																		<option value="<?php echo $tsize_res['tsizeID'];?>" selected><?php echo $tsize_res['Description']; ?></option>
+																		<?php
+																	}
+																	else{
+																		?>
+																		<option value="<?php echo $tsize_res['tsizeID'];?>"><?php echo $tsize_res['Description']; ?></option>
+																		<?php
+																	}
+
+																} while($tsize_res=mysqli_fetch_assoc($tsize_qry));
+															?>
+															<!-- <option value="1">Medium</option>
+															<option value="2">Small</option>
+															<option value="3">Large</option>
+															<option value="4">Extra Large</option> -->
+														</select>
+													</div>
+								  				</div>
+											</div>
+											<div class="field clearfix" style="margin-top: 10px; margin-bottom: 30px;">
+							  					<label for="">Approx. time commitment needed from each member *</label>
+								  				<div class="field">
+								  					<div class="field-select">
+														<select name="commit" id="">
+															<?php
+																$comm_sql="SELECT * from commitment";
+																$comm_qry=mysqli_query($dbconnect, $comm_sql);
+																$comm_res=mysqli_fetch_assoc($comm_qry);
+																do{
+																	if($p_res['commID']==$comm_res['cID']){
+																		?>
+																		<option value="<?php echo $comm_res['cID'];?>" selected><?php echo $comm_res['Description']; ?></option>
+																		<?php
+																	}
+																	else{
+																		?>
+																		<option value="<?php echo $comm_res['cID'];?>"><?php echo $comm_res['Description']; ?></option>
+																		<?php
+																	}
+
+																} while($comm_res=mysqli_fetch_assoc($comm_qry));
+															?>
+															<!-- <option value="1">Less than 10 hrs/week</option>
+															<option value="2" selected>11 to 20 hrs/week</option>
+															<option value="3">21 to 30 hrs/week</option>
+															<option value="4">More than 31 hrs/week</option> -->
+														</select>
+													</div>
+								  				</div>
+											</div>
+
+											<h3 style="margin-bottom: 10px;">Project details</h3>
+						  					<label style="margin-bottom: 2px;">How far is this project from completion? *</label><br>
+							  				<input name="progress" type="range" value="<?php echo $p_res['progress'];?>" id="projectProgress"></input>
+							  				<p>This project is <strong><span id="progressOutput"></span>%</strong> complete</p>
+											<button name="proj_set" class="btn-primary" type="submit" style="cursor: pointer;">Save and Apply settings</button>
+							  				<!-- <a href="#" class="btn-primary" style="margin-top: 5px;">Save and Apply settings</a> -->
+							  			</form>
 									</div>
 									<div id="updates" class="tabs">
 										<ul>
@@ -582,8 +822,55 @@
 							<div class="support support-campaign" style="margin-top: 5.5px;">
 								<h3 class="support-campaign-title">Timeline</h3>
 									<div id="updates" class="tabs">
+										<p id="no-updates"></p>
 										<ul>
-											<li>
+											<?php
+												$up_sql="SELECT * FROM proj_updates WHERE (projID=".$id.") AND (status=0)";
+												$up_qry=mysqli_query($dbconnect, $up_sql);
+												if(mysqli_num_rows($up_qry)==0){
+													echo "No updates available.";
+												}
+												else{
+
+													$up_res=mysqli_fetch_assoc($up_qry);
+
+													do{
+														?>
+															<li>
+																<p class="date"><?php echo date( 'Y-m-d', strtotime($up_res['dt']));?>
+																	<?php
+																		if($owner_ID==$sess_ID){
+																	?>
+																	<p2>
+																		<a-remove>
+																			<i data-id="<?php echo $up_res['upID'];?>" data-id2="<?php echo $up_res['projID'];?>" class="fa fa-times del-up"></i>
+																		</a-remove>
+																	</p2>
+																	<p2 style="margin-right: 5px;" onclick="turnEditable('updateTitle1', 'updateDesc1');">
+																		<a-edit>
+																			<i onclick="MyWindow=window.open('timeline_update.php?edit=1&upID=<?php echo $up_res['upID'];?>&projID=<?php echo $p_res['projID'];?>','MyWindow',width=450,height=300)" class="fa fa-pencil edit-up"></i>
+																		</a-edit>
+																	</p2>
+																	<p2 style="margin-right: 5px;" onclick="turnUneditable('updateTitle1', 'updateDesc1');">
+																		<a-edit>
+																			<i data-id="<?php echo $up_res['upID'];?>" data-id2="<?php echo $up_res['projID'];?>" class="fa fa-check check-up"></i>
+																		</a-edit>
+																	</p2>
+																	<?php
+																		}
+																	?>
+																</p>
+																<h3 id="updateTitle1"><?php echo $up_res['title'];?></h3>
+																<div class="desc" id="updateDesc1"><p><?php echo $up_res['details'];?></p></div>
+															</li>
+
+														<?php
+
+													}while($up_res=mysqli_fetch_assoc($up_qry));
+												}
+
+											?>
+											<!-- <li>
 												<p class="date"> 11-05-2018
 													<?php
 														if($owner_ID==$sess_ID){
@@ -690,12 +977,12 @@
 												</p>
 												<h3 id="updateTitle4">We started the project</h3>
 												<div class="desc" id="updateDesc4"><p>Sed cursus hendrerit odio, at aliquet leo hendrerit a. Nulla ultricies sagittis dolor, quis maximus magna consectetur eu.</p></div>
-											</li>
+											</li> -->
 										</ul>
 										<?php
 											if($owner_ID==$sess_ID){
 										?>
-										<button id="addUpdate" onclick="MyWindow=window.open('add_update.php','MyWindow',width=450,height=300)">+ Update</button>
+										<button id="addUpdate" onclick="MyWindow=window.open('add_update.php?projID=<?php echo $id;?>','MyWindow',width=450,height=300)">+ Update</button>
 										<?php
 											}
 										?>
@@ -789,8 +1076,15 @@
     <script type="text/javascript" src="libs/isotope/isotope.pkgd.min.js"></script>
     <script type="text/javascript" src="libs/bxslider/jquery.bxslider.min.js"></script>
     <!-- orther script -->
+    <script type="text/javascript" src="js/range.js"></script>
     <script  type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="js/changes.js"></script>
     <script type="text/javascript" src="js/popup.js"></script>
+    <script type="text/javascript">
+    	var usr_id="<?php echo $sess_ID?>";
+		var proj_id="<?php echo $id?>";
+    </script>
+    <script type="text/javascript" src="js/upvotes.js"></script>
+    <script type="text/javascript" src="js/update.js"></script>
 </body>
 </html>
