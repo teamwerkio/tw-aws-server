@@ -40,7 +40,7 @@
 							<span class="label-desc">Example: We started with 10 people and then ..... </span>
 		  					<textarea name="desc" rows="2" placeholder="Enter upto 350 characters"></textarea>
 		  				</div>
-		  				<button name="add_update" type="submit" value="Save & Launch" class="btn-primary" style="margin-bottom: 0px;">Add Update</button>
+		  				<!-- <button name="add_update" type="submit" value="Save & Launch" class="btn-primary" style="margin-bottom: 0px;">Add Update</button> -->
 					</form>
 				</div>
 			</div>

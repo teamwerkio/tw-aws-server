@@ -54,6 +54,12 @@
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link rel="stylesheet" type="text/css" href="css/responsive.css" />
     <link rel="icon" href="../images/favicon.png" type="image/x-icon"/>
+    <!-- bootstrap wrappable css to avoid conflicts -->
+  	<link rel="stylesheet" href="https://formden.com/static/assets/demos/bootstrap-iso/bootstrap-iso/bootstrap-iso.css">
+  	<link rel="stylesheet" href="https://formden.com/static/assets/demos/bootstrap-iso/bootstrap-iso/bootstrap-iso.css">
+<!-- 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script> -->
 </head>
 
 <body class="campaign-detail">
@@ -419,12 +425,12 @@
 																		<i data-id="<?php echo $role_res['roleID'];?>" data-id2="<?php echo $role_res['projID'];?>" class="fa fa-pencil edit-role" onclick="MyWindow=window.open('role_update.php?edit=1&roleID=<?php echo $role_res['roleID'];?>&projID=<?php echo $p_res['projID'];?>','MyWindow',width=450,height=300)"></i>
 																	</a-edit-black>
 																</p2>
-																<p2 style="margin-right: 5px; float: right;">
+																<!-- <p2 style="margin-right: 5px; float: right;">
 																	<a-edit-black>
 																		<i data-id="<?php echo $role_res['roleID'];?>" data-id2="<?php echo $role_res['projID'];?>" class="fa fa-check check-role"></i>
 																		</script>
 																	</a-edit-black>
-																</p2>
+																</p2> -->
 																<?php
 																	}
 																?>
@@ -561,16 +567,27 @@
 												</div>
 											</a>
 										</div> --> 
-										<?php
-											if($sess_ID==$owner_ID){
-										?>
-										<button style="margin-top: 0px;" onclick="MyWindow=window.open('add_role.php?projID=<?php echo $p_res['projID'];?>','MyWindow',width=450,height=300)">+ Role</button>
-										<?php
-											}
-										?>
+										<div class="bootstrap-iso">
+										<button id="addRole" type="button" data-toggle="modal" data-target="#modal-2">+ Role</button>
+										  <div class="modal fade" id="modal-2">
+										    <div class="modal-dialog modal-lg">
+										      <div class="modal-content" style="height: 600px;">
+										         <div class="modal-body">
+										          <iframe src="add_role.php" style="width: 100%; overflow: scroll;" height="400" frameborder="0">
+										          </iframe>
+										         </div>
+										         <div class="modal-footer">
+										          <button class="btn-mainb" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
+										          <button name="add_role" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Add Role</button>
+										         </div>
+										      </div>
+										    </div>
+										  </div>
+										</div>
 									</div></div>
 									</div>
 									<div id="story" class="tabs">
+										<img src="../images/placeholder/770x430.png" alt="">
 										<h4 style="margin-bottom: 8px;">Our story from start to now!
 											<?php
 												if($sess_ID==$owner_ID){
@@ -585,17 +602,16 @@
 												<i class="fa fa-pencil"></i>
 											</a-edit>
 										</p2>
-										<p2 style="margin-right: 5px; float: right;">
+										<!-- <p2 style="margin-right: 5px; float: right;">
 											<a-edit>
 												<i class="fa fa-check"></i>
 											</a-edit>
-										</p2>
+										</p2> -->
 										<?php
 											}
 										?>
-										</h4>
+										</h4>						
 										<p><?php echo $p_res['lg_desc'] ?></p>
-										<img src="../images/placeholder/770x430.png" alt="">
 										<p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment.</p>
 										<p>One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections. The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, waved</p>
 									</div>
@@ -677,7 +693,7 @@
 						  					<label style="margin-bottom: 2px;">How far is this project from completion? *</label><br>
 							  				<input name="progress" type="range" value="<?php echo $p_res['progress'];?>" id="projectProgress"></input>
 							  				<p>This project is <strong><span id="progressOutput"></span>%</strong> complete</p>
-											<button name="proj_set" class="btn-primary" type="submit" style="cursor: pointer;">Save and Apply settings</button>
+											<button name="proj_set" class="btn-primary" type="submit" style="cursor: pointer; margin-top: 5px; background-color: #73b941; padding-left: 8px; padding-right: 8px;">Save and Apply settings</button>
 							  				<!-- <a href="#" class="btn-primary" style="margin-top: 5px;">Save and Apply settings</a> -->
 							  			</form>
 									</div>
@@ -695,11 +711,11 @@
 															<i class="fa fa-pencil"></i>
 														</a-edit>
 													</p2>
-													<p2 style="margin-right: 5px;" onclick="turnUneditable('updateTitle1', 'updateDesc1');">
+													<!-- <p2 style="margin-right: 5px;" onclick="turnUneditable('updateTitle1', 'updateDesc1');">
 														<a-edit>
 															<i class="fa fa-check"></i>
 														</a-edit>
-													</p2>
+													</p2> -->
 												</p>
 												<h3 id="updateTitle1">Our Employee Reach 100 Person</h3>
 												<div class="desc" id="updateDesc1"><p>Sed cursus hendrerit odio, at aliquet leo hendrerit a. Nulla ultricies sagittis dolor, quis maximus magna consectetur eu. Cras pharetra aliquam fringilla. Integer placerat sapien dapibus varius luctus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in aliquam urna, ultrices lobortis lacus. Praesent mi enim, congue semper volutpat ut, bibendum tempor arcu.</p></div>
@@ -768,13 +784,13 @@
 												<div class="desc" id="updateDesc4"><p>Sed cursus hendrerit odio, at aliquet leo hendrerit a. Nulla ultricies sagittis dolor, quis maximus magna consectetur eu. Cras pharetra aliquam fringilla. Integer placerat sapien dapibus varius luctus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in aliquam urna, ultrices lobortis lacus. Praesent mi enim, congue semper volutpat ut, bibendum tempor arcu.</p></div>
 											</li>
 										</ul>
-										<button id="addUpdate">+ Update</button>
+<!-- 										<button id="addUpdate">+ Update</button>
 											<div id="updateModal" class="modal">
 												<div class="modal-content" scrolling="no">
 													<span class="close">&times;</span>
 													<iframe src="add_update.php" height="650" scrolling="no"></iframe>
 												</div>
-											</div>
+											</div> -->
 									</div>
 									<div id="comment" class="tabs comment-area">
 										<h3 class="comments-title">1 Comment</h3>
@@ -851,11 +867,11 @@
 																			<i onclick="MyWindow=window.open('timeline_update.php?edit=1&upID=<?php echo $up_res['upID'];?>&projID=<?php echo $p_res['projID'];?>','MyWindow',width=450,height=300)" class="fa fa-pencil edit-up"></i>
 																		</a-edit>
 																	</p2>
-																	<p2 style="margin-right: 5px;" onclick="turnUneditable('updateTitle1', 'updateDesc1');">
+																	<!-- <p2 style="margin-right: 5px;" onclick="turnUneditable('updateTitle1', 'updateDesc1');">
 																		<a-edit>
 																			<i data-id="<?php echo $up_res['upID'];?>" data-id2="<?php echo $up_res['projID'];?>" class="fa fa-check check-up"></i>
 																		</a-edit>
-																	</p2>
+																	</p2> -->
 																	<?php
 																		}
 																	?>
@@ -979,19 +995,24 @@
 												<div class="desc" id="updateDesc4"><p>Sed cursus hendrerit odio, at aliquet leo hendrerit a. Nulla ultricies sagittis dolor, quis maximus magna consectetur eu.</p></div>
 											</li> -->
 										</ul>
-										<?php
-											if($owner_ID==$sess_ID){
-										?>
-										<button id="addUpdate" onclick="MyWindow=window.open('add_update.php?projID=<?php echo $id;?>','MyWindow',width=450,height=300)">+ Update</button>
-										<?php
-											}
-										?>
-<!-- 											<div id="updateModal" class="modal">
-												<div class="modal-content" scrolling="no">
-													<span class="close">&times;</span>
-													<iframe src="add_update.html" height="650" scrolling="no"></iframe>
-												</div>
-											</div> -->
+										<!-- modal for hunter -->
+										<div class="bootstrap-iso">
+										<button id="addUpdate" type="button" data-toggle="modal" data-target="#modal-1">+ Update</button>
+										  <div class="modal fade" id="modal-1">
+										    <div class="modal-dialog modal-lg" >
+										      <div class="modal-content" style="height: 550px;">
+										         <div class="modal-body">
+										          <iframe src="add_update.php" style="width: 100%;" height="400" frameborder="0">
+										          </iframe>
+										         </div>
+										         <div class="modal-footer">
+										          <button class="btn-mainb" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
+										          <button name="add_update" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Add Update</button>
+										         </div>
+										      </div>
+										    </div>
+										  </div>
+										</div>
 									</div>
 							</div>
 						</div><!-- .sidebar -->
@@ -1078,13 +1099,16 @@
     <!-- orther script -->
     <script type="text/javascript" src="js/range.js"></script>
     <script  type="text/javascript" src="js/main.js"></script>
-    <script type="text/javascript" src="js/changes.js"></script>
-    <script type="text/javascript" src="js/popup.js"></script>
+<!--     <script type="text/javascript" src="js/changes.js"></script>
+    <script type="text/javascript" src="js/popup.js"></script> -->
     <script type="text/javascript">
     	var usr_id="<?php echo $sess_ID?>";
 		var proj_id="<?php echo $id?>";
     </script>
     <script type="text/javascript" src="js/upvotes.js"></script>
     <script type="text/javascript" src="js/update.js"></script>
+    <!-- for stuff -->
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </body>
 </html>

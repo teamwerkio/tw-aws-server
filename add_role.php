@@ -20,7 +20,7 @@
 
 <body class="campaign-detail">		
 
-		<main id="main" class="site-main">
+		<main id="main" class="site-main" style="margin-bottom: 0px; padding-bottom: 0px;">
 			<div style="margin-top: 50px;"></div>
 			<div class="campaign-form form-update">
 				<div class="container">
@@ -53,7 +53,7 @@
 								</div>
 			  				</div>
 						</div>
-		  				<div class="field" style="margin-top: 20px;">
+		  				<div class="field" style="margin-top: 20px; padding-bottom: 0px;">
 							<label for="title">What is your meeting location?</label>
 							<span class="label-desc">Easy to locate spots can help new team members navigate faster.</span>
 		  					<input type="text" value="" name="location" placeholder="The tree besides the lake" />
@@ -63,7 +63,7 @@
 							<span class="label-desc">Choose the institution where you run the meetings</span>
 			  				<div class="field">
 			  					<div class="field-select">
-									<select name="college" id="">
+									<select name="college" id="" style="margin-bottom: 0px;">
 										<?php
 											$col_sql="SELECT * from colleges";
 											$col_qry=mysqli_query($dbconnect, $col_sql);
@@ -85,7 +85,7 @@
 								</div>
 			  				</div>
 						</div>
-		  				<button name="proj_role" type="submit" value="Save & Launch" class="btn-primary" style="margin-bottom: 0px;">Add Role</button>
+		  				<!-- <button name="proj_role" type="submit" value="Save & Launch" class="btn-primary" style="margin-bottom: 0px;">Add Role</button> -->
 					</form>
 				</div>
 			</div>

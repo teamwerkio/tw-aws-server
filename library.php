@@ -28,10 +28,6 @@
 		$home_qry = mysqli_query($dbconnect, $home_sql);
 		$home_res = mysqli_fetch_assoc($home_qry);
 		$tab_disp=$home_res['firstname'];
-
-
-
-
 	}
 	$proj_sql = "SELECT * FROM project";
 	$proj_qry=mysqli_query($dbconnect, $proj_sql);
@@ -194,13 +190,13 @@
 											<div class="raised"><span style="width: <?php echo $trend_res
 											['progress']; ?>%;"></span></div>
 											<div class="process-info">
-												<div class="process-pledged"><span><?php echo $trend_res['upvote']; ?></span>upvotes</div>
+												<div class="process-pledged"><span><?php echo $trend_res['upvote']; ?></span>interest</div>
 												<div class="process-funded"><span>
 													<?php
 														$json=$trend_res['subs'];
 														$json=json_decode($json, true);
-														echo count($json['subs']);?></span>interest</div>
-												<div class="process-time"><span style="color: green;"><?php echo $trend_res['virality']; ?>%</span>virality</div>
+														echo count($json['subs']);?></span>teamsize</div>
+												<div class="process-time"><span style="color: green;"><?php echo $trend_res['virality']; ?>%</span>involvement</div>
 												<div class="process-time"><span><?php echo $days_elapsed; ?></span>days ago</div>
 											</div>
 										</div>
@@ -240,13 +236,13 @@
 														<div class="process">
 															<div class="raised"><span style="width: <?php echo $proj_res['progress'];?>%;"></span></div>
 															<div class="process-info">
-																<div class="process-pledged"><span><?php echo $proj_res['upvote']; ?></span>upvotes</div>
+																<div class="process-pledged"><span><?php echo $proj_res['upvote']; ?></span>interest</div>
 																<div class="process-funded"><span>
 																	<?php
 																		$json=$proj_res['subs'];
 																		$json=json_decode($json, true);
-																		echo count($json['subs']);?></span>interest</div>
-																<div class="process-time"><span style="color: red;"><?php echo $proj_res['virality']; ?>%</span>virality</div>
+																		echo count($json['subs']);?></span>teamsize</div>
+																<div class="process-time"><span style="color: red;"><?php echo $proj_res['virality']; ?>%</span>involvement</div>
 															</div>
 														</div>
 													</div>
