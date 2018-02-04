@@ -24,7 +24,7 @@
 			<div style="margin-top: 50px;"></div>
 			<div class="campaign-form form-update">
 				<div class="container">
-					<form name="proj_role" action="add_role_submit.php?projID=<?php echo $_GET['projID'];?>" method="post" enctype="multipart/form-data">
+					<form id="role_add" name="proj_role" action="add_role_submit.php?projID=<?php echo $_GET['projID'];?>" method="post" enctype="multipart/form-data">
 						<div class="field" style="margin-top: 20px;">
 							<label for="title">Role Title *</label>
 							<span class="label-desc">Think of a cool title, for your cool teammate!</span>

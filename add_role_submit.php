@@ -1,7 +1,7 @@
 <?php
 	include("dbconnect.php");
 	session_start();
-	if(!isset($_POST['proj_role'])){
+	if(empty($_POST)){
 		header("Location:project.php?projID=".$_GET['projID']);
 	}
 	else{
@@ -29,7 +29,7 @@
 			$role_qry=mysqli_query($dbconnect, $role_sql);
 
 			unset($_POST['proj_role']);
-			echo "<script>window.opener.location.reload(); window.close();</script>";
+			
 			// header("Location:project.php?projID=".$_GET['projID']);
 		}
 	}

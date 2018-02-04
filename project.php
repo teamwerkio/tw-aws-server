@@ -567,27 +567,35 @@
 												</div>
 											</a>
 										</div> --> 
-										<div class="bootstrap-iso">
-										<button id="addRole" type="button" data-toggle="modal" data-target="#modal-2">+ Role</button>
-										  <div class="modal fade" id="modal-2">
-										    <div class="modal-dialog modal-lg">
-										      <div class="modal-content" style="height: 600px;">
-										         <div class="modal-body">
-										          <iframe src="add_role.php" style="width: 100%; overflow: scroll;" height="400" frameborder="0">
-										          </iframe>
-										         </div>
-										         <div class="modal-footer">
-										          <button class="btn-mainb" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
-										          <button name="add_role" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Add Role</button>
-										         </div>
-										      </div>
-										    </div>
-										  </div>
-										</div>
+										<?php
+											if($owner_ID==$sess_ID){
+												?>
+												<div class="bootstrap-iso">
+												<button id="addRole" type="button" data-toggle="modal" data-target="#modal-2">+ Role</button>
+												  <div class="modal fade" id="modal-2">
+												    <div class="modal-dialog modal-lg">
+												      <div class="modal-content" style="height: 600px;">
+												         <div class="modal-body">
+												          <iframe id="if_role" src="add_role.php?projID=<?php echo $id;?>" style="width: 100%; overflow: scroll;" height="400" frameborder="0">
+												          </iframe>
+												         </div>
+												         <div class="modal-footer">
+												          <button class="btn-mainb" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
+												          <button id="role_button" name="add_role" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Add Role</button>
+												         </div>
+												      </div>
+												    </div>
+												  </div>
+												</div>
+												<?php
+											}
+
+										?>
+
 									</div></div>
 									</div>
 									<div id="story" class="tabs">
-										<img src="../images/placeholder/770x430.png" alt="">
+										<img src="<?php echo getimgURL($p_res['big_ban'], "banner_big"); ?>" alt="">
 										<h4 style="margin-bottom: 8px;">Our story from start to now!
 											<?php
 												if($sess_ID==$owner_ID){
@@ -612,8 +620,6 @@
 										?>
 										</h4>						
 										<p><?php echo $p_res['lg_desc'] ?></p>
-										<p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment.</p>
-										<p>One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections. The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, waved</p>
 									</div>
 									<div id="faq" class="tabs">
 										<h2>Frequently Asked Questions</h2>
@@ -996,23 +1002,30 @@
 											</li> -->
 										</ul>
 										<!-- modal for hunter -->
-										<div class="bootstrap-iso">
-										<button id="addUpdate" type="button" data-toggle="modal" data-target="#modal-1">+ Update</button>
-										  <div class="modal fade" id="modal-1">
-										    <div class="modal-dialog modal-lg" >
-										      <div class="modal-content" style="height: 550px;">
-										         <div class="modal-body">
-										          <iframe src="add_update.php" style="width: 100%;" height="400" frameborder="0">
-										          </iframe>
-										         </div>
-										         <div class="modal-footer">
-										          <button class="btn-mainb" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
-										          <button name="add_update" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Add Update</button>
-										         </div>
-										      </div>
-										    </div>
-										  </div>
-										</div>
+										<?php
+											if($owner_ID==$sess_ID){
+												?>
+													<div class="bootstrap-iso">
+													<button id="addUpdate" type="button" data-toggle="modal" data-target="#modal-1">+ Update</button>
+													  <div class="modal fade" id="modal-1">
+													    <div class="modal-dialog modal-lg" >
+													      <div class="modal-content" style="height: 550px;">
+													         <div class="modal-body">
+													          <iframe id="if_update" src="add_update.php?projID=<?php echo $id?>" style="width: 100%;" height="400" frameborder="0">
+													          </iframe>
+													         </div>
+													         <div class="modal-footer">
+													          <button class="btn-mainb" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
+													          <button name="add_update" id="update_button" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Add Update</button>
+													         </div>
+													      </div>
+													    </div>
+													  </div>
+													</div>
+												<?php												
+											}
+										?>
+
 									</div>
 							</div>
 						</div><!-- .sidebar -->
@@ -1104,6 +1117,20 @@
     <script type="text/javascript">
     	var usr_id="<?php echo $sess_ID?>";
 		var proj_id="<?php echo $id?>";
+		$(document).ready(function(){
+			$("#update_button").click(function(){
+				$("#if_update").contents().find("#update_add").submit();
+				$('.modal').modal('hide');
+				location.reload();
+
+			});
+
+			$("#role_button").click(function(){
+				$("#if_role").contents().find("#role_add").submit();
+				$(".modal").modal('hide');
+				location.reload();
+			});
+		});
     </script>
     <script type="text/javascript" src="js/upvotes.js"></script>
     <script type="text/javascript" src="js/update.js"></script>

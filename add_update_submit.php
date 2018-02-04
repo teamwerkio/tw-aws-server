@@ -1,7 +1,8 @@
 <?php
 	include("dbconnect.php");
 	session_start();
-	if(!isset($_POST['add_update'])){
+	if(empty($_POST)){
+
 		header("Location:project.php?projID=".$_GET['projID']);
 	}
 	else{
@@ -13,6 +14,7 @@
 
 		$fieldbool=$title=="" || $desc=="";
 		if($fieldbool==false){
+			error_log("working");
 			$up_sql="INSERT INTO proj_updates (projID, title, details, dt) VALUES ('".mysqli_real_escape_string($dbconnect, $projID)."', '".
 			mysqli_real_escape_string($dbconnect, $title)."', '".
 			mysqli_real_escape_string($dbconnect, $desc)."', '".
@@ -21,7 +23,7 @@
 			$up_qry=mysqli_query($dbconnect, $up_sql);
 
 			unset($_POST['add_update']);
-			echo "<script>window.opener.location.reload(); window.close();</script>";
+			
 		}
 	}
 ?>

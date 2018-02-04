@@ -24,7 +24,7 @@
 			<div style="margin-top: 50px;"></div>
 			<div class="campaign-form form-update">
 				<div class="container">
-					<form name="add_update" action="add_update_submit.php?projID=<?php echo $_GET['projID'];?>" method="post" enctype="multipart/form-data">
+					<form id="update_add" name="add_update" action="add_update_submit.php?projID=<?php echo $_GET['projID'];?>" method="post">
 <!-- 						<div class="date">
 							<label for="">Date *</label>
 							<span class="label-desc">Date for the entry</span>
