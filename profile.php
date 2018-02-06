@@ -7,12 +7,29 @@
 		header("Location:library.php");
 	}
 	else{
-		$prof_sql = "SELECT * FROM users WHERE usrID='".$_SESSION['usr']."'";
-		$prof_qry = mysqli_query($dbconnect, $prof_sql);
-		$prof_res = mysqli_fetch_assoc($prof_qry);
+		if(!isset($_GET['other_usr'])){
+			$prof_sql = "SELECT * FROM users WHERE usrID='".$_SESSION['usr']."'";
+			$prof_qry = mysqli_query($dbconnect, $prof_sql);
+			$prof_res = mysqli_fetch_assoc($prof_qry);
+			$show=true;
+		}
+		else{
+			$prof_sql = "SELECT * FROM users WHERE usrID='".$_GET['other_usr']."'";
+			$prof_qry = mysqli_query($dbconnect, $prof_sql);
+			$prof_res = mysqli_fetch_assoc($prof_qry);
+			$show=false;
+			if($_GET['other_usr']==$_SESSION['usr']){
+				$show=true;
+			}
+			
+		}
+		
 
 		
 	}
+	$name_sql = "SELECT firstname FROM users WHERE usrID='".$_SESSION['usr']."'";
+	$name_qry = mysqli_query($dbconnect, $name_sql);
+	$name_res = mysqli_fetch_assoc($name_qry);
 ?>
 <!doctype html>
 <html lang="en">
@@ -45,7 +62,7 @@
 								<a href="my_projects.php">My Projects<i class="fa fa-caret-down" aria-hidden="true"></i></a>
 							</li>
 							<li>
-								<a href="#"><?php echo $prof_res['firstname']; ?><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+								<a href="profile.php"><?php echo $name_res['firstname']; ?><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 								<ul class="sub-menu">
 									<li><a href="dashboard.php">Dashboard</a></li>
 									<li><a href="profile.php">Profile</a></li>
@@ -88,6 +105,9 @@
 			<div class="account-wrapper">
 				<div class="container">
 					<div class="row">
+						<?php
+							if($show){
+						?>
 						<div class="col-lg-3">
 							<nav class="account-bar">
 								<ul>
@@ -99,6 +119,9 @@
 								</ul>
 							</nav>
 						</div>
+						<?php
+							}
+						?>
 						<div class="col-lg-9">
 							<div class="account-content profile">
 								<h3 class="account-title">Profile</h3>
@@ -136,7 +159,14 @@
 											</li>
 										</ul>
 									</div> -->
+									<?php
+
+										if($show){
+									?>
 									<a href="#" class="btn-primary">Edit Details</a>
+									<?php
+										}
+									?>
 								</div>
 							</div>
 						</div>

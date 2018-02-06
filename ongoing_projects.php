@@ -145,12 +145,12 @@
 											?>
 
 													<div class="campaign-item">
-														<a class="campaign-image" href="#" style="height: 150px; width: 150px;">
+														<a class="campaign-image" href="project.php?projID=<?php echo $proj_res['projID']; ?>" style="height: 150px; width: 150px;">
 															<?php echo '<img src="'.getimgURL($proj_res['proj_icon'], "proj_icon").'" style="height: 150px; width: 150px;" />'; ?>		
 														</a>
 														<div class="campaign-box">
 															<div class="campaign-category"><a href="#"><?php echo returnCat('proj_categories', 'catName', $proj_res['catID'], $dbconnect); ?></a></div>
-															<div class="campaign-title"><a href="#"><?php echo $proj_res['projName']; ?></a></div>
+															<div class="campaign-title"><a href="project.php?projID=<?php echo $proj_res['projID']; ?>"><?php echo $proj_res['projName']; ?></a></div>
 															<div class="campaign-desc"><?php echo $proj_res['sm_desc']; ?></div>
 														</div>
 													</div>

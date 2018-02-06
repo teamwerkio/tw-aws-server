@@ -177,12 +177,12 @@
 															
 															?>
 																<li>
-																	<a href="#">
+																	<a href="project.php?projID=<?php echo $proj_res['projID']; ?>">
 																		<?php echo '<img src="'.getimgURL($proj_res['proj_icon'], "proj_icon").'" style="height: 70px; width: 70px;" />'; ?>
 																	</a>
 																	<div class="dashboard-latest-box">
 																		<div class="category"><a href="#"><?php echo returnCat('proj_categories', 'catName', $proj_res['catID'], $dbconnect); ?></a></div>
-																		<h4><a href="#"><?php echo $proj_res['projName']; ?></a></h4>
+																		<h4><a href="project.php?projID=<?php echo $proj_res['projID']; ?>"><?php echo $proj_res['projName']; ?></a></h4>
 																	</div>
 																</li>
 

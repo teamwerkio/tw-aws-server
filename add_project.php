@@ -115,17 +115,17 @@
 			  					<div class="file-upload">
 			  						<div class="upload-bg">
 				  						<div id="myfileupload">
-									   		<input type="file" id="uploadfile" name="big_ban" onchange="readURL1(this);" />	  
+									   		<input type="file" id="uploadfile1" name="big_ban" onchange="readURL1(this);" />	  
 									 	</div>
-									 	<div id="thumbbox">
+									 	<div id="thumbbox1">
 									 		<img height="100" width="100" alt="Thumb image" id="thumbimage1" style="display: none" />
-									  		<a class="removeimg" href="javascript:" ></a>
+									  		<a class="removeimg1" href="javascript:" ></a>
 									  	</div>
-									 	<div id="boxchoice">
-									  		<a href="javascript:" class="choicefile"><i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload Image</a>
+									 	<div id="boxchoice1">
+									  		<a href="javascript:" class="choicefile1"><i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload Image</a>
 									  		<p style="clear:both"></p>
 									 	</div>
-									  	<label class="filename"></label>
+									  	<label class="filename1"></label>
 				  					</div>
 			  					</div>
 			  				</div>
@@ -137,17 +137,17 @@
 			  					<div class="file-upload">
 			  						<div class="upload-bg">
 				  						<div id="myfileupload">
-									   		<input type="file" id="uploadfile" name="big_ban" onchange="readURL1(this);" />	  
+									   		<input type="file" id="uploadfile2" name="sm_ban" onchange="readURL2(this);" />	  
 									 	</div>
-									 	<div id="thumbbox">
-									 		<img height="100" width="100" alt="Thumb image" id="thumbimage1" style="display: none" />
-									  		<a class="removeimg" href="javascript:" ></a>
+									 	<div id="thumbbox2">
+									 		<img height="100" width="100" alt="Thumb image" id="thumbimage2" style="display: none" />
+									  		<a class="removeimg2" href="javascript:" ></a>
 									  	</div>
-									 	<div id="boxchoice">
-									  		<a href="javascript:" class="choicefile"><i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload Image</a>
+									 	<div id="boxchoice2">
+									  		<a href="javascript:" class="choicefile2"><i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload Image</a>
 									  		<p style="clear:both"></p>
 									 	</div>
-									  	<label class="filename"></label>
+									  	<label class="filename2"></label>
 				  					</div>
 			  					</div>
 			  				</div>
@@ -159,17 +159,17 @@
 			  					<div class="file-upload">
 			  						<div class="upload-bg">
 				  						<div id="myfileupload">
-									   		<input type="file" id="uploadfile" name="big_ban" onchange="readURL1(this);" />	  
+									   		<input type="file" id="uploadfile3" name="proj_icon" onchange="readURL3(this);" />	  
 									 	</div>
-									 	<div id="thumbbox">
-									 		<img height="100" width="100" alt="Thumb image" id="thumbimage1" style="display: none" />
-									  		<a class="removeimg" href="javascript:" ></a>
+									 	<div id="thumbbox3">
+									 		<img height="100" width="100" alt="Thumb image" id="thumbimage3" style="display: none" />
+									  		<a class="removeimg3" href="javascript:" ></a>
 									  	</div>
-									 	<div id="boxchoice">
-									  		<a href="javascript:" class="choicefile"><i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload Image</a>
+									 	<div id="boxchoice3">
+									  		<a href="javascript:" class="choicefile3"><i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload Image</a>
 									  		<p style="clear:both"></p>
 									 	</div>
-									  	<label class="filename"></label>
+									  	<label class="filename3"></label>
 				  					</div>
 			  					</div>
 			  				</div>

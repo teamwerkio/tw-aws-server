@@ -1,14 +1,13 @@
 <?php
 	include("dbconnect.php");
 	session_start();
-
+	include("img_url.php");
 	function timedifference_d($time){
 		date_default_timezone_set('US/Eastern');
-		$currtime=date('Y-m-d H:i:s:u');
-		$currtime=strtotime($currtime);
-		$time=strtotime($time);
-		$diff=$time-$currtime;
-		return floor($diff/(100*1000*60*60*24));
+		$currtime=new DateTime();
+		$time=new DateTime($time);
+		$interval=$currtime->diff($time);
+		return $interval->format('%a');
 	}
 
 
@@ -55,6 +54,12 @@
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link rel="stylesheet" type="text/css" href="css/responsive.css" />
     <link rel="icon" href="../images/favicon.png" type="image/x-icon"/>
+    <!-- bootstrap wrappable css to avoid conflicts -->
+  	<link rel="stylesheet" href="https://formden.com/static/assets/demos/bootstrap-iso/bootstrap-iso/bootstrap-iso.css">
+  	<link rel="stylesheet" href="https://formden.com/static/assets/demos/bootstrap-iso/bootstrap-iso/bootstrap-iso.css">
+<!-- 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script> -->
 </head>
 
 <body class="campaign-detail">
@@ -121,7 +126,7 @@
 						<div class="campaign-item clearfix">
 							<div class="campaign-image">
 								<div id="owl-campaign" class="campaign-slider">
-									<div class="item"><img src="../images/placeholder/570x400.png" alt=""></div>
+									<div class="item"><img src="<?php echo getimgURL($p_res['big_ban'], "banner_big"); ?>" alt=""></div>
 								</div>
 							</div>
 							<div class="campaign-box">
@@ -141,26 +146,74 @@
 								<div class="campaign-description"><p><?php echo $p_res['sm_desc']; ?></p></div>
 								<div class="campaign-author clearfix">
 									<div class="author-profile">
-										<a class="author-icon" href="#"><?php echo '<img src="../img_assets/profilepic/'.$owner_p.'" />'; ?></a>by <a class="author-name" href="#"><?php echo $owner_f; ?> <?php echo $owner_l; ?></a>
+										<a class="author-icon" href="profile.php?other_usr=<?php echo $p_res['usrID']; ?>"><?php echo '<img src="'.getimgURL($owner_p, "profilepic").'" />'; ?></a>by <a class="author-name" href="profile.php?other_usr=<?php echo $p_res['usrID']; ?>"><?php echo $owner_f; ?> <?php echo $owner_l; ?></a>
 									</div>
 									<div class="author-address"><span class="ion-location"></span><?php echo $proj_col; ?>, Amherst, MA</div>
 								</div>
 								<div class="process">
-									<div class="raised"><span></span></div>
+									<div class="raised"><span style="width: <?php echo $p_res
+											['progress']; ?>%;"></span></div>
 									<div class="process-info">
 
 										<!-- INTEREST -->
 
 										<div class="process-funded"><span>
-										<a data-tooltip="9999 ppl. interested to join">
-											9999
+										<a id="interest" data-tooltip="">
+											
 										</a>
 										</span>interest</div>
 
 										<!-- =============== -->
 
 										<!-- TEAM SIZE -->
-
+										<?php
+											$size_id=$p_res['tsizeID'];
+											if($size_id==1){
+												?>
+												<!-- Small Team -->
+												<div class="process-pledged"><span>
+													<a data-tooltip="Small team">
+													<i class="fa fa-user"></i>
+													<i class="fa fa-user"></i></a>
+												</span>team size</div>
+												<?php
+											}
+											elseif ($size_id==2) {
+												?>
+												<!-- Medium Team -->
+												<div class="process-pledged"><span>
+													<a data-tooltip="Medium team">
+													<i class="fa fa-user"></i>
+													<i class="fa fa-user"></i>
+													<i class="fa fa-user"></i></a>
+												</span>team size</div>
+												<?php
+											}
+											elseif ($size_id==3) {
+												?>
+												<!-- Large Team -->
+												<div class="process-pledged"><span>
+													<a data-tooltip="Large team">
+													<i class="fa fa-user"></i>
+													<i class="fa fa-user"></i>
+													<i class="fa fa-user"></i>
+													<i class="fa fa-user"></i></a>
+												</span>team size</div>
+												<?php
+											}
+											elseif ($size_id==4) {
+												?>
+												<!-- Extra Large Team -->
+												<div class="process-pledged"><span>
+													<a data-tooltip="Extra large team">
+													<i class="fa fa-user"></i>
+													<i class="fa fa-user"></i>
+													<i class="fa fa-user"></i>
+													<i class="fa fa-user-plus"></i></a>
+												</span>team size</div>
+												<?php
+											}
+										?>
 										<!-- Small Team -->
 										<!-- <div class="process-pledged"><span>
 											<a data-tooltip="Small team">
@@ -186,16 +239,60 @@
 										</span>team size</div> -->
 
 										<!-- Extra Large Team -->
-										<div class="process-pledged"><span>
+										<!-- <div class="process-pledged"><span>
 											<a data-tooltip="Extra large team">
 											<i class="fa fa-user"></i>
 											<i class="fa fa-user"></i>
 											<i class="fa fa-user"></i>
 											<i class="fa fa-user-plus"></i></a>
-										</span>team size</div>
+										</span>team size</div> -->
 
 										<!-- =============== -->
-
+										<?php
+											$inv_id=$p_res['commID'];
+											if($inv_id==1){
+												?>
+												<!-- < 10 hrs/week -->
+												<div class="process-time"><span>
+													<a data-tooltip="< 10 hrs/week (approx.)">
+													<i class="fa fa-clock-o"></i></a>
+												</span>involvement</div>
+												<?php
+											}
+											elseif ($inv_id==2) {
+												?>
+												<!-- 11 to 20 hrs/week -->
+												<div class="process-time"><span>
+													<a data-tooltip="11 to 20 hrs/week (approx.)">
+													<i class="fa fa-clock-o"></i>
+													<i class="fa fa-clock-o"></i></a>
+												</span>involvement</div>
+												<?php
+											}
+											elseif ($inv_id==3) {
+												?>
+												<!-- 21 to 30 hrs/week -->
+												<div class="process-time"><span>
+													<a data-tooltip="21 to 30 hrs/week (approx.)">
+													<i class="fa fa-clock-o"></i>
+													<i class="fa fa-clock-o"></i>
+													<i class="fa fa-clock-o"></i></a>
+												</span>involvement</div>
+												<?php
+											}
+											elseif ($inv_id==4) {
+												?>
+												<!-- > 31 hrs/week -->
+												<div class="process-time"><span>
+													<a data-tooltip="> 31 hrs/week (approx.)">
+													<i class="fa fa-clock-o"></i>
+													<i class="fa fa-clock-o"></i>
+													<i class="fa fa-clock-o"></i>
+													<i class="fa fa-clock-o"></i></a>
+												</span>involvement</div>
+												<?php
+											}
+										?>
 										<!-- INVOLVEMENT -->
 
 										<!-- < 10 hrs/week -->
@@ -220,34 +317,54 @@
 										</span>involvement</div> -->
 
 										<!-- > 31 hrs/week -->
-										<div class="process-time"><span>
+										<!-- <div class="process-time"><span>
 											<a data-tooltip="> 31 hrs/week (approx.)">
 											<i class="fa fa-clock-o"></i>
 											<i class="fa fa-clock-o"></i>
 											<i class="fa fa-clock-o"></i>
 											<i class="fa fa-clock-o"></i></a>
-										</span>involvement</div>
+										</span>involvement</div> -->
 
 										<!-- =============== -->
 
 										<!-- DAYS AGO -->
 
 										<div class="process-time"><span>
-										<a data-tooltip="Project started 9999 days ago">
-											9999
+										<a data-tooltip="Project started <?php echo timedifference_d($p_res['dt']);?> days ago">
+											<?php echo timedifference_d($p_res['dt']);?>
 										</a>
 										</span>days ago</div>
 
 										<!-- =============== -->
 									</div>
 								</div>
+								<?php if($_SESSION['usr']!=$owner_ID){
 
+								?>
 								<div class="button">
 									<form action="" id="priceForm" class="campaign-price quantity">
-										<button class="btn-primary" type="submit" style="cursor: pointer;">Join this project</button>
+										<button class="btn-primary" type="button" data-toggle="modal" data-target="#modal-33" style="cursor: pointer;">Join this project</button>
+										<div class="bootstrap-iso">
+										  <div class="modal fade" id="modal-33">
+										    <div class="modal-dialog modal-33g">
+										      <div class="modal-content" style="height: 700px; width: 500px;">
+										         <div class="modal-body">
+										          <iframe src="join_project.php" style="width: 100%; overflow: scroll;" height="550" frameborder="0">
+										          </iframe>
+										         </div>
+										         <div class="modal-footer">
+										          <button class="btn-mainb" data-dismiss="modal" style="cursor: pointer; width: 100px; color: white;">Close</button>
+										          <button name="add_role" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 100px; color: white;">Join</button>
+										         </div>
+										      </div>
+										    </div>
+										  </div>
+										</div>
 									</form>
-									<a href="#" class="btn-secondary"><i class="fa fa-hand-o-up" aria-hidden="true"></i>Keep me posted</a>
+									<a id="upvote" href="#" class="btn-secondary"><i class="fa fa-hand-o-up" aria-hidden="true"></i>Keep me posted</a>
 								</div>
+								<?php
+								} ?>
 								<!-- <div class="share" style="margin-top: 42px;">
 									<p style="margin-bottom: 5px;">Share this project</p>
 									<ul>
@@ -271,7 +388,13 @@
 									<!-- <li data-tab="backer"><a href="#">Backer List</a></li> -->
 									<li data-tab="story"><a href="#">Story</a></li>
 									<!-- <li data-tab="faq"><a href="#">Details</a></li> -->
+									<?php
+										if($_SESSION['usr']==$p_res['usrID']){
+									?>
 									<li data-tab="settings"><a href="#">Settings</a></li>
+									<?php
+										}
+									?>
 									<!-- <li data-tab="comment"><a href="#">Comments</a></li> -->
 								</ul>
 								<div class="campaign-content">
@@ -290,8 +413,72 @@
 										</div>
 
 										<!-- <h1 style="margin-bottom: 3px; font-weight: 500; font-size: 20px;">Open</h1> -->
+										<?php
+											$role_sql="SELECT * FROM team_roles WHERE (projID=".$p_res['projID'].") AND (status=0)";
+											$role_qry=mysqli_query($dbconnect,$role_sql);
+											if(mysqli_num_rows($role_qry)!=0){
 
-										<div class="plan" style="margin-bottom: 15px;">
+
+											$role_res=mysqli_fetch_assoc($role_qry);
+
+											do{
+												?>
+													<div class="plan" style="margin-bottom: 15px;">
+														<a href="javascript:void(0)">
+															<h4><?php echo $role_res['title'];
+																
+																	if($sess_ID==$owner_ID){
+
+
+																?>
+																<p2 style="float: right;">
+																	<a-remove>
+																		<i data-id="<?php echo $role_res['roleID'];?>" data-id2="<?php echo $role_res['projID'];?>" class="fa fa-times remove-role"></i>
+																	</a-remove>
+																</p2>
+																<p2 style="margin-right: 5px; float: right;">
+																	<a-edit-black>
+																		<i data-id="<?php echo $role_res['roleID'];?>" data-id2="<?php echo $role_res['projID'];?>" class="fa fa-pencil edit-role" onclick="MyWindow=window.open('role_update.php?edit=1&roleID=<?php echo $role_res['roleID'];?>&projID=<?php echo $p_res['projID'];?>','MyWindow',width=450,height=300)"></i>
+																	</a-edit-black>
+																</p2>
+																<!-- <p2 style="margin-right: 5px; float: right;">
+																	<a-edit-black>
+																		<i data-id="<?php echo $role_res['roleID'];?>" data-id2="<?php echo $role_res['projID'];?>" class="fa fa-check check-role"></i>
+																		</script>
+																	</a-edit-black>
+																</p2> -->
+																<?php
+																	}
+																?>
+															</h4>
+															<div class="plan-desc"><p><?php echo $role_res['description'];?></p></div>
+															<!-- <div class="plan-author">End    : 15 November 2018</div> -->
+															<div class="backer"><?php echo $role_res['meet_time'];?><i>(<?php if($role_res['meet_freq']==1){
+																echo "Weekly";
+															}
+															elseif ($role_res['meet_freq']==2) {
+																echo "Bi-Weekly";
+															}
+															else{
+																echo "Monthly";
+															}
+															?>)</i><br>
+																<?php echo returnCat('colleges', 'colName', $role_res['colID'], $dbconnect, 'colID'); ?>, <?php echo $role_res['location']; ?><br>
+															</div>
+														</a>
+													</div>
+
+
+												<?php
+
+											}while($role_res=mysqli_fetch_assoc($role_qry));
+										}
+										else{
+											echo "No roles available at this moment.";
+										}
+										?>
+										<p id="no-roles"></p>
+										<!-- <div class="plan" style="margin-bottom: 15px;">
 											<a href="javascript:void(0)">
 												<h4>Backend Developer
 													<?php
@@ -320,7 +507,7 @@
 												</h4>
 												<div class="plan-desc"><p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master builder of human happiness.</p></div>
 												<!-- <div class="plan-author">End    : 15 November 2018</div> -->
-												<div class="backer">
+												<!-- <div class="backer">
 													TTH 7:00PM to 8:00PM <i>(weekly)</i><br>
 													Hampshire College, ASH 221<br>
 												</div>
@@ -395,17 +582,36 @@
 													Hampshire College, FPH 108<br>
 												</div>
 											</a>
-										</div>
+										</div> --> 
 										<?php
-											if($sess_ID==$owner_ID){
-										?>
-										<button style="margin-top: 0px;" onclick="MyWindow=window.open('add_role.php','MyWindow',width=450,height=300)">+ Role</button>
-										<?php
+											if($owner_ID==$sess_ID){
+												?>
+												<div class="bootstrap-iso">
+												<button id="addRole" type="button" data-toggle="modal" data-target="#modal-2">+ Role</button>
+												  <div class="modal fade" id="modal-2">
+												    <div class="modal-dialog modal-lg">
+												      <div class="modal-content" style="height: 600px;">
+												         <div class="modal-body">
+												          <iframe id="if_role" src="add_role.php?projID=<?php echo $id;?>" style="width: 100%; overflow: scroll;" height="400" frameborder="0">
+												          </iframe>
+												         </div>
+												         <div class="modal-footer">
+												          <button class="btn-mainb" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
+												          <button id="role_button" name="add_role" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Add Role</button>
+												         </div>
+												      </div>
+												    </div>
+												  </div>
+												</div>
+												<?php
 											}
+
 										?>
+
 									</div></div>
 									</div>
 									<div id="story" class="tabs">
+										<img src="<?php echo getimgURL($p_res['big_ban'], "banner_big"); ?>" alt="">
 										<h4 style="margin-bottom: 8px;">Our story from start to now!
 											<?php
 												if($sess_ID==$owner_ID){
@@ -420,19 +626,16 @@
 												<i class="fa fa-pencil"></i>
 											</a-edit>
 										</p2>
-										<p2 style="margin-right: 5px; float: right;">
+										<!-- <p2 style="margin-right: 5px; float: right;">
 											<a-edit>
 												<i class="fa fa-check"></i>
 											</a-edit>
-										</p2>
+										</p2> -->
 										<?php
 											}
 										?>
-										</h4>
+										</h4>						
 										<p><?php echo $p_res['lg_desc'] ?></p>
-										<img src="../images/placeholder/770x430.png" alt="">
-										<p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment.</p>
-										<p>One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections. The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, waved</p>
 									</div>
 									<div id="faq" class="tabs">
 										<h2>Frequently Asked Questions</h2>
@@ -444,39 +647,77 @@
 										<p>Use the settings below to change items displayed on this project.</p>
 
 										<h3 style="margin-bottom: 10px; margin-top: 30px;">Team details</h3>
-										<div class="field clearfix">
-						  					<label for="">Team size *</label>
-							  				<div class="field">
-							  					<div class="field-select">
-													<select name="teamsize" id="">
-														<option value="">Medium</option>
-														<option value="1">Small</option>
-														<option value="2">Large</option>
-														<option value="3">Extra Large</option>
-													</select>
-												</div>
-							  				</div>
-										</div>
-										<div class="field clearfix" style="margin-top: 10px; margin-bottom: 30px;">
-						  					<label for="">Approx. time commitment needed from each member *</label>
-							  				<div class="field">
-							  					<div class="field-select">
-													<select name="teamsize" id="">
-														<option value="">Less than 10 hrs/week</option>
-														<option value="1">11 to 20 hrs/week</option>
-														<option value="2">21 to 30 hrs/week</option>
-														<option value="3">More than 31 hrs/week</option>
-													</select>
-												</div>
-							  				</div>
-										</div>
+										<form name="proj_set" action="proj_set_submit.php?projID=<?php echo $_GET['projID'];?>" method="post" enctype="multipart/form-data">
+											<div class="field clearfix">
+							  					<label for="">Team size *</label>
+								  				<div class="field">
+								  					<div class="field-select">
+														<select name="teamsize" id="">
+															<?php
+																$tsize_sql="SELECT * from teamsize";
+																$tsize_qry=mysqli_query($dbconnect, $tsize_sql);
+																$tsize_res=mysqli_fetch_assoc($tsize_qry);
+																do{
+																	if($p_res['tsizeID']==$tsize_res['tsizeID']){
+																		?>
+																		<option value="<?php echo $tsize_res['tsizeID'];?>" selected><?php echo $tsize_res['Description']; ?></option>
+																		<?php
+																	}
+																	else{
+																		?>
+																		<option value="<?php echo $tsize_res['tsizeID'];?>"><?php echo $tsize_res['Description']; ?></option>
+																		<?php
+																	}
 
-										<h3 style="margin-bottom: 10px;">Project details</h3>
-					  					<label style="margin-bottom: 2px;">How far is this project from completion? *</label><br>
-						  				<input type="range" value="20" id="projectProgress"></input>
-						  				<p>This project is <strong><span id="progressOutput"></span>%</strong> complete</p>
+																} while($tsize_res=mysqli_fetch_assoc($tsize_qry));
+															?>
+															<!-- <option value="1">Medium</option>
+															<option value="2">Small</option>
+															<option value="3">Large</option>
+															<option value="4">Extra Large</option> -->
+														</select>
+													</div>
+								  				</div>
+											</div>
+											<div class="field clearfix" style="margin-top: 10px; margin-bottom: 30px;">
+							  					<label for="">Approx. time commitment needed from each member *</label>
+								  				<div class="field">
+								  					<div class="field-select">
+														<select name="commit" id="">
+															<?php
+																$comm_sql="SELECT * from commitment";
+																$comm_qry=mysqli_query($dbconnect, $comm_sql);
+																$comm_res=mysqli_fetch_assoc($comm_qry);
+																do{
+																	if($p_res['commID']==$comm_res['cID']){
+																		?>
+																		<option value="<?php echo $comm_res['cID'];?>" selected><?php echo $comm_res['Description']; ?></option>
+																		<?php
+																	}
+																	else{
+																		?>
+																		<option value="<?php echo $comm_res['cID'];?>"><?php echo $comm_res['Description']; ?></option>
+																		<?php
+																	}
 
-						  				<a href="#" class="btn-primary" style="margin-top: 5px;">Save and Apply settings</a>
+																} while($comm_res=mysqli_fetch_assoc($comm_qry));
+															?>
+															<!-- <option value="1">Less than 10 hrs/week</option>
+															<option value="2" selected>11 to 20 hrs/week</option>
+															<option value="3">21 to 30 hrs/week</option>
+															<option value="4">More than 31 hrs/week</option> -->
+														</select>
+													</div>
+								  				</div>
+											</div>
+
+											<h3 style="margin-bottom: 10px;">Project details</h3>
+						  					<label style="margin-bottom: 2px;">How far is this project from completion? *</label><br>
+							  				<input name="progress" type="range" value="<?php echo $p_res['progress'];?>" id="projectProgress"></input>
+							  				<p>This project is <strong><span id="progressOutput"></span>%</strong> complete</p>
+											<button name="proj_set" class="btn-primary" type="submit" style="cursor: pointer; margin-top: 5px; background-color: #73b941; padding-left: 8px; padding-right: 8px;">Save and Apply settings</button>
+							  				<!-- <a href="#" class="btn-primary" style="margin-top: 5px;">Save and Apply settings</a> -->
+							  			</form>
 									</div>
 									<div id="updates" class="tabs">
 										<ul>
@@ -492,11 +733,11 @@
 															<i class="fa fa-pencil"></i>
 														</a-edit>
 													</p2>
-													<p2 style="margin-right: 5px;" onclick="turnUneditable('updateTitle1', 'updateDesc1');">
+													<!-- <p2 style="margin-right: 5px;" onclick="turnUneditable('updateTitle1', 'updateDesc1');">
 														<a-edit>
 															<i class="fa fa-check"></i>
 														</a-edit>
-													</p2>
+													</p2> -->
 												</p>
 												<h3 id="updateTitle1">Our Employee Reach 100 Person</h3>
 												<div class="desc" id="updateDesc1"><p>Sed cursus hendrerit odio, at aliquet leo hendrerit a. Nulla ultricies sagittis dolor, quis maximus magna consectetur eu. Cras pharetra aliquam fringilla. Integer placerat sapien dapibus varius luctus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in aliquam urna, ultrices lobortis lacus. Praesent mi enim, congue semper volutpat ut, bibendum tempor arcu.</p></div>
@@ -565,13 +806,13 @@
 												<div class="desc" id="updateDesc4"><p>Sed cursus hendrerit odio, at aliquet leo hendrerit a. Nulla ultricies sagittis dolor, quis maximus magna consectetur eu. Cras pharetra aliquam fringilla. Integer placerat sapien dapibus varius luctus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in aliquam urna, ultrices lobortis lacus. Praesent mi enim, congue semper volutpat ut, bibendum tempor arcu.</p></div>
 											</li>
 										</ul>
-										<button id="addUpdate">+ Update</button>
+<!-- 										<button id="addUpdate">+ Update</button>
 											<div id="updateModal" class="modal">
 												<div class="modal-content" scrolling="no">
 													<span class="close">&times;</span>
 													<iframe src="add_update.php" height="650" scrolling="no"></iframe>
 												</div>
-											</div>
+											</div> -->
 									</div>
 									<div id="comment" class="tabs comment-area">
 										<h3 class="comments-title">1 Comment</h3>
@@ -619,8 +860,55 @@
 							<div class="support support-campaign" style="margin-top: 5.5px;">
 								<h3 class="support-campaign-title">Timeline</h3>
 									<div id="updates" class="tabs">
+										<p id="no-updates"></p>
 										<ul>
-											<li>
+											<?php
+												$up_sql="SELECT * FROM proj_updates WHERE (projID=".$id.") AND (status=0)";
+												$up_qry=mysqli_query($dbconnect, $up_sql);
+												if(mysqli_num_rows($up_qry)==0){
+													echo "No updates available.";
+												}
+												else{
+
+													$up_res=mysqli_fetch_assoc($up_qry);
+
+													do{
+														?>
+															<li>
+																<p class="date"><?php echo date( 'Y-m-d', strtotime($up_res['dt']));?>
+																	<?php
+																		if($owner_ID==$sess_ID){
+																	?>
+																	<p2>
+																		<a-remove>
+																			<i data-id="<?php echo $up_res['upID'];?>" data-id2="<?php echo $up_res['projID'];?>" class="fa fa-times del-up"></i>
+																		</a-remove>
+																	</p2>
+																	<p2 style="margin-right: 5px;" onclick="turnEditable('updateTitle1', 'updateDesc1');">
+																		<a-edit>
+																			<i onclick="MyWindow=window.open('timeline_update.php?edit=1&upID=<?php echo $up_res['upID'];?>&projID=<?php echo $p_res['projID'];?>','MyWindow',width=450,height=300)" class="fa fa-pencil edit-up"></i>
+																		</a-edit>
+																	</p2>
+																	<!-- <p2 style="margin-right: 5px;" onclick="turnUneditable('updateTitle1', 'updateDesc1');">
+																		<a-edit>
+																			<i data-id="<?php echo $up_res['upID'];?>" data-id2="<?php echo $up_res['projID'];?>" class="fa fa-check check-up"></i>
+																		</a-edit>
+																	</p2> -->
+																	<?php
+																		}
+																	?>
+																</p>
+																<h3 id="updateTitle1"><?php echo $up_res['title'];?></h3>
+																<div class="desc" id="updateDesc1"><p><?php echo $up_res['details'];?></p></div>
+															</li>
+
+														<?php
+
+													}while($up_res=mysqli_fetch_assoc($up_qry));
+												}
+
+											?>
+											<!-- <li>
 												<p class="date"> 11-05-2018
 													<?php
 														if($owner_ID==$sess_ID){
@@ -727,21 +1015,33 @@
 												</p>
 												<h3 id="updateTitle4">We started the project</h3>
 												<div class="desc" id="updateDesc4"><p>Sed cursus hendrerit odio, at aliquet leo hendrerit a. Nulla ultricies sagittis dolor, quis maximus magna consectetur eu.</p></div>
-											</li>
+											</li> -->
 										</ul>
+										<!-- modal for hunter -->
 										<?php
 											if($owner_ID==$sess_ID){
-										?>
-										<button id="addUpdate" onclick="MyWindow=window.open('add_update.php','MyWindow',width=450,height=300)">+ Update</button>
-										<?php
+												?>
+													<div class="bootstrap-iso">
+													<button id="addUpdate" type="button" data-toggle="modal" data-target="#modal-1">+ Update</button>
+													  <div class="modal fade" id="modal-1">
+													    <div class="modal-dialog modal-lg" >
+													      <div class="modal-content" style="height: 550px;">
+													         <div class="modal-body">
+													          <iframe id="if_update" src="add_update.php?projID=<?php echo $id?>" style="width: 100%;" height="400" frameborder="0">
+													          </iframe>
+													         </div>
+													         <div class="modal-footer">
+													          <button class="btn-mainb" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
+													          <button name="add_update" id="update_button" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Add Update</button>
+													         </div>
+													      </div>
+													    </div>
+													  </div>
+													</div>
+												<?php												
 											}
 										?>
-<!-- 											<div id="updateModal" class="modal">
-												<div class="modal-content" scrolling="no">
-													<span class="close">&times;</span>
-													<iframe src="add_update.html" height="650" scrolling="no"></iframe>
-												</div>
-											</div> -->
+
 									</div>
 							</div>
 						</div><!-- .sidebar -->
@@ -828,7 +1128,30 @@
     <!-- orther script -->
     <script type="text/javascript" src="js/range.js"></script>
     <script  type="text/javascript" src="js/main.js"></script>
-    <script type="text/javascript" src="js/changes.js"></script>
-    <script type="text/javascript" src="js/popup.js"></script>
+<!--     <script type="text/javascript" src="js/changes.js"></script>
+    <script type="text/javascript" src="js/popup.js"></script> -->
+    <script type="text/javascript">
+    	var usr_id="<?php echo $sess_ID?>";
+		var proj_id="<?php echo $id?>";
+		$(document).ready(function(){
+			$("#update_button").click(function(){
+				$("#if_update").contents().find("#update_add").submit();
+				$('.modal').modal('hide');
+				location.reload();
+
+			});
+
+			$("#role_button").click(function(){
+				$("#if_role").contents().find("#role_add").submit();
+				$(".modal").modal('hide');
+				location.reload();
+			});
+		});
+    </script>
+    <script type="text/javascript" src="js/upvotes.js"></script>
+    <script type="text/javascript" src="js/update.js"></script>
+    <!-- for stuff -->
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </body>
 </html>

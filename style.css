@@ -267,6 +267,39 @@ input[type=range]:focus::-ms-fill-upper {
 .section{
 	padding-top: 120px;
 }
+.btn-mainb{
+	background-color: #73b941;
+	padding: 0 20px;
+	border-radius: 2px 2px 2px 2px;
+	-moz-border-radius: 2px 2px 2px 2px;
+	-webkit-border-radius: 2px 2px 2px 2px;
+	height: 46px;
+	line-height: 46px;
+	border: none;
+	display: inline-block;
+	color: white;
+}
+.btn-mainb:hover{
+	background-color: #5aab21;
+}
+.btn-secb{
+	color: #5aab21;
+  border: 2px solid #5aab21;
+	padding: 0 20px;
+	border-radius: 3px 3px 3px 3px;
+	-moz-border-radius: 3px 3px 3px 3px;
+	-webkit-border-radius: 3px 3px 3px 3px;
+	height: 46px;
+	line-height: 42px;
+	display: inline-block;
+	margin-right: 17px;
+	background-color: initial;
+}
+.btn-secb:hover{
+	background-color: #5aab21;
+  	border-color: #5aab21;
+	color: #fff;
+}
 .btn-primary{
 	background-color: #73b941;
 	padding: 0 20px;
@@ -280,7 +313,7 @@ input[type=range]:focus::-ms-fill-upper {
 }
 .btn-secondary{
 	color: #fff;
-  border: 2px solid #fff;
+  	border: 2px solid #fff;
 	padding: 0 20px;
 	border-radius: 3px 3px 3px 3px;
 	-moz-border-radius: 3px 3px 3px 3px;

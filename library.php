@@ -6,11 +6,10 @@
 
 	function timedifference_d($time){
 		date_default_timezone_set('US/Eastern');
-		$currtime=date('Y-m-d H:i:s:u');
-		$currtime=strtotime($currtime);
-		$time=strtotime($time);
-		$diff=$time-$currtime;
-		return floor($diff/(100*1000*60*60*24));
+		$currtime=new DateTime();
+		$time=new DateTime($time);
+		$interval=$currtime->diff($time);
+		return $interval->format('%a');
 	}
 
 
@@ -29,10 +28,6 @@
 		$home_qry = mysqli_query($dbconnect, $home_sql);
 		$home_res = mysqli_fetch_assoc($home_qry);
 		$tab_disp=$home_res['firstname'];
-
-
-
-
 	}
 	$proj_sql = "SELECT * FROM project";
 	$proj_qry=mysqli_query($dbconnect, $proj_sql);
@@ -163,7 +158,7 @@
 			<div class="campaigns">
 				<div class="container">
 					<div class="campaign-content">
-						<div class="row">
+						<div class="row" id="lib-pg">
 							<?php
 								$trend_sql="SELECT * FROM project where projID='".$trending_proj_id."'";
 								$trend_qry=mysqli_query($dbconnect, $trend_sql);
@@ -187,16 +182,21 @@
 										<div class="campaign-description"><?php echo $trend_res['sm_desc']; ?></div>
 										<div class="staff-picks-author">
 											<div class="author-profile">
-												<a class="author-avatar" href="#"><?php echo '<img src="'.getimgURL($owner_p, "profilepic").'" />'; ?></a>by <a class="author-name" href="#"><?php echo $owner_f.' '.$owner_l; ?></a>
+												<a class="author-avatar" href="profile.php?other_usr=<?php echo $trend_res['usrID']; ?>"><?php echo '<img src="'.getimgURL($owner_p, "profilepic").'" />'; ?></a>by <a class="author-name" href="profile.php?other_usr=<?php echo $trend_res['usrID']; ?>"><?php echo $owner_f.' '.$owner_l; ?></a>
 											</div>
 											<div class="author-address"><span class="ion-location"></span><?php echo $proj_col; ?>, Amherst, MA</div>
 										</div>
 										<div class="process">
-											<div class="raised"><span style="width: 50%;"></span></div>
+											<div class="raised"><span style="width: <?php echo $trend_res
+											['progress']; ?>%;"></span></div>
 											<div class="process-info">
-												<div class="process-pledged"><span><?php echo $trend_res['upvote']; ?></span>upvotes</div>
-												<div class="process-funded"><span><?php echo $trend_res['interest']; ?>%</span>interest</div>
-												<div class="process-time"><span style="color: green;"><?php echo $trend_res['virality']; ?>%</span>virality</div>
+												<div class="process-pledged"><span><?php echo $trend_res['upvote']; ?></span>interest</div>
+												<div class="process-funded"><span>
+													<?php
+														$json=$trend_res['subs'];
+														$json=json_decode($json, true);
+														echo count($json['subs']);?></span>teamsize</div>
+												<div class="process-time"><span style="color: green;"><?php echo $trend_res['virality']; ?>%</span>involvement</div>
 												<div class="process-time"><span><?php echo $days_elapsed; ?></span>days ago</div>
 											</div>
 										</div>
@@ -207,12 +207,15 @@
 
 							<?php
 
-								$proj_sql = "SELECT * FROM project";
+								$proj_sql = "SELECT * FROM project LIMIT 10";
 								$proj_qry=mysqli_query($dbconnect, $proj_sql);
 								$proj_res=mysqli_fetch_assoc($proj_qry);
+								$count=0;
+								$final_id=0;
 
 								do{
-									if($proj_res['projID']!==$trending_proj_id){
+									if($proj_res['projID']!==$trending_proj_id && $count<9){
+										$count+=1;
 										$cat=returnCat('proj_categories', 'catName', $proj_res['catID'], $dbconnect, 'catID');
 										$owner_f=returnCat('users', 'firstname', $proj_res['usrID'], $dbconnect, 'usrID');
 										$owner_p=returnCat('users', 'profilepic', $proj_res['usrID'], $dbconnect, 'usrID');
@@ -227,21 +230,26 @@
 														<a href="#" class="category"><?php echo $cat; ?></a>
 														<h3><a href="project.php?projID=<?php echo $proj_res['projID']; ?>"><?php echo $proj_res['projName']; ?></a></h3>
 														<div class="campaign-description"><?php echo $proj_res['sm_desc']; ?></div>
-														<div class="campaign-author"><a class="author-icon" href="#">
-															<?php echo '<img src="'.getimgURL($owner_p, "profilepic").'" />'; ?></a>by <a class="author-name" href="#"><?php echo $owner_f; ?>		
+														<div class="campaign-author"><a class="author-icon" href="profile.php?other_usr=<?php echo $proj_res['usrID']; ?>">
+															<?php echo '<img src="'.getimgURL($owner_p, "profilepic").'" />'; ?></a>by <a class="author-name" href="profile.php?other_usr=<?php echo $proj_res['usrID']; ?>"><?php echo $owner_f; ?>		
 														</a></div>
 														<div class="process">
-															<div class="raised"><span style="width: 10%;"></span></div>
+															<div class="raised"><span style="width: <?php echo $proj_res['progress'];?>%;"></span></div>
 															<div class="process-info">
-																<div class="process-pledged"><span><?php echo $proj_res['upvote']; ?></span>upvotes</div>
-																<div class="process-funded"><span><?php echo $proj_res['interest']; ?>%</span>interest</div>
-																<div class="process-time"><span style="color: red;"><?php echo $proj_res['virality']; ?>%</span>virality</div>
+																<div class="process-pledged"><span><?php echo $proj_res['upvote']; ?></span>interest</div>
+																<div class="process-funded"><span>
+																	<?php
+																		$json=$proj_res['subs'];
+																		$json=json_decode($json, true);
+																		echo count($json['subs']);?></span>teamsize</div>
+																<div class="process-time"><span style="color: red;"><?php echo $proj_res['virality']; ?>%</span>involvement</div>
 															</div>
 														</div>
 													</div>
 												</div>
 											</div>
 										<?php
+										$final_id=$proj_res['projID'];
 
 								}}while($proj_res=mysqli_fetch_assoc($proj_qry));
 
@@ -424,7 +432,9 @@
 							</div> -->
 						</div>
 					</div>
-					<div class="latest-button wow fadeInUp" data-wow-delay=".1s"><a href="#" class="btn-primary">Load more</a></div>
+					
+					<div class="latest-button wow fadeInUp" name="loading" data-wow-delay=".1s" ><a data-finalID="<?php echo $final_id;?>" id="load_more" href="#" class="btn-primary">Load more</a></div>
+
 				</div>
 			</div><!-- .latest -->
 		</main><!-- .site-main -->
@@ -506,5 +516,43 @@
     <script type="text/javascript" src="libs/bxslider/jquery.bxslider.min.js"></script>
     <!-- orther script -->
     <script  type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript">
+    	var trend=<?php echo $trending_proj_id;?>;
+    	$(document).on('click', '#load_more', function(){
+    		var button=$(this);
+    		var finID=button.attr("data-finalID");
+    		button.html("Loading...");
+    		$.ajax({
+    			url: 'load_more_req.php',
+    			type: 'POST',
+    			data: {
+    				'load': 1,
+    				'finID': finID,
+    				'trend': trend,
+    			},
+    			success: function(data){
+    				if(data==="0"){
+    					button.html("All showing");
+
+    				}
+    				else{
+    					var json=JSON.parse(data);
+    					
+    					$("#lib-pg").append(json.html);
+    					if(json.count==="0"){
+    						button.html("All showing");
+    					}
+    					else{
+    						$("#load_more").attr("data-finalID",json.final);
+
+    						button.html("Load more");
+    					}
+    					
+    				}
+    			}
+    		});
+    	});
+    </script>
+    
 </body>
 </html>
