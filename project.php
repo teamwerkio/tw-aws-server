@@ -379,6 +379,7 @@
 									<?php
 										}
 									?>
+									<li data-tab="requests" style="float: right;"><a href="#">Requests</a></li>
 									<!-- <li data-tab="comment"><a href="#">Comments</a></li> -->
 								</ul>
 								<div class="campaign-content">
@@ -407,8 +408,11 @@
 
 											do{
 												?>
+
 													<div class="plan" style="margin-bottom: 15px;">
 														<a href="javascript:void(0)">
+															
+																		
 															<h4><?php echo $role_res['title'];
 																
 																	if($sess_ID==$owner_ID){
@@ -420,9 +424,28 @@
 																		<i data-id="<?php echo $role_res['roleID'];?>" data-id2="<?php echo $role_res['projID'];?>" class="fa fa-times remove-role"></i>
 																	</a-remove>
 																</p2>
+																
+																<!-- Pencil Edit Icon-->
 																<p2 style="margin-right: 5px; float: right;">
 																	<a-edit-black>
-																		<i data-id="<?php echo $role_res['roleID'];?>" data-id2="<?php echo $role_res['projID'];?>" class="fa fa-pencil edit-role" onclick="MyWindow=window.open('role_update.php?edit=1&roleID=<?php echo $role_res['roleID'];?>&projID=<?php echo $p_res['projID'];?>','MyWindow',width=450,height=300)"></i>
+																		<div class="bootstrap-iso">
+																		<i class="fa fa-pencil edit-role" data-toggle="modal" data-target="#modal-3"></i>
+																		  <div class="modal fade" id="modal-3">
+																		    <div class="modal-dialog modal-3g" >
+																		      <div class="modal-content" style="height: 550px;">
+																		         <div class="modal-body">
+																		          <iframe src="role_update.php?edit=1&roleID=<?php echo $role_res['roleID'];?>&projID=<?php echo $p_res['projID'];?>" style="width: 100%;" height="400" frameborder="0">
+																		          </iframe>
+																		         </div>
+																		         <div class="modal-footer">
+																		          <button class="btn-mainb" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
+																		          <button name="Edit Role" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Edit Role</button>
+																		         </div>
+																		      </div>
+																		    </div>
+																		  </div>
+																		</div>
+																		<!--<i data-id="<?php echo $role_res['roleID'];?>" data-id2="<?php echo $role_res['projID'];?>" class="fa fa-pencil edit-role" onclick="MyWindow=window.open('role_update.php?edit=1&roleID=<?php echo $role_res['roleID'];?>&projID=<?php echo $p_res['projID'];?>','MyWindow',width=450,height=300)"></i>-->
 																	</a-edit-black>
 																</p2>
 																<!-- <p2 style="margin-right: 5px; float: right;">
@@ -857,16 +880,58 @@
 																	<?php
 																		if($owner_ID==$sess_ID){
 																	?>
+
 																	<p2>
 																		<a-remove>
 																			<i data-id="<?php echo $up_res['upID'];?>" data-id2="<?php echo $up_res['projID'];?>" class="fa fa-times del-up"></i>
 																		</a-remove>
 																	</p2>
-																	<p2 style="margin-right: 5px;" onclick="turnEditable('updateTitle1', 'updateDesc1');">
-																		<a-edit>
-																			<i onclick="MyWindow=window.open('timeline_update.php?edit=1&upID=<?php echo $up_res['upID'];?>&projID=<?php echo $p_res['projID'];?>','MyWindow',width=450,height=300)" class="fa fa-pencil edit-up"></i>
-																		</a-edit>
-																	</p2>
+																	<!-- Nirman Pencil Alignment issue -->
+																	<p2 style="margin-right: 0px;">
+																	<a-edit-black>
+																		<div class="bootstrap-iso">
+																		<i class="fa fa-pencil edit-role" data-toggle="modal" data-target="#modal-4"></i>
+																		  <div class="modal fade" id="modal-4">
+																		    <div class="modal-dialog modal-4g" >
+																		      <div class="modal-content" style="height: 550px;">
+																		         <div class="modal-body">
+																		          <iframe src="timeline_update.php?edit=1&upID=<?php echo $up_res['upID'];?>&projID=<?php echo $p_res['projID'];?>" style="width: 100%;" height="400" frameborder="0">
+																		          </iframe>
+																		         </div>
+																		         <div class="modal-footer">
+																		          <button class="btn-mainb" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
+																		          <button name="Edit Role" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Edit Role</button>
+																		         </div>
+																		      </div>
+																		    </div>
+																		  </div>
+																		</div>
+																		<!--<i data-id="<?php echo $role_res['roleID'];?>" data-id2="<?php echo $role_res['projID'];?>" class="fa fa-pencil edit-role" onclick="MyWindow=window.open('role_update.php?edit=1&roleID=<?php echo $role_res['roleID'];?>&projID=<?php echo $p_res['projID'];?>','MyWindow',width=450,height=300)"></i>-->
+																	</a-edit-black>
+																</p2>
+																	<!--<p2  style ="margin-right: 5px;" onclick="turnEditable('updateTitle1', 'updateDesc1');">-->
+																		<!-- <a-edit-black>
+																			<div class="bootstrap-iso">
+																			
+																			<i class="fa fa-pencil edit-up" data-toggle="modal" data-target="#modal-4"></i>
+																			  <div class="modal fade" id="modal-4">
+																			    <div class="modal-dialog modal-4g" >
+																			      <div class="modal-content" style="height: 550px;">
+																			         <div class="modal-body">
+																			          <iframe src="timeline_update.php?edit=1&upID=<?php echo $up_res['upID'];?>&projID=<?php echo $p_res['projID'];?>" style="width: 100%;" height="400" frameborder="0">
+																			          </iframe>
+																			         </div>
+																			         <div class="modal-footer">
+																			          <button class="btn-mainb" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
+																			          <button name="Edit Update" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Edit Update</button>
+																			         </div>
+																			      </div>
+																			    </div>
+																			  </div>
+																			</div> -->
+																			<!--<i onclick="MyWindow=window.open('timeline_update.php?edit=1&upID=<?php echo $up_res['upID'];?>&projID=<?php echo $p_res['projID'];?>','MyWindow',width=450,height=300)" class="fa fa-pencil edit-up"></i>-->
+																		<!--</a-edit-black> -->
+																	<!--</p2>-->
 																	<!-- <p2 style="margin-right: 5px;" onclick="turnUneditable('updateTitle1', 'updateDesc1');">
 																		<a-edit>
 																			<i data-id="<?php echo $up_res['upID'];?>" data-id2="<?php echo $up_res['projID'];?>" class="fa fa-check check-up"></i>
