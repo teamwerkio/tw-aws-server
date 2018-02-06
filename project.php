@@ -343,7 +343,23 @@
 								?>
 								<div class="button">
 									<form action="" id="priceForm" class="campaign-price quantity">
-										<button class="btn-primary" type="submit" style="cursor: pointer;">Join this project</button>
+										<button class="btn-primary" type="button" data-toggle="modal" data-target="#modal-33" style="cursor: pointer;">Join this project</button>
+										<div class="bootstrap-iso">
+										  <div class="modal fade" id="modal-33">
+										    <div class="modal-dialog modal-33g">
+										      <div class="modal-content" style="height: 700px; width: 500px;">
+										         <div class="modal-body">
+										          <iframe src="join_project.php" style="width: 100%; overflow: scroll;" height="550" frameborder="0">
+										          </iframe>
+										         </div>
+										         <div class="modal-footer">
+										          <button class="btn-mainb" data-dismiss="modal" style="cursor: pointer; width: 100px; color: white;">Close</button>
+										          <button name="add_role" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 100px; color: white;">Join</button>
+										         </div>
+										      </div>
+										    </div>
+										  </div>
+										</div>
 									</form>
 									<a id="upvote" href="#" class="btn-secondary"><i class="fa fa-hand-o-up" aria-hidden="true"></i>Keep me posted</a>
 								</div>
