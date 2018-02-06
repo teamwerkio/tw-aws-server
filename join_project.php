@@ -41,7 +41,7 @@
 						<div class="field" style="margin-top: 20px;">
 							<label for="title">Why this project?</label>
 							<span class="label-desc">Tell us why this project excites you? Why you want to join this role?</span>
-		  					<textarea name="desc" rows="4" placeholder="Enter upto 140 characters"><?php echo $up_res['details'];?></textarea>
+		  					<textarea name="desc" rows="4" placeholder="Enter upto 140 characters"></textarea>
 		  					<label for="count" style="font-weight: normal; font-size: 10px;">     0 characters</label>
 		  				</div>
 						<div class="payment" style="margin-top: 0px;">
@@ -58,7 +58,7 @@
 									<input type="radio" id="p1-option" name="selector">
 									<label for="p1-option">Other Email</label>
 									<div class="payment-check"></div>
-									<textarea name="payment-desc" rows="1" placeholder="Enter another email address"><?php echo $up_res['details'];?></textarea>
+									<textarea name="payment-desc" rows="1" placeholder="Enter another email address"></textarea>
 								</li>
 							</ul>
 						</div>
