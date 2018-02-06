@@ -172,13 +172,13 @@
 								$proj_col=returnCat('colleges', 'colName', $trend_res['colID'], $dbconnect, 'colID');
 							?>
 							<div class="col-lg-12">
-								<div class="campaign-big-item clearfix">
-									<a href="project.php?projID=<?php echo $trending_proj_id;?>" class="campaign-big-image" style="height: 350px; width: 570px;">
+								<div class="campaign-big-item clearfix" data-id="<?php echo $trending_proj_id;?>">
+									<a  href="project.php?projID=<?php echo $trending_proj_id;?>" class="trend campaign-big-image" style="height: 350px; width: 570px;">
 										<?php echo '<img src="'.getimgURL($trend_res['big_ban'], "banner_big").'" style="height: 350px; width: 570px;" />'; ?>		
 									</a>
 									<div class="campaign-big-box wow fadeInUp" data-wow-delay=".1s">
 										<a href="#" class="category"><?php echo $cat; ?></a>
-										<h3><a href="project.php?projID=<?php echo $trending_proj_id;?>"><?php echo $trend_res['projName']; ?></a></h3>
+										<h3><a class="trend" href="project.php?projID=<?php echo $trending_proj_id;?>"><?php echo $trend_res['projName']; ?></a></h3>
 										<div class="campaign-description"><?php echo $trend_res['sm_desc']; ?></div>
 										<div class="staff-picks-author">
 											<div class="author-profile">
@@ -220,15 +220,15 @@
 										$owner_f=returnCat('users', 'firstname', $proj_res['usrID'], $dbconnect, 'usrID');
 										$owner_p=returnCat('users', 'profilepic', $proj_res['usrID'], $dbconnect, 'usrID');
 										?>
-											<div class="col-lg-4 col-sm-6 col-6">
+											<div class="col-lg-4 col-sm-6 col-6" data-id2="<?php echo $proj_res['projID']; ?>">
 												<div class="campaign-item wow fadeInUp" data-wow-delay=".1s">
-													<a class="overlay" style="height: 240px;" href="project.php?projID=<?php echo $proj_res['projID']; ?>">
+													<a class="overlay content" style="height: 240px;" href="project.php?projID=<?php echo $proj_res['projID']; ?>">
 														<?php echo '<img src="'.getimgURL($proj_res['small_ban'], "banner_small").'" style="height: 240px;" />'; ?>
 														<span class="ion-paper-airplane"></span>
 													</a>
 													<div class="campaign-box">
 														<a href="#" class="category"><?php echo $cat; ?></a>
-														<h3><a href="project.php?projID=<?php echo $proj_res['projID']; ?>"><?php echo $proj_res['projName']; ?></a></h3>
+														<h3><a class="content" href="project.php?projID=<?php echo $proj_res['projID']; ?>"><?php echo $proj_res['projName']; ?></a></h3>
 														<div class="campaign-description"><?php echo $proj_res['sm_desc']; ?></div>
 														<div class="campaign-author"><a class="author-icon" href="profile.php?other_usr=<?php echo $proj_res['usrID']; ?>">
 															<?php echo '<img src="'.getimgURL($owner_p, "profilepic").'" />'; ?></a>by <a class="author-name" href="profile.php?other_usr=<?php echo $proj_res['usrID']; ?>"><?php echo $owner_f; ?>		
@@ -518,6 +518,43 @@
     <script  type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript">
     	var trend=<?php echo $trending_proj_id;?>;
+
+    	$(document).ready(function(){
+    		$(".trend").click(function(){
+    			var button=$(this);
+    			
+    			$.ajax({
+    				url: 'update_server.php',
+    				type: 'POST',
+    				data: {
+    					'clicked': 1,
+    					'projID': button.closest('.clearfix').data("id"),
+    					'usrID': <?php echo $_SESSION['usr'];?>,
+    				},
+    				success: function(data){
+    					
+    				}
+    			});
+    		});
+    		$(".content").click(function(){
+    			var button=$(this);
+ 				
+    			$.ajax({
+    				url: 'update_server.php',
+    				type: 'POST',
+    				data: {
+    					'clicked': 1,
+    					'projID': button.closest('.col-sm-6').data("id2"),
+    					'usrID': <?php echo $_SESSION['usr'];?>,
+    				},
+    				success: function(data){
+
+    				}
+    			});
+    			
+    		});
+    	});
+
     	$(document).on('click', '#load_more', function(){
     		var button=$(this);
     		var finID=button.attr("data-finalID");
