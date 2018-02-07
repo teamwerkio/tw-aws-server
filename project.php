@@ -410,7 +410,7 @@
 												?>
 
 													<div class="plan" style="margin-bottom: 15px;">
-														<a href="javascript:void(0)">
+														<a href="#">
 															
 																		
 															<h4><?php echo $role_res['title'];
@@ -719,6 +719,67 @@
 											<button name="proj_set" class="btn-primary" type="submit" style="cursor: pointer; margin-top: 5px; background-color: #73b941; padding-left: 8px; padding-right: 8px;">Save and Apply settings</button>
 							  				<!-- <a href="#" class="btn-primary" style="margin-top: 5px;">Save and Apply settings</a> -->
 							  			</form>
+									</div>
+									<!--Requests Tab HTML-->
+									<div class="support support-campaign">
+										<div id="requests" class="plan" style="margin-bottom: 15px;">
+											<a href="javascript:void(0)">
+												<h4 style="vertical-align: middle;">Statistical Analyzer</h4>	
+													<table style="float: right;">
+														<tr style="display: block;">
+															
+															<td style="float: right;">
+																<a-remove>
+																	<i class="fa fa-times"></i>
+																</a-remove>
+															</td>
+															<td style="margin-right: 5px; float: right;">
+																<a-edit-black>
+																	<i class="fa fa-check"></i>
+																</a-edit-black>
+															</td>
+															<td style="float: right; margin-right: 15px;" >
+																<h4>Mike Hoc</h4>
+															</td>
+															
+														</tr>										
+														<tr>
+															
+															<td style="float: right;">
+																<a-remove>
+																	<i class="fa fa-times"></i>
+																</a-remove>
+															</td>
+															<td style="margin-right: 5px; float: right;">
+																<a-edit-black>
+																	<i class="fa fa-check"></i>
+																</a-edit-black>
+															</td>
+															<td style="float: right; margin-right: 15px;" >
+																<h4>Mike Hoc</h4>
+															</td>
+														
+														</tr>
+														<tr>
+															
+															<td style="float: right;">
+																<a-remove>
+																	<i class="fa fa-times"></i>
+																</a-remove>
+															</td>
+															<td style="margin-right: 5px; float: right;">
+																<a-edit-black>
+																	<i class="fa fa-check"></i>
+																</a-edit-black>
+															</td>
+															<td style="float: right; margin-right: 15px;" >
+																<h4>Mike Hoc</h4>
+															</td>
+														
+														</tr>
+													</table>
+											</a>
+										</div> 
 									</div>
 									<div id="updates" class="tabs">
 										<ul>
