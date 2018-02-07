@@ -338,10 +338,15 @@
 										<!-- =============== -->
 									</div>
 								</div>
-								<?php if($_SESSION['usr']!=$owner_ID){
-
+								<?php 
+									$role_sql="SELECT * FROM team_roles WHERE (projID=".$p_res['projID'].") AND (status=0)";
+									$role_qry=mysqli_query($dbconnect,$role_sql);
+									if($_SESSION['usr']!=$owner_ID){
 								?>
 								<div class="button">
+									<?php
+										if(mysqli_num_rows($role_qry)!=0){
+									?>
 									<form action="" id="priceForm" class="campaign-price quantity">
 										<button class="btn-primary" type="button" data-toggle="modal" data-target="#modal-33" style="cursor: pointer;">Join this project</button>
 										<div class="bootstrap-iso">
@@ -349,18 +354,21 @@
 										    <div class="modal-dialog modal-33g">
 										      <div class="modal-content" style="height: 700px; width: 500px;">
 										         <div class="modal-body">
-										          <iframe src="join_project.php" style="width: 100%; overflow: scroll;" height="550" frameborder="0">
+										          <iframe id="if_join" src="join_project.php?projID=<?php echo $id;?>" style="width: 100%; overflow: scroll;" height="550" frameborder="0">
 										          </iframe>
 										         </div>
 										         <div class="modal-footer">
 										          <button class="btn-mainb" data-dismiss="modal" style="cursor: pointer; width: 100px; color: white;">Close</button>
-										          <button name="add_role" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 100px; color: white;">Join</button>
+										          <button id="join_proj" name="projID" value=<?php echo $id;?> type="submit" class="btn-mainb" style="cursor: pointer; width: 100px; color: white;">Join</button>
 										         </div>
 										      </div>
 										    </div>
 										  </div>
 										</div>
 									</form>
+									<?php
+										}
+									?>
 									<a id="upvote" href="#" class="btn-secondary"><i class="fa fa-hand-o-up" aria-hidden="true"></i>Keep me posted</a>
 								</div>
 								<?php
@@ -414,8 +422,6 @@
 
 										<!-- <h1 style="margin-bottom: 3px; font-weight: 500; font-size: 20px;">Open</h1> -->
 										<?php
-											$role_sql="SELECT * FROM team_roles WHERE (projID=".$p_res['projID'].") AND (status=0)";
-											$role_qry=mysqli_query($dbconnect,$role_sql);
 											if(mysqli_num_rows($role_qry)!=0){
 
 
@@ -1146,6 +1152,13 @@
 				$(".modal").modal('hide');
 				location.reload();
 			});
+
+			$("#join_proj").click(function(){
+				$("#if_join").contents().find("#proj_join").submit();
+				$(".modal").modal('hide');
+				
+			});
+
 		});
     </script>
     <script type="text/javascript" src="js/upvotes.js"></script>
