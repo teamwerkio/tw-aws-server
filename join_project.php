@@ -1,3 +1,20 @@
+
+<?php
+	include("dbconnect.php");
+	session_start();
+	
+	if(!isset($_SESSION['usr'])){
+		header("Location:usr.php");
+	}
+	$role_sql="SELECT * FROM team_roles WHERE (projID=".$_GET['projID'].") AND (status=0)";
+	$role_qry=mysqli_query($dbconnect, $role_sql);
+	$role_res=mysqli_fetch_assoc($role_qry);
+
+	$usr_sql="SELECT * FROM users WHERE usrID=".$_SESSION['usr'];
+	$usr_qry=mysqli_query($dbconnect, $usr_sql);
+	$usr_res=mysqli_fetch_assoc($usr_qry);
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -16,7 +33,8 @@
 			<div style="margin-top: 50px;"></div>
 			<div class="campaign-form form-update">
 				<div class="container">
-					<form name="edit_update" action="timeline_update_submit.php?upID=<?php echo $_GET['upID'];?>&projID=<?php echo $_GET['projID'];?>" method="post" enctype="multipart/form-data">
+					<form id="proj_join" name="join_proj" action="join_project_submit.php?projID=<?php echo $_GET['projID'];?>" method="post" enctype="multipart/form-data">
+
 <!-- 						<div class="date">
 							<label for="">Date *</label>
 							<span class="label-desc">Date for the entry</span>
@@ -27,13 +45,22 @@
 							<span class="label-desc">Choose a role you want to apply for.</span>
 			  				<div class="field">
 			  					<div class="field-select">
-									<select name="college" id="">
+
+									<select name="j_role" id="">
 										<option value="">Select a Role</option>
-										<option value="1">A</option>
+										<?php
+											do{
+												?>
+													<option value="<?php echo $role_res['roleID']?>"><?php echo $role_res['title']?></option>
+												<?php
+											}while($role_res=mysqli_fetch_assoc($role_qry));
+										?>
+<!-- 										<option value="1">A</option>
 										<option value="2">B</option>
 										<option value="3">C</option>
 										<option value="4">D</option>
-										<option value="5">E</option>
+										<option value="5">E</option> -->
+
 									</select>
 								</div>
 			  				</div>
@@ -41,7 +68,9 @@
 						<div class="field" style="margin-top: 20px;">
 							<label for="title">Why this project?</label>
 							<span class="label-desc">Tell us why this project excites you? Why you want to join this role?</span>
-		  					<textarea name="desc" rows="4" placeholder="Enter upto 140 characters"><?php echo $up_res['details'];?></textarea>
+
+		  					<textarea name="j_reason" rows="4" placeholder="Enter upto 140 characters"></textarea>
+
 		  					<label for="count" style="font-weight: normal; font-size: 10px;">     0 characters</label>
 		  				</div>
 						<div class="payment" style="margin-top: 0px;">
@@ -49,16 +78,20 @@
 							<h5 style="font-weight: normal; color: #555555; font-size: 14px; margin-bottom: 15px;">The project owner will be sent an email about your interest in the project.<br>You will be CC'd on the email so they can easily contact you.</h5>
 							<ul>
 								<li>
-									<input type="radio" id="p-option" name="selector">
-									<label for="p-option">my@email.edu</label>
+
+									<input type="radio" id="p-option" name="e_select" value="<?php echo $usr_res['email'];?>">
+									<label for="p-option"><?php echo $usr_res['email'];?></label>
+
 									<div class="payment-check"></div>
 									<!-- <div class="payment-desc"><p>The project owner will be sent an email about your interest in the project. You will be CC'd on the email so they can easily contact you.</p></div> -->
 								</li>
 								<li>
-									<input type="radio" id="p1-option" name="selector">
+
+									<input type="radio" id="p1-option" name="e_select" value="1">
 									<label for="p1-option">Other Email</label>
 									<div class="payment-check"></div>
-									<textarea name="payment-desc" rows="1" placeholder="Enter another email address"><?php echo $up_res['details'];?></textarea>
+									<textarea name="other_email" rows="1" placeholder="Enter another email address"></textarea>
+
 								</li>
 							</ul>
 						</div>

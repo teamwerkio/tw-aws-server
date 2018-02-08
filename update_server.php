@@ -23,4 +23,24 @@
 
 		echo mysqli_num_rows($up2_qry);
 
+
 	}
+	elseif (isset($_POST['clicked'])) {
+		$usrID=$_POST['usrID'];
+		$projID=$_POST['projID'];
+
+		$sql1="SELECT * FROM users where usrID=".$usrID;
+		$qry1=mysqli_query($dbconnect, $sql1);
+		$res1=mysqli_fetch_assoc($qry1);
+
+		$json=json_decode($res1['clicked'], true);
+		if(!in_array($projID, $json["clicked"])){
+			array_push($json["clicked"], $projID);
+
+			$json_str=json_encode($json);
+			$sql_up="UPDATE users SET clicked='".mysqli_escape_string($dbconnect,$json_str)."' WHERE usrID=".mysqli_escape_string($dbconnect,$usrID);
+			$qry_up=mysqli_query($dbconnect, $sql_up);
+		}
+	}
+?>
+
