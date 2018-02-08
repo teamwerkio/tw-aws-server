@@ -161,12 +161,42 @@
 			  				<div class="field">
 			  					<input name="pass_signup_verify" type="password" value="" name="s" placeholder="Verify your password" />
 			  				</div>
+			  				<?php
+			  					$int_sql="SELECT * FROM proj_categories";
+			  					$int_qry=mysqli_query($dbconnect, $int_sql);
+			  					$count=mysqli_num_rows($int_qry);
+			  					$int_res=mysqli_fetch_assoc($int_qry);
+			  					$half=$count/2;
+
+			  				?>
 			  				<div class="payment" style="margin-top: 0px;">
 								<h4 style="font-size: 14px; margin-bottom: 5px; font-weight: bold; color: #555555">Your top interests *</h4>
 								<h5 style="font-weight: normal; color: #555555; font-size: 14px; font-style: italic;">Pick your top interests</h5>
 								<div class="row" style="padding-left: 6px;">
 									<div class="column">
-										<div class="create-account" style="margin-top: 10px;">
+										<?php
+											
+
+
+												do{
+													if($count>$half){
+														?>
+														<div class="create-account" style="margin-top: 10px;">
+										  					<input type="checkbox" id="<?php echo $int_res['catID'];?>" name="chk_<?php echo $int_res['catID'];?>" value="<?php echo $int_res['catID'];?>">
+										  					<label for="<?php echo $int_res['catID'];?>" style="padding-left: 22px;"><?php echo $int_res['catName'];?></label>
+										  					<div class="checkbox" style="margin-top: 2px;"></div>
+									  					</div>
+
+														<?php
+														$count-=1;
+													}
+													else{
+														break;
+													}
+												}while($int_res=mysqli_fetch_assoc($int_qry));
+											
+										?>
+<!-- 										<div class="create-account" style="margin-top: 10px;">
 						  					<input type="checkbox" id="1" name="" value="">
 						  					<label for="1" style="padding-left: 22px;">Design & Art</label>
 						  					<div class="checkbox" style="margin-top: 2px;"></div>
@@ -185,10 +215,27 @@
 						  					<input type="checkbox" id="4" name="" value="">
 						  					<label for="4" style="padding-left: 22px;">Performances</label>
 						  					<div class="checkbox" style="margin-top: 2px;"></div>
-					  					</div>
+					  					</div> -->
 				  					</div>
 				  					<div class="column">
-										<div class="create-account" style="margin-top: 10px;">
+				  						<?php
+				  							
+				  								do{
+				  									if($count<=$half){
+				  									?>
+								  						<div class="create-account" style="margin-top: 10px;">
+										  					<input type="checkbox" id="<?php echo $int_res['catID'];?>" name="chk_<?php echo $int_res['catID'];?>" value="<?php echo $int_res['catID'];?>">
+										  					<label for="<?php echo $int_res['catID'];?>" style="padding-left: 22px;"><?php echo $int_res['catName'];?></label>
+										  					<div class="checkbox" style="margin-top: 2px;"></div>
+									  					</div>
+				  									<?php
+				  									}else{
+				  										break;
+				  									}
+				  								}while($int_res=mysqli_fetch_assoc($int_qry));
+				  							
+				  						?>
+<!-- 										<div class="create-account" style="margin-top: 10px;">
 						  					<input type="checkbox" id="5" name="" value="">
 						  					<label for="5" style="padding-left: 22px;">Crafts</label>
 						  					<div class="checkbox" style="margin-top: 2px;"></div>
@@ -207,7 +254,7 @@
 						  					<input type="checkbox" id="8" name="" value="">
 						  					<label for="8" style="padding-left: 22px;">Games</label>
 						  					<div class="checkbox" style="margin-top: 2px;"></div>
-					  					</div>
+					  					</div> -->
 				  					</div>
 				  				</div>
 				  				<div>

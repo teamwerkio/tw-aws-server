@@ -10,8 +10,23 @@
 	$email=$_POST['email_signup'];
 	$pitch=$_POST['pitch'];
 	$pass=sha1($_POST['pass_signup']);
+	$pass_v=sha1($_POST['pass_signup_verify']);
 	$date=date('Y-m-d H:i:s:u');
-	$fieldbool=$name_f=="" || $name_l=="" || $email=="" || $pass=="" || $pitch=="";
+
+	$int_sql="SELECT * FROM proj_categories";
+	$int_qry=mysqli_query($dbconnect, $int_sql);
+	$int_res=mysqli_fetch_assoc($int_qry);
+	$int_array=array();
+	do{
+		if(isset($_POST['chk_'.$int_res['catID']])){
+			array_push($int_array, $int_res['catID']);
+			error_log("pushing");
+		}
+	}while($int_res=mysqli_fetch_assoc($int_qry));
+	
+	error_log(empty($int_array));
+	error_log($pass!=$pass_v);
+	$fieldbool=$name_f=="" || $name_l=="" || $email=="" || $pass=="" || $pitch=="" || empty($int_array) || $pass!=$pass_v;
 
 
 
@@ -39,17 +54,20 @@
 			$new_name=$name_l.$date;
 			img_uploader($_FILES['profilepic'], "profilepic", $new_name);
 
-
+			$new_json=new \stdClass();
+			$new_json->prefs=$int_array;
+			$new_json_str=json_encode($new_json);
 			
 			// $img_name=$name_l.$date.'.'.end(explode(".", $_FILES['profilepic']['name']));
 			// $target_dir="../img_assets/profilepic/";
 			// move_uploaded_file($_FILES['profilepic']['tmp_name'], $target_dir.$img_name);
-			$signup_sql = "INSERT INTO users (firstname, lastname, email, pitch, password, profilepic, dt) VALUES ('".mysqli_real_escape_string($dbconnect, $name_f)."', '".
+			$signup_sql = "INSERT INTO users (firstname, lastname, email, pitch, password, profilepic, prefs, dt) VALUES ('".mysqli_real_escape_string($dbconnect, $name_f)."', '".
 			mysqli_real_escape_string($dbconnect, $name_l)."', '".
 			mysqli_real_escape_string($dbconnect, $email)."', '".
 			mysqli_real_escape_string($dbconnect, $pitch)."', '".
 			mysqli_real_escape_string($dbconnect, $pass)."', '".
 			mysqli_real_escape_string($dbconnect, $new_name)."', '".
+			mysqli_real_escape_string($dbconnect, $new_json_str)."', '".
 			mysqli_real_escape_string($dbconnect, $date)."')";
 
 		}

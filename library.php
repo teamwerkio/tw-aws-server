@@ -190,14 +190,110 @@
 											<div class="raised"><span style="width: <?php echo $trend_res
 											['progress']; ?>%;"></span></div>
 											<div class="process-info">
-												<div class="process-pledged"><span><?php echo $trend_res['upvote']; ?></span>interest</div>
-												<div class="process-funded"><span>
+												<div class="process-pledged"><span><?php
+																		$json=$trend_res['subs'];
+																		$json=json_decode($json, true);
+																		echo count($json['subs']);?></span>interest</div>
 													<?php
-														$json=$trend_res['subs'];
-														$json=json_decode($json, true);
-														echo count($json['subs']);?></span>teamsize</div>
-												<div class="process-time"><span style="color: green;"><?php echo $trend_res['virality']; ?>%</span>involvement</div>
-												<div class="process-time"><span><?php echo $days_elapsed; ?></span>days ago</div>
+														$size_id=$trend_res['tsizeID'];
+														if($size_id==1){
+															?>
+															<!-- Small Team -->
+															<div class="process-pledged"><span>
+																<a data-tooltip="Small team">
+																<i class="fa fa-user"></i>
+																<i class="fa fa-user"></i></a>
+															</span>team size</div>
+															<?php
+														}
+														elseif ($size_id==2) {
+															?>
+															<!-- Medium Team -->
+															<div class="process-pledged"><span>
+																<a data-tooltip="Medium team">
+																<i class="fa fa-user"></i>
+																<i class="fa fa-user"></i>
+																<i class="fa fa-user"></i></a>
+															</span>team size</div>
+															<?php
+														}
+														elseif ($size_id==3) {
+															?>
+															<!-- Large Team -->
+															<div class="process-pledged"><span>
+																<a data-tooltip="Large team">
+																<i class="fa fa-user"></i>
+																<i class="fa fa-user"></i>
+																<i class="fa fa-user"></i>
+																<i class="fa fa-user"></i></a>
+															</span>team size</div>
+															<?php
+														}
+														elseif ($size_id==4) {
+															?>
+															<!-- Extra Large Team -->
+															<div class="process-pledged"><span>
+																<a data-tooltip="Extra large team">
+																<i class="fa fa-user"></i>
+																<i class="fa fa-user"></i>
+																<i class="fa fa-user"></i>
+																<i class="fa fa-user-plus"></i></a>
+															</span>team size</div>
+															<?php
+														}
+													?>
+
+													<?php
+														$inv_id=$trend_res['commID'];
+														if($inv_id==1){
+															?>
+															<!-- < 10 hrs/week -->
+															<div class="process-time"><span>
+																<a data-tooltip="< 10 hrs/week (approx.)">
+																<i class="fa fa-clock-o"></i></a>
+															</span>involvement</div>
+															<?php
+														}
+														elseif ($inv_id==2) {
+															?>
+															<!-- 11 to 20 hrs/week -->
+															<div class="process-time"><span>
+																<a data-tooltip="11 to 20 hrs/week (approx.)">
+																<i class="fa fa-clock-o"></i>
+																<i class="fa fa-clock-o"></i></a>
+															</span>involvement</div>
+															<?php
+														}
+														elseif ($inv_id==3) {
+															?>
+															<!-- 21 to 30 hrs/week -->
+															<div class="process-time"><span>
+																<a data-tooltip="21 to 30 hrs/week (approx.)">
+																<i class="fa fa-clock-o"></i>
+																<i class="fa fa-clock-o"></i>
+																<i class="fa fa-clock-o"></i></a>
+															</span>involvement</div>
+															<?php
+														}
+														elseif ($inv_id==4) {
+															?>
+															<!-- > 31 hrs/week -->
+															<div class="process-time"><span>
+																<a data-tooltip="> 31 hrs/week (approx.)">
+																<i class="fa fa-clock-o"></i>
+																<i class="fa fa-clock-o"></i>
+																<i class="fa fa-clock-o"></i>
+																<i class="fa fa-clock-o"></i></a>
+															</span>involvement</div>
+															<?php
+														}
+													?>
+												<!-- <div class="process-time"><span style="color: green;"><?php echo $trend_res['virality']; ?>%</span>involvement</div> -->
+												<div class="process-time"><span>
+												<a data-tooltip="Project started <?php echo timedifference_d($trend_res['dt']);?> days ago">
+													<?php echo timedifference_d($trend_res['dt']);?>
+												</a>
+												</span>days ago</div>
 											</div>
 										</div>
 									</div>
@@ -236,13 +332,109 @@
 														<div class="process">
 															<div class="raised"><span style="width: <?php echo $proj_res['progress'];?>%;"></span></div>
 															<div class="process-info">
-																<div class="process-pledged"><span><?php echo $proj_res['upvote']; ?></span>interest</div>
-																<div class="process-funded"><span>
+																<div class="process-pledged"><span><?php
+																		$json=$proj_res['subs'];
+																		$json=json_decode($json, true);
+																		echo count($json['subs']);?></span>interest</div>
+<!-- 																<div class="process-funded"><span>
 																	<?php
 																		$json=$proj_res['subs'];
 																		$json=json_decode($json, true);
-																		echo count($json['subs']);?></span>teamsize</div>
-																<div class="process-time"><span style="color: red;"><?php echo $proj_res['virality']; ?>%</span>involvement</div>
+																		echo count($json['subs']);?></span>teamsize</div> -->
+
+																	<?php
+																		$size_id=$proj_res['tsizeID'];
+																		if($size_id==1){
+																			?>
+																			<!-- Small Team -->
+																			<div class="process-pledged"><span>
+																				<a data-tooltip="Small team">
+																				<i class="fa fa-user"></i>
+																				<i class="fa fa-user"></i></a>
+																			</span>team size</div>
+																			<?php
+																		}
+																		elseif ($size_id==2) {
+																			?>
+																			<!-- Medium Team -->
+																			<div class="process-pledged"><span>
+																				<a data-tooltip="Medium team">
+																				<i class="fa fa-user"></i>
+																				<i class="fa fa-user"></i>
+																				<i class="fa fa-user"></i></a>
+																			</span>team size</div>
+																			<?php
+																		}
+																		elseif ($size_id==3) {
+																			?>
+																			<!-- Large Team -->
+																			<div class="process-pledged"><span>
+																				<a data-tooltip="Large team">
+																				<i class="fa fa-user"></i>
+																				<i class="fa fa-user"></i>
+																				<i class="fa fa-user"></i>
+																				<i class="fa fa-user"></i></a>
+																			</span>team size</div>
+																			<?php
+																		}
+																		elseif ($size_id==4) {
+																			?>
+																			<!-- Extra Large Team -->
+																			<div class="process-pledged"><span>
+																				<a data-tooltip="Extra large team">
+																				<i class="fa fa-user"></i>
+																				<i class="fa fa-user"></i>
+																				<i class="fa fa-user"></i>
+																				<i class="fa fa-user-plus"></i></a>
+																			</span>team size</div>
+																			<?php
+																		}
+																	?>
+																	<?php
+																		$inv_id=$proj_res['commID'];
+																		if($inv_id==1){
+																			?>
+																			<!-- < 10 hrs/week -->
+																			<div class="process-time"><span>
+																				<a data-tooltip="< 10 hrs/week (approx.)">
+																				<i class="fa fa-clock-o"></i></a>
+																			</span>involvement</div>
+																			<?php
+																		}
+																		elseif ($inv_id==2) {
+																			?>
+																			<!-- 11 to 20 hrs/week -->
+																			<div class="process-time"><span>
+																				<a data-tooltip="11 to 20 hrs/week (approx.)">
+																				<i class="fa fa-clock-o"></i>
+																				<i class="fa fa-clock-o"></i></a>
+																			</span>involvement</div>
+																			<?php
+																		}
+																		elseif ($inv_id==3) {
+																			?>
+																			<!-- 21 to 30 hrs/week -->
+																			<div class="process-time"><span>
+																				<a data-tooltip="21 to 30 hrs/week (approx.)">
+																				<i class="fa fa-clock-o"></i>
+																				<i class="fa fa-clock-o"></i>
+																				<i class="fa fa-clock-o"></i></a>
+																			</span>involvement</div>
+																			<?php
+																		}
+																		elseif ($inv_id==4) {
+																			?>
+																			<!-- > 31 hrs/week -->
+																			<div class="process-time"><span>
+																				<a data-tooltip="> 31 hrs/week (approx.)">
+																				<i class="fa fa-clock-o"></i>
+																				<i class="fa fa-clock-o"></i>
+																				<i class="fa fa-clock-o"></i>
+																				<i class="fa fa-clock-o"></i></a>
+																			</span>involvement</div>
+																			<?php
+																		}
+																	?>
 															</div>
 														</div>
 													</div>

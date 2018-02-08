@@ -15,7 +15,7 @@
 			$role_res=mysqli_fetch_assoc($role_qry);
 			
 		}
-
+		
 
 
 ?>
@@ -37,7 +37,7 @@
 			<div style="margin-top: 50px;"></div>
 			<div class="campaign-form form-update">
 				<div class="container">
-					<form name="edit_role" action="edit_role_submit.php?roleID=<?php echo $_GET['roleID'];?>&projID=<?php echo $_GET['projID'];?>" method="post" enctype="multipart/form-data">
+					<form id="role_edit" name="edit_role" action="edit_role_submit.php?roleID=<?php echo $_GET['roleID'];?>&projID=<?php echo $_GET['projID'];?>" method="post" enctype="multipart/form-data">
 						<div class="field" style="margin-top: 20px;">
 							<label for="title">Role Title *</label>
 							<span class="label-desc">Think of a cool title, for your cool teammate!</span>
@@ -103,6 +103,6 @@
 				</div>
 			</div>
 		</main>
-	</div>
+	
 </body>
 </html>

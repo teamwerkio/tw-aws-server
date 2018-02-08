@@ -4,7 +4,9 @@
 	
 	if(!isset($_SESSION['usr'])){
 		header("Location:usr.php");
+
 	}
+	
 ?>
 <!doctype html>
 <html lang="en">

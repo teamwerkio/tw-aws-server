@@ -362,7 +362,7 @@
 										          </iframe>
 										         </div>
 										         <div class="modal-footer">
-										          <button class="btn-mainb" data-dismiss="modal" style="cursor: pointer; width: 100px; color: white;">Close</button>
+										          <button class="btn-mainb cl" data-dismiss="modal" style="cursor: pointer; width: 100px; color: white;">Close</button>
 
 										          <button id="join_proj" name="projID" value=<?php echo $id;?> type="submit" class="btn-mainb" style="cursor: pointer; width: 100px; color: white;">Join</button>
 
@@ -461,17 +461,17 @@
 																<p2 style="margin-right: 5px; float: right;">
 																	<a-edit-black>
 																		<div class="bootstrap-iso">
-																		<i class="fa fa-pencil edit-role" data-toggle="modal" data-target="#modal-3"></i>
+																		<i class="fa fa-pencil edit-role" data-roleID="<?php echo $role_res['roleID'];?>" data-toggle="modal" data-target="#modal-3"></i>
 																		  <div class="modal fade" id="modal-3">
 																		    <div class="modal-dialog modal-3g" >
 																		      <div class="modal-content" style="height: 550px;">
 																		         <div class="modal-body">
-																		          <iframe src="role_update.php?edit=1&roleID=<?php echo $role_res['roleID'];?>&projID=<?php echo $p_res['projID'];?>" style="width: 100%;" height="400" frameborder="0">
-																		          </iframe>
+																		          <!-- <iframe id="if_role_e" src="role_update.php?edit=1&roleID=<?php echo $role_res['roleID'];?>&projID=<?php echo $p_res['projID'];?>" style="width: 100%;" height="400" frameborder="0">
+																		          </iframe> -->
 																		         </div>
 																		         <div class="modal-footer">
-																		          <button class="btn-mainb" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
-																		          <button name="Edit Role" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Edit Role</button>
+																		          <button class="btn-mainb cl" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
+																		          <button id="update_role" name="" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Edit Role</button>
 																		         </div>
 																		      </div>
 																		    </div>
@@ -635,7 +635,7 @@
 												          </iframe>
 												         </div>
 												         <div class="modal-footer">
-												          <button class="btn-mainb" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
+												          <button class="btn-mainb cl" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
 												          <button id="role_button" name="add_role" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Add Role</button>
 												         </div>
 												      </div>
@@ -1000,8 +1000,8 @@
 																		          </iframe>
 																		         </div>
 																		         <div class="modal-footer">
-																		          <button class="btn-mainb" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
-																		          <button name="Edit Role" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Edit Role</button>
+																		          <button class="btn-mainb cl" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
+																		          <button name="" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Edit Role</button>
 																		         </div>
 																		      </div>
 																		    </div>
@@ -1175,7 +1175,7 @@
 													          </iframe>
 													         </div>
 													         <div class="modal-footer">
-													          <button class="btn-mainb" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
+													          <button class="btn-mainb cl" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
 													          <button name="add_update" id="update_button" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Add Update</button>
 													         </div>
 													      </div>
@@ -1278,6 +1278,7 @@
     	var usr_id="<?php echo $sess_ID?>";
 		var proj_id="<?php echo $id?>";
 		$(document).ready(function(){
+
 			$("#update_button").click(function(){
 				$("#if_update").contents().find("#update_add").submit();
 				$('.modal').modal('hide');
@@ -1296,6 +1297,24 @@
 				$("#if_join").contents().find("#proj_join").submit();
 				$(".modal").modal('hide');
 				
+			});
+
+			// $(".cl").click(function(){
+			// 	$("#if_role_e").contents().find("#role_edit")[0].reset();
+			// });
+
+			$("#update_role").click(function(){
+				$("#if_role_e").contents().find("#role_edit").submit();
+				$(".modal").modal('hide');
+				location.reload();
+			});
+
+			$(".edit-role").click(function(){
+				$(".modal-body").html("Loading...");
+				var button=$(this);
+				var roleID=button.attr('data-roleID');
+				var iFrame='<iframe id="if_role_e" src="role_update.php?edit=1&roleID='+roleID+'&projID='+proj_id+'" style="width: 100%;" height="400" frameborder="0"></iframe>';
+				$(".modal-body").html(iFrame);
 			});
 
 
