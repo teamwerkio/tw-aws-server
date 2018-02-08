@@ -33,6 +33,26 @@
 			$req_qry=mysqli_query($dbconnect, $req_sql);
 			// header("Location:project.php?projID=".$_GET['projID']);
 			include("noreply_join_email.php");
+
+			$user_sql="SELECT * FROM users WHERE usrID=".$_SESSION['usr'];
+			$user_qry=mysqli_query($dbconnect, $user_sql);
+			$user_res=mysqli_fetch_assoc($user_qry);
+
+			function returnCat($table, $col, $idx, $dbconnect, $idtype){
+				$cat_sql="SELECT ".$col." FROM ".$table." WHERE ".$idtype."='".$idx."'";
+				$cat_qry=mysqli_query($dbconnect, $cat_sql);
+				$cat_res=mysqli_fetch_assoc($cat_qry);
+				return $cat_res[$col];
+			}
+
+			$teamLID=returnCat('project', 'usrID', $projID, $dbconnect, 'projID');
+			
+			$lsql="SELECT * FROM users WHERE usrID=".$teamLID;
+			$lqry=mysqli_query($dbconnect, $lsql);
+			$lres=mysqli_fetch_assoc($lqry);
+
+			userEmail($email, $user_res['firstname'], $lres['email'], $lres['firstname']);
+			leaderEmail($lres['email'], $lres['firstname'], $email, $user_res['firstname']);
 			unset($_POST['join_proj']);
 			
 		}

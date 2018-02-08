@@ -9,7 +9,7 @@ $apikey = $parsed_ini["MJ"]["apikey"];
 $apisecret = $parsed_ini["MJ"]["secret"];
 
 
-$mj = new \Mailjet\Client($apikey, $apisecret);
+$mj = new \Mailjet\Client($apikey, $apisecret, true,['version' => 'v3.1']);
 
 
 ?>

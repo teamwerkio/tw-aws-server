@@ -10,7 +10,7 @@
 		return $interval->format('%a');
 	}
 
-
+	
 	function returnCat($table, $col, $idx, $dbconnect, $idtype){
 		$cat_sql="SELECT ".$col." FROM ".$table." WHERE ".$idtype."='".$idx."'";
 		$cat_qry=mysqli_query($dbconnect, $cat_sql);
