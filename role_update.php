@@ -98,7 +98,7 @@
 								</div>
 			  				</div>
 						</div>
-		  				<button name="edit_role" type="submit" value="Save & Launch" class="btn-primary" style="margin-bottom: 0px;">Edit Role</button>
+		  				<!--<button name="edit_role" type="submit" value="Save & Launch" class="btn-primary" style="margin-bottom: 0px;">Edit Role</button>-->
 					</form>
 				</div>
 			</div>
