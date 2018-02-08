@@ -519,6 +519,7 @@
     <script type="text/javascript">
     	var trend=<?php echo $trending_proj_id;?>;
 
+
     	$(document).ready(function(){
     		$(".trend").click(function(){
     			var button=$(this);
@@ -554,6 +555,7 @@
     			
     		});
     	});
+
 
     	$(document).on('click', '#load_more', function(){
     		var button=$(this);

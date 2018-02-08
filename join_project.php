@@ -1,3 +1,4 @@
+
 <?php
 	include("dbconnect.php");
 	session_start();
@@ -13,6 +14,7 @@
 	$usr_qry=mysqli_query($dbconnect, $usr_sql);
 	$usr_res=mysqli_fetch_assoc($usr_qry);
 ?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -32,6 +34,7 @@
 			<div class="campaign-form form-update">
 				<div class="container">
 					<form id="proj_join" name="join_proj" action="join_project_submit.php?projID=<?php echo $_GET['projID'];?>" method="post" enctype="multipart/form-data">
+
 <!-- 						<div class="date">
 							<label for="">Date *</label>
 							<span class="label-desc">Date for the entry</span>
@@ -42,6 +45,7 @@
 							<span class="label-desc">Choose a role you want to apply for.</span>
 			  				<div class="field">
 			  					<div class="field-select">
+
 									<select name="j_role" id="">
 										<option value="">Select a Role</option>
 										<?php
@@ -56,6 +60,7 @@
 										<option value="3">C</option>
 										<option value="4">D</option>
 										<option value="5">E</option> -->
+
 									</select>
 								</div>
 			  				</div>
@@ -63,7 +68,9 @@
 						<div class="field" style="margin-top: 20px;">
 							<label for="title">Why this project?</label>
 							<span class="label-desc">Tell us why this project excites you? Why you want to join this role?</span>
+
 		  					<textarea name="j_reason" rows="4" placeholder="Enter upto 140 characters"></textarea>
+
 		  					<label for="count" style="font-weight: normal; font-size: 10px;">     0 characters</label>
 		  				</div>
 						<div class="payment" style="margin-top: 0px;">
@@ -71,16 +78,20 @@
 							<h5 style="font-weight: normal; color: #555555; font-size: 14px; margin-bottom: 15px;">The project owner will be sent an email about your interest in the project.<br>You will be CC'd on the email so they can easily contact you.</h5>
 							<ul>
 								<li>
+
 									<input type="radio" id="p-option" name="e_select" value="<?php echo $usr_res['email'];?>">
 									<label for="p-option"><?php echo $usr_res['email'];?></label>
+
 									<div class="payment-check"></div>
 									<!-- <div class="payment-desc"><p>The project owner will be sent an email about your interest in the project. You will be CC'd on the email so they can easily contact you.</p></div> -->
 								</li>
 								<li>
+
 									<input type="radio" id="p1-option" name="e_select" value="1">
 									<label for="p1-option">Other Email</label>
 									<div class="payment-check"></div>
 									<textarea name="other_email" rows="1" placeholder="Enter another email address"></textarea>
+
 								</li>
 							</ul>
 						</div>

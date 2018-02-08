@@ -23,6 +23,7 @@
 
 		echo mysqli_num_rows($up2_qry);
 
+
 	}
 	elseif (isset($_POST['clicked'])) {
 		$usrID=$_POST['usrID'];
@@ -42,3 +43,4 @@
 		}
 	}
 ?>
+

@@ -2209,7 +2209,8 @@ form .create-account input[type="checkbox"]{
 .create-account .checkbox{
 	display: block;
 	position: absolute;
-	background-color: #73b941;
+	/*background-color: #73b941;*/
+	background-color: #cacaca;
 	border-radius: 2px;
 	height: 15px;
 	width: 15px;
@@ -2233,7 +2234,8 @@ form .create-account input[type="checkbox"]{
 .create-account .checkbox:before{
 	position: absolute;
 	content: '\f3fd';
-	color: #fff;
+	/*color: #fff;*/
+	color: #000;
 	font-family: "Ionicons";
 	border-radius: 100%;
 	font-size: 28px;

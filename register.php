@@ -16,6 +16,22 @@
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link rel="stylesheet" type="text/css" href="css/responsive.css" />
     <link rel="icon" href="../images/favicon.ico" type="image/x-icon"/>
+
+    <style type="text/css">
+		/* Create two equal columns that floats next to each other */
+		.column {
+			float: left;
+			width: 50%;
+			padding: 10px;
+		}
+
+		/* Clear floats after the columns */
+		.row:after {
+			content: "";
+			display: table;
+			clear: both;
+		}
+    </style>
 </head>
 
 <body>
@@ -142,29 +158,81 @@
 			  				<div class="field">
 			  					<input name="pass_signup" type="password" value="" name="s" placeholder="Password" />
 			  				</div>
-							<div>
-				  				<div class="field" style="margin-bottom: 1px;">
-				  					<p><strong>Upload a Profile Picture *</strong></p>
-				  					<p><i>A size of 120 x 120 is preferred</i></p>
-				  					<div class="file-upload">
-				  						<div class="upload-bg">
-					  						<div id="myfileupload1">
-										   		<input type="file" id="uploadfile1" name="profilepic" onchange="readURL1(this);" />	  
-										 	</div>
-										 	<div id="thumbbox1">
-										 		<img height="100" width="100" alt="Thumb image" id="thumbimage1" style="display: none" />
-										  		<a class="removeimg1" href="javascript:" ></a>
-										  	</div>
-										 	<div id="boxchoice1">
-										  		<a href="javascript:" class="choicefile1"><i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload Image</a>
-										  		<p style="clear:both"></p>
-										 	</div>
-										  	<label class="filename1"></label>
+			  				<div class="field">
+			  					<input name="pass_signup_verify" type="password" value="" name="s" placeholder="Verify your password" />
+			  				</div>
+			  				<div class="payment" style="margin-top: 0px;">
+								<h4 style="font-size: 14px; margin-bottom: 5px; font-weight: bold; color: #555555">Your top interests *</h4>
+								<h5 style="font-weight: normal; color: #555555; font-size: 14px; font-style: italic;">Pick your top interests</h5>
+								<div class="row" style="padding-left: 6px;">
+									<div class="column">
+										<div class="create-account" style="margin-top: 10px;">
+						  					<input type="checkbox" id="1" name="" value="">
+						  					<label for="1" style="padding-left: 22px;">Design & Art</label>
+						  					<div class="checkbox" style="margin-top: 2px;"></div>
+					  					</div>
+					  					<div class="create-account" style="margin-top: 10px;">
+						  					<input type="checkbox" id="2" name="" value="">
+						  					<label for="2" style="padding-left: 22px;">Film & Video</label>
+						  					<div class="checkbox" style="margin-top: 2px;"></div>
+					  					</div>
+					  					<div class="create-account" style="margin-top: 10px;">
+						  					<input type="checkbox" id="3" name="" value="">
+						  					<label for="3" style="padding-left: 22px;">Books</label>
+						  					<div class="checkbox" style="margin-top: 2px;"></div>
+					  					</div>
+					  					<div class="create-account" style="margin-top: 10px;">
+						  					<input type="checkbox" id="4" name="" value="">
+						  					<label for="4" style="padding-left: 22px;">Performances</label>
+						  					<div class="checkbox" style="margin-top: 2px;"></div>
+					  					</div>
+				  					</div>
+				  					<div class="column">
+										<div class="create-account" style="margin-top: 10px;">
+						  					<input type="checkbox" id="5" name="" value="">
+						  					<label for="5" style="padding-left: 22px;">Crafts</label>
+						  					<div class="checkbox" style="margin-top: 2px;"></div>
+					  					</div>
+					  					<div class="create-account" style="margin-top: 10px;">
+						  					<input type="checkbox" id="6" name="" value="">
+						  					<label for="6" style="padding-left: 22px;">Technology</label>
+						  					<div class="checkbox" style="margin-top: 2px;"></div>
+					  					</div>
+					  					<div class="create-account" style="margin-top: 10px;">
+						  					<input type="checkbox" id="7" name="" value="">
+						  					<label for="7" style="padding-left: 22px;">Food</label>
+						  					<div class="checkbox" style="margin-top: 2px;"></div>
+					  					</div>
+					  					<div class="create-account" style="margin-top: 10px;">
+						  					<input type="checkbox" id="8" name="" value="">
+						  					<label for="8" style="padding-left: 22px;">Games</label>
+						  					<div class="checkbox" style="margin-top: 2px;"></div>
 					  					</div>
 				  					</div>
 				  				</div>
-			  				</div>
-			  				<div class="inline clearfix">
+				  				<div>
+					  				<div class="field" style="margin-bottom: 1px; margin-top: 10px;">
+					  					<p><strong>Upload a Profile Picture *</strong></p>
+					  					<p><i>A size of 120 x 120 is preferred</i></p>
+					  					<div class="file-upload">
+					  						<div class="upload-bg">
+						  						<div id="myfileupload1">
+											   		<input type="file" id="uploadfile1" name="profilepic" onchange="readURL1(this);" />	  
+											 	</div>
+											 	<div id="thumbbox1">
+											 		<img height="100" width="100" alt="Thumb image" id="thumbimage1" style="display: none" />
+											  		<a class="removeimg1" href="javascript:" ></a>
+											  	</div>
+											 	<div id="boxchoice1">
+											  		<a href="javascript:" class="choicefile1"><i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload Image</a>
+											  		<p style="clear:both"></p>
+											 	</div>
+											  	<label class="filename1"></label>
+						  					</div>
+					  					</div>
+					  				</div>
+			  					</div>
+			  				<div class="inline clearfix" style="margin-top: 10px;">
 						  		<button type="submit" name="signup" class="btn-primary">Create Account</button>
 						  	</div>
 					  	</form>
