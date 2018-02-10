@@ -762,7 +762,7 @@
 									</div>
 
 									<!--Requests Tab HTML THIS IS IN THE WRONG PLACE-->
-									<div class="support-campaign">
+									<!-- <div class="support-campaign">
 										<div id="requests" class="plan" style="border: 2px solid #ededed; border-radius: 2px; margin-bottom: 30px; overflow: hidden;">
 											
 											<a href="javascript:void(0)">
@@ -812,7 +812,7 @@
 													</div>
 											</a>
 										 </div>
-									</div>
+									</div> -->
 									<!--END OF REQUESTS TAB, PLEASE MOVE THIS TO THE RIGHT PLACE, CURRENTLY SHOWING UP IN ROLES TAB AS WELL-->
 									
 									<div id="updates" class="tabs">
