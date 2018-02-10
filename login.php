@@ -16,14 +16,31 @@
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link rel="stylesheet" type="text/css" href="css/responsive.css" />
     <link rel="icon" href="../images/favicon.ico" type="image/x-icon"/>
+
+    <style type="text/css">
+    	#fbcenter {
+			margin: 0 auto;
+			text-align: center;
+		}
+    </style>
 </head>
 
 <body>
+
+<!-- <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.12&appId=111072682828913&autoLogAppEvents=1';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script> -->
+
 	<div id="wrapper">
 		<header id="header" class="site-header">
 			<div class="container">
 				<div class="site-brand">
-					<a href="login.php"><img src="../images/assets/logo.png" style="width: 170px; height: 28px;" alt=""></a>
+					<a href="login.php"><img src="../images/assets/logo.png" style="width: 205px; height: 40px;" alt=""></a>
 				</div><!-- .site-brand -->
 				<div class="right-header">					
 					<!-- <nav class="main-menu">
@@ -125,6 +142,14 @@
 			<div class="container">
 				<div class="main-content">
 					<div class="form-login">
+						<!-- <h2 align="center">Log in with Facebook</h2>
+						<hr>
+						<div id="fbcenter">
+							<div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="true"></div>
+						</div>
+
+						<h2 align="center" style="margin-top: 35px;">Log in with Email</h2>
+						<hr> -->
 						<h2>Log in to Teamwerk</h2>
 						<form name="login" action="usr.php" method="post" id="loginForm" class="clearfix">
 			  				<div class="field">

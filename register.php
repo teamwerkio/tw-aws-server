@@ -17,6 +17,10 @@
     <link rel="stylesheet" type="text/css" href="css/responsive.css" />
     <link rel="icon" href="../images/favicon.ico" type="image/x-icon"/>
 
+    <!-- bootstrap wrappable css to avoid conflicts -->
+  	<link rel="stylesheet" href="https://formden.com/static/assets/demos/bootstrap-iso/bootstrap-iso/bootstrap-iso.css">
+  	<link rel="stylesheet" href="https://formden.com/static/assets/demos/bootstrap-iso/bootstrap-iso/bootstrap-iso.css">
+
     <style type="text/css">
 		/* Create two equal columns that floats next to each other */
 		.column {
@@ -25,21 +29,34 @@
 			padding: 10px;
 		}
 
-		/* Clear floats after the columns */
 		.row:after {
 			content: "";
 			display: table;
 			clear: both;
 		}
+		#fbcenter {
+			margin: 0 auto;
+			text-align: center;
+		}
     </style>
 </head>
 
 <body>
+
+<!-- <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.12&appId=111072682828913&autoLogAppEvents=1';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script> -->
+
 	<div id="wrapper">
 		<header id="header" class="site-header">
 			<div class="container">
 				<div class="site-brand">
-					<a href="login.php"><img src="../images/assets/logo.png" style="width: 170px; height: 28px;" alt=""></a>
+					<a href="login.php"><img src="../images/assets/logo.png" style="width: 205px; height: 40px;" alt=""></a>
 				</div><!-- .site-brand -->
 				<div class="right-header">					
 					<!-- <nav class="main-menu">
@@ -135,12 +152,20 @@
 							<li><a href="index.html">Home</a><span>/</span></li>
 							<li>Sign Up</li>
 						</ul>
-					</div><!-- .breadcrumbs -->
+					</div>
 				</div>
-			</div><!-- .page-title -->
+			</div> <!-- .page-title -->
 			<div class="container">
 				<div class="main-content">
 					<div class="form-login form-register">
+						<!-- <h2 align="center">Sign up with Facebook</h2>
+						<hr>
+						<div id="fbcenter">
+							<div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="true"></div>
+						</div> -->
+
+						<!-- <h2 align="center" style="margin-top: 35px;">Create an account</h2>
+						<hr> -->
 						<h2>Create an account</h2>
 						<form name="signup" action="usr.php" method="post" enctype="multipart/form-data" id="registerForm" class="clearfix">
 			  				<div class="field">
@@ -279,9 +304,29 @@
 					  					</div>
 					  				</div>
 			  					</div>
-			  				<div class="inline clearfix" style="margin-top: 10px;">
+
+			  					<div class="bootstrap-iso">
+								<button id="createAccount" type="button" class="btn-mainb" data-toggle="modal" data-target="#modal-1" style="color: white;">Create Account</button>
+								  <div class="modal fade" id="modal-1">
+								    <div class="modal-dialog modal-lg" >
+								      <div class="modal-content" style="height: 300px;">
+								         <div class="modal-body">
+								          <iframe id="if_createAccount" src="social_connect.php" style="width: 100%;" height="180" frameborder="0">
+								          </iframe>
+								         </div>
+								         <div class="modal-footer">
+								         	<a href="">No, proceed without Facebook</a>
+								          <!-- <button class="btn-mainb" data-dismiss="modal" style="cursor: pointer; width: 100px; color: white;">Close</button>
+								          <button name="add_update" id="update_button" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px; color: white;">Add Update</button> -->
+								         </div>
+								      </div>
+								    </div>
+								  </div>
+								</div>
+
+			  				<!-- <div class="inline clearfix" style="margin-top: 10px;">
 						  		<button type="submit" name="signup" class="btn-primary">Create Account</button>
-						  	</div>
+						  	</div> -->
 					  	</form>
 					</div>
 				</div>
@@ -346,14 +391,14 @@
 						</div>
 					</div>
 				</div>
-			</div><!-- .footer-menu -->
+			</div>
 			<div class="footer-copyright">
 				<div class="container">
 					<p class="copyright">© Copyrights 2017 by Teamwerk. All Rights Reserved.</p>
 					<a href="#" class="back-top">Back to top<span class="ion-android-arrow-up"></span></a>
 				</div>
 			</div>
-		</footer><!-- site-footer -->
+		</footer> <!-- site-footer -->
 	</div><!-- #wrapper -->
 	<!-- jQuery -->    
     <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
@@ -365,5 +410,6 @@
     <script type="text/javascript" src="libs/bxslider/jquery.bxslider.min.js"></script>
     <!-- orther script -->
     <script  type="text/javascript" src="js/main.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </body>
 </html>
