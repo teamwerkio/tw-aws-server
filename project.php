@@ -1068,6 +1068,8 @@
 										<a class="fa fa-facebook-square" style="font-size: 35px; margin-left: 5px;" href=""></a>
 										<a class="fa fa-twitter-square" style="font-size: 35px; margin-left: 10px;" href=""></a>
 										<a class="fa fa-google-plus-square" style="font-size: 35px; margin-left: 10px;" href=""></a>
+										<a class="fa fa-clone" style="font-size: 30px; margin-left: 10px;" href=""></a>
+										
 									</div>
 								</div>
 						</div><!-- .sidebar -->

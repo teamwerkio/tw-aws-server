@@ -75,6 +75,12 @@
 								  	</form>
 								</div>	
 							</li>
+							<!-- notifications bell icon -->
+							<!-- <li style="margin-left: 0px;">
+								<div class="search-icon">
+									<a href="#" class="ion-ios-bell-outline" style="cursor: pointer;"></a>
+								</div>
+							</li> -->
 							<li>
 								<a href="library.php">Library<i class="fa fa-caret-down" aria-hidden="true"></i></a>
 							</li>

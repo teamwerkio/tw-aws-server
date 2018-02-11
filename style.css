@@ -612,7 +612,7 @@ ul.socials-top li:hover i{
 .site-main .sideshow{
 	position: relative;
 	height: 674px;
-	background-image: url('../images/placeholder/1920x680.png');
+	background-image: url('../images/placeholder/1920x680n.png');
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center center;
@@ -624,7 +624,7 @@ ul.socials-top li:hover i{
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background: rgba(0,0,0,0.3);
+	background: rgba(0,0,0,0);
 }
 .sideshow .sideshow-content{
 	position: absolute;
@@ -1318,7 +1318,7 @@ ul.menu-category li.active:after{
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background: rgba(0,0,0,0.3);
+	background: rgba(0,0,0,0);
 }
 .page-title .container{
 	position: absolute;

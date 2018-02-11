@@ -40,7 +40,7 @@
 		<header id="header" class="site-header">
 			<div class="container">
 				<div class="site-brand">
-					<a href="login.php"><img src="../images/assets/logo.png" style="width: 205px; height: 40px;" alt=""></a>
+					<a href="landing.php"><img src="../images/assets/logo.png" style="width: 205px; height: 40px;" alt=""></a>
 				</div><!-- .site-brand -->
 				<div class="right-header">					
 					<!-- <nav class="main-menu">
@@ -160,7 +160,7 @@
 			  				</div>
 			  				<div class="inline clearfix">
 						  		<button name="login" type="submit" class="btn-primary">Log In</button>
-						  		<p><a onclick="alert('Not my problem!');" href="">Forgot password?</a></p>
+						  		<p><a href="register.php">Don't have an account?</a></p>
 						  	</div>
 					  	</form>
 					</div>
