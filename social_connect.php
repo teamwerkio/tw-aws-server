@@ -37,7 +37,7 @@
 						<p align="center">Connect your Teamwerk account with Facebook so we can find you the top projects that would interest you the most.</p>
 						
 						<div id="fbcenter" style="margin-top: 25px;">
-							<div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="true"></div>
+							<div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
 						</div>
 					</div>
 				</div>
