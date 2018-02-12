@@ -167,7 +167,7 @@
 						<!-- <h2 align="center" style="margin-top: 35px;">Create an account</h2>
 						<hr> -->
 						<h2>Create an account</h2>
-						<form name="signup" action="usr.php" method="post" enctype="multipart/form-data" id="registerForm" class="clearfix">
+						<form id="reg_form" name="signup" action="usr.php" method="post" enctype="multipart/form-data" id="registerForm" class="clearfix">
 			  				<div class="field">
 			  					<input name="firstname" type="text" value="" name="s" placeholder="First Name" />
 			  				</div>
@@ -187,12 +187,12 @@
 					  				<div class="field clearfix">
 						  				<div class="field">
 						  					<div class="field-select">
-												<select name="college" id="" style="margin-bottom: 0px; border-radius: 0px;">
-													<option value="">@hampshire.edu</option>
-													<option value="">@umass.edu</option>
-													<option value="">@mtholyoke.edu</option>
-													<option value="">@smith.edu</option>
-													<option value="">@amherst.edu</option>
+												<select name="em_ext" id="" style="margin-bottom: 0px; border-radius: 0px;">
+													<option value="hampshire.edu">@hampshire.edu</option>
+													<option value="umass.edu">@umass.edu</option>
+													<option value="mtholyoke.edu">@mtholyoke.edu</option>
+													<option value="smith.edu">@smith.edu</option>
+													<option value="amherst.edu">@amherst.edu</option>
 												</select>
 											</div>
 						  				</div>
@@ -334,7 +334,7 @@
 								          </iframe>
 								         </div>
 								         <div class="modal-footer">
-								         	<a href="">No, proceed without Facebook</a>
+								         	<a id="no_fb" href="">No, proceed without Facebook</a>
 								          <!-- <button class="btn-mainb" data-dismiss="modal" style="cursor: pointer; width: 100px; color: white;">Close</button>
 								          <button name="add_update" id="update_button" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px; color: white;">Add Update</button> -->
 								         </div>
@@ -430,5 +430,20 @@
     <!-- orther script -->
     <script  type="text/javascript" src="js/main.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+    	$(document).ready(function(){
+    		var formData=0;
+    		$('#createAccount').click(function(){
+				formData=new new FormData($('#reg_form')[0]);
+
+    		});
+    		$('#no_fb').click(function(){
+    			var request = new XMLHttpRequest();
+				request.open("POST", "register_form.php");
+				request.send(formData);
+    		});
+    	});
+    </script>
 </body>
 </html>

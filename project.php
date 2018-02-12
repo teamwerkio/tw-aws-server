@@ -17,15 +17,24 @@
 		$cat_res=mysqli_fetch_assoc($cat_qry);
 		return $cat_res[$col];
 	}
+	$viewOff=false;
 
-
-	if(!isset($_SESSION['usr'])){
+	if(!isset($_SESSION['usr']) && !isset($_GET['viewOff'])){
 		header("Location:usr.php");
 	}
 	else{
-		$usr_sql="SELECT * FROM users WHERE usrID='".$_SESSION['usr']."'";
-		$usr_qry=mysqli_query($dbconnect, $usr_sql);
-		$usr_res=mysqli_fetch_assoc($usr_qry);
+		if(isset($_GET['viewOff'])){
+			$viewOff=true;
+			$sess_ID=rand(1000000,1000000000);
+		}
+		else{
+			$usr_sql="SELECT * FROM users WHERE usrID='".$_SESSION['usr']."'";
+			$usr_qry=mysqli_query($dbconnect, $usr_sql);
+			$usr_res=mysqli_fetch_assoc($usr_qry);
+
+			$sess_ID=$_SESSION['usr'];
+		}
+
 
 
 		$id=$_GET['projID'];
@@ -40,7 +49,7 @@
 		$proj_col=returnCat('colleges', 'colName', $p_res['colID'], $dbconnect, 'colID');
 		$owner_ID=$p_res['usrID'];
 
-		$sess_ID=$_SESSION['usr'];
+		
 	}
 ?>
 <!doctype html>
@@ -72,24 +81,31 @@
 				<div class="right-header">					
 					<nav class="main-menu">
 						<button class="c-hamburger c-hamburger--htx"><span></span></button>
-						<ul>
-							<li>
-								<a href="library.php">Library<i class="fa fa-caret-down" aria-hidden="true"></i></a>
-							</li>
-							<li>
-								<a href="my_projects.php">My Projects<i class="fa fa-caret-down" aria-hidden="true"></i></a>
-							</li>
-							<li>
-								<a href="#"><?php echo $usr_res['firstname']; ?><i class="fa fa-caret-down" aria-hidden="true"></i></a>
-								<ul class="sub-menu">
-									<li><a href="dashboard.php">Dashboard</a></li>
-									<li><a href="profile.php">Profile</a></li>
-									<li><a href="ongoing_projects.php">Ongoing Projects</a></li>
-									<li><a href="past_projects.php">Past Projects</a></li>
-									<li><a href="usr.php?action=logout">Log Out</a></li>
-								</ul>
-							</li>
-						</ul>
+						<?php
+							if(!$viewOff){
+								?>
+									<ul>
+										<li>
+											<a href="library.php">Library<i class="fa fa-caret-down" aria-hidden="true"></i></a>
+										</li>
+										<li>
+											<a href="my_projects.php">My Projects<i class="fa fa-caret-down" aria-hidden="true"></i></a>
+										</li>
+										<li>
+											<a href="#"><?php echo $usr_res['firstname']; ?><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+											<ul class="sub-menu">
+												<li><a href="dashboard.php">Dashboard</a></li>
+												<li><a href="profile.php">Profile</a></li>
+												<li><a href="ongoing_projects.php">Ongoing Projects</a></li>
+												<li><a href="past_projects.php">Past Projects</a></li>
+												<li><a href="usr.php?action=logout">Log Out</a></li>
+											</ul>
+										</li>
+									</ul>
+								<?php
+							}
+						?>
+
 					</nav><!-- .main-menu -->
 					<!-- <div class="search-icon">
 						<a href="#" class="ion-ios-search-strong"></a>
@@ -101,7 +117,19 @@
 					</div> -->	
 
 					<div class="login login-button">
-						<a href="add_project.php" class="btn-primary">+ Project</a>
+						<?php
+							if($viewOff){
+								?>
+								<a href="login.php" class="btn-primary">Login</a>
+								<?php
+							}
+							else{
+								?>
+								<a href="add_project.php" class="btn-primary">+ Project</a>
+								<?php
+							}
+						?>
+						
 					</div><!-- .login -->
 				</div><!--. right-header -->
 			</div><!-- .container -->
@@ -342,7 +370,7 @@
 								<?php 
 									$role_sql="SELECT * FROM team_roles WHERE (projID=".$p_res['projID'].") AND (status=0)";
 									$role_qry=mysqli_query($dbconnect,$role_sql);
-									if($_SESSION['usr']!=$owner_ID){
+									if(!$viewOff && $_SESSION['usr']!=$owner_ID){
 
 								?>
 								<div class="button">
@@ -405,7 +433,7 @@
 									<li data-tab="story"><a href="#">Story</a></li>
 									<!-- <li data-tab="faq"><a href="#">Details</a></li> -->
 									<?php
-										if($_SESSION['usr']==$p_res['usrID']){
+										if(!$viewOff && $_SESSION['usr']==$p_res['usrID']){
 									?>
 									<li data-tab="settings"><a href="#">Settings</a></li>
 									<?php
@@ -447,7 +475,7 @@
 																		
 															<h4><?php echo $role_res['title'];
 																
-																	if($sess_ID==$owner_ID){
+																	if(!$viewOff && $sess_ID==$owner_ID){
 
 
 																?>
@@ -623,7 +651,7 @@
 											</a>
 										</div> --> 
 										<?php
-											if($owner_ID==$sess_ID){
+											if(!$viewOff && $owner_ID==$sess_ID){
 												?>
 												<div class="bootstrap-iso">
 												<button id="addRole" type="button" data-toggle="modal" data-target="#modal-2">+ Role</button>
@@ -653,7 +681,7 @@
 										<img src="<?php echo getimgURL($p_res['big_ban'], "banner_big"); ?>" alt="">
 										<h4 style="margin-bottom: 8px;">Our story from start to now!
 											<?php
-												if($sess_ID==$owner_ID){
+												if(!$viewOff && $sess_ID==$owner_ID){
 											?>
 										<p2 style="float: right;">
 											<a-remove>
@@ -1157,7 +1185,7 @@
 										</ul>
 										<!-- modal for hunter -->
 										<?php
-											if($owner_ID==$sess_ID){
+											if(!$viewOff && $owner_ID==$sess_ID){
 												?>
 													<div class="bootstrap-iso">
 													<button id="addUpdate" type="button" data-toggle="modal" data-target="#modal-1">+ Update</button>
@@ -1182,8 +1210,10 @@
 
 									</div>
 							</div>
-
-							<div class="support support-campaign" style="margin-top: 5.5px;">
+							<?php
+								if(!$viewOff){
+									?>
+								<div class="support support-campaign" style="margin-top: 5.5px;">
 								<h3 class="support-campaign-title" style="margin-top: 35px; margin-bottom: 15px;">Share this project</h3>
 									<div id="updates" class="tabs">
 										<a class="fa fa-facebook-square" style="font-size: 35px; margin-left: 5px;" href=""></a>
@@ -1193,6 +1223,11 @@
 										
 									</div>
 								</div>
+
+									<?php
+								}
+							?>
+
 
 						</div><!-- .sidebar -->
 					</div>
@@ -1321,6 +1356,21 @@
 				var roleID=button.attr('data-roleID');
 				var iFrame='<iframe id="if_role_e" src="role_update.php?edit=1&roleID='+roleID+'&projID='+proj_id+'" style="width: 100%;" height="400" frameborder="0"></iframe>';
 				$(".modal-body").html(iFrame);
+			});
+			$('.fa-clone').click(function(){
+				
+				var url=window.location.href+"&viewOff=true";
+				console.log(url);
+			    var dummy = document.createElement("textarea");
+			    document.body.appendChild(dummy);
+			    dummy.value = url;
+			    dummy.select();
+			    document.execCommand("copy");
+			    document.body.removeChild(dummy);
+
+				
+
+
 			});
 
 

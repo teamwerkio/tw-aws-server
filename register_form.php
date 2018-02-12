@@ -3,14 +3,22 @@
 	ini_set('display_errors', 'on');
 	include("dbconnect.php");
 	include("upload_photo.php");
+	error_log("here");
 
+
+
+	if(empty($_POST)){
+		header("Location:usr.php");
+	}
 	date_default_timezone_set('US/Eastern');
 	$name_f=$_POST['firstname'];
 	$name_l=$_POST['lastname'];
-	$email=$_POST['email_signup'];
+	$email=$_POST['email_signup'].'@'.$_POST['em_ext'];
+	
 	$pitch=$_POST['pitch'];
 	$pass=sha1($_POST['pass_signup']);
 	$pass_v=sha1($_POST['pass_signup_verify']);
+	
 	$date=date('Y-m-d H:i:s:u');
 
 	$int_sql="SELECT * FROM proj_categories";
@@ -23,8 +31,6 @@
 			error_log("pushing");
 		}
 	}while($int_res=mysqli_fetch_assoc($int_qry));
-	
-	error_log(empty($int_array));
 	error_log($pass!=$pass_v);
 	$fieldbool=$name_f=="" || $name_l=="" || $email=="" || $pass=="" || $pitch=="" || empty($int_array) || $pass!=$pass_v;
 
