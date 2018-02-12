@@ -410,14 +410,14 @@
 									<?php
 										if($_SESSION['usr']==$p_res['usrID']){
 									?>
-									<li data-tab="tsettings" style="float: right; margin-right: 0px; margin-left: 0px;"><a href="#">Team Settings</a></li>
-									<li data-tab="psettings" style="float: right; margin-right: 25px; margin-left: 0px;"><a href="#">Project Settings</a></li>
+									<li data-tab="settings" style="float: right; margin-right: 0px; margin-left: 0px;"><a href="#">Settings</a></li>
 									<li data-tab="backer" style="float: right; margin-right: 25px;"><a href="#">Requests</a></li>
 									<?php
 										}
 									?>
 									<!-- <li data-tab="comment"><a href="#">Comments</a></li> -->
 								</ul>
+
 								<div class="campaign-content">
 									<div id="campaign" class="tabs active">
 									<div class="col-lg-15" style="margin-top: 0px;">
@@ -468,7 +468,7 @@
 																		<i class="fa fa-pencil edit-role" data-roleID="<?php echo $role_res['roleID'];?>" data-toggle="modal" data-target="#modal-3"></i>
 																		  <div class="modal fade" id="modal-3">
 																		    <div class="modal-dialog modal-3g" >
-																		      <div class="modal-content" style="height: 550px;">
+																		      <div class="modal-content" style="height: 550px; width: 550px;">
 																		         <div class="modal-body">
 																		          <!-- <iframe id="if_role_e" src="role_update.php?edit=1&roleID=<?php echo $role_res['roleID'];?>&projID=<?php echo $p_res['projID'];?>" style="width: 100%;" height="400" frameborder="0">
 																		          </iframe> -->
@@ -831,8 +831,8 @@
 									</button>
 									</div>
 
-									<div id="tsettings" class="tabs">
-										<h2 style="margin-bottom: 10px;">Team Settings</h2>
+									<div id="settings" class="tabs">
+										<h2 style="margin-bottom: 10px; color:">Team Settings</h2>
 										<p>Use the settings below to change settings for your team.</p>
 
 										<form name="proj_set" action="proj_set_submit.php?projID=<?php echo $_GET['projID'];?>" method="post" enctype="multipart/form-data">
@@ -980,15 +980,8 @@
 												</table>
 											</div>
 
-											<br>
-
-											<button name="proj_set" class="btn-primary" type="submit" style="cursor: pointer; margin-top: 7px; background-color: #73b941; padding-left: 8px; padding-right: 8px;">Save and Apply settings</button>
-
-									</div>
-
-									<div id="psettings" class="tabs">
-										<h2 style="margin-bottom: 10px;">Project Settings</h2>
-										<p>Use the settings below to change settings for your project.</p>
+											<h2 style="margin-bottom: 10px; margin-top: 30px;">Project Settings</h2>
+											<p>Use the settings below to change settings for your project.</p>
 
 						  					<label style="margin-bottom: 2px;">How far is this project from completion? *</label><br>
 							  				<input name="progress" type="range" value="<?php echo $p_res['progress'];?>" id="projectProgress"></input>
@@ -1107,10 +1100,9 @@
 							  				<br>
 
 											<button name="proj_set" class="btn-primary" type="submit" style="cursor: pointer; margin-top: 5px; background-color: #73b941; padding-left: 8px; padding-right: 8px;">Save and Apply settings</button>
-							  				<!-- <a href="#" class="btn-primary" style="margin-top: 5px;">Save and Apply settings</a> -->
-							  			</form>
+										</form>
 									</div>
-									
+
 									<div id="updates" class="tabs">
 										<ul>
 											<li>
@@ -1271,27 +1263,26 @@
 																	<?php
 																		if($owner_ID==$sess_ID){
 																	?>
-
+																	<div class="bootstrap-iso">
 																	<p2>
 																		<a-remove>
 																			<i data-id="<?php echo $up_res['upID'];?>" data-id2="<?php echo $up_res['projID'];?>" class="fa fa-times del-up"></i>
 																		</a-remove>
 																	</p2>
 																	<!-- Nirman Pencil Alignment issue -->
-																	<p2 style="margin-right: 0px;">
+																	<p2 style="margin-right: 10px;">
 																	<a-edit-black>
-																		<div class="bootstrap-iso">
 																		<i class="fa fa-pencil edit-role" data-toggle="modal" data-target="#modal-4"></i>
 																		  <div class="modal fade" id="modal-4">
 																		    <div class="modal-dialog modal-4g" >
-																		      <div class="modal-content" style="height: 550px;">
+																		      <div class="modal-content" style="height: 550px; width: 550px;">
 																		         <div class="modal-body">
 																		          <iframe src="timeline_update.php?edit=1&upID=<?php echo $up_res['upID'];?>&projID=<?php echo $p_res['projID'];?>" style="width: 100%;" height="400" frameborder="0">
 																		          </iframe>
 																		         </div>
 																		         <div class="modal-footer">
 																		          <button class="btn-mainb cl" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
-																		          <button name="" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Edit Role</button>
+																		          <button name="" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Edit Update</button>
 																		         </div>
 																		      </div>
 																		    </div>
@@ -1513,10 +1504,10 @@
 							<div class="footer-menu-item">
 								<h3>Community</h3>
 								<ul>
-									<li><a href="#">Support</a></li>
-									<li><a href="#">Guidelines</a></li>
-									<li><a href="#">Terms of Use</a></li>
-									<li><a href="#">Privacy Policy</a></li>
+									<li><a href="support.html">Support</a></li>
+									<li><a href="guidelines.html">Guidelines</a></li>
+									<li><a href="termsofuse.html">Terms of Use</a></li>
+									<li><a href="privacypolicy.html">Privacy Policy</a></li>
 								</ul>
 							</div>
 						</div>

@@ -59,84 +59,6 @@
 					<a href="landing.php"><img src="../images/assets/logo.png" style="width: 205px; height: 40px;" alt=""></a>
 				</div><!-- .site-brand -->
 				<div class="right-header">					
-					<!-- <nav class="main-menu">
-						<button class="c-hamburger c-hamburger--htx"><span></span></button>
-						<ul>
-							<li>
-								<a href="#">Home<i class="fa fa-caret-down" aria-hidden="true"></i></a>
-								<ul class="sub-menu">
-									<li><a href="index_v2.html">Home v2</a></li>
-								</ul>
-							</li>
-							<li>
-								<a href="#">Explore<i class="fa fa-caret-down" aria-hidden="true"></i></a>
-								<ul class="sub-menu">
-									<li><a href="explore_layout_one.html">Explore Layout One</a></li>
-									<li><a href="explore_layout_two.html">Explore Layout Two</a></li>
-									<li><a href="explore_layout_three.html">Explore Layout Three</a></li>
-								</ul>
-							</li>
-							<li>
-								<a href="#">Start a Campaigns<i class="fa fa-caret-down" aria-hidden="true"></i></a>
-								<ul class="sub-menu">
-									<li><a href="create_a_campaign.html">Create a campaign</a></li>
-									<li><a href="update_a_campaign.html">Update a campaign</a></li>
-								</ul>
-							</li>
-							<li>
-								<a href="#">Pages<i class="fa fa-caret-down" aria-hidden="true"></i></a>
-								<ul class="sub-menu">
-									<li><a href="coming_soon.html">Coming Soon</a></li>
-									<li><a href="about_us.html">About Us</a></li>
-									<li><a href="404.html">404</a></li>
-									<li><a href="login.html">Login</a></li>
-									<li><a href="register.html">Register</a></li>
-									<li><a href="faq.html">Faq</a></li>
-									<li><a href="campaign_detail.html">Campaign details</a></li>
-								</ul>
-							</li>
-							<li>
-								<a href="#">Blog<i class="fa fa-caret-down" aria-hidden="true"></i></a>
-								<ul class="sub-menu">
-									<li><a href="blog_grid.html">Blog Grid</a></li>
-									<li><a href="blog_list.html">Blog List</a></li>
-									<li><a href="blog_list_sidebar.html">Blog Grid Sidebar</a></li>
-									<li><a href="blog_details.html">Blog Details</a></li>
-								</ul>
-							</li>
-							<li>
-								<a href="#">Shop<i class="fa fa-caret-down" aria-hidden="true"></i></a>
-								<ul class="sub-menu">
-									<li><a href="shop-grid.html">Shop Grid</a></li>
-									<li><a href="shop-details.html">Shop Details</a></li>
-									<li><a href="cart.html">Cart</a></li>
-									<li><a href="checkout.html">Checkout</a></li>
-								</ul>
-							</li>
-							<li><a href="contact_us.html">Contact</a></li>
-							<li>
-								<a href="#">Account<i class="fa fa-caret-down" aria-hidden="true"></i></a>
-								<ul class="sub-menu">
-									<li><a href="dashboard.html">Dashboard</a></li>
-									<li><a href="profile.html">Profile</a></li>
-									<li><a href="account_my_campaigns.html">My Campaigns</a></li>
-									<li><a href="account_pledges_received.html">Pledges Received</a></li>
-									<li><a href="account_backed_campaigns.html">Backed Campaigns</a></li>
-									<li><a href="account_rewards.html">Rewards</a></li>
-									<li><a href="account_payments.html">Payments</a></li>
-								</ul>
-							</li>
-						</ul>
-					</nav> --><!-- .main-menu -->
-		<!-- 			<div class="search-icon">
-						<a href="#" class="ion-ios-search-strong"></a>
-						<div class="form-search"></div>
-						<form action="#" method="POST" id="searchForm">
-					  		<input type="text" value="" name="search" placeholder="Search..." />
-					    	<button type="submit" value=""><span class="ion-ios-search-strong"></span></button>
-					  	</form>
-					</div>	 -->
-
 					<div class="login login-button">
 						<a href="login.php" class="btn-primary">Log In</a>
 					</div><!-- .login -->
@@ -301,27 +223,32 @@
 					  					</div> -->
 				  					</div>
 				  				</div>
-				  				<div>
-					  				<div class="field" style="margin-bottom: 1px; margin-top: 10px;">
-					  					<p><strong>Upload a Profile Picture *</strong></p>
-					  					<p><i>A size of 120 x 120 is preferred</i></p>
-					  					<div class="file-upload">
-					  						<div class="upload-bg">
-						  						<div id="myfileupload1">
-											   		<input type="file" id="uploadfile1" name="profilepic" onchange="readURL1(this);" />	  
-											 	</div>
-											 	<div id="thumbbox1">
-											 		<img height="100" width="100" alt="Thumb image" id="thumbimage1" style="display: none" />
-											  		<a class="removeimg1" href="javascript:" ></a>
-											  	</div>
-											 	<div id="boxchoice1">
-											  		<a href="javascript:" class="choicefile1"><i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload Image</a>
-											  		<p style="clear:both"></p>
-											 	</div>
-											  	<label class="filename1"></label>
-						  					</div>
+
+				  				<div class="field" style="margin-bottom: 0px; margin-top: 10px;">
+				  					<p><strong>Upload a Profile Picture *</strong></p>
+				  					<p><i>A size of 120 x 120 is preferred</i></p>
+				  					<div class="file-upload">
+				  						<div class="upload-bg">
+					  						<div id="myfileupload1">
+										   		<input type="file" id="uploadfile1" name="profilepic" onchange="readURL1(this);" />	  
+										 	</div>
+										 	<div id="thumbbox1">
+										 		<img height="100" width="100" alt="Thumb image" id="thumbimage1" style="display: none" />
+										  		<a class="removeimg1" href="javascript:" ></a>
+										  	</div>
+										 	<div id="boxchoice1">
+										  		<a href="javascript:" class="choicefile1"><i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload Image</a>
+										  		<p style="clear:both"></p>
+										 	</div>
+										  	<label class="filename1"></label>
 					  					</div>
-					  				</div>
+				  					</div>
+				  				</div>
+
+			  					<div class="create-account" style="margin-top: 14.5px; /*margin-bottom: 15px;*/ float: right;">
+				  					<input type="checkbox" id="tou" name="" value="" checked>
+				  					<label for="tou" style="padding-left: 22px;">I agree to the <u><a style="display: inline;" href="termsofuse.html">Terms of Use</a></u></label>
+				  					<div class="checkbox" style="margin-top: 2px;"></div>
 			  					</div>
 
 			  					<div class="bootstrap-iso">
@@ -371,10 +298,10 @@
 							<div class="footer-menu-item">
 								<h3>Community</h3>
 								<ul>
-									<li><a href="#">Support</a></li>
-									<li><a href="#">Guidelines</a></li>
-									<li><a href="#">Terms of Use</a></li>
-									<li><a href="#">Privacy Policy</a></li>
+									<li><a href="support.html">Support</a></li>
+									<li><a href="guidelines.html">Guidelines</a></li>
+									<li><a href="termsofuse.html">Terms of Use</a></li>
+									<li><a href="privacypolicy.html">Privacy Policy</a></li>
 								</ul>
 							</div>
 						</div>
