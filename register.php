@@ -56,7 +56,7 @@
 		<header id="header" class="site-header">
 			<div class="container">
 				<div class="site-brand">
-					<a href="login.php"><img src="../images/assets/logo.png" style="width: 205px; height: 40px;" alt=""></a>
+					<a href="landing.php"><img src="../images/assets/logo.png" style="width: 205px; height: 40px;" alt=""></a>
 				</div><!-- .site-brand -->
 				<div class="right-header">					
 					<!-- <nav class="main-menu">
@@ -177,9 +177,28 @@
 			  				<div class="field">
 			  					<input name="pitch" type="text" value="" name="s" placeholder="Talk to me about ..." />
 			  				</div>
-			  				<div class="field">
-			  					<input name="email_signup" type="email" value="" name="s" placeholder=".edu Email Address" />
-			  				</div>
+			  				<div class="row">
+			  					<div class="coloumn" style="margin-left: 15px; width: 49%;">
+					  				<div class="field">
+					  					<input name="email_signup" type="email" value="" name="s" placeholder="College Email" />
+					  				</div>
+					  			</div>
+					  			<div class="coloumn" style="margin-left: 5px; width: 200px;">
+					  				<div class="field clearfix">
+						  				<div class="field">
+						  					<div class="field-select">
+												<select name="college" id="" style="margin-bottom: 0px; border-radius: 0px;">
+													<option value="">@hampshire.edu</option>
+													<option value="">@umass.edu</option>
+													<option value="">@mtholyoke.edu</option>
+													<option value="">@smith.edu</option>
+													<option value="">@amherst.edu</option>
+												</select>
+											</div>
+						  				</div>
+									</div>
+								</div>
+							</div>
 			  				<div class="field">
 			  					<input name="pass_signup" type="password" value="" name="s" placeholder="Password" />
 			  				</div>
