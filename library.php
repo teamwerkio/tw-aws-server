@@ -51,7 +51,7 @@
 	<!-- Style CSS -->
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link rel="stylesheet" type="text/css" href="css/responsive.css" />
-    <link rel="icon" href="../images/favicon.ico" type="image/x-icon"/>
+    <link rel="icon" href="../images/favicon.png" type="image/x-icon"/>
 </head>
 
 <body>
@@ -188,7 +188,7 @@
 								$proj_col=returnCat('colleges', 'colName', $trend_res['colID'], $dbconnect, 'colID');
 							?>
 							<div class="col-lg-12">
-								<div class="campaign-big-item clearfix" data-id="<?php echo $trending_proj_id;?>">
+								<div class="campaign-big-item clearfix wow fadeInUp" data-id="<?php echo $trending_proj_id;?>">
 									<a  href="project.php?projID=<?php echo $trending_proj_id;?>" class="trend campaign-big-image" style="height: 350px; width: 570px;">
 										<?php echo '<img src="'.getimgURL($trend_res['big_ban'], "banner_big").'" style="height: 350px; width: 570px;" />'; ?>		
 									</a>
@@ -656,9 +656,8 @@
 							<div class="footer-menu-item">
 								<h3>Company</h3>
 								<ul>
-									<li><a href="about_us.php">About</a></li>
+									<li><a href="about.html">About</a></li>
 									<li><a href="">Press</a></li>
-									<li><a href="#">Team</a></li>
 									<li><a href="#">Contact</a></li>
 								</ul>
 							</div>
@@ -694,13 +693,13 @@
 							  		<input type="text" value="" name="s" placeholder="Enter your email..." />
 							    	<button type="submit" value=""><span class="ion-android-drafts"></span></button>
 							  	</form>
-							  	<div class="follow">
+							  	<!-- <div class="follow">
 							  		<h3>Join us on</h3>
 							  		<ul>
 							  			<li class="facebook"><a target="_Blank" href="http://www.facebook.com"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
 							  			<li class="twitter"><a target="_Blank" href="http://www.twitter.com"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
 							  		</ul>
-							  	</div>
+							  	</div> -->
 							</div>
 						</div>
 					</div>
@@ -708,7 +707,7 @@
 			</div><!-- .footer-menu -->
 			<div class="footer-copyright">
 				<div class="container">
-					<p class="copyright">© Copyrights 2017 by Teamwerk. All Rights Reserved.</p>
+					<p class="copyright">© Copyrights 2018 by Teamwerk. All Rights Reserved.</p>
 					<a href="#" class="back-top">Back to top<span class="ion-android-arrow-up"></span></a>
 				</div>
 			</div>

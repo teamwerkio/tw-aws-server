@@ -410,7 +410,8 @@
 									<?php
 										if($_SESSION['usr']==$p_res['usrID']){
 									?>
-									<li data-tab="settings" style="float: right; margin-right: 0px; margin-left: 0px;"><a href="#">Settings</a></li>
+									<li data-tab="tsettings" style="float: right; margin-right: 0px; margin-left: 0px;"><a href="#">Team Settings</a></li>
+									<li data-tab="psettings" style="float: right; margin-right: 25px; margin-left: 0px;"><a href="#">Project Settings</a></li>
 									<li data-tab="backer" style="float: right; margin-right: 25px;"><a href="#">Requests</a></li>
 									<?php
 										}
@@ -653,7 +654,9 @@
 									</div></div>
 									</div>
 									<div id="story" class="tabs">
-										<img src="<?php echo getimgURL($p_res['big_ban'], "banner_big"); ?>" alt="">
+										<h2>Story</h2>
+										<p style="margin-top: 10px;">This feature is under construction. Coming soon.</p>
+										<!-- <img src="<?php echo getimgURL($p_res['big_ban'], "banner_big"); ?>" alt="">
 										<h4 style="margin-bottom: 8px;">Our story from start to now!
 											<?php
 												if($sess_ID==$owner_ID){
@@ -667,17 +670,17 @@
 											<a-edit>
 												<i class="fa fa-pencil"></i>
 											</a-edit>
-										</p2>
+										</p2> -->
 										<!-- <p2 style="margin-right: 5px; float: right;">
 											<a-edit>
 												<i class="fa fa-check"></i>
 											</a-edit>
 										</p2> -->
-										<?php
+										<!-- <?php
 											}
 										?>
-										</h4>						
-										<p><?php echo $p_res['lg_desc'] ?></p>
+										</h4>	 -->					
+										<!-- <p><?php echo $p_res['lg_desc'] ?></p> -->
 									</div>
 									<div id="faq" class="tabs">
 										<h2>Frequently Asked Questions</h2>
@@ -828,11 +831,10 @@
 									</button>
 									</div>
 
-									<div id="settings" class="tabs">
-										<h2 style="margin-bottom: 10px;">Settings</h2>
-										<p>Use the settings below to change items displayed on this project.</p>
+									<div id="tsettings" class="tabs">
+										<h2 style="margin-bottom: 10px;">Team Settings</h2>
+										<p>Use the settings below to change settings for your team.</p>
 
-										<h3 style="margin-bottom: 10px; margin-top: 30px;">Team details</h3>
 										<form name="proj_set" action="proj_set_submit.php?projID=<?php echo $_GET['projID'];?>" method="post" enctype="multipart/form-data">
 											<div class="field clearfix">
 							  					<label for="">Team size *</label>
@@ -899,10 +901,211 @@
 								  				</div>
 											</div>
 
-											<h3 style="margin-bottom: 10px;">Project details</h3>
+											<h3 style="margin-bottom: 10px;">Team member settings</h3>
+											<p>Here is a list of your team members and their roles.</p>
+											<div id="backer">
+												<table id="xyz">
+													<tr>
+														<th>Name</th>
+														<th>Position</th>
+														<th>Role</th>
+														<th>Contact</th>
+													</tr>
+													<tr>
+														<td>
+															<a href="linktoprofile" style="text-decoration: underline; cursor: pointer;">Andrew McDonald</a>
+														</td>
+														<td>Designer</td>
+														<td>
+															<div class="field">
+											  					<div class="field-select">
+																	<select name="role" id="">
+																		<option value="">Owner</option>
+																		<option value="1">Member (cannot edit settings)</option>
+																		<option value="2">Admin Member (can edit settings)</option>
+																	</select>
+																</div>
+											  				</div>
+														</td>
+														<td>
+															<a href="mailto:someone@example.com" style="font-size: 16px; text-align: center; cursor: pointer; color: #545BEE;">
+																<i class="fa fa-envelope"></i>
+															</a>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<a href="linktoprofile" style="text-decoration: underline; cursor: pointer;">Old McDonald</a>
+														</td>
+														<td>Statistician</td>
+														<td>
+															<div class="field">
+											  					<div class="field-select">
+																	<select name="role" id="">
+																		<option value="">Owner</option>
+																		<option value="1">Member (cannot edit settings)</option>
+																		<option value="2">Admin Member (can edit settings)</option>
+																	</select>
+																</div>
+											  				</div>
+														</td>
+														<td>
+															<a href="mailto:someone@example.com" style="font-size: 16px; text-align: center; cursor: pointer; color: #545BEE;">
+																<i class="fa fa-envelope"></i>
+															</a>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<a href="linktoprofile" style="text-decoration: underline; cursor: pointer;">Daddy McDonald</a>
+														</td>
+														<td>Marketing Expert</td>
+														<td>
+															<div class="field">
+											  					<div class="field-select">
+																	<select name="role" id="">
+																		<option value="">Owner</option>
+																		<option value="1">Member (cannot edit settings)</option>
+																		<option value="2">Admin Member (can edit settings)</option>
+																	</select>
+																</div>
+											  				</div>
+														</td>
+														<td>
+															<a href="mailto:someone@example.com" style="font-size: 16px; text-align: center; cursor: pointer; color: #545BEE;">
+																<i class="fa fa-envelope"></i>
+															</a>
+														</td>
+													</tr>
+												</table>
+											</div>
+
+											<br>
+
+											<button name="proj_set" class="btn-primary" type="submit" style="cursor: pointer; margin-top: 7px; background-color: #73b941; padding-left: 8px; padding-right: 8px;">Save and Apply settings</button>
+
+									</div>
+
+									<div id="psettings" class="tabs">
+										<h2 style="margin-bottom: 10px;">Project Settings</h2>
+										<p>Use the settings below to change settings for your project.</p>
+
 						  					<label style="margin-bottom: 2px;">How far is this project from completion? *</label><br>
 							  				<input name="progress" type="range" value="<?php echo $p_res['progress'];?>" id="projectProgress"></input>
 							  				<p>This project is <strong><span id="progressOutput"></span>%</strong> complete</p>
+
+							  				<label style="margin-bottom: 2px;">Name *</label><br>
+							  				<div class="field" style="margin-bottom: 0px;">
+							  					<input type="text" value="" name="projname" placeholder="The Oreous Pillow" />
+							  				</div>
+							  				<label style="margin-bottom: 2px; margin-top: 20px;">Tagline *</label><br>
+							  				<div class="field" style="margin-bottom: 0px;">
+							  					<textarea style="width: 100%" name="projtagl" rows="2" placeholder="Enter upto 85 characters"></textarea>
+							  				</div>
+							  				<label style="margin-bottom: 2px; margin-top: 20px;">Short description *</label><br>
+							  				<div class="field" style="margin-bottom: 0px;">
+							  					<textarea style="width: 100%" name="proj_sh_desc" rows="2" placeholder="Enter upto 215 characters"></textarea>
+							  				</div>
+							  				<label style="margin-bottom: 2px; margin-top: 20px;">Long description *</label><br>
+							  				<div class="field" style="margin-bottom: 0px;">
+							  					<textarea style="width: 100%" name="proj_sh_desc" rows="2" placeholder="Enter upto 500 characters"></textarea>
+							  				</div>
+
+							  				<label style="margin-bottom: 2px; margin-top: 20px;">Big banner *</label><br>
+							  				<div class="field" style="margin-bottom: 0px;">
+							  					<div class="file-upload">
+							  						<div class="upload-bg">
+								  						<div id="myfileupload">
+													   		<input type="file" id="uploadfile1" name="big_ban" onchange="readURL1(this);" />	  
+													 	</div>
+													 	<div id="thumbbox1">
+													 		<img height="100" width="100" alt="Thumb image" id="thumbimage1" style="display: none" />
+													  		<a class="removeimg1" href="javascript:" ></a>
+													  	</div>
+													 	<div id="boxchoice1">
+													  		<a href="javascript:" class="choicefile1"><i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload Image</a>
+													  		<p style="clear:both"></p>
+													 	</div>
+													  	<label class="filename1"></label>
+								  					</div>
+							  					</div>
+							  				</div>
+							  				<label style="margin-bottom: 2px; margin-top: 20px;">Small banner *</label><br>
+							  				<div class="field" style="margin-bottom: 0px;">
+							  					<div class="file-upload">
+							  						<div class="upload-bg">
+								  						<div id="myfileupload">
+													   		<input type="file" id="uploadfile2" name="sm_ban" onchange="readURL2(this);" />	  
+													 	</div>
+													 	<div id="thumbbox2">
+													 		<img height="100" width="100" alt="Thumb image" id="thumbimage2" style="display: none" />
+													  		<a class="removeimg2" href="javascript:" ></a>
+													  	</div>
+													 	<div id="boxchoice2">
+													  		<a href="javascript:" class="choicefile2"><i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload Image</a>
+													  		<p style="clear:both"></p>
+													 	</div>
+													  	<label class="filename2"></label>
+								  					</div>
+							  					</div>
+							  				</div>
+							  				<label style="margin-bottom: 2px; margin-top: 20px;">Project icon *</label><br>
+							  				<div class="field" style="margin-bottom: 0px;">
+							  					<div class="file-upload">
+							  						<div class="upload-bg">
+								  						<div id="myfileupload">
+													   		<input type="file" id="uploadfile3" name="proj_icon" onchange="readURL3(this);" />	  
+													 	</div>
+													 	<div id="thumbbox3">
+													 		<img height="100" width="100" alt="Thumb image" id="thumbimage3" style="display: none" />
+													  		<a class="removeimg3" href="javascript:" ></a>
+													  	</div>
+													 	<div id="boxchoice3">
+													  		<a href="javascript:" class="choicefile3"><i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload Image</a>
+													  		<p style="clear:both"></p>
+													 	</div>
+													  	<label class="filename3"></label>
+								  					</div>
+							  					</div>
+							  				</div>
+
+							  				<label style="margin-bottom: 2px; margin-top: 20px;">Institution *</label><br>
+							  				<div class="field" style="margin-bottom: 0px;">
+							  					<div class="field-select">
+													<select name="college" id="">
+														<option value="">Select an Institution</option>
+														<option value="1">Amherst College</option>
+														<option value="2">Hampshire College</option>
+														<option value="3">Mount Holyoke College</option>
+														<option value="4">Smith College</option>
+														<option value="5">University of Massachusetts, Amherst</option>
+													</select>
+												</div>
+							  				</div>
+							  				<label style="margin-bottom: 2px; margin-top: 20px;">Category *</label><br>
+							  				<div class="field" style="margin-bottom: 0px;">
+							  					<div class="field-select">
+													<select name="cat" id="">
+														<option value="">Select a Category</option>
+														<option value="1">Design &amp; Art</option>
+														<option value="2">Film &amp; Video</option>
+														<option value="3">Book</option>
+														<option value="4">Performances</option>
+														<option value="5">Crafts</option>
+														<option value="6">Technology</option>
+														<option value="7">Food</option>
+														<option value="8">Game</option>
+													</select>
+												</div>
+							  				</div>
+
+							  				<label style="margin-bottom: 2px; margin-top: 20px;">Tags *</label><br>
+							  				<div class="field" style="margin-bottom: 0px;">
+							  					<input type="text" value="" name="tags" placeholder="Plants, Leaves, Green, Environment, Rain" />
+							  				</div>
+
+							  				<br>
+
 											<button name="proj_set" class="btn-primary" type="submit" style="cursor: pointer; margin-top: 5px; background-color: #73b941; padding-left: 8px; padding-right: 8px;">Save and Apply settings</button>
 							  				<!-- <a href="#" class="btn-primary" style="margin-top: 5px;">Save and Apply settings</a> -->
 							  			</form>
@@ -1300,9 +1503,8 @@
 							<div class="footer-menu-item">
 								<h3>Company</h3>
 								<ul>
-									<li><a href="about_us.html">About</a></li>
+									<li><a href="about.html">About</a></li>
 									<li><a href="">Press</a></li>
-									<li><a href="#">Team</a></li>
 									<li><a href="#">Contact</a></li>
 								</ul>
 							</div>
@@ -1338,13 +1540,13 @@
 							  		<input type="text" value="" name="s" placeholder="Enter your email..." />
 							    	<button type="submit" value=""><span class="ion-android-drafts"></span></button>
 							  	</form>
-							  	<div class="follow">
+							  	<!-- <div class="follow">
 							  		<h3>Join us on</h3>
 							  		<ul>
 							  			<li class="facebook"><a target="_Blank" href="http://www.facebook.com"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
 							  			<li class="twitter"><a target="_Blank" href="http://www.twitter.com"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
 							  		</ul>
-							  	</div>
+							  	</div> -->
 							</div>
 						</div>
 					</div>

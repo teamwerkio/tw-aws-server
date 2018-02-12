@@ -41,7 +41,7 @@
 	<!-- Style CSS -->
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link rel="stylesheet" type="text/css" href="css/responsive.css" />
-    <link rel="icon" href="images/favicon.png" type="image/x-icon"/>
+    <link rel="icon" href="../images/favicon.png" type="image/x-icon"/>
 </head>
 
 <body>
@@ -183,9 +183,8 @@
 							<div class="footer-menu-item">
 								<h3>Company</h3>
 								<ul>
-									<li><a href="about_us.html">About</a></li>
+									<li><a href="about.html">About</a></li>
 									<li><a href="">Press</a></li>
-									<li><a href="#">Team</a></li>
 									<li><a href="#">Contact</a></li>
 								</ul>
 							</div>
@@ -221,13 +220,13 @@
 							  		<input type="text" value="" name="s" placeholder="Enter your email..." />
 							    	<button type="submit" value=""><span class="ion-android-drafts"></span></button>
 							  	</form>
-							  	<div class="follow">
+							  	<!-- <div class="follow">
 							  		<h3>Join us on</h3>
 							  		<ul>
 							  			<li class="facebook"><a target="_Blank" href="http://www.facebook.com"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
 							  			<li class="twitter"><a target="_Blank" href="http://www.twitter.com"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
 							  		</ul>
-							  	</div>
+							  	</div> -->
 							</div>
 						</div>
 					</div>
@@ -235,7 +234,7 @@
 			</div><!-- .footer-menu -->
 			<div class="footer-copyright">
 				<div class="container">
-					<p class="copyright">© Copyrights 2017 by Teamwerk. All Rights Reserved.</p>
+					<p class="copyright">© Copyrights 2018 by Teamwerk. All Rights Reserved.</p>
 					<a href="#" class="back-top">Back to top<span class="ion-android-arrow-up"></span></a>
 				</div>
 			</div>
