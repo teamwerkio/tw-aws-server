@@ -415,7 +415,6 @@
 									<?php
 										}
 									?>
-									<li data-tab="requests" style="float: right;"><a href="#">Requests</a></li>
 									<!-- <li data-tab="comment"><a href="#">Comments</a></li> -->
 								</ul>
 								<div class="campaign-content">
@@ -908,60 +907,6 @@
 							  				<!-- <a href="#" class="btn-primary" style="margin-top: 5px;">Save and Apply settings</a> -->
 							  			</form>
 									</div>
-
-									<!--Requests Tab HTML THIS IS IN THE WRONG PLACE-->
-									<!-- <div class="support-campaign">
-										<div id="requests" class="plan" style="border: 2px solid #ededed; border-radius: 2px; margin-bottom: 30px; overflow: hidden;">
-											
-											<a href="javascript:void(0)">
-												<h4 style="float: left;">Statistical Analyzer</h4>	
-													<div style="overflow: auto; border-style: solid; float: right; height: 30px;">
-															<table style="width: 200px;">
-																	<tr style="overflow-y: scroll; height: 30px;">
-																		<td style="border-bottom: 1px solid #ccc;">Nirman Dave</td>
-																		<td style="border-bottom: 1px solid #ccc;">
-																			<a-remove>
-																				<i class="fa fa-times"></i>
-																			</a-remove>
-																		</td>
-																		<td style="border-bottom: 1px solid #ccc;">
-																			<a-edit-black>
-																				<i class="fa fa-check"></i>
-																			</a-edit-black>
-																		</td>
-																	</tr>
-																	<tr style="overflow-y: scroll; height: 30px;">
-																		<td style="border-bottom: 1px solid #ccc;">Hunter Golden</td>
-																		<td style="border-bottom: 1px solid #ccc;">
-																			<a-remove>
-																				<i class="fa fa-times"></i>
-																			</a-remove>
-																		</td>
-																		<td style="border-bottom: 1px solid #ccc;">
-																			<a-edit-black>
-																				<i class="fa fa-check"></i>
-																			</a-edit-black>
-																		</td>
-																	</tr>
-																	<tr style="overflow-y: scroll; height: 30px;">
-																		<td style="border-bottom: 1px solid #ccc;">Tapu Lastname</td>
-																		<td style="border-bottom: 1px solid #ccc;">
-																			<a-remove>
-																				<i class="fa fa-times"></i>
-																			</a-remove>
-																		</td>
-																		<td style="border-bottom: 1px solid #ccc;">
-																			<a-edit-black>
-																				<i class="fa fa-check"></i>
-																			</a-edit-black>
-																		</td>
-																	</tr>
-																</table>
-													</div>
-											</a>
-										 </div>
-									</div> -->
-									<!--END OF REQUESTS TAB, PLEASE MOVE THIS TO THE RIGHT PLACE, CURRENTLY SHOWING UP IN ROLES TAB AS WELL-->
 									
 									<div id="updates" class="tabs">
 										<ul>
