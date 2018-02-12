@@ -21,6 +21,7 @@
 <body class="campaign-detail">
 
 <div id="fb-root"></div>
+
 <script>window.fbAsyncInit = function() {
     FB.init({
       appId      : "1841177166173972",
@@ -37,6 +38,7 @@
      js.src = "https://connect.facebook.net/en_US/sdk.js";
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));</script>		
+
 
 		<main id="main" class="site-main" style="margin-bottom: 0px; padding-bottom: 0px;">
 			<div class="container">
