@@ -330,8 +330,8 @@
 								    <div class="modal-dialog modal-lg" >
 								      <div class="modal-content" style="height: 300px;">
 								         <div class="modal-body">
-								          <iframe id="if_createAccount" src="social_connect.php" style="width: 100%;" height="180" frameborder="0">
-								          </iframe>
+								          <!-- <iframe id="if_createAccount" src="social_connect.php" style="width: 100%;" height="180" frameborder="0"> -->
+<!-- 								          </iframe> -->
 								         </div>
 								         <div class="modal-footer">
 								         	<a id="no_fb" href="">No, proceed without Facebook</a>
@@ -432,17 +432,23 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
     <script type="text/javascript">
+    	var formData;
     	$(document).ready(function(){
-    		var formData=0;
+    		
     		$('#createAccount').click(function(){
-				formData=new new FormData($('#reg_form')[0]);
+				formData=new FormData($('#reg_form')[0]);
+				var iframe='<iframe id="if_createAccount" src="social_connect.php" style="width: 100%;" height="180" frameborder="0">';
+				$('.modal-body').html(iframe);
 
     		});
     		$('#no_fb').click(function(){
     			var request = new XMLHttpRequest();
-				request.open("POST", "register_form.php");
+				request.open("POST", "usr.php");
 				request.send(formData);
     		});
+
+
+
     	});
     </script>
 </body>

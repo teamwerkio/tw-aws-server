@@ -19,7 +19,7 @@
 		$cat_res=mysqli_fetch_assoc($cat_qry);
 		return $cat_res[$col];
 	}
-
+	
 	if(!isset($_SESSION['usr'])){
 		header("Location:usr.php");
 	}
