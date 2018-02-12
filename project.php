@@ -362,7 +362,7 @@
 										          </iframe>
 										         </div>
 										         <div class="modal-footer">
-										          <button class="btn-mainb" data-dismiss="modal" style="cursor: pointer; width: 100px; color: white;">Close</button>
+										          <button class="btn-mainb cl" data-dismiss="modal" style="cursor: pointer; width: 100px; color: white;">Close</button>
 
 										          <button id="join_proj" name="projID" value=<?php echo $id;?> type="submit" class="btn-mainb" style="cursor: pointer; width: 100px; color: white;">Join</button>
 
@@ -411,6 +411,7 @@
 									<?php
 										}
 									?>
+									<li data-tab="requests" style="float: right;"><a href="#">Requests</a></li>
 									<!-- <li data-tab="comment"><a href="#">Comments</a></li> -->
 								</ul>
 								<div class="campaign-content">
@@ -439,8 +440,11 @@
 
 											do{
 												?>
+
 													<div class="plan" style="margin-bottom: 15px;">
-														<a href="javascript:void(0)">
+														<a href="#">
+															
+																		
 															<h4><?php echo $role_res['title'];
 																
 																	if($sess_ID==$owner_ID){
@@ -452,9 +456,28 @@
 																		<i data-id="<?php echo $role_res['roleID'];?>" data-id2="<?php echo $role_res['projID'];?>" class="fa fa-times remove-role"></i>
 																	</a-remove>
 																</p2>
+																
+																<!-- Pencil Edit Icon-->
 																<p2 style="margin-right: 5px; float: right;">
 																	<a-edit-black>
-																		<i data-id="<?php echo $role_res['roleID'];?>" data-id2="<?php echo $role_res['projID'];?>" class="fa fa-pencil edit-role" onclick="MyWindow=window.open('role_update.php?edit=1&roleID=<?php echo $role_res['roleID'];?>&projID=<?php echo $p_res['projID'];?>','MyWindow',width=450,height=300)"></i>
+																		<div class="bootstrap-iso">
+																		<i class="fa fa-pencil edit-role" data-roleID="<?php echo $role_res['roleID'];?>" data-toggle="modal" data-target="#modal-3"></i>
+																		  <div class="modal fade" id="modal-3">
+																		    <div class="modal-dialog modal-3g" >
+																		      <div class="modal-content" style="height: 550px;">
+																		         <div class="modal-body">
+																		          <!-- <iframe id="if_role_e" src="role_update.php?edit=1&roleID=<?php echo $role_res['roleID'];?>&projID=<?php echo $p_res['projID'];?>" style="width: 100%;" height="400" frameborder="0">
+																		          </iframe> -->
+																		         </div>
+																		         <div class="modal-footer">
+																		          <button class="btn-mainb cl" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
+																		          <button id="update_role" name="" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Edit Role</button>
+																		         </div>
+																		      </div>
+																		    </div>
+																		  </div>
+																		</div>
+																		<!--<i data-id="<?php echo $role_res['roleID'];?>" data-id2="<?php echo $role_res['projID'];?>" class="fa fa-pencil edit-role" onclick="MyWindow=window.open('role_update.php?edit=1&roleID=<?php echo $role_res['roleID'];?>&projID=<?php echo $p_res['projID'];?>','MyWindow',width=450,height=300)"></i>-->
 																	</a-edit-black>
 																</p2>
 																<!-- <p2 style="margin-right: 5px; float: right;">
@@ -612,7 +635,7 @@
 												          </iframe>
 												         </div>
 												         <div class="modal-footer">
-												          <button class="btn-mainb" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
+												          <button class="btn-mainb cl" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
 												          <button id="role_button" name="add_role" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Add Role</button>
 												         </div>
 												      </div>
@@ -737,6 +760,61 @@
 							  				<!-- <a href="#" class="btn-primary" style="margin-top: 5px;">Save and Apply settings</a> -->
 							  			</form>
 									</div>
+
+									<!--Requests Tab HTML THIS IS IN THE WRONG PLACE-->
+									<!-- <div class="support-campaign">
+										<div id="requests" class="plan" style="border: 2px solid #ededed; border-radius: 2px; margin-bottom: 30px; overflow: hidden;">
+											
+											<a href="javascript:void(0)">
+												<h4 style="float: left;">Statistical Analyzer</h4>	
+													<div style="overflow: auto; border-style: solid; float: right; height: 30px;">
+															<table style="width: 200px;">
+																	<tr style="overflow-y: scroll; height: 30px;">
+																		<td style="border-bottom: 1px solid #ccc;">Nirman Dave</td>
+																		<td style="border-bottom: 1px solid #ccc;">
+																			<a-remove>
+																				<i class="fa fa-times"></i>
+																			</a-remove>
+																		</td>
+																		<td style="border-bottom: 1px solid #ccc;">
+																			<a-edit-black>
+																				<i class="fa fa-check"></i>
+																			</a-edit-black>
+																		</td>
+																	</tr>
+																	<tr style="overflow-y: scroll; height: 30px;">
+																		<td style="border-bottom: 1px solid #ccc;">Hunter Golden</td>
+																		<td style="border-bottom: 1px solid #ccc;">
+																			<a-remove>
+																				<i class="fa fa-times"></i>
+																			</a-remove>
+																		</td>
+																		<td style="border-bottom: 1px solid #ccc;">
+																			<a-edit-black>
+																				<i class="fa fa-check"></i>
+																			</a-edit-black>
+																		</td>
+																	</tr>
+																	<tr style="overflow-y: scroll; height: 30px;">
+																		<td style="border-bottom: 1px solid #ccc;">Tapu Lastname</td>
+																		<td style="border-bottom: 1px solid #ccc;">
+																			<a-remove>
+																				<i class="fa fa-times"></i>
+																			</a-remove>
+																		</td>
+																		<td style="border-bottom: 1px solid #ccc;">
+																			<a-edit-black>
+																				<i class="fa fa-check"></i>
+																			</a-edit-black>
+																		</td>
+																	</tr>
+																</table>
+													</div>
+											</a>
+										 </div>
+									</div> -->
+									<!--END OF REQUESTS TAB, PLEASE MOVE THIS TO THE RIGHT PLACE, CURRENTLY SHOWING UP IN ROLES TAB AS WELL-->
+									
 									<div id="updates" class="tabs">
 										<ul>
 											<li>
@@ -897,16 +975,58 @@
 																	<?php
 																		if($owner_ID==$sess_ID){
 																	?>
+
 																	<p2>
 																		<a-remove>
 																			<i data-id="<?php echo $up_res['upID'];?>" data-id2="<?php echo $up_res['projID'];?>" class="fa fa-times del-up"></i>
 																		</a-remove>
 																	</p2>
-																	<p2 style="margin-right: 5px;" onclick="turnEditable('updateTitle1', 'updateDesc1');">
-																		<a-edit>
-																			<i onclick="MyWindow=window.open('timeline_update.php?edit=1&upID=<?php echo $up_res['upID'];?>&projID=<?php echo $p_res['projID'];?>','MyWindow',width=450,height=300)" class="fa fa-pencil edit-up"></i>
-																		</a-edit>
-																	</p2>
+																	<!-- Nirman Pencil Alignment issue -->
+																	<p2 style="margin-right: 0px;">
+																	<a-edit-black>
+																		<div class="bootstrap-iso">
+																		<i class="fa fa-pencil edit-role" data-toggle="modal" data-target="#modal-4"></i>
+																		  <div class="modal fade" id="modal-4">
+																		    <div class="modal-dialog modal-4g" >
+																		      <div class="modal-content" style="height: 550px;">
+																		         <div class="modal-body">
+																		          <iframe src="timeline_update.php?edit=1&upID=<?php echo $up_res['upID'];?>&projID=<?php echo $p_res['projID'];?>" style="width: 100%;" height="400" frameborder="0">
+																		          </iframe>
+																		         </div>
+																		         <div class="modal-footer">
+																		          <button class="btn-mainb cl" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
+																		          <button name="" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Edit Role</button>
+																		         </div>
+																		      </div>
+																		    </div>
+																		  </div>
+																		</div>
+																		<!--<i data-id="<?php echo $role_res['roleID'];?>" data-id2="<?php echo $role_res['projID'];?>" class="fa fa-pencil edit-role" onclick="MyWindow=window.open('role_update.php?edit=1&roleID=<?php echo $role_res['roleID'];?>&projID=<?php echo $p_res['projID'];?>','MyWindow',width=450,height=300)"></i>-->
+																	</a-edit-black>
+																</p2>
+																	<!--<p2  style ="margin-right: 5px;" onclick="turnEditable('updateTitle1', 'updateDesc1');">-->
+																		<!-- <a-edit-black>
+																			<div class="bootstrap-iso">
+																			
+																			<i class="fa fa-pencil edit-up" data-toggle="modal" data-target="#modal-4"></i>
+																			  <div class="modal fade" id="modal-4">
+																			    <div class="modal-dialog modal-4g" >
+																			      <div class="modal-content" style="height: 550px;">
+																			         <div class="modal-body">
+																			          <iframe src="timeline_update.php?edit=1&upID=<?php echo $up_res['upID'];?>&projID=<?php echo $p_res['projID'];?>" style="width: 100%;" height="400" frameborder="0">
+																			          </iframe>
+																			         </div>
+																			         <div class="modal-footer">
+																			          <button class="btn-mainb" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
+																			          <button name="Edit Update" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Edit Update</button>
+																			         </div>
+																			      </div>
+																			    </div>
+																			  </div>
+																			</div> -->
+																			<!--<i onclick="MyWindow=window.open('timeline_update.php?edit=1&upID=<?php echo $up_res['upID'];?>&projID=<?php echo $p_res['projID'];?>','MyWindow',width=450,height=300)" class="fa fa-pencil edit-up"></i>-->
+																		<!--</a-edit-black> -->
+																	<!--</p2>-->
 																	<!-- <p2 style="margin-right: 5px;" onclick="turnUneditable('updateTitle1', 'updateDesc1');">
 																		<a-edit>
 																			<i data-id="<?php echo $up_res['upID'];?>" data-id2="<?php echo $up_res['projID'];?>" class="fa fa-check check-up"></i>
@@ -1049,7 +1169,7 @@
 													          </iframe>
 													         </div>
 													         <div class="modal-footer">
-													          <button class="btn-mainb" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
+													          <button class="btn-mainb cl" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
 													          <button name="add_update" id="update_button" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Add Update</button>
 													         </div>
 													      </div>
@@ -1062,6 +1182,7 @@
 
 									</div>
 							</div>
+
 							<div class="support support-campaign" style="margin-top: 5.5px;">
 								<h3 class="support-campaign-title" style="margin-top: 35px; margin-bottom: 15px;">Share this project</h3>
 									<div id="updates" class="tabs">
@@ -1072,6 +1193,7 @@
 										
 									</div>
 								</div>
+
 						</div><!-- .sidebar -->
 					</div>
 				</div>
@@ -1162,6 +1284,7 @@
     	var usr_id="<?php echo $sess_ID?>";
 		var proj_id="<?php echo $id?>";
 		$(document).ready(function(){
+
 			$("#update_button").click(function(){
 				$("#if_update").contents().find("#update_add").submit();
 				$('.modal').modal('hide');
@@ -1180,6 +1303,24 @@
 				$("#if_join").contents().find("#proj_join").submit();
 				$(".modal").modal('hide');
 				
+			});
+
+			// $(".cl").click(function(){
+			// 	$("#if_role_e").contents().find("#role_edit")[0].reset();
+			// });
+
+			$("#update_role").click(function(){
+				$("#if_role_e").contents().find("#role_edit").submit();
+				$(".modal").modal('hide');
+				location.reload();
+			});
+
+			$(".edit-role").click(function(){
+				$(".modal-body").html("Loading...");
+				var button=$(this);
+				var roleID=button.attr('data-roleID');
+				var iFrame='<iframe id="if_role_e" src="role_update.php?edit=1&roleID='+roleID+'&projID='+proj_id+'" style="width: 100%;" height="400" frameborder="0"></iframe>';
+				$(".modal-body").html(iFrame);
 			});
 
 
