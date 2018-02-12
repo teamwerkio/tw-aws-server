@@ -4096,3 +4096,22 @@ form .create-account input[type="checkbox"]{
 	margin-right: 3px;
 }
 
+.accbutt {
+	float: left;
+	font-size: 18px;
+}
+.accbutt:hover {
+	float: left;
+	font-size: 19px;
+}
+
+.rejbutt {
+	float: right;
+	font-size: 18px;
+}
+
+.rejbutt:hover {
+	float: right;
+	font-size: 19px;
+}
+

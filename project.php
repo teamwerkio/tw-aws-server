@@ -57,6 +57,8 @@
     <!-- bootstrap wrappable css to avoid conflicts -->
   	<link rel="stylesheet" href="https://formden.com/static/assets/demos/bootstrap-iso/bootstrap-iso/bootstrap-iso.css">
   	<link rel="stylesheet" href="https://formden.com/static/assets/demos/bootstrap-iso/bootstrap-iso/bootstrap-iso.css">
+  	<!-- sweet alerts -->
+  	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script> -->
@@ -73,6 +75,15 @@
 					<nav class="main-menu">
 						<button class="c-hamburger c-hamburger--htx"><span></span></button>
 						<ul>
+							<!-- search  -->
+							<div class="search-icon">
+								<a href="#" class="ion-ios-search-strong"></a>
+								<div class="form-search"></div>
+								<form action="#" method="POST" id="searchForm">
+							  		<input type="text" value="" name="search" placeholder="Search..." />
+							    	<button type="submit" value=""><span class="ion-ios-search-strong"></span></button>
+							  	</form>
+							</div>
 							<li>
 								<a href="library.php">Library<i class="fa fa-caret-down" aria-hidden="true"></i></a>
 							</li>
@@ -90,15 +101,7 @@
 								</ul>
 							</li>
 						</ul>
-					</nav><!-- .main-menu -->
-					<!-- <div class="search-icon">
-						<a href="#" class="ion-ios-search-strong"></a>
-						<div class="form-search"></div>
-						<form action="#" method="POST" id="searchForm">
-					  		<input type="text" value="" name="search" placeholder="Search..." />
-					    	<button type="submit" value=""><span class="ion-ios-search-strong"></span></button>
-					  	</form>
-					</div> -->	
+					</nav><!-- .main-menu -->	
 
 					<div class="login login-button">
 						<a href="add_project.php" class="btn-primary">+ Project</a>
@@ -400,14 +403,15 @@
 						<div class="col-lg-8">
 							<div class="campaign-tabs">
 								<ul class="tabs-controls">
-									<li class="active" data-tab="campaign"><a href="#">Team</a></li>
+									<li class="active" data-tab="campaign" style="margin-right: 0px;"><a href="#">Team</a></li>
 									<!-- <li data-tab="backer"><a href="#">Backer List</a></li> -->
-									<li data-tab="story"><a href="#">Story</a></li>
-									<!-- <li data-tab="faq"><a href="#">Details</a></li> -->
+									<li data-tab="story" style="margin-left: 25px; margin-right: 0px;"><a href="#">Story</a></li>
+									<li data-tab="resources" style="margin-left: 25px;"><a href="#">Resources</a></li>
 									<?php
 										if($_SESSION['usr']==$p_res['usrID']){
 									?>
-									<li data-tab="settings"><a href="#">Settings</a></li>
+									<li data-tab="settings" style="float: right; margin-right: 0px; margin-left: 0px;"><a href="#">Settings</a></li>
+									<li data-tab="backer" style="float: right; margin-right: 25px;"><a href="#">Requests</a></li>
 									<?php
 										}
 									?>
@@ -658,6 +662,150 @@
 										<p>Looks like there aren't any frequently asked questions yet. Ask the project creator directly.</p>
 										<a href="#" class="btn-primary">Ask a question</a>
 									</div>
+
+									<div id="resources" class="tabs">
+										<h2>Resources</h2>
+										<p style="margin-top: 10px;">This feature is under construction. Coming soon.</p>
+										<!-- <a href="#" class="btn-primary">Ask a question</a> -->
+									</div>
+
+									<div id="backer" class="tabs">
+										<h2>Requests</h2>
+										<p style="margin-top: 10px;">Here you can see join requests for this project.</p>
+										
+										<h3 style="margin-bottom: 10px;">Position #1</h3>
+										<table id="xyz">
+											<tr>
+												<th>Name</th>
+												<th>140 Character Pitch</th>
+												<th>Contact</th>
+												<th>Action</th>
+											</tr>
+											<tr>
+												<td><a href="linktoprofile" style="text-decoration: underline; cursor: pointer;">Andrew McDonald</a></td>
+												<td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et ma</td>
+												<td>
+													<a href="mailto:someone@example.com?Subject=Teamwerk%20Project%20Invitation&body=Hey%20member%20name,%20thank%20you%20for%20your%20interest%20in%20project%20name.%20I%20would%20love%20to%20hear%20more%20about%20you,%20have%20you%20engaged%20in%20a%20project%20like%20this%20before?" style="font-size: 16px; text-align: center; cursor: pointer; color: #545BEE;">
+														<i class="fa fa-envelope"></i>
+													</a>
+												</td>
+												<td>
+													<a class="accbutt" style="color: #73b941; cursor: pointer;" onclick="
+													swal('Invitation Accpeted', '{member name} is now a part of your team', 'success');
+													">
+														<i class="fa fa-check"></i>
+													</a>
+													<a class="rejbutt" style="color: #b10000; cursor: pointer;" onclick="
+													swal('Invitation Declined', '{member name} will not be a part of your team', 'error');
+													">
+														<i class="fa fa-times"></i>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td><a href="linktoprofile" style="text-decoration: underline; cursor: pointer;">Old McDonald</a></td>
+												<td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et ma</td>
+												<td>
+													<a href="mailto:someone@example.com?Subject=Teamwerk%20Project%20Invitation&body=Hey%20member%20name,%20thank%20you%20for%20your%20interest%20in%20project%20name.%20I%20would%20love%20to%20hear%20more%20about%20you,%20have%20you%20engaged%20in%20a%20project%20like%20this%20before?" style="font-size: 16px; text-align: center; cursor: pointer; color: #545BEE;">
+														<i class="fa fa-envelope"></i>
+													</a>
+												</td>
+												<td>
+													<a class="accbutt" style="color: #73b941; cursor: pointer;" onclick="
+													swal('Invitation Accpeted', '{member name} is now a part of your team', 'success');
+													">
+														<i class="fa fa-check"></i>
+													</a>
+													<a class="rejbutt" style="color: #b10000; cursor: pointer;" onclick="
+													swal('Invitation Declined', '{member name} will not be a part of your team', 'error');
+													">
+														<i class="fa fa-times"></i>
+													</a>
+												</td>
+											</tr>										
+										</table>
+
+										<h3 style="margin-bottom: 10px; margin-top: 20px;">Position #2</h3>
+										<p>No requests for this position so far.</p>
+
+										<h3 style="margin-bottom: 10px; margin-top: 20px;">Position #3</h3>
+										<table id="xyz">
+											<tr>
+												<th>Name</th>
+												<th>140 Character Pitch</th>
+												<th>Contact</th>
+												<th>Action</th>
+											</tr>
+											<tr>
+												<td><a href="linktoprofile" style="text-decoration: underline; cursor: pointer;">Andrew McDonald</a></td>
+												<td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et ma</td>
+												<td>
+													<a href="mailto:someone@example.com?Subject=Teamwerk%20Project%20Invitation&body=Hey%20member%20name,%20thank%20you%20for%20your%20interest%20in%20project%20name.%20I%20would%20love%20to%20hear%20more%20about%20you,%20have%20you%20engaged%20in%20a%20project%20like%20this%20before?" style="font-size: 16px; text-align: center; cursor: pointer; color: #545BEE;">
+														<i class="fa fa-envelope"></i>
+													</a>
+												</td>
+												<td>
+													<a class="accbutt" style="color: #73b941; cursor: pointer;" onclick="
+													swal('Invitation Accpeted', '{member name} is now a part of your team', 'success');
+													">
+														<i class="fa fa-check"></i>
+													</a>
+													<a class="rejbutt" style="color: #b10000; cursor: pointer;" onclick="
+													swal('Invitation Declined', '{member name} will not be a part of your team', 'error');
+													">
+														<i class="fa fa-times"></i>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td><a href="linktoprofile" style="text-decoration: underline; cursor: pointer;">Old McDonald</a></td>
+												<td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et ma</td>
+												<td>
+													<a href="mailto:someone@example.com?Subject=Teamwerk%20Project%20Invitation&body=Hey%20member%20name,%20thank%20you%20for%20your%20interest%20in%20project%20name.%20I%20would%20love%20to%20hear%20more%20about%20you,%20have%20you%20engaged%20in%20a%20project%20like%20this%20before?" style="font-size: 16px; text-align: center; cursor: pointer; color: #545BEE;">
+														<i class="fa fa-envelope"></i>
+													</a>
+												</td>
+												<td>
+													<a class="accbutt" style="color: #73b941; cursor: pointer;" onclick="
+													swal('Invitation Accpeted', '{member name} is now a part of your team', 'success');
+													">
+														<i class="fa fa-check"></i>
+													</a>
+													<a class="rejbutt" style="color: #b10000; cursor: pointer;" onclick="
+													swal('Invitation Declined', '{member name} will not be a part of your team', 'error');
+													">
+														<i class="fa fa-times"></i>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td><a href="linktoprofile" style="text-decoration: underline; cursor: pointer;">Daddy McDonald</a></td>
+												<td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et ma</td>
+												<td>
+													<a href="mailto:someone@example.com?Subject=Teamwerk%20Project%20Invitation&body=Hey%20member%20name,%20thank%20you%20for%20your%20interest%20in%20project%20name.%20I%20would%20love%20to%20hear%20more%20about%20you,%20have%20you%20engaged%20in%20a%20project%20like%20this%20before?" style="font-size: 16px; text-align: center; cursor: pointer; color: #545BEE;">
+														<i class="fa fa-envelope"></i>
+													</a>
+												</td>
+												<td>
+													<a class="accbutt" style="color: #73b941; cursor: pointer;" onclick="
+													swal('Invitation Accpeted', '{member name} is now a part of your team', 'success');
+													">
+														<i class="fa fa-check"></i>
+													</a>
+													<a class="rejbutt" style="color: #b10000; cursor: pointer;" onclick="
+													swal('Invitation Declined', '{member name} will not be a part of your team', 'error');
+													">
+														<i class="fa fa-times"></i>
+													</a>
+												</td>
+											</tr>											
+										</table>
+										<button name="proj_set" class="btn-primary" type="submit" style="cursor: pointer; margin-top: 20px; background-color: #73b941; padding-left: 8px; padding-right: 8px;" onclick="
+										swal('Download Spreadsheet', 'This feature is under construction. Coming soon.', 'info');
+										">Download as spreadsheet
+									</button>
+									</div>
+
 									<div id="settings" class="tabs">
 										<h2 style="margin-bottom: 10px;">Settings</h2>
 										<p>Use the settings below to change items displayed on this project.</p>
@@ -1068,8 +1216,7 @@
 										<a class="fa fa-facebook-square" style="font-size: 35px; margin-left: 5px;" href=""></a>
 										<a class="fa fa-twitter-square" style="font-size: 35px; margin-left: 10px;" href=""></a>
 										<a class="fa fa-google-plus-square" style="font-size: 35px; margin-left: 10px;" href=""></a>
-										<a class="fa fa-clone" style="font-size: 30px; margin-left: 10px;" href=""></a>
-										
+										<a class="fa fa-clone" style="font-size: 30px; margin-left: 10px;" href=""></a>					
 									</div>
 								</div>
 						</div><!-- .sidebar -->
@@ -1138,7 +1285,7 @@
 			</div><!-- .footer-menu -->
 			<div class="footer-copyright">
 				<div class="container">
-					<p class="copyright">© Copyrights 2017 by Teamwerk. All Rights Reserved.</p>
+					<p class="copyright">© Copyrights 2018 by Teamwerk. All Rights Reserved.</p>
 					<a href="#" class="back-top">Back to top<span class="ion-android-arrow-up"></span></a>
 				</div>
 			</div>
