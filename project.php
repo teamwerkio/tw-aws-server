@@ -358,7 +358,7 @@
 										  <div class="modal fade" id="modal-33">
 										    <div class="modal-dialog modal-33g">
 										      <div class="modal-content" style="height: 700px; width: 500px;">
-										         <div class="modal-body">
+										         <div class="modal-body" id="modal_join">
 
 										          <iframe id="if_join" src="join_project.php?projID=<?php echo $id;?>" style="width: 100%; overflow: scroll;" height="550" frameborder="0">
 
@@ -462,13 +462,16 @@
 																</p2>
 																
 																<!-- Pencil Edit Icon-->
+
+
+
 																<p2 style="margin-right: 5px; float: right;">
 																	<a-edit-black>
 																		<div class="bootstrap-iso">
 																		<i class="fa fa-pencil edit-role" data-roleID="<?php echo $role_res['roleID'];?>" data-toggle="modal" data-target="#modal-3"></i>
 																		  <div class="modal fade" id="modal-3">
 																		    <div class="modal-dialog modal-3g" >
-																		      <div class="modal-content" style="height: 550px; width: 550px;">
+																		      <div class="modal-content" style="height: 550px;">
 																		         <div class="modal-body">
 																		          <!-- <iframe id="if_role_e" src="role_update.php?edit=1&roleID=<?php echo $role_res['roleID'];?>&projID=<?php echo $p_res['projID'];?>" style="width: 100%;" height="400" frameborder="0">
 																		          </iframe> -->
@@ -481,15 +484,8 @@
 																		    </div>
 																		  </div>
 																		</div>
-																		<!--<i data-id="<?php echo $role_res['roleID'];?>" data-id2="<?php echo $role_res['projID'];?>" class="fa fa-pencil edit-role" onclick="MyWindow=window.open('role_update.php?edit=1&roleID=<?php echo $role_res['roleID'];?>&projID=<?php echo $p_res['projID'];?>','MyWindow',width=450,height=300)"></i>-->
 																	</a-edit-black>
 																</p2>
-																<!-- <p2 style="margin-right: 5px; float: right;">
-																	<a-edit-black>
-																		<i data-id="<?php echo $role_res['roleID'];?>" data-id2="<?php echo $role_res['projID'];?>" class="fa fa-check check-role"></i>
-																		</script>
-																	</a-edit-black>
-																</p2> -->
 																<?php
 																	}
 																?>
@@ -521,111 +517,6 @@
 										}
 										?>
 										<p id="no-roles"></p>
-										<!-- <div class="plan" style="margin-bottom: 15px;">
-											<a href="javascript:void(0)">
-												<h4>Backend Developer
-													<?php
-														if($sess_ID==$owner_ID){
-
-
-													?>
-													<p2 style="float: right;">
-														<a-remove>
-															<i class="fa fa-times"></i>
-														</a-remove>
-													</p2>
-													<p2 style="margin-right: 5px; float: right;">
-														<a-edit-black>
-															<i class="fa fa-pencil"></i>
-														</a-edit-black>
-													</p2>
-													<p2 style="margin-right: 5px; float: right;">
-														<a-edit-black>
-															<i class="fa fa-check"></i>
-														</a-edit-black>
-													</p2>
-													<?php
-														}
-													?>
-												</h4>
-												<div class="plan-desc"><p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master builder of human happiness.</p></div>
-												<!-- <div class="plan-author">End    : 15 November 2018</div> -->
-												<!-- <div class="backer">
-													TTH 7:00PM to 8:00PM <i>(weekly)</i><br>
-													Hampshire College, ASH 221<br>
-												</div>
-											</a>
-										</div>
-
-										<div class="plan" style="margin-bottom: 15px;">
-											<a href="javascript:void(0)">
-												<h4>Content Writer
-													<?php
-														if($sess_ID==$owner_ID){
-
-
-													?>
-													<p2 style="float: right;">
-														<a-remove>
-															<i class="fa fa-times"></i>
-														</a-remove>
-													</p2>
-													<p2 style="margin-right: 5px; float: right;">
-														<a-edit-black>
-															<i class="fa fa-pencil"></i>
-														</a-edit-black>
-													</p2>
-													<p2 style="margin-right: 5px; float: right;">
-														<a-edit-black>
-															<i class="fa fa-check"></i>
-														</a-edit-black>
-													</p2>
-													<?php
-														}
-													?>
-												</h4>
-												<div class="plan-desc"><p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master builder of human happiness.</p></div>
-												<div class="backer">
-													TTH 7:00PM to 7:30PM <i>(weekly)</i><br>
-													Hampshire College, ASH 221<br>
-												</div>
-											</a>
-										</div>
-
-										<div class="plan" style="margin-bottom: 15px;">
-											<a href="javascript:void(0)">
-												<h4>Statistical Analyzer
-													<?php
-														if($sess_ID==$owner_ID){
-
-
-													?>
-													<p2 style="float: right;">
-														<a-remove>
-															<i class="fa fa-times"></i>
-														</a-remove>
-													</p2>
-													<p2 style="margin-right: 5px; float: right;">
-														<a-edit-black>
-															<i class="fa fa-pencil"></i>
-														</a-edit-black>
-													</p2>
-													<p2 style="margin-right: 5px; float: right;">
-														<a-edit-black>
-															<i class="fa fa-check"></i>
-														</a-edit-black>
-													</p2>
-													<?php
-														}
-													?>													
-												</h4>
-												<div class="plan-desc"><p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master builder of human happiness.</p></div>
-												<div class="backer">
-													TTH 5:00PM to 6:00PM <i>(bi-weekly)</i><br>
-													Hampshire College, FPH 108<br>
-												</div>
-											</a>
-										</div> --> 
 										<?php
 											if($owner_ID==$sess_ID){
 												?>
@@ -634,7 +525,7 @@
 												  <div class="modal fade" id="modal-2">
 												    <div class="modal-dialog modal-lg">
 												      <div class="modal-content" style="height: 600px;">
-												         <div class="modal-body">
+												         <div class="modal-body" id="modal_role_add">
 												          <iframe id="if_role" src="add_role.php?projID=<?php echo $id;?>" style="width: 100%; overflow: scroll;" height="400" frameborder="0">
 												          </iframe>
 												         </div>
@@ -696,9 +587,81 @@
 
 									<div id="backer" class="tabs">
 										<h2>Requests</h2>
-										<p style="margin-top: 10px;">Here you can see join requests for this project.</p>
 										
-										<h3 style="margin-bottom: 10px;">Position #1</h3>
+										<?php
+											$pos_sql="SELECT * FROM team_roles WHERE projID=".$_GET['projID'];
+											$pos_qry=mysqli_query($dbconnect,$pos_sql);
+											if(mysqli_num_rows($pos_qry)==0){
+												echo "<p>You have not added any available positions yet</p>";
+											}
+											else{
+												?>
+												<p style="margin-top: 10px;">Here you can see join requests for this project.</p>
+												<?php
+												$pos_res=mysqli_fetch_assoc($pos_qry);
+
+												do{
+													$req_sql="SELECT * FROM join_req WHERE projID='".$_GET['projID']."' AND roleID=".$pos_res['roleID'];
+													$req_qry=mysqli_query($dbconnect, $req_sql);
+													?>
+														<h3 style="margin-bottom: 10px; margin-top: 20px;"><?php echo $pos_res['title'];?></h3>
+													<?php
+													if(mysqli_num_rows($req_qry)==0){
+														echo "<p>No requests for this position so far.</p>";
+													}	
+													else{
+														$req_res=mysqli_fetch_assoc($req_qry);
+														?>
+														<table id="xyz">
+																	<tr>
+																		<th>Name</th>
+																		<th>140 Character Pitch</th>
+																		<th>Contact</th>
+																		<th>Action</th>
+																	</tr>
+														<?php
+														do{
+															$fn=returnCat('users', 'firstname', $req_res['usrID'], $dbconnect, 'usrID');
+															$ln=returnCat('users', 'lastname', $req_res['usrID'], $dbconnect, 'usrID');
+															$proj
+
+															?>
+																
+																	<tr>
+																		<td><a href="profile.php?other_usr=<?php echo $req_res['usrID'];?>" style="text-decoration: underline; cursor: pointer;"><?php echo $fn;?> <?php echo $ln;?></a></td>
+																		<td><?php echo $req_res['reason'];?></td>
+																		<td>
+																			<a href="<?php echo "mailto:".$req_res['email_pref']."?Subject=Teamwerk%20Project%20Invitation&body=Hey%20".$fn."%20".$ln.",%20thank%20you%20for%20your%20interest%20in%20".$p_res['projName'].".%20I%20would%20love%20to%20hear%20more%20about%20you,%20have%20you%20engaged%20in%20a%20project%20like%20this%20before?"?>" style="font-size: 16px; text-align: center; cursor: pointer; color: #545BEE;">
+																				<i class="fa fa-envelope"></i>
+																			</a>
+																		</td>
+																		<td>
+																			<a class="accbutt" style="color: #73b941; cursor: pointer;" onclick="
+																			swal('Invitation Accpeted', '<?php echo $fn." ".$ln;?> is now a part of your team', 'success');
+																			">
+																				<i class="fa fa-check"></i>
+																			</a>
+																			<a class="rejbutt" style="color: #b10000; cursor: pointer;" onclick="
+																			swal('Invitation Declined', '<?php echo $fn." ".$ln;?> will not be a part of your team', 'error');
+																			">
+																				<i class="fa fa-times"></i>
+																			</a>
+																		</td>
+																	</tr>										
+																
+
+															<?php
+														}while($req_res=mysqli_fetch_assoc($req_qry));
+														?>
+														</table>
+														<?php
+													}
+
+												}while($pos_res=mysqli_fetch_assoc($pos_qry));
+											}
+
+										?>
+<!-- 										<h3 style="margin-bottom: 10px;">Position #1</h3>
 										<table id="xyz">
 											<tr>
 												<th>Name</th>
@@ -824,12 +787,13 @@
 													</a>
 												</td>
 											</tr>											
-										</table>
+										</table> -->
 										<button name="proj_set" class="btn-primary" type="submit" style="cursor: pointer; margin-top: 20px; background-color: #73b941; padding-left: 8px; padding-right: 8px;" onclick="
 										swal('Download Spreadsheet', 'This feature is under construction. Coming soon.', 'info');
 										">Download as spreadsheet
 									</button>
 									</div>
+
 
 									<div id="settings" class="tabs">
 										<h2 style="margin-bottom: 10px; color:">Team Settings</h2>
@@ -1270,55 +1234,29 @@
 																		</a-remove>
 																	</p2>
 																	<!-- Nirman Pencil Alignment issue -->
-																	<p2 style="margin-right: 10px;">
-																	<a-edit-black>
-																		<i class="fa fa-pencil edit-role" data-toggle="modal" data-target="#modal-4"></i>
-																		  <div class="modal fade" id="modal-4">
-																		    <div class="modal-dialog modal-4g" >
-																		      <div class="modal-content" style="height: 550px; width: 550px;">
-																		         <div class="modal-body">
-																		          <iframe src="timeline_update.php?edit=1&upID=<?php echo $up_res['upID'];?>&projID=<?php echo $p_res['projID'];?>" style="width: 100%;" height="400" frameborder="0">
-																		          </iframe>
-																		         </div>
-																		         <div class="modal-footer">
-																		          <button class="btn-mainb cl" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
-																		          <button name="" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Edit Update</button>
-																		         </div>
-																		      </div>
-																		    </div>
-																		  </div>
-																		</div>
-																		<!--<i data-id="<?php echo $role_res['roleID'];?>" data-id2="<?php echo $role_res['projID'];?>" class="fa fa-pencil edit-role" onclick="MyWindow=window.open('role_update.php?edit=1&roleID=<?php echo $role_res['roleID'];?>&projID=<?php echo $p_res['projID'];?>','MyWindow',width=450,height=300)"></i>-->
-																	</a-edit-black>
-																</p2>
-																	<!--<p2  style ="margin-right: 5px;" onclick="turnEditable('updateTitle1', 'updateDesc1');">-->
-																		<!-- <a-edit-black>
+																	<p2 style="margin-right: 5px; float: right;">
+																		<a-edit-black>
 																			<div class="bootstrap-iso">
-																			
-																			<i class="fa fa-pencil edit-up" data-toggle="modal" data-target="#modal-4"></i>
+																			<i class="fa fa-pencil edit-upForm" data-upID="<?php echo $up_res['upID'];?>" data-toggle="modal" data-target="#modal-4"></i>
 																			  <div class="modal fade" id="modal-4">
 																			    <div class="modal-dialog modal-4g" >
 																			      <div class="modal-content" style="height: 550px;">
 																			         <div class="modal-body">
-																			          <iframe src="timeline_update.php?edit=1&upID=<?php echo $up_res['upID'];?>&projID=<?php echo $p_res['projID'];?>" style="width: 100%;" height="400" frameborder="0">
-																			          </iframe>
+																			          <!-- <iframe id="if_role_e" src="role_update.php?edit=1&roleID=<?php echo $role_res['roleID'];?>&projID=<?php echo $p_res['projID'];?>" style="width: 100%;" height="400" frameborder="0">
+																			          </iframe> -->
 																			         </div>
 																			         <div class="modal-footer">
-																			          <button class="btn-mainb" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
-																			          <button name="Edit Update" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Edit Update</button>
+																			          <button class="btn-mainb cl" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
+																			          <button id="edit_update" name="" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Edit Update</button>
 																			         </div>
 																			      </div>
 																			    </div>
 																			  </div>
-																			</div> -->
-																			<!--<i onclick="MyWindow=window.open('timeline_update.php?edit=1&upID=<?php echo $up_res['upID'];?>&projID=<?php echo $p_res['projID'];?>','MyWindow',width=450,height=300)" class="fa fa-pencil edit-up"></i>-->
-																		<!--</a-edit-black> -->
-																	<!--</p2>-->
-																	<!-- <p2 style="margin-right: 5px;" onclick="turnUneditable('updateTitle1', 'updateDesc1');">
-																		<a-edit>
-																			<i data-id="<?php echo $up_res['upID'];?>" data-id2="<?php echo $up_res['projID'];?>" class="fa fa-check check-up"></i>
-																		</a-edit>
-																	</p2> -->
+																			</div>
+																		</a-edit-black>
+																	</p2>
+
+																	
 																	<?php
 																		}
 																	?>
@@ -1333,114 +1271,6 @@
 												}
 
 											?>
-											<!-- <li>
-												<p class="date"> 11-05-2018
-													<?php
-														if($owner_ID==$sess_ID){
-													?>
-													<p2>
-														<a-remove>
-															<i class="fa fa-times"></i>
-														</a-remove>
-													</p2>
-													<p2 style="margin-right: 5px;" onclick="turnEditable('updateTitle1', 'updateDesc1');">
-														<a-edit>
-															<i class="fa fa-pencil"></i>
-														</a-edit>
-													</p2>
-													<p2 style="margin-right: 5px;" onclick="turnUneditable('updateTitle1', 'updateDesc1');">
-														<a-edit>
-															<i class="fa fa-check"></i>
-														</a-edit>
-													</p2>
-													<?php
-														}
-													?>
-												</p>
-												<h3 id="updateTitle1">100 students joined our group!</h3>
-												<div class="desc" id="updateDesc1"><p>Sed cursus hendrerit odio, at aliquet leo hendrerit a. Nulla ultricies sagittis dolor, quis maximus magna consectetur eu.</p></div>
-											</li>
-											<li>
-												<p class="date"> 28-04-2018
-													<?php
-														if($owner_ID==$sess_ID){
-													?>
-													<p2>
-														<a-remove>
-															<i class="fa fa-times"></i>
-														</a-remove>
-													</p2>
-													<p2 style="margin-right: 5px;" onclick="turnEditable('updateTitle1', 'updateDesc1');">
-														<a-edit>
-															<i class="fa fa-pencil"></i>
-														</a-edit>
-													</p2>
-													<p2 style="margin-right: 5px;" onclick="turnUneditable('updateTitle1', 'updateDesc1');">
-														<a-edit>
-															<i class="fa fa-check"></i>
-														</a-edit>
-													</p2>
-													<?php
-														}
-													?>
-												</p>
-												<h3 id="updateTitle2">Created a student group</h3>
-												<div class="desc" id="updateDesc2"><p>Sed cursus hendrerit odio, at aliquet leo hendrerit a. Nulla ultricies sagittis dolor, quis maximus magna consectetur eu.</p></div>
-											</li>
-											<li>
-												<p class="date"> 30-03-2018
-													<?php
-														if($owner_ID==$sess_ID){
-													?>
-													<p2>
-														<a-remove>
-															<i class="fa fa-times"></i>
-														</a-remove>
-													</p2>
-													<p2 style="margin-right: 5px;" onclick="turnEditable('updateTitle1', 'updateDesc1');">
-														<a-edit>
-															<i class="fa fa-pencil"></i>
-														</a-edit>
-													</p2>
-													<p2 style="margin-right: 5px;" onclick="turnUneditable('updateTitle1', 'updateDesc1');">
-														<a-edit>
-															<i class="fa fa-check"></i>
-														</a-edit>
-													</p2>
-													<?php
-														}
-													?>
-												</p>
-												<h3 id="updateTitle3">We found some traction</h3>
-												<div class="desc" id="updateDesc3"><p>Sed cursus hendrerit odio, at aliquet leo hendrerit a. Nulla ultricies sagittis dolor, quis maximus magna consectetur eu.</p></div>
-											</li>
-											<li>
-												<p class="date"> 12-02-2018
-													<?php
-														if($owner_ID==$sess_ID){
-													?>
-													<p2>
-														<a-remove>
-															<i class="fa fa-times"></i>
-														</a-remove>
-													</p2>
-													<p2 style="margin-right: 5px;" onclick="turnEditable('updateTitle1', 'updateDesc1');">
-														<a-edit>
-															<i class="fa fa-pencil"></i>
-														</a-edit>
-													</p2>
-													<p2 style="margin-right: 5px;" onclick="turnUneditable('updateTitle1', 'updateDesc1');">
-														<a-edit>
-															<i class="fa fa-check"></i>
-														</a-edit>
-													</p2>
-													<?php
-														}
-													?>
-												</p>
-												<h3 id="updateTitle4">We started the project</h3>
-												<div class="desc" id="updateDesc4"><p>Sed cursus hendrerit odio, at aliquet leo hendrerit a. Nulla ultricies sagittis dolor, quis maximus magna consectetur eu.</p></div>
-											</li> -->
 										</ul>
 										<!-- modal for hunter -->
 										<?php
@@ -1451,7 +1281,7 @@
 													  <div class="modal fade" id="modal-1">
 													    <div class="modal-dialog modal-lg" >
 													      <div class="modal-content" style="height: 550px;">
-													         <div class="modal-body">
+													         <div class="modal-body" id="modal_update_add">
 													          <iframe id="if_update" src="add_update.php?projID=<?php echo $id?>" style="width: 100%;" height="400" frameborder="0">
 													          </iframe>
 													         </div>
@@ -1590,16 +1420,12 @@
 				
 			});
 
-			// $(".cl").click(function(){
-			// 	$("#if_role_e").contents().find("#role_edit")[0].reset();
-			// });
 
 			$("#update_role").click(function(){
 				$("#if_role_e").contents().find("#role_edit").submit();
 				$(".modal").modal('hide');
 				location.reload();
 			});
-
 			$(".edit-role").click(function(){
 				$(".modal-body").html("Loading...");
 				var button=$(this);
@@ -1607,6 +1433,25 @@
 				var iFrame='<iframe id="if_role_e" src="role_update.php?edit=1&roleID='+roleID+'&projID='+proj_id+'" style="width: 100%;" height="400" frameborder="0"></iframe>';
 				$(".modal-body").html(iFrame);
 			});
+
+
+			$("#edit_update").click(function(){
+				console.log("f");
+				$("#if_up_e").contents().find("#update_edited").submit();
+				console.log("edit_update");
+				$(".modal").modal('hide');
+				location.reload();
+			});
+			$(".edit-upForm").click(function(){
+				$(".modal-body").html("Loading...");
+				var button=$(this);
+				var upID=button.attr('data-upID');
+				var iFrame='<iframe id="if_up_e" src="timeline_update.php?edit=1&upID='+upID+'&projID='+proj_id+'" style="width: 100%;" height="400" frameborder="0"></iframe>';
+				$(".modal-body").html(iFrame);
+			});
+
+
+
 			$('.fa-clone').click(function(){
 				var url=window.location.href;
 				url=url.substr(0, url.lastIndexOf("/") + 1);
