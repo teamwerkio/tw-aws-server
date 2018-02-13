@@ -24,7 +24,7 @@
 			<div class="content-header">
 				<div class="container">
 					<div class="site-brand">
-						<a href="landing.php"><img src="../images/assets/logo.png" style="width: 205px; height: 40px;" alt=""></a>
+						<a href="index.php"><img src="../images/assets/logo.png" style="width: 205px; height: 40px;" alt=""></a>
 					</div><!-- .site-brand -->
 					<div class="right-header">					
 						<nav class="main-menu">
@@ -56,7 +56,7 @@
 			<div class="sideshow">
 				<div class="container">
 					<div class="sideshow-content">
-						<h1 class="wow fadeInUp" data-wow-delay=".1s">Share your project idea. Build a team, find a team.</h1>
+						<h1 class="wow fadeInUp" data-wow-delay=".1s">Share your project idea. Build a team, join a team.</h1>
 						<div class="sideshow-description wow fadeInUp" data-wow-delay=".1s">Find student collaborators, makers and co-founders from your college, who can help you build your next big project.</div>
 						<div data-wow-delay="0.3s">
 							<!-- <a href="#" class="btn-secondary">See Campaign</a> -->
@@ -74,7 +74,7 @@
 							<div class="item-work wow fadeInUp" data-wow-delay=".1s">
 								<div class="item-icon"><span>01</span><i class="fa fa-rocket" aria-hidden="true"></i></div>
 								<div class="item-content">
-									<h3 class="item-title">Launch a project</h3>
+									<h3 class="item-title">Build a team</h3>
 									<div class="item-desc" style="font-size: 90%"><p>Share your project idea, list your project needs (e.g. designers, programmers, actors, etc.) and find other students who can help!</p></div>
 								</div>
 							</div>
@@ -83,7 +83,7 @@
 							<div class="item-work wow fadeInUp" data-wow-delay=".1s">
 								<div class="item-icon"><span>02</span><i class="fa fa-search" aria-hidden="true"></i></div>
 								<div class="item-content">
-									<h3 class="item-title">Find a project</h3>
+									<h3 class="item-title">Join a team</h3>
 									<div class="item-desc" style="font-size: 90%;"><p>Find and join new projects from your and nearby colleges. Get experience working with other students and build a solid resume.</p></div>
 								</div>
 							</div>
@@ -329,10 +329,9 @@
 							<div class="footer-menu-item">
 								<h3>Company</h3>
 								<ul>
-									<li><a href="about_us.html">About</a></li>
-									<li><a href="">Press</a></li>
-									<li><a href="#">Team</a></li>
-									<li><a href="#">Contact</a></li>
+									<li><a href="about.html">About</a></li>
+									<li><a href="press.html">Press</a></li>
+									<li><a href="contact.html">Contact</a></li>
 								</ul>
 							</div>
 						</div>
@@ -340,10 +339,10 @@
 							<div class="footer-menu-item">
 								<h3>Community</h3>
 								<ul>
-									<li><a href="#">Support</a></li>
-									<li><a href="#">Guidelines</a></li>
-									<li><a href="#">Terms of Use</a></li>
-									<li><a href="#">Privacy Policy</a></li>
+									<li><a href="support.html">Support</a></li>
+									<li><a href="guidelines.html">Guidelines</a></li>
+									<li><a href="termsofuse.html">Terms of Use</a></li>
+									<li><a href="privacypolicy.html">Privacy Policy</a></li>
 								</ul>
 							</div>
 						</div>
@@ -367,13 +366,13 @@
 							  		<input type="text" value="" name="s" placeholder="Enter your email..." />
 							    	<button type="submit" value=""><span class="ion-android-drafts"></span></button>
 							  	</form>
-							  	<div class="follow">
+							  	<!-- <div class="follow">
 							  		<h3>Join us on</h3>
 							  		<ul>
 							  			<li class="facebook"><a target="_Blank" href="http://www.facebook.com"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
 							  			<li class="twitter"><a target="_Blank" href="http://www.twitter.com"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
 							  		</ul>
-							  	</div>
+							  	</div> -->
 							</div>
 						</div>
 					</div>

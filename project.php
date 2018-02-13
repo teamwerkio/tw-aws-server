@@ -93,10 +93,9 @@
 							<li>
 								<a href="#"><?php echo $usr_res['firstname']; ?><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 								<ul class="sub-menu">
-									<li><a href="dashboard.php">Dashboard</a></li>
 									<li><a href="profile.php">Profile</a></li>
-									<li><a href="ongoing_projects.php">Ongoing Projects</a></li>
-									<li><a href="past_projects.php">Past Projects</a></li>
+									<li><a href="my_projects.php">My Projects</a></li>
+									<li><a href="profile_settings.php">Profile Settings</a></li>
 									<li><a href="usr.php?action=logout">Log Out</a></li>
 								</ul>
 							</li>
@@ -129,7 +128,7 @@
 						<div class="campaign-item clearfix">
 							<div class="campaign-image">
 								<div id="owl-campaign" class="campaign-slider">
-									<div class="item"><img src="<?php echo getimgURL($p_res['big_ban'], "banner_big"); ?>" alt=""></div>
+									<div class="item"><img style="width: 570px; height: 375px; object-fit: cover;" src="<?php echo getimgURL($p_res['big_ban'], "banner_big"); ?>" alt=""></div>
 								</div>
 							</div>
 							<div class="campaign-box">
@@ -358,10 +357,10 @@
 										  <div class="modal fade" id="modal-33">
 										    <div class="modal-dialog modal-33g">
 										      <div class="modal-content" style="height: 700px; width: 500px;">
+
 										         <div class="modal-body" id="modal_join">
 
 										          <iframe id="if_join" src="join_project.php?projID=<?php echo $id;?>" style="width: 100%; overflow: scroll;" height="550" frameborder="0">
-
 										          </iframe>
 										         </div>
 										         <div class="modal-footer">
@@ -471,7 +470,7 @@
 																		<i class="fa fa-pencil edit-role" data-roleID="<?php echo $role_res['roleID'];?>" data-toggle="modal" data-target="#modal-3"></i>
 																		  <div class="modal fade" id="modal-3">
 																		    <div class="modal-dialog modal-3g" >
-																		      <div class="modal-content" style="height: 550px;">
+																		      <div class="modal-content" style="height: 550px; width: 550px;">
 																		         <div class="modal-body">
 																		          <!-- <iframe id="if_role_e" src="role_update.php?edit=1&roleID=<?php echo $role_res['roleID'];?>&projID=<?php echo $p_res['projID'];?>" style="width: 100%;" height="400" frameborder="0">
 																		          </iframe> -->
@@ -662,6 +661,7 @@
 
 										?>
 <!-- 										<h3 style="margin-bottom: 10px;">Position #1</h3>
+
 										<table id="xyz">
 											<tr>
 												<th>Name</th>
@@ -787,13 +787,13 @@
 													</a>
 												</td>
 											</tr>											
+
 										</table> -->
 										<button name="proj_set" class="btn-primary" type="submit" style="cursor: pointer; margin-top: 20px; background-color: #73b941; padding-left: 8px; padding-right: 8px;" onclick="
 										swal('Download Spreadsheet', 'This feature is under construction. Coming soon.', 'info');
 										">Download as spreadsheet
 									</button>
 									</div>
-
 
 									<div id="settings" class="tabs">
 										<h2 style="margin-bottom: 10px; color:">Team Settings</h2>
@@ -1234,8 +1234,31 @@
 																		</a-remove>
 																	</p2>
 																	<!-- Nirman Pencil Alignment issue -->
-																	<p2 style="margin-right: 5px; float: right;">
-																		<a-edit-black>
+
+																	<p2 style="margin-right: 10px;">
+																	<a-edit-black>
+																		<i class="fa fa-pencil edit-role" data-toggle="modal" data-target="#modal-4"></i>
+																		  <div class="modal fade" id="modal-4">
+																		    <div class="modal-dialog modal-4g" >
+																		      <div class="modal-content" style="height: 550px; width: 550px;">
+																		         <div class="modal-body">
+																		          <iframe src="timeline_update.php?edit=1&upID=<?php echo $up_res['upID'];?>&projID=<?php echo $p_res['projID'];?>" style="width: 100%;" height="400" frameborder="0">
+																		          </iframe>
+																		         </div>
+																		         <div class="modal-footer">
+																		          <button class="btn-mainb cl" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
+																		          <button name="" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Edit Update</button>
+																		         </div>
+																		      </div>
+																		    </div>
+																		  </div>
+																		</div>
+																		<!--<i data-id="<?php echo $role_res['roleID'];?>" data-id2="<?php echo $role_res['projID'];?>" class="fa fa-pencil edit-role" onclick="MyWindow=window.open('role_update.php?edit=1&roleID=<?php echo $role_res['roleID'];?>&projID=<?php echo $p_res['projID'];?>','MyWindow',width=450,height=300)"></i>-->
+																	</a-edit-black>
+																</p2>
+																	<!--<p2  style ="margin-right: 5px;" onclick="turnEditable('updateTitle1', 'updateDesc1');">-->
+																		<!-- <a-edit-black>
+
 																			<div class="bootstrap-iso">
 																			<i class="fa fa-pencil edit-upForm" data-upID="<?php echo $up_res['upID'];?>" data-toggle="modal" data-target="#modal-4"></i>
 																			  <div class="modal fade" id="modal-4">
@@ -1325,8 +1348,10 @@
 								<h3>Company</h3>
 								<ul>
 									<li><a href="about.html">About</a></li>
-									<li><a href="">Press</a></li>
-									<li><a href="#">Contact</a></li>
+
+									<li><a href="press.html">Press</a></li>
+									<li><a href="contact.html">Contact</a></li>
+
 								</ul>
 							</div>
 						</div>

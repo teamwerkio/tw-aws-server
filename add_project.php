@@ -23,7 +23,7 @@
 	<!-- Style CSS -->
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link rel="stylesheet" type="text/css" href="css/responsive.css" />
-    <link rel="icon" href="images/favicon.png" type="image/x-icon"/>
+    <link rel="icon" href="../images/favicon.png" type="image/x-icon"/>
 </head>
 
 <body class="campaign-detail">
@@ -175,7 +175,7 @@
 			  				</div>
 		  				</div>
 		  				<div class="field clearfix">
-		  					<label for="">Your Institution *</label>
+		  					<label for="">Institution *</label>
 							<span class="label-desc">Choose the institution where you are running this project from.</span>
 			  				<div class="field">
 			  					<div class="field-select">
