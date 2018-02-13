@@ -1,19 +1,36 @@
 <?php
 	include("dbconnect.php");
-	session_start();
 	include("img_url.php");
+	session_start();
+
 	if(!isset($_SESSION['usr'])){
 		header("Location:library.php");
 	}
 	else{
-		$myp_sql="SELECT * FROM users WHERE usrID='".$_SESSION['usr']."'";
-		$myp_qry=mysqli_query($dbconnect, $myp_sql);
-		$myp_res=mysqli_fetch_assoc($myp_qry);
+		if(!isset($_GET['other_usr'])){
+			$prof_sql = "SELECT * FROM users WHERE usrID='".$_SESSION['usr']."'";
+			$prof_qry = mysqli_query($dbconnect, $prof_sql);
+			$prof_res = mysqli_fetch_assoc($prof_qry);
+			$show=true;
+		}
+		else{
+			$prof_sql = "SELECT * FROM users WHERE usrID='".$_GET['other_usr']."'";
+			$prof_qry = mysqli_query($dbconnect, $prof_sql);
+			$prof_res = mysqli_fetch_assoc($prof_qry);
+			$show=false;
+			if($_GET['other_usr']==$_SESSION['usr']){
+				$show=true;
+			}
+			
+		}
+		
 
+		
 	}
+	$name_sql = "SELECT firstname FROM users WHERE usrID='".$_SESSION['usr']."'";
+	$name_qry = mysqli_query($dbconnect, $name_sql);
+	$name_res = mysqli_fetch_assoc($name_qry);
 ?>
-
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -25,6 +42,21 @@
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link rel="stylesheet" type="text/css" href="css/responsive.css" />
     <link rel="icon" href="../images/favicon.png" type="image/x-icon"/>
+
+    <style type="text/css">
+		/* Create two equal columns that floats next to each other */
+		.column {
+			float: left;
+			width: 50%;
+			padding: 10px;
+		}
+
+		.row:after {
+			content: "";
+			display: table;
+			clear: both;
+		}
+	</style>
 </head>
 
 <body>
@@ -38,6 +70,14 @@
 					<nav class="main-menu">
 						<button class="c-hamburger c-hamburger--htx"><span></span></button>
 						<ul>
+							<div class="search-icon">
+								<a href="#" class="ion-ios-search-strong"></a>
+								<div class="form-search"></div>
+								<form action="#" method="POST" id="searchForm">
+							  		<input type="text" value="" name="search" placeholder="Search..." />
+							    	<button type="submit" value=""><span class="ion-ios-search-strong"></span></button>
+							  	</form>
+							</div>	
 							<li>
 								<a href="library.php">Library<i class="fa fa-caret-down" aria-hidden="true"></i></a>
 							</li>
@@ -45,25 +85,16 @@
 								<a href="my_projects.php">My Projects<i class="fa fa-caret-down" aria-hidden="true"></i></a>
 							</li>
 							<li>
-								<a href="#"><?php echo $myp_res['firstname']; ?><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+								<a href="profile.php"><?php echo $name_res['firstname']; ?><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 								<ul class="sub-menu">
-									<li><a href="dashboard.php">Dashboard</a></li>
 									<li><a href="profile.php">Profile</a></li>
-									<li><a href="ongoing_projects.php">Ongoing Projects</a></li>
-									<li><a href="past_projects.php">Past Projects</a></li>
+									<li><a href="my_projects.php">My Projects</a></li>
+									<li><a href="profile_settings.php">Profile Settings</a></li>
 									<li><a href="usr.php?action=logout">Log Out</a></li>
 								</ul>
 							</li>
 						</ul>
 					</nav><!-- .main-menu -->
-<!-- 					<div class="search-icon">
-						<a href="#" class="ion-ios-search-strong"></a>
-						<div class="form-search"></div>
-						<form action="#" method="POST" id="searchForm">
-					  		<input type="text" value="" name="search" placeholder="Search..." />
-					    	<button type="submit" value=""><span class="ion-ios-search-strong"></span></button>
-					  	</form>
-					</div>	 -->
 
 					<div class="login login-button">
 						<a href="add_project.php" class="btn-primary">+ Project</a>
@@ -73,75 +104,117 @@
 		</header><!-- .site-header -->
 
 		<main id="main" class="site-main">
-<!-- 			<div class="page-title background-page">
-				<div class="container">
-					<h1>My Campaigns</h1>
-					<div class="breadcrumbs">
-						<ul>
-							<li><a href="index.html">Home</a><span>/</span></li>
-							<li>My Campaigns</li>
-						</ul>
-					</div>
-				</div>
-			</div> -->
 			<div style="margin-top: 20px;"></div><!-- .page-title -->
 			<div class="account-wrapper">
 				<div class="container">
 					<div class="row">
+						<?php
+							if($show){
+						?>
 						<div class="col-lg-3">
 							<nav class="account-bar">
 								<ul>
-									<li><a href="dashboard.php">Dashboard</a></li>
+									<!-- <li><a href="dashboard.php">Dashboard</a></li> -->
 									<li><a href="profile.php">Profile</a></li>
-									<li><a href="ongoing_projects.php">Ongoing Projects</a></li>
-									<li><a href="past_projects.php">Past Projects</a></li>
+									<!-- <li><a href="ongoing_projects.php">Ongoing Projects</a></li>
+									<li><a href="past_projects.php">Past Projects</a></li> -->
 									<li class="active"><a href="my_projects.php">My Projects</a></li>
+									<li><a href="profile_settings.php">Profile Settings</a></li>
 								</ul>
 							</nav>
 						</div>
+						<?php
+							}
+						?>
 						<div class="col-lg-9">
-
-							<div class="account-content my-campaigns account-table">
+							<div class="account-content profile">
 								<h3 class="account-title">My Projects</h3>
 								<div class="account-main">
+									<div class="author clearfix">
+										<a class="author-avatar" href="#">
+											<?php echo '<img src="'.getimgURL($prof_res['profilepic'], 'profilepic').'"/>'; ?></a>
+										<div class="author-content">
+											<div class="author-title">
+												<h3 style="margin-bottom: 0px;"><a style="font-size: 25px; margin-top: 30px; margin-bottom: 0px;"><?php echo $prof_res['firstname'];?> <?php echo $prof_res['lastname']; ?></a></h3>
+											</div>
 
+											<div class="author-info">
+												<p><i><a href="mailto:<?php echo $prof_res['email']; ?>"><?php echo $prof_res['email']; ?></a></i></p>
+												<p>Talk to me about <b><?php echo $prof_res['pitch']; ?></b></p>
+											</div>
+										</div>
+									</div>
 
-
-									<?php
-										$proj_sql="SELECT * FROM project WHERE usrID='".$_SESSION['usr']."'";
-										$proj_qry=mysqli_query($dbconnect, $proj_sql);
-										$proj_res=mysqli_fetch_assoc($proj_qry);
-
-										function returnCat($table, $col, $idx, $dbconnect){
-											$cat_sql="SELECT ".$col." FROM ".$table." WHERE catID='".$idx."'";
-											$cat_qry=mysqli_query($dbconnect, $cat_sql);
-											$cat_res=mysqli_fetch_assoc($cat_qry);
-											return $cat_res[$col];
-										}
-
-										do{
-											if(strcmp($proj_res['projName'], "")!==0){
-											
-										
-											?>
-
-												<div class="campaign-item">
-													<a class="campaign-image" href="project.php?projID=<?php echo $proj_res['projID']; ?>" style="height: 150px; width: 150px;">
-														<?php echo '<img src="'.getimgURL($proj_res['proj_icon'], "proj_icon").'" style="height: 150px; width: 150px;" />'; ?>
-													</a>
-													<div class="campaign-box">
-														<div class="campaign-category"><a href="#"><?php echo returnCat('proj_categories', 'catName', $proj_res['catID'], $dbconnect); ?></a></div>
-														<div class="campaign-title"><a href="project.php?projID=<?php echo $proj_res['projID']; ?>"><?php echo $proj_res['projName']; ?></a></div>
-														<div class="campaign-desc"><?php echo $proj_res['sm_desc']; ?></div>
-													</div>
-												</div>
-
-											<?php
-
-											}
-										} while($proj_res=mysqli_fetch_assoc($proj_qry));
-
-									?>
+									<!-- my projects -->
+									<div class="dashboard-latest" style="margin-bottom: 1px;">
+										<h3 style="margin-bottom: 20px;">Projects started by <?php echo $prof_res['firstname'];?></h3>
+										<div class="row" style="margin-left: 1px;">
+											<div class="coloumn">
+												<ul>
+													<li>
+														<a href="#"><img src="../images/placeholder/70x70.png" style="width: 70px; height: 70px;" alt=""></a>
+														<div class="dashboard-latest-box">
+															<div class="category"><a href="#">Film & Video</a></div>
+															<h4><a href="#">Space Odyssey - The Video Game</a></h4>
+														</div>
+													</li>
+													<li>
+														<a href="#"><img src="../images/placeholder/70x70.png" style="width: 70px; height: 70px;" alt=""></a>
+														<div class="dashboard-latest-box">
+															<div class="category"><a href="#">Box</a></div>
+															<h4><a href="#">Unbuonded: A Feature Documentary</a></h4>
+														</div>
+													</li>
+													<li>
+														<a href="#"><img src="../images/placeholder/70x70.png" style="width: 70px; height: 70px;" alt=""></a>
+														<div class="dashboard-latest-box">
+															<div class="category"><a href="#">Box</a></div>
+															<h4><a href="#">Unbuonded: A Feature Documentary</a></h4>
+														</div>
+													</li>
+													<li>
+														<a href="#"><img src="../images/placeholder/70x70.png" style="width: 70px; height: 70px;" alt=""></a>
+														<div class="dashboard-latest-box">
+															<div class="category"><a href="#">Box</a></div>
+															<h4><a href="#">Unbuonded: A Feature Documentary</a></h4>
+														</div>
+													</li>
+												</ul>
+											</div>
+											<div class="coloumn" style="margin-left: 20px;">
+												<ul>
+													<li>
+														<a href="#"><img src="../images/placeholder/70x70.png" style="width: 70px; height: 70px;" alt=""></a>
+														<div class="dashboard-latest-box">
+															<div class="category"><a href="#">Film & Video</a></div>
+															<h4><a href="#">Space Odyssey - The Video Game</a></h4>
+														</div>
+													</li>
+													<li>
+														<a href="#"><img src="../images/placeholder/70x70.png" style="width: 70px; height: 70px;" alt=""></a>
+														<div class="dashboard-latest-box">
+															<div class="category"><a href="#">Box</a></div>
+															<h4><a href="#">Unbuonded: A Feature Documentary</a></h4>
+														</div>
+													</li>
+													<li>
+														<a href="#"><img src="../images/placeholder/70x70.png" style="width: 70px; height: 70px;" alt=""></a>
+														<div class="dashboard-latest-box">
+															<div class="category"><a href="#">Box</a></div>
+															<h4><a href="#">Unbuonded: A Feature Documentary</a></h4>
+														</div>
+													</li>
+													<li>
+														<a href="#"><img src="../images/placeholder/70x70.png" style="width: 70px; height: 70px;" alt=""></a>
+														<div class="dashboard-latest-box">
+															<div class="category"><a href="#">Box</a></div>
+															<h4><a href="#">Unbuonded: A Feature Documentary</a></h4>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>

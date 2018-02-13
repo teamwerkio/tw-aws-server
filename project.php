@@ -93,10 +93,9 @@
 							<li>
 								<a href="#"><?php echo $usr_res['firstname']; ?><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 								<ul class="sub-menu">
-									<li><a href="dashboard.php">Dashboard</a></li>
 									<li><a href="profile.php">Profile</a></li>
-									<li><a href="ongoing_projects.php">Ongoing Projects</a></li>
-									<li><a href="past_projects.php">Past Projects</a></li>
+									<li><a href="my_projects.php">My Projects</a></li>
+									<li><a href="profile_settings.php">Profile Settings</a></li>
 									<li><a href="usr.php?action=logout">Log Out</a></li>
 								</ul>
 							</li>
@@ -129,7 +128,7 @@
 						<div class="campaign-item clearfix">
 							<div class="campaign-image">
 								<div id="owl-campaign" class="campaign-slider">
-									<div class="item"><img src="<?php echo getimgURL($p_res['big_ban'], "banner_big"); ?>" alt=""></div>
+									<div class="item"><img style="width: 570px; height: 375px; object-fit: cover;" src="<?php echo getimgURL($p_res['big_ban'], "banner_big"); ?>" alt=""></div>
 								</div>
 							</div>
 							<div class="campaign-box">
@@ -359,9 +358,7 @@
 										    <div class="modal-dialog modal-33g">
 										      <div class="modal-content" style="height: 700px; width: 500px;">
 										         <div class="modal-body">
-
 										          <iframe id="if_join" src="join_project.php?projID=<?php echo $id;?>" style="width: 100%; overflow: scroll;" height="550" frameborder="0">
-
 										          </iframe>
 										         </div>
 										         <div class="modal-footer">

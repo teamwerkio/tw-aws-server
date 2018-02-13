@@ -95,10 +95,9 @@
 										<li><a href="usr.php">Sign Up/Log In</a></li>
 										<?php
 									} ?>
-									<li><a href="dashboard.php">Dashboard</a></li>
 									<li><a href="profile.php">Profile</a></li>
-									<li><a href="ongoing_projects.php">Ongoing Projects</a></li>
-									<li><a href="past_projects.php">Past Projects</a></li>
+									<li><a href="my_projects.php">My Projects</a></li>
+									<li><a href="profile_settings.php">Profile Settings</a></li>
 									<?php if(isset($_SESSION['usr'])) {
 										?>
 										<li><a href="usr.php?action=logout">Logout</a></li>
