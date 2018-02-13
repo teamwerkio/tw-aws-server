@@ -1,8 +1,16 @@
 <?php
 	include("dbconnect.php");
+	include("img_url.php");
 	@session_start();
 	if(isset($_SESSION['usr'])){
 		header("Location:library.php");
+	}
+
+	function returnCat($table, $col, $idx, $dbconnect, $idtype){
+		$cat_sql="SELECT ".$col." FROM ".$table." WHERE ".$idtype."='".$idx."'";
+		$cat_qry=mysqli_query($dbconnect, $cat_sql);
+		$cat_res=mysqli_fetch_assoc($cat_qry);
+		return $cat_res[$col];
 	}
 ?>
 <!doctype html>
@@ -111,7 +119,165 @@
 					</div>
 					<div class="campaign-content grid">
 						<div class="row">
-							<div class="col-lg-4 col-md-6 col-sm-6 col-6 filterinteresting filterpopular filterlatest">
+
+							<?php
+								$feat_sql="SELECT * FROM project";
+								$feat_qry=mysqli_query($dbconnect, $feat_sql);
+								$feat_res=mysqli_fetch_assoc($feat_qry);
+								$feat_array=array();
+								do{
+									$curr_json=json_decode($feat_res['subs'], true);
+									$sub_size=count($curr_json["subs"]);
+									$curr_arr=array('id' => $feat_res['projID'], 'count'=>$sub_size);
+									if(empty($feat_array)){array_push($feat_array, $curr_arr);}
+									elseif ($feat_array[0]['count']<=$curr_arr['count']) {
+										array_unshift($feat_array, $curr_arr);
+									}
+									else{
+										array_push($feat_array, $curr_arr);
+									}
+
+								}while($feat_res=mysqli_fetch_assoc($feat_qry));
+
+								$feat_count=0;
+
+								foreach ($feat_array as $feat) {
+									$item_sql="SELECT * FROM project WHERE projID=".$feat['id'];
+									$item_qry=mysqli_query($dbconnect, $item_sql);
+									$item_res=mysqli_fetch_assoc($item_qry);
+									if($feat_count<6){
+										$feat_count+=1;
+
+
+									?>
+										<div class="col-lg-4 col-md-6 col-sm-6 col-6 filterinteresting filterpopular filterlatest">
+											<div class="campaign-item wow fadeInUp" data-wow-delay=".1s">
+												<a class="overlay" href="projectOffline.php?projID=<?php echo $feat['id'];?>&viewOff=true">
+													<img src="<?php echo getimgURL($item_res['small_ban'], "banner_small");?>" alt="">
+													<span class="ion-paper-airplane"></span>
+												</a>
+												<div class="campaign-box">
+													<a href="#" class="category"><?php echo returnCat('proj_categories', 'catName', $item_res['catID'], $dbconnect, 'catID');?></a>
+													<h3><a href="projectOffline.php?projID=<?php echo $feat['id'];?>&viewOff=true"><?php echo $item_res['projName'];?></a></h3>
+													<div class="campaign-description"><?php echo $item_res['sm_desc'];?></div>
+													<div class="campaign-author"><a class="author-icon" href="#"><img src="<?php echo getimgURL(returnCat('users', 'profilepic', $item_res['usrID'], $dbconnect, 'usrID'), "profilepic");?>" alt=""></a>by <a class="author-name" href="#"><?php echo returnCat('users', 'firstname', $item_res['usrID'], $dbconnect, 'usrID');?></a></div>
+													<div class="process">
+														<div class="raised"><span style="width: <?php echo $item_res['progress'];?>%;"></span></div>
+														<div class="process-info">
+
+															<div class="process-pledged"><span><?php
+																		$json=$item_res['subs'];
+																		$json=json_decode($json, true);
+																		echo count($json['subs']);?></span>interest</div>
+
+																	<?php
+																		$size_id=$item_res['tsizeID'];
+																		if($size_id==1){
+																			?>
+																			<!-- Small Team -->
+																			<div class="process-pledged"><span>
+																				<a data-tooltip="Small team">
+																				<i class="fa fa-user"></i>
+																				<i class="fa fa-user"></i></a>
+																			</span>team size</div>
+																			<?php
+																		}
+																		elseif ($size_id==2) {
+																			?>
+																			<!-- Medium Team -->
+																			<div class="process-pledged"><span>
+																				<a data-tooltip="Medium team">
+																				<i class="fa fa-user"></i>
+																				<i class="fa fa-user"></i>
+																				<i class="fa fa-user"></i></a>
+																			</span>team size</div>
+																			<?php
+																		}
+																		elseif ($size_id==3) {
+																			?>
+																			<!-- Large Team -->
+																			<div class="process-pledged"><span>
+																				<a data-tooltip="Large team">
+																				<i class="fa fa-user"></i>
+																				<i class="fa fa-user"></i>
+																				<i class="fa fa-user"></i>
+																				<i class="fa fa-user"></i></a>
+																			</span>team size</div>
+																			<?php
+																		}
+																		elseif ($size_id==4) {
+																			?>
+																			<!-- Extra Large Team -->
+																			<div class="process-pledged"><span>
+																				<a data-tooltip="Extra large team">
+																				<i class="fa fa-user"></i>
+																				<i class="fa fa-user"></i>
+																				<i class="fa fa-user"></i>
+																				<i class="fa fa-user-plus"></i></a>
+																			</span>team size</div>
+																			<?php
+																		}
+																	?>
+																	<?php
+																		$inv_id=$item_res['commID'];
+																		if($inv_id==1){
+																			?>
+																			<!-- < 10 hrs/week -->
+																			<div class="process-time"><span>
+																				<a data-tooltip="< 10 hrs/week (approx.)">
+																				<i class="fa fa-clock-o"></i></a>
+																			</span>involvement</div>
+																			<?php
+																		}
+																		elseif ($inv_id==2) {
+																			?>
+																			<!-- 11 to 20 hrs/week -->
+																			<div class="process-time"><span>
+																				<a data-tooltip="11 to 20 hrs/week (approx.)">
+																				<i class="fa fa-clock-o"></i>
+																				<i class="fa fa-clock-o"></i></a>
+																			</span>involvement</div>
+																			<?php
+																		}
+																		elseif ($inv_id==3) {
+																			?>
+																			<!-- 21 to 30 hrs/week -->
+																			<div class="process-time"><span>
+																				<a data-tooltip="21 to 30 hrs/week (approx.)">
+																				<i class="fa fa-clock-o"></i>
+																				<i class="fa fa-clock-o"></i>
+																				<i class="fa fa-clock-o"></i></a>
+																			</span>involvement</div>
+																			<?php
+																		}
+																		elseif ($inv_id==4) {
+																			?>
+																			<!-- > 31 hrs/week -->
+																			<div class="process-time"><span>
+																				<a data-tooltip="> 31 hrs/week (approx.)">
+																				<i class="fa fa-clock-o"></i>
+																				<i class="fa fa-clock-o"></i>
+																				<i class="fa fa-clock-o"></i>
+																				<i class="fa fa-clock-o"></i></a>
+																			</span>involvement</div>
+																			<?php
+																		}
+																	?>
+<!-- 															<div class="process-pledged"><span>$630</span>interest</div>
+															<div class="process-funded"><span>26%</span>teamsize</div>
+															<div class="process-time"><span>2</span>involvement</div> -->
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									<?php
+								}}
+
+
+
+							?>
+<!-- 							<div class="col-lg-4 col-md-6 col-sm-6 col-6 filterinteresting filterpopular filterlatest">
 								<div class="campaign-item wow fadeInUp" data-wow-delay=".1s">
 									<a class="overlay" href="campaign_detail.html">
 										<img src="../images/placeholder/370x240.png" alt="">
@@ -242,7 +408,7 @@
 										</div>
 									</div>
 								</div>
-							</div>
+							</div> -->
 						</div>
 					</div>
 					<div class="latest-button"><a href="login.php" class="btn-primary">View all projects</a></div>

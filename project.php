@@ -789,7 +789,7 @@
 											</tr>											
 
 										</table> -->
-										<button name="proj_set" class="btn-primary" type="submit" style="cursor: pointer; margin-top: 20px; background-color: #73b941; padding-left: 8px; padding-right: 8px;" onclick="
+										<button name="" class="btn-primary" type="submit" style="cursor: pointer; margin-top: 20px; background-color: #73b941; padding-left: 8px; padding-right: 8px;" onclick="
 										swal('Download Spreadsheet', 'This feature is under construction. Coming soon.', 'info');
 										">Download as spreadsheet
 									</button>
@@ -864,6 +864,15 @@
 													</div>
 								  				</div>
 											</div>
+											<?php
+												$team_json=json_decode($p_res['team'],true);
+												
+												$owner=$team_json["owner"];
+												$member=$team_json["member"];
+												$admin=$team_json["admin"];
+
+												$owner_email=returnCat('users', 'email', $owner["id"], $dbconnect, 'usrID');
+											?>
 
 											<h3 style="margin-bottom: 10px;">Team member settings</h3>
 											<p>Here is a list of your team members and their roles.</p>
@@ -877,13 +886,13 @@
 													</tr>
 													<tr>
 														<td>
-															<a href="linktoprofile" style="text-decoration: underline; cursor: pointer;">Andrew McDonald</a>
+															<a href="profile.php?other_usr=<?php echo $owner["id"];?>" style="text-decoration: underline; cursor: pointer;"><?php echo $owner_f." ".$owner_l?></a>
 														</td>
-														<td>Designer</td>
+														<td><?php echo $owner["pos"];?></td>
 														<td>
 															<div class="field">
 											  					<div class="field-select">
-																	<select name="role" id="">
+																	<select name="role_<?php echo $owner["id"];?>" id="">
 																		<option value="">Owner</option>
 																		<option value="1">Member (cannot edit settings)</option>
 																		<option value="2">Admin Member (can edit settings)</option>
@@ -892,55 +901,76 @@
 											  				</div>
 														</td>
 														<td>
-															<a href="mailto:someone@example.com" style="font-size: 16px; text-align: center; cursor: pointer; color: #545BEE;">
+															<a href="<?php echo "mailto:".$owner_email;?>" style="font-size: 16px; text-align: center; cursor: pointer; color: #545BEE;">
 																<i class="fa fa-envelope"></i>
 															</a>
 														</td>
 													</tr>
-													<tr>
-														<td>
-															<a href="linktoprofile" style="text-decoration: underline; cursor: pointer;">Old McDonald</a>
-														</td>
-														<td>Statistician</td>
-														<td>
-															<div class="field">
-											  					<div class="field-select">
-																	<select name="role" id="">
-																		<option value="">Owner</option>
-																		<option value="1">Member (cannot edit settings)</option>
-																		<option value="2">Admin Member (can edit settings)</option>
-																	</select>
-																</div>
-											  				</div>
-														</td>
-														<td>
-															<a href="mailto:someone@example.com" style="font-size: 16px; text-align: center; cursor: pointer; color: #545BEE;">
-																<i class="fa fa-envelope"></i>
-															</a>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<a href="linktoprofile" style="text-decoration: underline; cursor: pointer;">Daddy McDonald</a>
-														</td>
-														<td>Marketing Expert</td>
-														<td>
-															<div class="field">
-											  					<div class="field-select">
-																	<select name="role" id="">
-																		<option value="">Owner</option>
-																		<option value="1">Member (cannot edit settings)</option>
-																		<option value="2">Admin Member (can edit settings)</option>
-																	</select>
-																</div>
-											  				</div>
-														</td>
-														<td>
-															<a href="mailto:someone@example.com" style="font-size: 16px; text-align: center; cursor: pointer; color: #545BEE;">
-																<i class="fa fa-envelope"></i>
-															</a>
-														</td>
-													</tr>
+
+													<?php
+														foreach($admin as $ad){
+															$ad_sql="SELECT * FROM users WHERE usrID=".$ad["id"];
+															$ad_qry=mysqli_query($dbconnect,$ad_sql);
+															$ad_res=mysqli_fetch_assoc($ad_qry);
+															?>
+															<tr>
+																<td>
+																	<a href="profile.php?other_usr=<?php echo $ad["id"];?>" style="text-decoration: underline; cursor: pointer;"><?php echo $ad_res['firstname']." ".$ad_res['lastname'];?></a>
+																</td>
+																<td><?php $ad["pos"];?></td>
+																<td>
+																	<div class="field">
+													  					<div class="field-select">
+																			<select name="role_<?php echo $ad["id"];?>" id="">
+																				<option value="">Owner</option>
+																				<option value="1">Member (cannot edit settings)</option>
+																				<option value="2">Admin Member (can edit settings)</option>
+																			</select>
+																		</div>
+													  				</div>
+																</td>
+																<td>
+																	<a href="mailto:<?php echo $ad_res['email'];?>" style="font-size: 16px; text-align: center; cursor: pointer; color: #545BEE;">
+																		<i class="fa fa-envelope"></i>
+																	</a>
+																</td>
+															</tr>
+															<?php
+														}
+													?>
+
+													<?php
+														foreach($member as $mem){
+															$mem_sql="SELECT * FROM users WHERE usrID=".$mem["id"];
+															$mem_qry=mysqli_query($dbconnect,$mem_sql);
+															$mem_res=mysqli_fetch_assoc($mem_qry);
+															?>
+															<tr>
+																<td>
+																	<a href="profile.php?other_usr=<?php echo $mem;?>" style="text-decoration: underline; cursor: pointer;"><?php echo $mem_res['firstname']." ".$mem_res['lastname'];?></a>
+																</td>
+																<td><?php echo $mem["pos"];?></td>
+																<td>
+																	<div class="field">
+													  					<div class="field-select">
+																			<select name="role_<?php echo $mem["id"];?>" id="">
+																				<option value="">Owner</option>
+																				<option value="1">Member (cannot edit settings)</option>
+																				<option value="2">Admin Member (can edit settings)</option>
+																			</select>
+																		</div>
+													  				</div>
+																</td>
+																<td>
+																	<a href="mailto:<?php echo $mem_res['email'];?>" style="font-size: 16px; text-align: center; cursor: pointer; color: #545BEE;">
+																		<i class="fa fa-envelope"></i>
+																	</a>
+																</td>
+															</tr>
+															<?php
+														}
+													?>
+		
 												</table>
 											</div>
 
@@ -953,19 +983,19 @@
 
 							  				<label style="margin-bottom: 2px;">Name *</label><br>
 							  				<div class="field" style="margin-bottom: 0px;">
-							  					<input type="text" value="" name="projname" placeholder="The Oreous Pillow" />
+							  					<input type="text" value="<?php echo $p_res['projName'];?>" name="projname" placeholder="The Oreous Pillow" />
 							  				</div>
 							  				<label style="margin-bottom: 2px; margin-top: 20px;">Tagline *</label><br>
 							  				<div class="field" style="margin-bottom: 0px;">
-							  					<textarea style="width: 100%" name="projtagl" rows="2" placeholder="Enter upto 85 characters"></textarea>
+							  					<textarea style="width: 100%" name="projtagl" rows="2" placeholder="Enter upto 85 characters"><?php echo $p_res['tagline'];?></textarea>
 							  				</div>
 							  				<label style="margin-bottom: 2px; margin-top: 20px;">Short description *</label><br>
 							  				<div class="field" style="margin-bottom: 0px;">
-							  					<textarea style="width: 100%" name="proj_sh_desc" rows="2" placeholder="Enter upto 215 characters"></textarea>
+							  					<textarea style="width: 100%" name="proj_sh_desc" rows="2" placeholder="Enter upto 215 characters"><?php echo $p_res['sm_desc'];?></textarea>
 							  				</div>
 							  				<label style="margin-bottom: 2px; margin-top: 20px;">Long description *</label><br>
 							  				<div class="field" style="margin-bottom: 0px;">
-							  					<textarea style="width: 100%" name="proj_sh_desc" rows="2" placeholder="Enter upto 500 characters"></textarea>
+							  					<textarea style="width: 100%" name="proj_lg_desc" rows="2" placeholder="Enter upto 500 characters"><?php echo $p_res['lg_desc'];?></textarea>
 							  				</div>
 
 							  				<label style="margin-bottom: 2px; margin-top: 20px;">Big banner *</label><br>
@@ -1030,12 +1060,17 @@
 							  				<div class="field" style="margin-bottom: 0px;">
 							  					<div class="field-select">
 													<select name="college" id="">
-														<option value="">Select an Institution</option>
-														<option value="1">Amherst College</option>
-														<option value="2">Hampshire College</option>
-														<option value="3">Mount Holyoke College</option>
-														<option value="4">Smith College</option>
-														<option value="5">University of Massachusetts, Amherst</option>
+														<?php
+															$col_sql="SELECT * FROM colleges";
+															$col_qry=mysqli_query($dbconnect, $col_sql);
+															$col_res=mysqli_fetch_assoc($col_qry);
+
+															do{
+																?>
+																	<option value="<?php echo $col_res['colID'];?>"><?php echo $col_res['colName'];?></option>
+																<?php
+															}while($col_res=mysqli_fetch_assoc($col_qry));
+														?>
 													</select>
 												</div>
 							  				</div>
@@ -1043,22 +1078,31 @@
 							  				<div class="field" style="margin-bottom: 0px;">
 							  					<div class="field-select">
 													<select name="cat" id="">
-														<option value="">Select a Category</option>
-														<option value="1">Design &amp; Art</option>
-														<option value="2">Film &amp; Video</option>
-														<option value="3">Book</option>
-														<option value="4">Performances</option>
-														<option value="5">Crafts</option>
-														<option value="6">Technology</option>
-														<option value="7">Food</option>
-														<option value="8">Game</option>
+														<?php
+															$cat_sql="SELECT * FROM proj_categories";
+															$cat_qry=mysqli_query($dbconnect, $cat_sql);
+															$cat_res=mysqli_fetch_assoc($cat_qry);
+
+															do{
+																?>
+																<option value="<?php echo $cat_res['catID'];?>"><?php echo $cat_res['catName'];?></option>
+																<?php
+															}while($cat_res=mysqli_fetch_assoc($cat_qry));
+														?>
 													</select>
 												</div>
 							  				</div>
+											<?php
+												$tags_json=json_decode($p_res['tags'],true);
+												$tags=$tags_json["tags"];
+												
 
+							  					
+											?>
 							  				<label style="margin-bottom: 2px; margin-top: 20px;">Tags *</label><br>
 							  				<div class="field" style="margin-bottom: 0px;">
-							  					<input type="text" value="" name="tags" placeholder="Plants, Leaves, Green, Environment, Rain" />
+							  					<input type="text" value="<?php echo implode(', ', $tags);
+							  					?>" name="tags" placeholder="Plants, Leaves, Green, Environment, Rain" />
 							  				</div>
 
 							  				<br>
