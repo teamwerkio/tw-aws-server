@@ -1094,6 +1094,8 @@
 							  				</div>
 											<?php
 												$tags_json=json_decode($p_res['tags'],true);
+												
+
 												$tags=$tags_json["tags"];
 												
 
@@ -1101,7 +1103,7 @@
 											?>
 							  				<label style="margin-bottom: 2px; margin-top: 20px;">Tags *</label><br>
 							  				<div class="field" style="margin-bottom: 0px;">
-							  					<input type="text" value="<?php echo implode(', ', $tags);
+							  					<input type="text" value="<?php echo implode(',', $tags);
 							  					?>" name="tags" placeholder="Plants, Leaves, Green, Environment, Rain" />
 							  				</div>
 

@@ -111,12 +111,12 @@
 			<div class="latest campaign">
 				<div class="container">
 					<h2 class="title" data-wow-delay=".1s">Discover Projects</h2>
-					<div class="campaign-tabs filter-theme" data-wow-delay=".1s">
+<!-- 					<div class="campaign-tabs filter-theme" data-wow-delay=".1s">
 						<button class="button is-checked" data-filter=".filterinteresting">Featured</button>
 						<button class="button" data-filter=".filtersuccessful">Technology</button>
 						<button class="button" data-filter=".filterpopular">Performing Arts</button>
 						<button class="button" data-filter=".filterlatest">Film and Video</button>
-					</div>
+					</div> -->
 					<div class="campaign-content grid">
 						<div class="row">
 
