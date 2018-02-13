@@ -53,7 +53,7 @@
 		<header id="header" class="site-header">
 			<div class="container">
 				<div class="site-brand">
-					<a href="library.php"><img src="../images/assets/logo.png" style="width: 205px; height: 40px;" alt=""></a>
+					<a href="index.php"><img src="../images/assets/logo.png" style="width: 205px; height: 40px;" alt=""></a>
 				</div><!-- .site-brand -->
 				<div class="right-header">					
 					<nav class="main-menu">
@@ -180,8 +180,8 @@
 								<h3>Company</h3>
 								<ul>
 									<li><a href="about.html">About</a></li>
-									<li><a href="">Press</a></li>
-									<li><a href="#">Contact</a></li>
+									<li><a href="press.html">Press</a></li>
+									<li><a href="contact.html">Contact</a></li>
 								</ul>
 							</div>
 						</div>
