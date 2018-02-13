@@ -1233,31 +1233,8 @@
 																			<i data-id="<?php echo $up_res['upID'];?>" data-id2="<?php echo $up_res['projID'];?>" class="fa fa-times del-up"></i>
 																		</a-remove>
 																	</p2>
-																	<!-- Nirman Pencil Alignment issue -->
-
-																	<p2 style="margin-right: 10px;">
-																	<a-edit-black>
-																		<i class="fa fa-pencil edit-role" data-toggle="modal" data-target="#modal-4"></i>
-																		  <div class="modal fade" id="modal-4">
-																		    <div class="modal-dialog modal-4g" >
-																		      <div class="modal-content" style="height: 550px; width: 550px;">
-																		         <div class="modal-body">
-																		          <iframe src="timeline_update.php?edit=1&upID=<?php echo $up_res['upID'];?>&projID=<?php echo $p_res['projID'];?>" style="width: 100%;" height="400" frameborder="0">
-																		          </iframe>
-																		         </div>
-																		         <div class="modal-footer">
-																		          <button class="btn-mainb cl" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
-																		          <button name="" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Edit Update</button>
-																		         </div>
-																		      </div>
-																		    </div>
-																		  </div>
-																		</div>
-																		<!--<i data-id="<?php echo $role_res['roleID'];?>" data-id2="<?php echo $role_res['projID'];?>" class="fa fa-pencil edit-role" onclick="MyWindow=window.open('role_update.php?edit=1&roleID=<?php echo $role_res['roleID'];?>&projID=<?php echo $p_res['projID'];?>','MyWindow',width=450,height=300)"></i>-->
-																	</a-edit-black>
-																</p2>
-																	<!--<p2  style ="margin-right: 5px;" onclick="turnEditable('updateTitle1', 'updateDesc1');">-->
-																		<!-- <a-edit-black>
+																	<p2 style ="margin-right: 5px;" onclick="turnEditable('updateTitle1', 'updateDesc1');">
+																		<a-edit-black>
 
 																			<div class="bootstrap-iso">
 																			<i class="fa fa-pencil edit-upForm" data-upID="<?php echo $up_res['upID'];?>" data-toggle="modal" data-target="#modal-4"></i>
