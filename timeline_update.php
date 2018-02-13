@@ -33,12 +33,8 @@
 			<div style="margin-top: 50px;"></div>
 			<div class="campaign-form form-update">
 				<div class="container">
-					<form name="edit_update" action="timeline_update_submit.php?upID=<?php echo $_GET['upID'];?>&projID=<?php echo $_GET['projID'];?>" method="post" enctype="multipart/form-data">
-<!-- 						<div class="date">
-							<label for="">Date *</label>
-							<span class="label-desc">Date for the entry</span>
-		  					<input type="date" placeholder="" />
-		  				</div> -->
+					<form id="update_edited" name="edit_updated" action="timeline_update_submit.php?upID=<?php echo $_GET['upID'];?>&projID=<?php echo $_GET['projID'];?>" method="post" enctype="multipart/form-data">
+
 						<div class="field" style="margin-top: 20px;">
 							<label for="title">Update *</label>
 							<span class="label-desc">Example: We got a 100 customers!</span>
@@ -49,11 +45,10 @@
 							<span class="label-desc">Example: We started with 10 people and then ..... </span>
 		  					<textarea name="desc" rows="2" placeholder="Enter upto 350 characters"><?php echo $up_res['details'];?></textarea>
 		  				</div>
-		  				<button name="edit_update" type="submit" value="Save & Launch" class="btn-primary" style="margin-bottom: 0px;">Edit Update</button>
+
 					</form>
 				</div>
 			</div>
 		</main>
-	</div>
 </body>
 </html>
