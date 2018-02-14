@@ -385,7 +385,7 @@
 
     		});
     		$('#no_fb').click(function(){
-    			$("#reg_form").ajaxSubmit({url: 'usr.php', type: 'post'})
+    			$("#reg_form").ajaxSubmit({url: 'usr.php', type: 'post'});
     // 			var request = new XMLHttpRequest();
 				// request.open("POST", "usr.php");
 				// request.send(formData);
