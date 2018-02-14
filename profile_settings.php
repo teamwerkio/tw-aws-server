@@ -25,7 +25,7 @@
 	<!-- Style CSS -->
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link rel="stylesheet" type="text/css" href="css/responsive.css" />
-    <link rel="icon" href="../images/favicon.png" type="image/x-icon"/>
+    <link rel="icon" href="images/favicon.png" type="image/x-icon"/>
 
     <style type="text/css">
 		/* Create two equal columns that floats next to each other */
@@ -57,7 +57,7 @@
 		<header id="header" class="site-header">
 			<div class="container">
 				<div class="site-brand">
-					<a href="library.php"><img src="../images/assets/logo.png" style="width: 205px; height: 40px;" alt=""></a>
+					<a href="library.php"><img src="images/assets/logo.png" style="width: 205px; height: 40px;" alt=""></a>
 				</div><!-- .site-brand -->
 				<div class="right-header">					
 					<nav class="main-menu">

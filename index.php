@@ -23,7 +23,7 @@
 	<!-- Style CSS -->
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link rel="stylesheet" type="text/css" href="css/responsive.css" />
-    <link rel="icon" href="../images/favicon.png" type="image/x-icon"/>
+    <link rel="icon" href="images/favicon.png" type="image/x-icon"/>
 </head>
 
 <body class="home">
@@ -32,7 +32,7 @@
 			<div class="content-header">
 				<div class="container">
 					<div class="site-brand">
-						<a href="index.php"><img src="/place/images/assets/logo.png" style="width: 205px; height: 40px;" alt=""></a>
+						<a href="index.php"><img src="images/assets/logo.png" style="width: 205px; height: 40px;" alt=""></a>
 					</div><!-- .site-brand -->
 					<div class="right-header">					
 						<nav class="main-menu">
@@ -280,14 +280,14 @@
 <!-- 							<div class="col-lg-4 col-md-6 col-sm-6 col-6 filterinteresting filterpopular filterlatest">
 								<div class="campaign-item wow fadeInUp" data-wow-delay=".1s">
 									<a class="overlay" href="campaign_detail.html">
-										<img src="../images/placeholder/370x240.png" alt="">
+										<img src="images/placeholder/370x240.png" alt="">
 										<span class="ion-paper-airplane"></span>
 									</a>
 									<div class="campaign-box">
 										<a href="#" class="category">Crafts</a>
 										<h3><a href="campaign_detail.html">The Oreous Pillow</a></h3>
 										<div class="campaign-description">A watch designed to be an heirloom to be passed down to the next generation.</div>
-										<div class="campaign-author"><a class="author-icon" href="#"><img src="../images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Sabato Alterio</a></div>
+										<div class="campaign-author"><a class="author-icon" href="#"><img src="images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Sabato Alterio</a></div>
 										<div class="process">
 											<div class="raised"><span></span></div>
 											<div class="process-info">
@@ -302,14 +302,14 @@
 							<div class="col-lg-4 col-md-6 col-sm-6 col-6 filterinteresting filterlatest">
 								<div class="campaign-item wow fadeInUp" data-wow-delay=".1s">
 									<a class="overlay" href="campaign_detail.html">
-										<img src="../images/placeholder/370x240.png" alt="">
+										<img src="images/placeholder/370x240.png" alt="">
 										<span class="ion-paper-airplane"></span>
 									</a>
 									<div class="campaign-box">
 										<a href="#" class="category">Crafts</a>
 										<h3><a href="campaign_detail.html">The Oreous Pillow</a></h3>
 										<div class="campaign-description">A watch designed to be an heirloom to be passed down to the next generation.</div>
-										<div class="campaign-author"><a class="author-icon" href="#"><img src="../images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Sabato Alterio</a></div>
+										<div class="campaign-author"><a class="author-icon" href="#"><img src="images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Sabato Alterio</a></div>
 										<div class="process">
 											<div class="raised"><span></span></div>
 											<div class="process-info">
@@ -324,14 +324,14 @@
 							<div class="col-lg-4 col-md-6 col-sm-6 col-6 filterinteresting filterpopular">
 								<div class="campaign-item wow fadeInUp" data-wow-delay=".1s">
 									<a class="overlay" href="campaign_detail.html">
-										<img src="../images/placeholder/370x240.png" alt="">
+										<img src="images/placeholder/370x240.png" alt="">
 										<span class="ion-paper-airplane"></span>
 									</a>
 									<div class="campaign-box">
 										<a href="#" class="category">Crafts</a>
 										<h3><a href="campaign_detail.html">The Oreous Pillow</a></h3>
 										<div class="campaign-description">A watch designed to be an heirloom to be passed down to the next generation.</div>
-										<div class="campaign-author"><a class="author-icon" href="#"><img src="../images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Sabato Alterio</a></div>
+										<div class="campaign-author"><a class="author-icon" href="#"><img src="images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Sabato Alterio</a></div>
 										<div class="process">
 											<div class="raised"><span></span></div>
 											<div class="process-info">
@@ -346,14 +346,14 @@
 							<div class="col-lg-4 col-md-6 col-sm-6 col-6 filterinteresting filterlatest">
 								<div class="campaign-item wow fadeInUp" data-wow-delay=".1s">
 									<a class="overlay" href="campaign_detail.html">
-										<img src="../images/placeholder/370x240.png" alt="">
+										<img src="images/placeholder/370x240.png" alt="">
 										<span class="ion-paper-airplane"></span>
 									</a>
 									<div class="campaign-box">
 										<a href="#" class="category">Crafts</a>
 										<h3><a href="campaign_detail.html">The Oreous Pillow</a></h3>
 										<div class="campaign-description">A watch designed to be an heirloom to be passed down to the next generation.</div>
-										<div class="campaign-author"><a class="author-icon" href="#"><img src="../images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Sabato Alterio</a></div>
+										<div class="campaign-author"><a class="author-icon" href="#"><img src="images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Sabato Alterio</a></div>
 										<div class="process">
 											<div class="raised"><span></span></div>
 											<div class="process-info">
@@ -368,14 +368,14 @@
 							<div class="col-lg-4 col-md-6 col-sm-6 col-6 filterinteresting">
 								<div class="campaign-item wow fadeInUp" data-wow-delay=".1s">
 									<a class="overlay" href="campaign_detail.html">
-										<img src="../images/placeholder/370x240.png" alt="">
+										<img src="images/placeholder/370x240.png" alt="">
 										<span class="ion-paper-airplane"></span>
 									</a>
 									<div class="campaign-box">
 										<a href="#" class="category">Crafts</a>
 										<h3><a href="campaign_detail.html">The Oreous Pillow</a></h3>
 										<div class="campaign-description">A watch designed to be an heirloom to be passed down to the next generation.</div>
-										<div class="campaign-author"><a class="author-icon" href="#"><img src="../images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Sabato Alterio</a></div>
+										<div class="campaign-author"><a class="author-icon" href="#"><img src="images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Sabato Alterio</a></div>
 										<div class="process">
 											<div class="raised"><span></span></div>
 											<div class="process-info">
@@ -390,14 +390,14 @@
 							<div class="col-lg-4 col-md-6 col-sm-6 col-6 filterinteresting filterpopular">
 								<div class="campaign-item wow fadeInUp" data-wow-delay=".1s">
 									<a class="overlay" href="campaign_detail.html">
-										<img src="../images/placeholder/370x240.png" alt="">
+										<img src="images/placeholder/370x240.png" alt="">
 										<span class="ion-paper-airplane"></span>
 									</a>
 									<div class="campaign-box">
 										<a href="#" class="category">Crafts</a>
 										<h3><a href="campaign_detail.html">The Oreous Pillow</a></h3>
 										<div class="campaign-description">A watch designed to be an heirloom to be passed down to the next generation.</div>
-										<div class="campaign-author"><a class="author-icon" href="#"><img src="../images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Sabato Alterio</a></div>
+										<div class="campaign-author"><a class="author-icon" href="#"><img src="images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Sabato Alterio</a></div>
 										<div class="process">
 											<div class="raised"><span></span></div>
 											<div class="process-info">
@@ -422,11 +422,11 @@
 						<div class="story-slider">
 							<div class="story-item wow fadeInUp" data-wow-delay=".1s">
 								<div class="story-thumb">
-									<div class="thumb-image"><img src="../images/placeholder/370x220.png" alt=""></div>
+									<div class="thumb-image"><img src="images/placeholder/370x220.png" alt=""></div>
 									<h3 class="story-title"><a href="#">The Oreous Pillow</a></h3>
 								</div>
 								<div class="story-info">
-									<div class="author-avatar"><img src="../images/placeholder/70x70.png" alt=""></div>
+									<div class="author-avatar"><img src="images/placeholder/70x70.png" alt=""></div>
 									<a href="#" class="author-name">Samino</a>
 									<div class="story-desc"><p>We've tried it both ways—doing it by hand for our first campaign, and using Ideabox for our second. Omnicos directe al desirabilite de un nov lingua franca</p></div>
 									<a href="#" class="read-more">Read the Story</a>
@@ -434,11 +434,11 @@
 							</div>
 							<div class="story-item wow fadeInUp" data-wow-delay=".1s">
 								<div class="story-thumb">
-									<div class="thumb-image"><img src="../images/placeholder/370x220.png" alt=""></div>
+									<div class="thumb-image"><img src="images/placeholder/370x220.png" alt=""></div>
 									<h3 class="story-title"><a href="#">Learning 4 Kids Early Childhood</a></h3>
 								</div>
 								<div class="story-info">
-									<div class="author-avatar"><img src="../images/placeholder/70x70.png" alt=""></div>
+									<div class="author-avatar"><img src="images/placeholder/70x70.png" alt=""></div>
 									<a href="#" class="author-name">Andrew</a>
 									<div class="story-desc"><p>A un Angleso it va semblar un simplificat Angles, quam un skeptic Cambridge amico dit me que Occidental es. Li Europan lingues es membres del sam familie.</p></div>
 									<a href="#" class="read-more">Read the Story</a>
@@ -446,11 +446,11 @@
 							</div>
 							<div class="story-item wow fadeInUp" data-wow-delay=".1s">
 								<div class="story-thumb">
-									<div class="thumb-image"><img src="../images/placeholder/370x220.png" alt=""></div>
+									<div class="thumb-image"><img src="images/placeholder/370x220.png" alt=""></div>
 									<h3 class="story-title"><a href="#">Digital Comics for Mobile</a></h3>
 								</div>
 								<div class="story-info">
-									<div class="author-avatar"><img src="../images/placeholder/70x70.png" alt=""></div>
+									<div class="author-avatar"><img src="images/placeholder/70x70.png" alt=""></div>
 									<a href="#" class="author-name">Andy Yuri</a>
 									<div class="story-desc"><p>Lor separat existentie es un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular. Li lingues differe solmen in li grammatica, li pronunciation e li plu commun vocabules.</p></div>
 									<a href="#" class="read-more">Read the Story</a>
@@ -458,11 +458,11 @@
 							</div>
 							<div class="story-item wow fadeInUp" data-wow-delay=".1s">
 								<div class="story-thumb">
-									<div class="thumb-image"><img src="../images/placeholder/370x220.png" alt=""></div>
+									<div class="thumb-image"><img src="images/placeholder/370x220.png" alt=""></div>
 									<h3 class="story-title"><a href="#">Digital Comics for Mobile</a></h3>
 								</div>
 								<div class="story-info">
-									<div class="author-avatar"><img src="../images/placeholder/70x70.png" alt=""></div>
+									<div class="author-avatar"><img src="images/placeholder/70x70.png" alt=""></div>
 									<a href="#" class="author-name">Andy Yuri</a>
 									<div class="story-desc"><p>Lor separat existentie es un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular. Li lingues differe solmen in li grammatica, li pronunciation e li plu commun vocabules.</p></div>
 									<a href="#" class="read-more">Read the Story</a>
@@ -475,12 +475,12 @@
 			<!-- <div class="partners">
 				<div class="container">
 					<div class="partners-slider">
-						<div><a href="#"><img src="../images/partner-01.png" alt=""></a></div>
-						<div><a href="#"><img src="../images/partner-02.png" alt=""></a></div>
-						<div><a href="#"><img src="../images/partner-03.png" alt=""></a></div>
-						<div><a href="#"><img src="../images/partner-04.png" alt=""></a></div>
-						<div><a href="#"><img src="../images/partner-05.png" alt=""></a></div>
-						<div><a href="#"><img src="../images/partner-06.png" alt=""></a></div>
+						<div><a href="#"><img src="images/partner-01.png" alt=""></a></div>
+						<div><a href="#"><img src="images/partner-02.png" alt=""></a></div>
+						<div><a href="#"><img src="images/partner-03.png" alt=""></a></div>
+						<div><a href="#"><img src="images/partner-04.png" alt=""></a></div>
+						<div><a href="#"><img src="images/partner-05.png" alt=""></a></div>
+						<div><a href="#"><img src="images/partner-06.png" alt=""></a></div>
 					</div>
 				</div>
 			</div> -->

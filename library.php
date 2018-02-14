@@ -51,7 +51,7 @@
 	<!-- Style CSS -->
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link rel="stylesheet" type="text/css" href="css/responsive.css" />
-    <link rel="icon" href="../images/favicon.png" type="image/x-icon"/>
+    <link rel="icon" href="images/favicon.png" type="image/x-icon"/>
 </head>
 
 <body>
@@ -59,7 +59,7 @@
 		<header id="header" class="site-header">
 			<div class="container">
 				<div class="site-brand">
-					<a href="library.php"><img src="../images/assets/logo.png" style="width: 205px; height: 40px;" alt=""></a>
+					<a href="library.php"><img src="images/assets/logo.png" style="width: 205px; height: 40px;" alt=""></a>
 				</div><!-- .site-brand -->
 				<div class="right-header">					
 					<nav class="main-menu">
@@ -464,14 +464,14 @@
 							<!-- <div class="col-lg-4 col-sm-6 col-6">
 								<div class="campaign-item wow fadeInUp" data-wow-delay=".1s">
 									<a class="overlay" href="project.php">
-										<img src="../images/placeholder/370x240.png" alt="">
+										<img src="images/placeholder/370x240.png" alt="">
 										<span class="ion-ios-search-strong"></span>
 									</a>
 									<div class="campaign-box">
 										<a href="#" class="category">Book</a>
 										<h3><a href="project.php">The Everlast Notebook</a></h3>
 										<div class="campaign-description">One smart, reusable notebook to last the rest of your life? That's not magic, that's the Everlast.</div>
-										<div class="campaign-author"><a class="author-icon" href="#"><img src="../images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Samino</a></div>
+										<div class="campaign-author"><a class="author-icon" href="#"><img src="images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Samino</a></div>
 										<div class="process">
 											<div class="raised"><span style="width: 40%;"></span></div>
 											<div class="process-info">
@@ -486,14 +486,14 @@
 							<div class="col-lg-4 col-sm-6 col-6">
 								<div class="campaign-item wow fadeInUp" data-wow-delay=".1s">
 									<a class="overlay" href="project.php">
-										<img src="../images/placeholder/370x240.png" alt="">
+										<img src="images/placeholder/370x240.png" alt="">
 										<span class="ion-ios-search-strong"></span>
 									</a>
 									<div class="campaign-box">
 										<a href="#" class="category">Perfomances</a>
 										<h3><a href="project.php">Uncompromising Ski Gear</a></h3>
 										<div class="campaign-description">The Orsden Slope Pants don't compromise delivering performance, fit, and value directly to you</div>
-										<div class="campaign-author"><a class="author-icon" href="#"><img src="../images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Andrew Noah</a></div>
+										<div class="campaign-author"><a class="author-icon" href="#"><img src="images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Andrew Noah</a></div>
 										<div class="process">
 											<div class="raised"><span style="width: 21%;"></span></div>
 											<div class="process-info">
@@ -508,14 +508,14 @@
 							<div class="col-lg-4 col-sm-6 col-6">
 								<div class="campaign-item wow fadeInUp" data-wow-delay=".1s">
 									<a class="overlay" href="project.php">
-										<img src="../images/placeholder/370x240.png" alt="">
+										<img src="images/placeholder/370x240.png" alt="">
 										<span class="ion-ios-search-strong"></span>
 									</a>
 									<div class="campaign-box">
 										<a href="#" class="category">Technology</a>
 										<h3><a href="project.php">Smart Wallet with Solar Charge</a></h3>
 										<div class="campaign-description">A wonderful serenity has taken possession of my entire soul, like these sweet mornings.</div>
-										<div class="campaign-author"><a class="author-icon" href="#"><img src="../images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Andrew Noah</a></div>
+										<div class="campaign-author"><a class="author-icon" href="#"><img src="images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Andrew Noah</a></div>
 										<div class="process">
 											<div class="raised"><span style="width: 56%;"></span></div>
 											<div class="process-info">
@@ -530,14 +530,14 @@
 							<div class="col-lg-4 col-sm-6 col-6">
 								<div class="campaign-item wow fadeInUp" data-wow-delay=".1s">
 									<a class="overlay" href="project.php">
-										<img src="../images/placeholder/370x240.png" alt="">
+										<img src="images/placeholder/370x240.png" alt="">
 										<span class="ion-ios-search-strong"></span>
 									</a>
 									<div class="campaign-box">
 										<a href="#" class="category">Technology</a>
 										<h3><a href="project.php">Redefine Your VR Experience</a></h3>
 										<div class="campaign-description">I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot.</div>
-										<div class="campaign-author"><a class="author-icon" href="#"><img src="../images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Sabato Alterio</a></div>
+										<div class="campaign-author"><a class="author-icon" href="#"><img src="images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Sabato Alterio</a></div>
 										<div class="process">
 											<div class="raised"><span style="width: 89%;"></span></div>
 											<div class="process-info">
@@ -552,14 +552,14 @@
 							<div class="col-lg-4 col-sm-6 col-6">
 								<div class="campaign-item wow fadeInUp" data-wow-delay=".1s">
 									<a class="overlay" href="project.php">
-										<img src="../images/placeholder/370x240.png" alt="">
+										<img src="images/placeholder/370x240.png" alt="">
 										<span class="ion-ios-search-strong"></span>
 									</a>
 									<div class="campaign-box">
 										<a href="#" class="category">Design &amp; Art</a>
 										<h3><a href="project.php">Bring back Fun House</a></h3>
 										<div class="campaign-description">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</div>
-										<div class="campaign-author"><a class="author-icon" href="#"><img src="../images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Samino</a></div>
+										<div class="campaign-author"><a class="author-icon" href="#"><img src="images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Samino</a></div>
 										<div class="process">
 											<div class="raised"><span style="width: 91%;"></span></div>
 											<div class="process-info">
@@ -574,14 +574,14 @@
 							<div class="col-lg-4 col-sm-6 col-6">
 								<div class="campaign-item wow fadeInUp" data-wow-delay=".1s">
 									<a class="overlay" href="project.php">
-										<img src="../images/placeholder/370x240.png" alt="">
+										<img src="images/placeholder/370x240.png" alt="">
 										<span class="ion-ios-search-strong"></span>
 									</a>
 									<div class="campaign-box">
 										<a href="#" class="category">Technology</a>
 										<h3><a href="project.php">Smart Wallet with Solar Charge</a></h3>
 										<div class="campaign-description">A wonderful serenity has taken possession of my entire soul, like these sweet mornings.</div>
-										<div class="campaign-author"><a class="author-icon" href="#"><img src="../images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Andrew Noah</a></div>
+										<div class="campaign-author"><a class="author-icon" href="#"><img src="images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Andrew Noah</a></div>
 										<div class="process">
 											<div class="raised"><span style="width: 29%;"></span></div>
 											<div class="process-info">
@@ -596,14 +596,14 @@
 							<div class="col-lg-4 col-sm-6 col-6">
 								<div class="campaign-item wow fadeInUp" data-wow-delay=".1s">
 									<a class="overlay" href="project.php">
-										<img src="../images/placeholder/370x240.png" alt="">
+										<img src="images/placeholder/370x240.png" alt="">
 										<span class="ion-ios-search-strong"></span>
 									</a>
 									<div class="campaign-box">
 										<a href="#" class="category">Technology</a>
 										<h3><a href="project.php">Redefine Your VR Experience</a></h3>
 										<div class="campaign-description">I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot.</div>
-										<div class="campaign-author"><a class="author-icon" href="#"><img src="../images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Sabato Alterio</a></div>
+										<div class="campaign-author"><a class="author-icon" href="#"><img src="images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Sabato Alterio</a></div>
 										<div class="process">
 											<div class="raised"><span style="width: 44%;"></span></div>
 											<div class="process-info">
@@ -618,14 +618,14 @@
 							<div class="col-lg-4 col-sm-6 col-6">
 								<div class="campaign-item wow fadeInUp" data-wow-delay=".1s">
 									<a class="overlay" href="project.php">
-										<img src="../images/placeholder/370x240.png" alt="">
+										<img src="images/placeholder/370x240.png" alt="">
 										<span class="ion-ios-search-strong"></span>
 									</a>
 									<div class="campaign-box">
 										<a href="#" class="category">Design &amp; Art</a>
 										<h3><a href="project.php">Bring back Fun House</a></h3>
 										<div class="campaign-description">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</div>
-										<div class="campaign-author"><a class="author-icon" href="#"><img src="../images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Samino</a></div>
+										<div class="campaign-author"><a class="author-icon" href="#"><img src="images/placeholder/35x35.png" alt=""></a>by <a class="author-name" href="#">Samino</a></div>
 										<div class="process">
 											<div class="raised"><span style="width: 48%;"></span></div>
 											<div class="process-info">

@@ -612,7 +612,7 @@ ul.socials-top li:hover i{
 .site-main .sideshow{
 	position: relative;
 	height: 674px;
-	background-image: url('../images/placeholder/1920x680n.png');
+	background-image: url('images/placeholder/1920x680n.png');
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center center;
@@ -1300,16 +1300,16 @@ ul.menu-category li.active:after{
 	background-repeat: no-repeat;
 }
 .page-title.background-page{
-	background-image: url('../images/placeholder/1920x220.png');
+	background-image: url('images/placeholder/1920x220.png');
 }
 .page-title.background-blog{
-	background-image: url('../images/placeholder/1920x220.png');
+	background-image: url('images/placeholder/1920x220.png');
 }
 .page-title.background-campaign{
-	background-image: url('../images/placeholder/1920x220.png');
+	background-image: url('images/placeholder/1920x220.png');
 }
 .page-title.background-cart{
-	background-image: url('../images/placeholder/1920x220.png');
+	background-image: url('images/placeholder/1920x220.png');
 }
 .page-title:before{
 	content: '';
@@ -1757,7 +1757,7 @@ ul.menu-category li.active:after{
 	11. ABOUT US
 ==========================================================*/
 .top-site{
-	background-image: url('../images/placeholder/1920x860.png');
+	background-image: url('images/placeholder/1920x860.png');
 	height: 860px;
 	background-size: cover;
 	background-position: center center;
@@ -2447,7 +2447,7 @@ form .create-account input[type="checkbox"]{
 	16. COMING SOON
 ==========================================================*/
 .coming-soon #wrapper{
-	background-image: url(../images/placeholder/1920x1080.png);
+	background-image: url(images/placeholder/1920x1080.png);
 	background-position: center center;
 	background-size: cover;
 	background-repeat: no-repeat;
