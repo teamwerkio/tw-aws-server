@@ -95,7 +95,9 @@
 
 	if($fieldbool==False) {
 		
-		if(getimagesize($_FILES['profilepic']['tmp_name'])==False){
+		if(is_uploaded_file($_FILES['profilepic']['tmp_name'])==False){
+			error_log("Showing false image");
+			error_log($_FILES["profilepic"]["tmp_name"]);
 			$signup_sql = "INSERT INTO users (firstname, lastname, email, pitch, password, fb_data_status, dt) VALUES ('".mysqli_real_escape_string($dbconnect, $name_f)."', '".
 			mysqli_real_escape_string($dbconnect, $name_l)."', '".
 			mysqli_real_escape_string($dbconnect, $email)."', '".
