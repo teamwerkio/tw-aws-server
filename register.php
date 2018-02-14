@@ -356,9 +356,11 @@
     <!-- orther script -->
     <script  type="text/javascript" src="js/main.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script> 
+    <script src="http://malsup.github.com/jquery.form.js"></script> 
 
     <script type="text/javascript">
-    	var formData;
+    	// var formData;
     	$(document).ready(function(){
    //  		$('input[type=text],input[type=password],input[type=email],input[type=checkbox]').keyup(function() {
         
@@ -377,15 +379,16 @@
 			// });
     		
     		$('#createAccount').click(function(){
-				formData=new FormData($('#reg_form')[0]);
+				// formData=new FormData($('#reg_form')[0]);
 				var iframe='<iframe id="if_createAccount" src="social_connect.php" style="width: 100%;" height="180" frameborder="0">';
 				$('.modal-body').html(iframe);
 
     		});
     		$('#no_fb').click(function(){
-    			var request = new XMLHttpRequest();
-				request.open("POST", "usr.php");
-				request.send(formData);
+    			$("#reg_form").ajaxSubmit({url: 'usr.php', type: 'post'})
+    // 			var request = new XMLHttpRequest();
+				// request.open("POST", "usr.php");
+				// request.send(formData);
     		});
 
 
