@@ -1,35 +1,19 @@
 <?php
 	include("dbconnect.php");
-	include("img_url.php");
+	include("upload_photo.php");
 	session_start();
 
 	if(!isset($_SESSION['usr'])){
 		header("Location:library.php");
 	}
 	else{
-		if(!isset($_GET['other_usr'])){
-			$prof_sql = "SELECT * FROM users WHERE usrID='".$_SESSION['usr']."'";
-			$prof_qry = mysqli_query($dbconnect, $prof_sql);
-			$prof_res = mysqli_fetch_assoc($prof_qry);
-			$show=true;
-		}
-		else{
-			$prof_sql = "SELECT * FROM users WHERE usrID='".$_GET['other_usr']."'";
-			$prof_qry = mysqli_query($dbconnect, $prof_sql);
-			$prof_res = mysqli_fetch_assoc($prof_qry);
-			$show=false;
-			if($_GET['other_usr']==$_SESSION['usr']){
-				$show=true;
-			}
-			
-		}
-		
-
+	
+		$usr_sql = "SELECT * FROM users WHERE usrID=".$_SESSION['usr'];
+		$usr_qry = mysqli_query($dbconnect, $usr_sql);
+		$usr_res = mysqli_fetch_assoc($usr_qry);
 		
 	}
-	$name_sql = "SELECT firstname FROM users WHERE usrID='".$_SESSION['usr']."'";
-	$name_qry = mysqli_query($dbconnect, $name_sql);
-	$name_res = mysqli_fetch_assoc($name_qry);
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -94,7 +78,7 @@
 								<a href="my_projects.php">My Projects<i class="fa fa-caret-down" aria-hidden="true"></i></a>
 							</li>
 							<li>
-								<a href="profile.php"><?php echo $name_res['firstname']; ?><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+								<a href="profile.php"><?php echo $usr_res['firstname']; ?><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 								<ul class="sub-menu">
 									<li><a href="profile.php">Profile</a></li>
 									<li><a href="my_projects.php">My Projects</a></li>
@@ -117,9 +101,7 @@
 			<div class="account-wrapper">
 				<div class="container">
 					<div class="row">
-						<?php
-							if($show){
-						?>
+
 						<div class="col-lg-3">
 							<nav class="account-bar">
 								<ul>
@@ -132,32 +114,48 @@
 								</ul>
 							</nav>
 						</div>
-						<?php
-							}
-						?>
+
 						<div class="col-lg-9">
 							<div class="account-content profile">
 								<h3 class="account-title">Profile Settings</h3>
 								<div class="account-main">
 
 									<h3 style="margin-bottom: 20px;">Basic Information</h3>
-									<form name="signup" action="usr.php" method="post" enctype="multipart/form-data" id="registerForm" class="clearfix">
+									<form name="prof_set" action="profile_settings_submit.php" method="post" enctype="multipart/form-data">
 						  				<div class="field">
-						  					<input name="firstname" type="text" value="" name="s" placeholder="First Name" />
+						  					<input name="firstname" type="text" value="<?php echo $usr_res['firstname'];?>" name="s" placeholder="First Name" />
 						  				</div>
 						  				<div class="field">
-						  					<input name="lastname" type="text" value="" name="s" placeholder="Last Name" />
+						  					<input name="lastname" type="text" value="<?php echo $usr_res['lastname'];?>" name="s" placeholder="Last Name" />
 						  				</div>
 						  				<div class="field">
-						  					<input name="pitch" type="text" value="" name="s" placeholder="Talk to me about ..." />
+						  					<input name="pitch" type="text" value="<?php echo $usr_res['pitch'];?>" name="s" placeholder="Talk to me about ..." />
 						  				</div>
 						  				<div class="field" style="margin-bottom: 0px; margin-top: 10px;">
 						  					<p><b>Upload a New Profile Picture</b></p>
 						  					<p><i>A size of 120 x 120 is preferred</i></p>
-						  					<div class="file-upload">
+
+							  					<div class="file-upload">
+							  						<div class="upload-bg">
+								  						<div id="myfileupload">
+													   		<input type="file" id="uploadfile1" name="profilepic" onchange="readURL1(this);" />	  
+													 	</div>
+													 	<div id="thumbbox1">
+													 		<img height="100" width="100" alt="Thumb image" id="thumbimage1" style="display: none" />
+													  		<a class="removeimg1" href="javascript:" ></a>
+													  	</div>
+													 	<div id="boxchoice1">
+													  		<a href="javascript:" class="choicefile1"><i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload Image</a>
+													  		<p style="clear:both"></p>
+													 	</div>
+													  	<label class="filename1"></label>
+								  					</div>
+							  					</div>
+
+<!-- 						  					<div class="file-upload">
 						  						<div class="upload-bg">
 							  						<div id="myfileupload1" style="background-color: green;">
-												   		<input type="file" id="uploadfile1" name="profilepic" onchange="readURL1(this);" />	  
+												   		<input type="profilepic" id="uploadfile1" name="profilepic" onchange="readURL1(this);" />	  
 												 	</div>
 												 	<div id="thumbbox1">
 												 		<img height="100" width="100" alt="Thumb image" id="thumbimage1" style="display: none" />
@@ -170,11 +168,8 @@
 												  	<label class="filename1"></label>
 							  					</div>
 						  					</div>
-						  				</div>
-						  			</form>
-
-						  			<h3 style="margin-bottom: 20px; margin-top: 20px;">Reset Password</h3>
-						  			<form name="signup" action="usr.php" method="post" enctype="multipart/form-data" id="registerForm" class="clearfix">
+ -->						  				</div>
+						  				<h3 style="margin-bottom: 20px; margin-top: 20px;">Reset Password</h3>
 						  				<div class="field">
 						  					<input name="old_pass" type="password" value="" name="s" placeholder="Old Password" />
 						  				</div>
@@ -184,21 +179,13 @@
 						  				<div class="field">
 						  					<input name="pass_signup_verify" type="password" value="" name="s" placeholder="Verify New Password" />
 						  				</div>	
+						  				<button name="prof_set" class="btn-primary" type="submit" style="cursor: pointer; margin-top: 5px; background-color: #73b941; padding-left: 8px; padding-right: 8px;">Save and Apply settings</button>
 						  			</form>
 
-						  			<h3 style="margin-bottom: 20px; margin-top: 20px;">Connect with Facebook</h3>
+<!-- 						  			<h3 style="margin-bottom: 20px; margin-top: 20px;">Connect with Facebook</h3>
 						  			<div id="fbcenter" style="margin-bottom: 20px;">
 										<div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
-									</div>
-
-
-									<?php
-										if($show){
-									?>
-									<a href="#" style="margin-top: 10px; margin-bottom: 0px;" class="btn-primary">Save and Apply settings</a>
-									<?php
-										}
-									?>
+									</div> -->
 								</div>
 							</div>
 						</div>
