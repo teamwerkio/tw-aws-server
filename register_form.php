@@ -3,7 +3,7 @@
 	ini_set('display_errors', 'on');
 	include("dbconnect.php");
 	include("upload_photo.php");
-	error_log("here");
+	error_log("here ".$_FILES['profilepic']['error']);
 
 
 	$parsed_ini=parse_ini_file("../../fb.ini", true);
