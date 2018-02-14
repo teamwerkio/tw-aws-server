@@ -151,23 +151,6 @@
 													  	<label class="filename1"></label>
 								  					</div>
 							  					</div>
-
-<!-- 						  					<div class="file-upload">
-						  						<div class="upload-bg">
-							  						<div id="myfileupload1" style="background-color: green;">
-												   		<input type="profilepic" id="uploadfile1" name="profilepic" onchange="readURL1(this);" />	  
-												 	</div>
-												 	<div id="thumbbox1">
-												 		<img height="100" width="100" alt="Thumb image" id="thumbimage1" style="display: none" />
-												  		<a class="removeimg1" href="javascript:" ></a>
-												  	</div>
-												 	<div id="boxchoice1">
-												  		<a href="javascript:" class="choicefile1"><i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload Image</a>
-												  		<p style="clear:both"></p>
-												 	</div>
-												  	<label class="filename1"></label>
-							  					</div>
-						  					</div>
  -->						  				</div>
 						  				<h3 style="margin-bottom: 20px; margin-top: 20px;">Reset Password</h3>
 						  				<div class="field">
