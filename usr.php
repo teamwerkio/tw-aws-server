@@ -1,5 +1,6 @@
 <?php
-	error_log("message");
+	error_log(print_r($_POST,true));
+	error_log("print sth");
 	session_start();
 	include("dbconnect.php");
 	if(isset($_GET['action'])) {

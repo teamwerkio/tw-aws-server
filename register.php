@@ -43,14 +43,7 @@
 
 <body>
 
-<!-- <div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.12&appId=111072682828913&autoLogAppEvents=1';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script> -->
+
 
 	<div id="wrapper">
 		<header id="header" class="site-header">
@@ -80,29 +73,22 @@
 			<div class="container">
 				<div class="main-content">
 					<div class="form-login form-register">
-						<!-- <h2 align="center">Sign up with Facebook</h2>
-						<hr>
-						<div id="fbcenter">
-							<div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="true"></div>
-						</div> -->
 
-						<!-- <h2 align="center" style="margin-top: 35px;">Create an account</h2>
-						<hr> -->
 						<h2>Create an account</h2>
-						<form id="reg_form" name="signup" action="usr.php" method="post" enctype="multipart/form-data" id="registerForm" class="clearfix">
+						<form id="reg_form" name="signup" action="usr.php" method="post" enctype="multipart/form-data" class="clearfix">
 			  				<div class="field">
-			  					<input name="firstname" type="text" value="" name="s" placeholder="First Name" />
+			  					<input name="firstname" type="text" value="" placeholder="First Name" />
 			  				</div>
 			  				<div class="field">
-			  					<input name="lastname" type="text" value="" name="s" placeholder="Last Name" />
+			  					<input name="lastname" type="text" value="" placeholder="Last Name" />
 			  				</div>
 			  				<div class="field">
-			  					<input name="pitch" type="text" value="" name="s" placeholder="Talk to me about ..." />
+			  					<input name="pitch" type="text" value="" placeholder="Talk to me about ..." />
 			  				</div>
 			  				<div class="row">
 			  					<div class="coloumn" style="margin-left: 15px; width: 49%;">
 					  				<div class="field">
-					  					<input name="email_signup" type="email" value="" name="s" placeholder="College Email" />
+					  					<input name="email_signup" type="" value="" placeholder="College Email" />
 					  				</div>
 					  			</div>
 					  			<div class="coloumn" style="margin-left: 5px; width: 200px;">
@@ -122,10 +108,10 @@
 								</div>
 							</div>
 			  				<div class="field">
-			  					<input name="pass_signup" type="password" value="" name="s" placeholder="Password" />
+			  					<input name="pass_signup" type="password" value=""  placeholder="Password" />
 			  				</div>
 			  				<div class="field">
-			  					<input name="pass_signup_verify" type="password" value="" name="s" placeholder="Verify your password" />
+			  					<input name="pass_signup_verify" type="password" value="" placeholder="Verify your password" />
 			  				</div>
 			  				<?php
 			  					$int_sql="SELECT * FROM proj_categories";
@@ -162,26 +148,6 @@
 												}while($int_res=mysqli_fetch_assoc($int_qry));
 											
 										?>
-<!-- 										<div class="create-account" style="margin-top: 10px;">
-						  					<input type="checkbox" id="1" name="" value="">
-						  					<label for="1" style="padding-left: 22px;">Design & Art</label>
-						  					<div class="checkbox" style="margin-top: 2px;"></div>
-					  					</div>
-					  					<div class="create-account" style="margin-top: 10px;">
-						  					<input type="checkbox" id="2" name="" value="">
-						  					<label for="2" style="padding-left: 22px;">Film & Video</label>
-						  					<div class="checkbox" style="margin-top: 2px;"></div>
-					  					</div>
-					  					<div class="create-account" style="margin-top: 10px;">
-						  					<input type="checkbox" id="3" name="" value="">
-						  					<label for="3" style="padding-left: 22px;">Books</label>
-						  					<div class="checkbox" style="margin-top: 2px;"></div>
-					  					</div>
-					  					<div class="create-account" style="margin-top: 10px;">
-						  					<input type="checkbox" id="4" name="" value="">
-						  					<label for="4" style="padding-left: 22px;">Performances</label>
-						  					<div class="checkbox" style="margin-top: 2px;"></div>
-					  					</div> -->
 				  					</div>
 				  					<div class="column">
 				  						<?php
@@ -201,26 +167,6 @@
 				  								}while($int_res=mysqli_fetch_assoc($int_qry));
 				  							
 				  						?>
-<!-- 										<div class="create-account" style="margin-top: 10px;">
-						  					<input type="checkbox" id="5" name="" value="">
-						  					<label for="5" style="padding-left: 22px;">Crafts</label>
-						  					<div class="checkbox" style="margin-top: 2px;"></div>
-					  					</div>
-					  					<div class="create-account" style="margin-top: 10px;">
-						  					<input type="checkbox" id="6" name="" value="">
-						  					<label for="6" style="padding-left: 22px;">Technology</label>
-						  					<div class="checkbox" style="margin-top: 2px;"></div>
-					  					</div>
-					  					<div class="create-account" style="margin-top: 10px;">
-						  					<input type="checkbox" id="7" name="" value="">
-						  					<label for="7" style="padding-left: 22px;">Food</label>
-						  					<div class="checkbox" style="margin-top: 2px;"></div>
-					  					</div>
-					  					<div class="create-account" style="margin-top: 10px;">
-						  					<input type="checkbox" id="8" name="" value="">
-						  					<label for="8" style="padding-left: 22px;">Games</label>
-						  					<div class="checkbox" style="margin-top: 2px;"></div>
-					  					</div> -->
 				  					</div>
 				  				</div>
 
@@ -244,35 +190,9 @@
 					  					</div>
 				  					</div>
 				  				</div>
-
-			  					<div class="create-account" style="margin-top: 14.5px; /*margin-bottom: 15px;*/ float: right;">
-				  					<input type="checkbox" id="tou" name="" value="" checked>
-				  					<label for="tou" style="padding-left: 22px;">I agree to the <u><a style="display: inline;" href="termsofuse.html">Terms of Use</a></u></label>
-				  					<div class="checkbox" style="margin-top: 2px;"></div>
-			  					</div>
-
-			  					<div class="bootstrap-iso">
-								<button id="createAccount" type="button" class="btn-mainb" data-toggle="modal" data-target="#modal-1" style="color: white;">Create Account</button>
-								  <div class="modal fade" id="modal-1">
-								    <div class="modal-dialog modal-lg" >
-								      <div class="modal-content" style="height: 300px;">
-								         <div class="modal-body">
-								          <!-- <iframe id="if_createAccount" src="social_connect.php" style="width: 100%;" height="180" frameborder="0"> -->
-<!-- 								          </iframe> -->
-								         </div>
-								         <div class="modal-footer">
-								         	<a id="no_fb" href="">No, proceed without Facebook</a>
-								          <!-- <button class="btn-mainb" data-dismiss="modal" style="cursor: pointer; width: 100px; color: white;">Close</button>
-								          <button name="add_update" id="update_button" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px; color: white;">Add Update</button> -->
-								         </div>
-								      </div>
-								    </div>
-								  </div>
-								</div>
-
-			  				<!-- <div class="inline clearfix" style="margin-top: 10px;">
-						  		<button type="submit" name="signup" class="btn-primary">Create Account</button>
-						  	</div> -->
+							</div>
+							<!-- <button name="signup" class="btn-primary" type="submit" style="cursor: pointer; margin-top: 5px; background-color: #73b941; padding-left: 8px; padding-right: 8px;">Save and Apply settings</button> -->
+							<button id="signup" type="submit" class="btn-primary" style="color: white;">Create Account</button>
 					  	</form>
 					</div>
 				</div>
@@ -360,36 +280,9 @@
     <script src="http://malsup.github.com/jquery.form.js"></script> 
 
     <script type="text/javascript">
-    	// var formData;
+    	
     	$(document).ready(function(){
-   //  		$('input[type=text],input[type=password],input[type=email],input[type=checkbox]').keyup(function() {
-        
-		 //    if ($('input[name=firstname]').val() !=''&&
-			//     $('input[name=lastname]').val() != '' &&
-			//     $('input[name=pitch]').val() != ''&&
-			//     $('input[name=email_signup]').val() != ''&&
-			//     $('input[name=pass_signup]').val() != ''&&
-			//     $('input[name=pass_signup_verify]').val() != ''&&
-			//     $("input[name^='chk_']:checked").length>1){
-			      
-		 //        $('#createAccount').removeAttr('disabled');
-			//     } else {
-			//         $('#createAccount').attr('disabled', 'disabled');
-			//     }
-			// });
-    		
-    		$('#createAccount').click(function(){
-				// formData=new FormData($('#reg_form')[0]);
-				var iframe='<iframe id="if_createAccount" src="social_connect.php" style="width: 100%;" height="180" frameborder="0">';
-				$('.modal-body').html(iframe);
 
-    		});
-    		$('#no_fb').click(function(){
-    			$("#reg_form").ajaxSubmit({url: 'usr.php', type: 'post'});
-    // 			var request = new XMLHttpRequest();
-				// request.open("POST", "usr.php");
-				// request.send(formData);
-    		});
 
 
 
@@ -397,3 +290,34 @@
     </script>
 </body>
 </html>
+
+
+
+<!-- 			  					<div class="create-account" style="margin-top: 14.5px; /*margin-bottom: 15px;*/ float: right;">
+				  					<input type="checkbox" id="tou" name="" value="" checked>
+				  					<label for="tou" style="padding-left: 22px;">I agree to the <u><a style="display: inline;" href="termsofuse.html">Terms of Use</a></u></label>
+				  					<div class="checkbox" style="margin-top: 2px;"></div>
+			  					</div> -->
+
+<!-- 			  					<div class="bootstrap-iso">
+								<button id="createAccount" type="button" class="btn-mainb" data-toggle="modal" data-target="#modal-1" style="color: white;">Create Account</button>
+								  <div class="modal fade" id="modal-1">
+								    <div class="modal-dialog modal-lg" >
+								      <div class="modal-content" style="height: 300px;">
+								         <div class="modal-body"> -->
+<!-- 								          <iframe id="if_createAccount" src="social_connect.php" style="width: 100%;" height="180" frameborder="0"> -->
+								          <!-- </iframe> -->
+<!-- 								         </div>
+								         <div class="modal-footer">
+								         	<a id="no_fb" href="">No, proceed without Facebook</a>
+								          <button class="btn-mainb" data-dismiss="modal" style="cursor: pointer; width: 100px; color: white;">Close</button>
+								          <button name="add_update" id="update_button" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px; color: white;">Add Update</button>
+								         </div>
+								      </div>
+								    </div>
+								  </div>
+								</div> -->
+
+			  				<!-- <div class="inline clearfix" style="margin-top: 10px;">
+						  		<button type="submit" name="signup" class="btn-primary">Create Account</button>
+						  	</div> -->

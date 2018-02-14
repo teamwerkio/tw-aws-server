@@ -34,18 +34,18 @@
 <script type="text/javascript" src="libs/isotope/isotope.pkgd.min.js"></script>
 <script type="text/javascript" src="libs/bxslider/jquery.bxslider.min.js"></script>
 <script>
-  var form=$("#reg_form", window.parent.document);
-  formData=new FormData(form[0]);
+  // var form=$("#reg_form", window.parent.document);
+  // formData=new FormData(form[0]);
   
 
-  var login=function(){
-    FB.login(function(){
-      var request = new XMLHttpRequest();
-      request.open("POST", "usr.php");
-      request.send(formData);
+  // var login=function(){
+  //   FB.login(function(){
+  //     var request = new XMLHttpRequest();
+  //     request.open("POST", "usr.php");
+  //     request.send(formData);
 
-    });
-  }
+  //   });
+  // }
 
   // window.fbAsyncInit = function() {
   //   FB.init({
@@ -93,8 +93,8 @@
 						<p align="center">Connect your Teamwerk account with Facebook so we can find you the top projects that would interest you the most.</p>
 						
 						<div id="fbcenter" style="margin-top: 25px;">
-							<fb:login-button size="xlarge"  onlogin="login();">Continue with Facebook
-							</fb:login-button>
+<!-- 							<fb:login-button size="xlarge"  onlogin="login();">Continue with Facebook
+							</fb:login-button> -->
               
 
 							<!-- <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"> --></div>
