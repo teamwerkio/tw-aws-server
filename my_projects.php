@@ -135,14 +135,26 @@
 									</div>
 
 									<!-- my projects -->
+
+
 									<div class="dashboard-latest" style="margin-bottom: 1px;">
 										<h3 style="margin-bottom: 20px;">Projects started by <?php echo $prof_res['firstname'];?></h3>
+
+									<?php
+										if(mysqli_num_rows($proj_qry)==0){
+											echo "<p>You have not posted any projects yet. Go ahead and create one!</p>";
+										}
+										else{
+
+
+									?>
 										<div class="row" style="margin-left: 1px;">
 											<div class="coloumn">
 												<ul>
 
 													<?php
 														$half=ceil(mysqli_num_rows($proj_qry)/2);
+														
 														$count=0;
 														do{
 															$count+=1;
@@ -242,7 +254,11 @@
 												</ul>
 											</div>
 										</div>
+									<?php
+										}
+									?>
 									</div>
+
 								</div>
 							</div>
 						</div>

@@ -138,17 +138,18 @@
 											</div>
 										</div>
 									</div>
-									<?php
-										if(count($clicked)==0){
-											echo "<p>You have not visited any projects yet. Go to the library page and explore!</p>";
-										}
-										else{
-
-
-									?>
 									<!-- Recently visited projects -->
 									<div class="dashboard-latest" style="margin-bottom: 1px;">
 										<h3 style="margin-bottom: 20px;">Recently Visited</h3>
+										<?php
+											if(count($clicked)==0){
+												echo "<p>You have not visited any projects yet. Go to the library page and explore!</p>";
+											}
+											else{
+
+
+										?>
+
 										<div class="row" style="margin-left: 1px;">
 											<div class="coloumn">
 												<ul>
@@ -222,41 +223,36 @@
 															
 														}
 													?>
-<!-- 													<li>
-														<a href="#"><img src="images/placeholder/70x70.png" style="width: 70px; height: 70px;" alt=""></a>
-														<div class="dashboard-latest-box">
-															<div class="category"><a href="#">Film & Video</a></div>
-															<h4><a href="#">Space Odyssey - The Video Game</a></h4>
-														</div>
-													</li>
-													<li>
-														<a href="#"><img src="images/placeholder/70x70.png" style="width: 70px; height: 70px;" alt=""></a>
-														<div class="dashboard-latest-box">
-															<div class="category"><a href="#">Box</a></div>
-															<h4><a href="#">Unbuonded: A Feature Documentary</a></h4>
-														</div>
-													</li> -->
+
 												</ul>
 											</div>
 										</div>
+										<?php
+										}?>
 									</div>
+
+
 									<?php
-										}
-
-
 										$ongArr=array();
 										$pastArr=array();
+										
 										do{
 											$tag_json=json_decode($proj_res['tags'],true);
 											if($tag_json["ongoing"]==true){
 												array_push($ongArr, $proj_res['projID']);
 											}
-											else{
+											elseif($tag_json["ongoing"]==false && $proj_res['projID']){
+
 												array_push($pastArr, $proj_res['projID']);
+												
 											}
 										}while($proj_res = mysqli_fetch_assoc($proj_qry));
 									?>
 									
+
+									<!-- Ongoing projects -->
+									<div class="dashboard-latest" style="margin-bottom: 1px;">
+										<h3 style="margin-bottom: 20px; margin-top: 20px;">Ongoing Projects</h3>
 									<?php
 										if(count($ongArr)==0){
 											echo "<p>You do not have any ongoing projects at this moment.</p>";
@@ -265,9 +261,6 @@
 
 										
 									?>
-									<!-- Ongoing projects -->
-									<div class="dashboard-latest" style="margin-bottom: 1px;">
-										<h3 style="margin-bottom: 20px; margin-top: 20px;">Ongoing Projects</h3>
 										<div class="row" style="margin-left: 1px;">
 											<div class="coloumn">
 												<ul>
@@ -349,24 +342,28 @@
 												</ul>
 											</div>
 										</div>
+										<?php
+									}
+										?>
 									</div>
-									<?php
-										}
-										error_log(count($pastArr));
 
-										if(count($pastArr)==0){
-
-										echo "<p>You do not have any ongoing projects at this moment.</p>";
-										}
-										else{
-
-
-									?>
 
 									
 									<!-- Past Projects -->
 									<div class="dashboard-latest" style="margin-bottom: 1px;">
 										<h3 style="margin-bottom: 20px; margin-top: 20px;">Past Projects</h3>
+									<?php
+										
+										
+
+										if(count($pastArr)==0){
+
+										echo "<p>You do not have any past projects.</p>";
+										}
+										else{
+
+
+									?>
 										<div class="row" style="margin-left: 1px;">
 											<div class="coloumn">
 												<ul>
@@ -374,10 +371,9 @@
 
 													<?php
 														$halfP=ceil(count($pastArr)/2);
-
 														$halfP1=array_slice($pastArr, 0,$halfP);
 														$halfP2=array_slice($pastArr, $halfP);
-
+														
 														foreach ($halfP1 as $h1) {
 															$h1_sql="SELECT * FROM project WHERE projID=".$h1;
 															$h1_qry=mysqli_query($dbconnect, $h1_sql);
@@ -450,11 +446,10 @@
 												</ul>
 											</div>
 										</div>
+										<?php
+											}
+										?>
 									</div>
-
-									<?php
-										}
-									?>
 								</div>
 							</div>
 						</div>

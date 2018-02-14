@@ -423,13 +423,36 @@
 									<div class="support support-campaign" style="margin-top: 41px;">
 
 										<div class="team" style="margin-top: 0px; margin-bottom: 0px;">
-											<img src="images/placeholder/150x150.png">
-											<img src="images/placeholder/150x150.png">
-											<img src="images/placeholder/150x150.png">
-											<img src="images/placeholder/150x150.png">
-											<img src="images/placeholder/150x150.png">
-											<img src="images/placeholder/150x150.png">
-											<img src="images/placeholder/150x150.png">
+											<?php
+												$team_json=json_decode($p_res['team'],true);
+												$admin_arr=$team_json["admin"];
+												$mem_arr=$team_json["member"];
+												
+											?>
+											<img src="<?php echo getimgURL($owner_p, "profilepic");?>">
+											<?php
+												foreach ($admin_arr as $admin) {
+													$ad_sql="SELECT * FROM users WHERE usrID=".$admin["id"];
+													$ad_qry=mysqli_query($dbconnect, $ad_sql);
+													$ad_res=mysqli_fetch_assoc($ad_qry);
+													?>
+													<img src="<?php echo getimgURL($ad_res['profilepic'], "profilepic");?>">
+													<?php
+													
+												}
+											?>
+											<?php
+												foreach ($mem_arr as $mem) {
+													$mem_sql="SELECT * FROM users WHERE usrID=".$mem["id"];
+													$mem_qry=mysqli_query($dbconnect, $mem_sql);
+													$mem_res=mysqli_fetch_assoc($mem_qry);
+													?>
+													<img src="<?php echo getimgURL($mem_res['profilepic'], "profilepic");?>">
+													<?php
+													
+												}
+											?>
+
 										</div>
 
 										<!-- <h1 style="margin-bottom: 3px; font-weight: 500; font-size: 20px;">Open</h1> -->
@@ -1465,6 +1488,7 @@
 			$("#join_proj").click(function(){
 				$("#if_join").contents().find("#proj_join").submit();
 				$(".modal").modal('hide');
+				location.reload();
 				
 			});
 
