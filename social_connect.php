@@ -60,39 +60,46 @@
   //     statusChangeCallback(response);
   //   });
   // }
-
-  function statusChangeCallback(response) {
-    console.log('statusChangeCallback');
-    console.log(response);
-    // The response object is returned with a status field that lets the
-    // app know the current login status of the person.
-    // Full docs on the response object can be found in the documentation
-    // for FB.getLoginStatus().
-    if (response.status === 'connected') {
-      // Logged into your app and Facebook.
-      console.log("works");
-    // FB.login(function(response) {
-    //   if (response.authResponse) {
-    //     console.log("logged in");
-      var request = new XMLHttpRequest(),
-      method="POST",
-      url="usr.php";
-      request.open(method,url,true);
-      request.onreadystatechange=function(){
-        if(request.readyState === XMLHttpRequest.DONE && request.status === 200){
-          parent.location.reload();
-        }
-      };
+  var login=function(){
+    FB.login(function(){
+      var request = new XMLHttpRequest();
+      request.open("POST", "usr.php");
       request.send(formData);
-    }
-  }
 
-
-  function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
     });
   }
+  // function statusChangeCallback(response) {
+  //   console.log('statusChangeCallback');
+  //   console.log(response);
+  //   // The response object is returned with a status field that lets the
+  //   // app know the current login status of the person.
+  //   // Full docs on the response object can be found in the documentation
+  //   // for FB.getLoginStatus().
+  //   if (response.status === 'connected') {
+  //     // Logged into your app and Facebook.
+  //     console.log("works");
+  //   // FB.login(function(response) {
+  //   //   if (response.authResponse) {
+  //   //     console.log("logged in");
+  //     var request = new XMLHttpRequest(),
+  //     method="POST",
+  //     url="usr.php";
+  //     request.open(method,url,true);
+  //     request.onreadystatechange=function(){
+  //       if(request.readyState === XMLHttpRequest.DONE && request.status === 200){
+  //         parent.location.reload();
+  //       }
+  //     };
+  //     request.send(formData);
+  //   }
+  // }
+
+
+  // function checkLoginState() {
+  //   FB.getLoginStatus(function(response) {
+  //     statusChangeCallback(response);
+  //   });
+  // }
   window.fbAsyncInit = function() {
     FB.init({
       appId: <?php echo $app_id;?>,
@@ -101,9 +108,9 @@
       cookie: true, // This is important, it's not enabled by default
       version: 'v2.8'
     });
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
+    // FB.getLoginStatus(function(response) {
+    //   statusChangeCallback(response);
+    // });
 
 
     // FB.getLoginStatus(function(response) {
@@ -146,7 +153,7 @@
 						<p align="center">Connect your Teamwerk account with Facebook so we can find you the top projects that would interest you the most.</p>
 						
 						<div id="fbcenter" style="margin-top: 25px;">
-							<fb:login-button size="xlarge"  onlogin="checkLoginState();">Continue with Facebook
+							<fb:login-button size="xlarge"  onlogin="login();">Continue with Facebook
 							</fb:login-button>
               
 

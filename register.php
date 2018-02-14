@@ -360,6 +360,21 @@
     <script type="text/javascript">
     	var formData;
     	$(document).ready(function(){
+   //  		$('input[type=text],input[type=password],input[type=email],input[type=checkbox]').keyup(function() {
+        
+		 //    if ($('input[name=firstname]').val() !=''&&
+			//     $('input[name=lastname]').val() != '' &&
+			//     $('input[name=pitch]').val() != ''&&
+			//     $('input[name=email_signup]').val() != ''&&
+			//     $('input[name=pass_signup]').val() != ''&&
+			//     $('input[name=pass_signup_verify]').val() != ''&&
+			//     $("input[name^='chk_']:checked").length>1){
+			      
+		 //        $('#createAccount').removeAttr('disabled');
+			//     } else {
+			//         $('#createAccount').attr('disabled', 'disabled');
+			//     }
+			// });
     		
     		$('#createAccount').click(function(){
 				formData=new FormData($('#reg_form')[0]);
