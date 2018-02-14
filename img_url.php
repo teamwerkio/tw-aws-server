@@ -24,17 +24,17 @@
 		));
 		
 		if(strcmp($name, "")==0 && strcmp($dir, "profilepic")==0){
-			return "images/placeholder/place_profilepic.png";
+			return "../images/placeholder/place_profilepic.png";
 
 		}
 		elseif (strcmp($name, "")==0 && strcmp($dir, "banner_big")==0) {
-			return "images/placeholder/570x350.png";
+			return "../images/placeholder/570x350.png";
 		}
 		elseif (strcmp($name, "")==0 && strcmp($dir, "banner_small")==0) {
-			return "images/placeholder/370x240.png";
+			return "../images/placeholder/370x240.png";
 		}
 		elseif (strcmp($name, "")==0 && strcmp($dir, "proj_icon")==0) {
-			return "images/placeholder/150x150.png";
+			return "../images/placeholder/150x150.png";
 		}
 		else{
 			$url="";

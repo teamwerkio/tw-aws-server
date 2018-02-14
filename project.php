@@ -54,7 +54,7 @@
 	<!-- Style CSS -->
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link rel="stylesheet" type="text/css" href="css/responsive.css" />
-    <link rel="icon" href="images/favicon.png" type="image/x-icon"/>
+    <link rel="icon" href="../images/favicon.png" type="image/x-icon"/>
     <!-- bootstrap wrappable css to avoid conflicts -->
   	<link rel="stylesheet" href="https://formden.com/static/assets/demos/bootstrap-iso/bootstrap-iso/bootstrap-iso.css">
   	<link rel="stylesheet" href="https://formden.com/static/assets/demos/bootstrap-iso/bootstrap-iso/bootstrap-iso.css">
@@ -70,7 +70,7 @@
 		<header id="header" class="site-header">
 			<div class="container">
 				<div class="site-brand">
-					<a href="library.php"><img src="images/assets/logo.png" style="width: 205px; height: 40px;" alt=""></a>
+					<a href="library.php"><img src="../images/assets/logo.png" style="width: 205px; height: 40px;" alt=""></a>
 				</div><!-- .site-brand -->
 				<div class="right-header">					
 					<nav class="main-menu">
@@ -1237,7 +1237,7 @@
 										<ol class="comments-list">
 											<li class="comment clearfix"> 
 												<div class="comment-body">
-													<div class="comment-avatar"><img src="images/placeholder/70x70.png" alt=""></div>
+													<div class="comment-avatar"><img src="../images/placeholder/70x70.png" alt=""></div>
 													<div class="comment-info">
 														<header class="comment-meta"></header>
 														<cite class="comment-author">Jordan B. Goodale</cite>
