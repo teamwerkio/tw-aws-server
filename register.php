@@ -4,6 +4,10 @@
 	if(isset($_SESSION['usr'])){
 		header("Location:library.php");
 	}
+
+	$parsed_ini=parse_ini_file("../../fb.ini", true);
+	$app_id=$parsed_ini['FB']['app_id'];
+	$app_secret=$parsed_ini['FB']['app_secret'];
 ?>
 <!doctype html>
 <html lang="en">
@@ -190,9 +194,15 @@
 					  					</div>
 				  					</div>
 				  				</div>
+				  				<div class="create-account" style="margin-top: 14.5px; /*margin-bottom: 15px;*/ float: right;">
+				  					<input type="checkbox" id="tou" name="" value="" checked>
+				  					<label for="tou" style="padding-left: 22px;">I agree to the <u><a style="display: inline;" href="termsofuse.html">Terms of Use</a></u></label>
+				  					<div class="checkbox" style="margin-top: 2px;"></div>
+				  				</div>
 							</div>
-							<!-- <button name="signup" class="btn-primary" type="submit" style="cursor: pointer; margin-top: 5px; background-color: #73b941; padding-left: 8px; padding-right: 8px;">Save and Apply settings</button> -->
-							<button id="signup" type="submit" class="btn-primary" style="color: white;">Create Account</button>
+							<button id="signup" type="submit" class="btn-primary" data-toggle="modal" data-target="#modal-1" style="color: white;">No, proceed without Facebook</button>
+							<fb:login-button size="xlarge"  onlogin="checkLoginState();">Continue with Facebook
+							</fb:login-button>
 					  	</form>
 					</div>
 				</div>
@@ -280,13 +290,47 @@
     <script src="http://malsup.github.com/jquery.form.js"></script> 
 
     <script type="text/javascript">
-    	
-    	$(document).ready(function(){
+
+	  function statusChangeCallback(response) {
+	    console.log('statusChangeCallback');
+	    console.log(response.status);
+	    if(response.status==='connected'){
+	    	$("#signup").click();
+	    }
+	    // The response object is returned with a status field that lets the
+	    // app know the current login status of the person.
+	    // Full docs on the response object can be found in the documentation
+	    // for FB.getLoginStatus().
+	  }
+	    function checkLoginState() {
+		    FB.getLoginStatus(function(response) {
+		      statusChangeCallback(response);
+		    });
+		  }
+	  window.fbAsyncInit = function() {
+	    FB.init({
+	      appId: <?php echo $app_id;?>,
+	      autoLogAppEvents : true,
+	      xfbml            : true,
+	      cookie: true, // This is important, it's not enabled by default
+	      version: 'v2.8'
+	    });
+
+	    FB.getLoginStatus(function(response) {
+	      statusChangeCallback(response);
+	    });
 
 
 
+	  };
+	  (function(d, s, id){
+	    var js, fjs = d.getElementsByTagName(s)[0];
+	    if (d.getElementById(id)) {return;}
+	    js = d.createElement(s); js.id = id;
+	    js.src = "https://connect.facebook.net/en_US/sdk.js";
+	    fjs.parentNode.insertBefore(js, fjs);
+	  }(document, 'script', 'facebook-jssdk'));
 
-    	});
     </script>
 </body>
 </html>
