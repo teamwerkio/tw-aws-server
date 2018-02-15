@@ -1224,13 +1224,7 @@
 												<div class="desc" id="updateDesc4"><p>Sed cursus hendrerit odio, at aliquet leo hendrerit a. Nulla ultricies sagittis dolor, quis maximus magna consectetur eu. Cras pharetra aliquam fringilla. Integer placerat sapien dapibus varius luctus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in aliquam urna, ultrices lobortis lacus. Praesent mi enim, congue semper volutpat ut, bibendum tempor arcu.</p></div>
 											</li>
 										</ul>
-<!-- 										<button id="addUpdate">+ Update</button>
-											<div id="updateModal" class="modal">
-												<div class="modal-content" scrolling="no">
-													<span class="close">&times;</span>
-													<iframe src="add_update.php" height="650" scrolling="no"></iframe>
-												</div>
-											</div> -->
+
 									</div>
 									<div id="comment" class="tabs comment-area">
 										<h3 class="comments-title">1 Comment</h3>
@@ -1471,18 +1465,45 @@
     	var usr_id="<?php echo $sess_ID?>";
 		var proj_id="<?php echo $id?>";
 		$(document).ready(function(){
-
 			$("#update_button").click(function(){
-				$("#if_update").contents().find("#update_add").submit();
-				$('.modal').modal('hide');
-				location.reload();
+
+				$.ajax({
+					url: 'add_update_submit.php?projID='+proj_id,
+					type: 'POST',
+					data: $("#if_update").contents().find("#update_add").serialize(),
+					success: function(data){
+						$(".modal").modal('hide');
+						location.reload();
+						
+					}
+
+				});
+				
 
 			});
 
+
+			$('.modal').on('hidden.bs.modal', function(){
+				console.log("erasing");
+			    $(this).find('form')[0].reset();
+			});
+
+
 			$("#role_button").click(function(){
-				$("#if_role").contents().find("#role_add").submit();
-				$(".modal").modal('hide');
-				location.reload();
+				$.ajax({
+					url: 'add_role_submit.php?projID='+proj_id,
+					type: 'POST',
+					data: $("#if_role").contents().find("#role_add").serialize(),
+					success: function(data){
+						$(".modal").modal('hide');
+						location.reload();
+						
+					}
+
+				});
+				// $("#if_role").contents().find("#role_add").submit();
+				
+				
 			});
 
 
