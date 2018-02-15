@@ -2,6 +2,7 @@
 	include("dbconnect.php");
 	include("img_url.php");
 	session_start();
+	$other=false;
 	function returnCat($table, $col, $idx, $dbconnect, $idtype){
 		$cat_sql="SELECT ".$col." FROM ".$table." WHERE ".$idtype."='".$idx."'";
 		$cat_qry=mysqli_query($dbconnect, $cat_sql);
@@ -10,6 +11,12 @@
 	}
 	if(!isset($_SESSION['usr'])){
 		header("Location:library.php");
+	}
+	elseif (isset($_GET['other_usr'])){
+		$other=true;
+		$prof_sql = "SELECT * FROM users WHERE usrID=".$_GET['other_usr'];
+		$prof_qry = mysqli_query($dbconnect, $prof_sql);
+		$prof_res = mysqli_fetch_assoc($prof_qry);
 	}
 	
 	else{
@@ -83,7 +90,22 @@
 								<a href="my_projects.php">My Projects<i class="fa fa-caret-down" aria-hidden="true"></i></a>
 							</li>
 							<li>
-								<a href="profile.php"><?php echo $prof_res['firstname']; ?><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+								<?php
+									if(!$other){
+										?>
+											<a href="profile.php"><?php echo $prof_res['firstname']; ?><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+										<?php
+									}
+									else{
+										$prof2_sql = "SELECT * FROM users WHERE usrID=".$_SESSION['usr'];
+										$prof2_qry = mysqli_query($dbconnect, $prof2_sql);
+										$prof2_res = mysqli_fetch_assoc($prof2_qry);
+										?>
+										<a href="profile.php"><?php echo $prof2_res['firstname']; ?><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+										<?php
+
+									}
+								?>
 								<ul class="sub-menu">
 									<li><a href="profile.php">Profile</a></li>
 									<li><a href="my_projects.php">My Projects</a></li>
@@ -109,6 +131,11 @@
 
 						<div class="col-lg-3">
 							<nav class="account-bar">
+								<?php
+									if(!$other){
+
+									
+								?>
 								<ul>
 									<!-- <li><a href="dashboard.php">Dashboard</a></li> -->
 									<li class="active"><a href="profile.php">Profile</a></li>
@@ -117,6 +144,9 @@
 									<li><a href="my_projects.php">My Projects</a></li>
 									<li><a href="profile_settings.php">Profile Settings</a></li>
 								</ul>
+								<?php
+									}
+								?>
 							</nav>
 						</div>
 
@@ -138,6 +168,11 @@
 											</div>
 										</div>
 									</div>
+									<?php
+										if(!$other){
+
+										
+									?>
 									<!-- Recently visited projects -->
 									<div class="dashboard-latest" style="margin-bottom: 1px;">
 										<h3 style="margin-bottom: 20px;">Recently Visited</h3>
@@ -450,6 +485,9 @@
 											}
 										?>
 									</div>
+									<?php
+										}
+									?>
 								</div>
 							</div>
 						</div>

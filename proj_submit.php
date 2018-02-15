@@ -65,27 +65,31 @@
 			$member=array('owner' =>array('id' => $usrID,'pos'=>"A"), 'member'=>array(), 'admin'=>array());
 			$member_json=json_encode($member);
 
+			$proj_sql = "INSERT INTO project (usrID, projName, tagline, lg_desc, sm_desc, big_ban, small_ban, proj_icon, colID, catID, tags, team, dt) VALUES ('".mysqli_real_escape_string($dbconnect, $_SESSION['usr'])."', '".
+			mysqli_real_escape_string($dbconnect, $projName)."', '".
+			mysqli_real_escape_string($dbconnect, $tagline)."', '".
+			mysqli_real_escape_string($dbconnect, $lg_desc)."', '".
+			mysqli_real_escape_string($dbconnect, $sh_desc)."', '".
+			mysqli_real_escape_string($dbconnect, $big_ban_name)."', '".
+			mysqli_real_escape_string($dbconnect, $sm_ban_name)."', '".
+			mysqli_real_escape_string($dbconnect, $icon_name)."', '".
+			mysqli_real_escape_string($dbconnect, $college)."', '".
+			mysqli_real_escape_string($dbconnect, $category)."', '".
+			mysqli_real_escape_string($dbconnect, $tag_final)."', '".
+			mysqli_real_escape_string($dbconnect, $member_json)."', '".
+			mysqli_real_escape_string($dbconnect, $date)."')";
 
-
-			$proj_sql="INSERT INTO project (usrID, projName, tagline, lg_desc, sm_desc, big_ban, small_ban, proj_icon, colID, catID, tags, team, dt) VALUES ('".mysqli_real_escape_string($dbconnect, $usrID)."',
-				'".mysqli_real_escape_string($dbconnect, $projName)."',
-				'".mysqli_real_escape_string($dbconnect, $tagline)."',
-				'".mysqli_real_escape_string($dbconnect, $lg_desc)."',
-				'".mysqli_real_escape_string($dbconnect, $sh_desc)."',
-				'".mysqli_real_escape_string($dbconnect, $big_ban_name)."',
-				'".mysqli_real_escape_string($dbconnect, $sm_ban_name)."',
-				'".mysqli_real_escape_string($dbconnect, $icon_name)."',
-				'".mysqli_real_escape_string($dbconnect, $college)."',
-				'".mysqli_real_escape_string($dbconnect, $category)."',
-				'".mysqli_real_escape_string($dbconnect, $tag_final)."',
-				'".mysqli_real_escape_string($dbconnect, $member_json)."',
-				'".mysqli_real_escape_string($dbconnect, $date).
-				"')";
+			error_log($proj_sql);
 			$proj_query=mysqli_query($dbconnect, $proj_sql);
+			if(!$proj_query){
+				error_log(mysqli_error($dbconnect));
+			}
 
+			$highest_id = mysqli_fetch_row(mysqli_query($dbconnect, "SELECT MAX(projID) FROM project"))[0];
+			error_log($highest_id);
+			header("Location:project.php?projID=".$highest_id);
 
 		}
-		unset($_POST['addp']);
-		header("Location:library.php"); 
+
 	}
 ?>
