@@ -79,16 +79,16 @@
 			mysqli_real_escape_string($dbconnect, $member_json)."', '".
 			mysqli_real_escape_string($dbconnect, $date)."')";
 
-			error_log($proj_sql);
+			
 			$proj_query=mysqli_query($dbconnect, $proj_sql);
-			if(!$proj_query){
-				error_log(mysqli_error($dbconnect));
-			}
 
 			$highest_id = mysqli_fetch_row(mysqli_query($dbconnect, "SELECT MAX(projID) FROM project"))[0];
-			error_log($highest_id);
+			unset($_POST['addp']);
 			header("Location:project.php?projID=".$highest_id);
 
+		}
+		else{
+			header("Location:library.php");
 		}
 
 	}

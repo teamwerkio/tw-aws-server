@@ -34,6 +34,8 @@
 
 					$json=$load_res['subs'];
 					$json=json_decode($json, true);
+					$size_id=$load_res['tsizeID'];
+					$inv_id=$load_res['commID'];
 
 					$output.='
 					<div class="col-lg-4 col-sm-6 col-6">
@@ -52,16 +54,87 @@
 								<div class="process">
 									<div class="raised"><span style="width: '.$load_res['progress'].'%;"></span></div>
 									<div class="process-info">
-										<div class="process-pledged"><span>'.$load_res['upvote'].'</span>upvotes</div>
-										<div class="process-funded"><span>
-											'.count($json['subs']).'</span>interest</div>
-										<div class="process-time"><span style="color: red;">'.$load_res['virality'].'%</span>virality</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>';
-					$final_id=$load_res['projID'];
+										<div class="process-pledged"><span>'.count($json['subs']).'</span>interest</div>';
+					if($size_id==1){
+						$output.='
+						<div class="process-pledged"><span>
+							<a data-tooltip="Small team">
+							<i class="fa fa-user"></i>
+							<i class="fa fa-user"></i></a>
+						</span>team size</div>';
+					}
+					elseif ($size_id==2) {
+						$output.='
+						<div class="process-pledged"><span>
+							<a data-tooltip="Medium team">
+							<i class="fa fa-user"></i>
+							<i class="fa fa-user"></i>
+							<i class="fa fa-user"></i></a>
+						</span>team size</div>';
+					}
+					elseif ($size_id==3) {
+						$output.='
+						<div class="process-pledged"><span>
+							<a data-tooltip="Large team">
+							<i class="fa fa-user"></i>
+							<i class="fa fa-user"></i>
+							<i class="fa fa-user"></i>
+							<i class="fa fa-user"></i></a>
+						</span>team size</div>';
+					}
+					elseif ($size_id==4) {
+						$output.='
+						<div class="process-pledged"><span>
+							<a data-tooltip="Extra large team">
+							<i class="fa fa-user"></i>
+							<i class="fa fa-user"></i>
+							<i class="fa fa-user"></i>
+							<i class="fa fa-user-plus"></i></a>
+						</span>team size</div>';
+					}
+
+					if($inv_id==1){
+						$output.='
+						<div class="process-time"><span>
+							<a data-tooltip="< 10 hrs/week (approx.)">
+							<i class="fa fa-clock-o"></i></a>
+						</span>involvement</div>';
+
+					}
+					elseif ($inv_id==2) {
+						$output.='
+						<div class="process-time"><span>
+							<a data-tooltip="11 to 20 hrs/week (approx.)">
+							<i class="fa fa-clock-o"></i>
+							<i class="fa fa-clock-o"></i></a>
+						</span>involvement</div>';
+					}
+				elseif ($inv_id==3) {
+					$output.='
+					<div class="process-time"><span>
+						<a data-tooltip="21 to 30 hrs/week (approx.)">
+						<i class="fa fa-clock-o"></i>
+						<i class="fa fa-clock-o"></i>
+						<i class="fa fa-clock-o"></i></a>
+					</span>involvement</div>';
+				}
+				elseif ($inv_id==4) {
+					$output.='
+					<div class="process-time"><span>
+						<a data-tooltip="> 31 hrs/week (approx.)">
+						<i class="fa fa-clock-o"></i>
+						<i class="fa fa-clock-o"></i>
+						<i class="fa fa-clock-o"></i>
+						<i class="fa fa-clock-o"></i></a>
+					</span>involvement</div>';
+				}									
+					$output.='
+				</div>
+			</div>
+		</div>
+	</div>
+</div>';
+			$final_id=$load_res['projID'];
 
 			}}while($load_res=mysqli_fetch_assoc($load_qry));
 			$out=new \stdClass();
