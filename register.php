@@ -200,9 +200,10 @@
 				  					<div class="checkbox" style="margin-top: 2px;"></div>
 				  				</div>
 							</div>
-							<button id="signup" type="submit" class="btn-primary" data-toggle="modal" data-target="#modal-1" style="color: white;">No, proceed without Facebook</button>
+							<a href="social_connect.php" class="btn-primary">Create account</a>
+							<!-- <button id="signup" type="submit" class="btn-primary" data-toggle="modal" data-target="#modal-1" style="color: white;">No, proceed without Facebook</button>
 							<fb:login-button size="xlarge"  onlogin="checkLoginState();">Continue with Facebook
-							</fb:login-button>
+							</fb:login-button> -->
 					  	</form>
 					</div>
 				</div>
