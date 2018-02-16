@@ -9,7 +9,8 @@
 		    "mem_fn": "'.$mem_name_f.'",
 		    "mem_ln": "'.$mem_name_l.'",
 		    "pos": "'.$position.'",
-		    "mem_pitch": "'.$pitch.'"
+		    "mem_pitch": "'.$pitch.'",
+		    "mem_email": "'.$mem_email.'"
 		  }';
 		$body = [
 	    'Messages' => [
@@ -69,7 +70,8 @@
 		    "mem_fn": "'.$mem_name_f.'",
 		    "mem_ln": "'.$mem_name_l.'",
 		    "projName": "'.$projName.'",
-		    "position": "'.$position.'"
+		    "position": "'.$position.'",
+		    "mem_email": "'.$mem_email.'"
 		  }', true)	            
 	        ]
 	    ]
