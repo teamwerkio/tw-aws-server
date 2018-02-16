@@ -55,6 +55,7 @@
 			$position=returnCat('team_roles', 'title', $roleID, $dbconnect, 'roleID');
 
 			leader_noti_f($lres['email'], $projName, $lres['firstname'], $lres['lastname'], $position, $email, $user_res['firstname'], $user_res['lastname'], $reason);
+			requester_email_f($projName, $email, $user_res['firstname'], $user_res['lastname']);
 
 			unset($_POST['join_proj']);
 			

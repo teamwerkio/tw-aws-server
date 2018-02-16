@@ -86,4 +86,44 @@
 
 	}
 
+	function requester_email_f($projName, $mem_email, $mem_name_f, $mem_name_l){
+		include("mjconnect.php");
+		
+		$json='{
+		"mem_fn": "'.$mem_name_f.'",
+		"mem_ln": "'.$mem_name_l.'",
+		"projName": "'.$projName.'"
+		}';
+		
+		$body = [
+		'Messages' => [
+		  [
+		    'From' => [
+		      'Email' => "noreply@teamwerk.io",
+		      'Name' => "Teamwerk"
+		    ],
+		    'To' => [
+		      [
+		        'Email' => $mem_email,
+		        'Name' => $mem_name_f." ".$mem_name_l
+		      ]
+		    ],
+		    'TemplateID' => 316397,
+		    'TemplateLanguage' => true,
+		    'Subject' => "Your request to join ".$projName." has been sent!",
+		    'Variables' => json_decode($json, true)
+		  ]
+		]
+		];
+
+
+		$response = $mj->post(Resources::$Email, ['body' => $body]);
+		error_log(error_log(print_r($response->getData(), True)));
+		if($response->success()){
+			error_log("sent");
+		}
+
+
+	}
+
 ?>
