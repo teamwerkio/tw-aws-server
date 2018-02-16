@@ -1,9 +1,16 @@
 <?php
 	use \Mailjet\Resources;
-	function userEmail($recipient, $name, $teamEmail, $leaderName){
+	function leader_noti_f($owner_email, $projName, $o_name_f, $o_name_l, $position, $mem_email, $mem_name_f, $mem_name_l, $pitch){
 		include("mjconnect.php");
-	
-		
+		$json='{
+		    "owner_fn": "'.$o_name_f.'",
+		    "owner_ln": "'.$o_name_l.'",
+		    "projName": "'.$projName.'",
+		    "mem_fn": "'.$mem_name_f.'",
+		    "mem_ln": "'.$mem_name_l.'",
+		    "pos": "'.$position.'",
+		    "mem_pitch": "'.$pitch.'"
+		  }';
 		$body = [
 	    'Messages' => [
 	        [
@@ -13,18 +20,21 @@
 	            ],
 	            'To' => [
 	                [
-	                    'Email' => $recipient,
-	                    'Name' => $name
+	                    'Email' => $owner_email,
+	                    'Name' => $o_name_f." ".$o_name_l
 	                ]
 	            ],
-	            'Subject' => "Your request to join the team has been sent",
-	            'TextPart' => "Dear ".$name." you can contact ".$leaderName." using the email: ".$teamEmail
+                'TemplateID' => 316380,
+		        'TemplateLanguage' => true,
+		        'Subject' => "You have received a request to join ".$projName,
+		        'Variables' => json_decode($json, true)
 	        ]
 	    ]
 		];
 
+
 		$response = $mj->post(Resources::$Email, ['body' => $body]);
-		error_log(error_log(print_r($response->getData(), True)));
+		error_log(print_r($response->getData(), True));
 		if($response->success()){
 			error_log("sent");
 		}
@@ -32,7 +42,7 @@
 
 	}
 
-	function leaderEmail($recipient, $name, $reqEmail, $requester){
+	function leaderEmail_noti($owner_email, $projName, $o_name_f, $o_name_l, $position, $mem_email, $mem_name_f, $mem_name_l){
 		include("mjconnect.php");
 	
 		
@@ -45,12 +55,22 @@
 	            ],
 	            'To' => [
 	                [
-	                    'Email' => $recipient,
-	                    'Name' => $name
+	                    'Email' => $owner_email,
+	                    'Name' => $o_name_f." ".$o_name_l
 	                ]
 	            ],
-	            'Subject' => "You have a request to join your team",
-	            'TextPart' => "Dear ".$name." , ".$requester." wants to join your team, who can be reached using the email: ".$reqEmail
+
+	            'TemplateID' => 316381,
+		        'TemplateLanguage' => true,
+		        'Subject' => "Recent requests to join your project",
+		        'Variables' => json_decode('{
+		    "owner_fn": "'.$o_name_f.'",
+		    "owner_ln": "'.$o_name_l.'",
+		    "mem_fn": "'.$mem_name_f.'",
+		    "mem_ln": "'.$mem_name_l.'",
+		    "projName": "'.$projName.'",
+		    "position": "'.$position.'"
+		  }', true)	            
 	        ]
 	    ]
 		];

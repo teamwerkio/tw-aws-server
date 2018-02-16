@@ -1508,9 +1508,17 @@
 
 
 			$("#join_proj").click(function(){
-				$("#if_join").contents().find("#proj_join").submit();
-				$(".modal").modal('hide');
-				location.reload();
+				$.ajax({
+					url: 'join_project_submit.php?projID='+proj_id,
+					type: 'POST',
+					data: $("#if_join").contents().find("#proj_join").serialize(),
+					success: function(data){
+						$(".modal").modal('hide');
+						location.reload();
+						
+					}
+
+				});
 				
 			});
 
