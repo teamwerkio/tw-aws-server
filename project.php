@@ -3,21 +3,8 @@
 	include("dbconnect.php");
 	session_start();
 	include("img_url.php");
-	function timedifference_d($time){
-		date_default_timezone_set('US/Eastern');
-		$currtime=new DateTime();
-		$time=new DateTime($time);
-		$interval=$currtime->diff($time);
-		return $interval->format('%a');
-	}
-
+	include("utilities.php");
 	
-	function returnCat($table, $col, $idx, $dbconnect, $idtype){
-		$cat_sql="SELECT ".$col." FROM ".$table." WHERE ".$idtype."='".$idx."'";
-		$cat_qry=mysqli_query($dbconnect, $cat_sql);
-		$cat_res=mysqli_fetch_assoc($cat_qry);
-		return $cat_res[$col];
-	}
 
 
 	if(!isset($_SESSION['usr'])){
@@ -149,7 +136,7 @@
 								<div class="campaign-description"><p><?php echo $p_res['sm_desc']; ?></p></div>
 								<div class="campaign-author clearfix">
 									<div class="author-profile">
-										<a class="author-icon" href="profile.php?other_usr=<?php echo $p_res['usrID']; ?>"><?php echo '<img src="'.getimgURL($owner_p, "profilepic").'" />'; ?></a>by <a class="author-name" href="profile.php?other_usr=<?php echo $p_res['usrID']; ?>"><?php echo $owner_f; ?> <?php echo $owner_l; ?></a>
+										<a class="author-icon" href="profile.php?other_usr=<?php echo $p_res['usrID']; ?>"><?php echo '<img src="'.getProfURL($owner_p).'" />'; ?></a>by <a class="author-name" href="profile.php?other_usr=<?php echo $p_res['usrID']; ?>"><?php echo $owner_f; ?> <?php echo $owner_l; ?></a>
 									</div>
 									<div class="author-address"><span class="ion-location"></span><?php echo $proj_col; ?>, Amherst, MA</div>
 								</div>
@@ -430,14 +417,14 @@
 												$mem_arr=$team_json["member"];
 												
 											?>
-											<img src="<?php echo getimgURL($owner_p, "profilepic");?>">
+											<img src="<?php echo getProfURL($owner_p);?>">
 											<?php
 												foreach ($admin_arr as $admin) {
 													$ad_sql="SELECT * FROM users WHERE usrID=".$admin["id"];
 													$ad_qry=mysqli_query($dbconnect, $ad_sql);
 													$ad_res=mysqli_fetch_assoc($ad_qry);
 													?>
-													<img src="<?php echo getimgURL($ad_res['profilepic'], "profilepic");?>">
+													<img src="<?php echo getProfURL($ad_res['profilepic']);?>">
 													<?php
 													
 												}
@@ -448,7 +435,7 @@
 													$mem_qry=mysqli_query($dbconnect, $mem_sql);
 													$mem_res=mysqli_fetch_assoc($mem_qry);
 													?>
-													<img src="<?php echo getimgURL($mem_res['profilepic'], "profilepic");?>">
+													<img src="<?php echo getProfURL($mem_res['profilepic']);?>">
 													<?php
 													
 												}

@@ -2,23 +2,7 @@
 	include("dbconnect.php");
 	session_start();
 	include("img_url.php");
-
-
-	function timedifference_d($time){
-		date_default_timezone_set('US/Eastern');
-		$currtime=new DateTime();
-		$time=new DateTime($time);
-		$interval=$currtime->diff($time);
-		return $interval->format('%a');
-	}
-
-
-	function returnCat($table, $col, $idx, $dbconnect, $idtype){
-		$cat_sql="SELECT ".$col." FROM ".$table." WHERE ".$idtype."='".$idx."'";
-		$cat_qry=mysqli_query($dbconnect, $cat_sql);
-		$cat_res=mysqli_fetch_assoc($cat_qry);
-		return $cat_res[$col];
-	}
+	include("utilities.php");
 	
 	if(!isset($_SESSION['usr'])){
 		header("Location:usr.php");
@@ -197,7 +181,7 @@
 										<div class="campaign-description"><?php echo $trend_res['sm_desc']; ?></div>
 										<div class="staff-picks-author">
 											<div class="author-profile">
-												<a class="author-avatar" href="profile.php?other_usr=<?php echo $trend_res['usrID']; ?>"><?php echo '<img src="'.getimgURL($owner_p, "profilepic").'" />'; ?></a>by <a class="author-name" href="profile.php?other_usr=<?php echo $trend_res['usrID']; ?>"><?php echo $owner_f.' '.$owner_l; ?></a>
+												<a class="author-avatar" href="profile.php?other_usr=<?php echo $trend_res['usrID']; ?>"><?php echo '<img src="'.getProfURL($owner_p).'" />'; ?></a>by <a class="author-name" href="profile.php?other_usr=<?php echo $trend_res['usrID']; ?>"><?php echo $owner_f.' '.$owner_l; ?></a>
 											</div>
 											<div class="author-address"><span class="ion-location"></span><?php echo $proj_col; ?>, Amherst, MA</div>
 										</div>
@@ -342,7 +326,7 @@
 														<h3><a class="content" href="project.php?projID=<?php echo $proj_res['projID']; ?>"><?php echo $proj_res['projName']; ?></a></h3>
 														<div class="campaign-description"><?php echo $proj_res['sm_desc']; ?></div>
 														<div class="campaign-author"><a class="author-icon" href="profile.php?other_usr=<?php echo $proj_res['usrID']; ?>">
-															<?php echo '<img src="'.getimgURL($owner_p, "profilepic").'" />'; ?></a>by <a class="author-name" href="profile.php?other_usr=<?php echo $proj_res['usrID']; ?>"><?php echo $owner_f; ?>		
+															<?php echo '<img src="'.getProfURL($owner_p).'" />'; ?></a>by <a class="author-name" href="profile.php?other_usr=<?php echo $proj_res['usrID']; ?>"><?php echo $owner_f; ?>		
 														</a></div>
 														<div class="process">
 															<div class="raised"><span style="width: <?php echo $proj_res['progress'];?>%;"></span></div>

@@ -1,3 +1,15 @@
+<?php
+	include("dbconnect.php");
+	session_start();
+	unset($_SESSION['fb']);
+	$usr_sql="SELECT * FROM users WHERE usrID=".$_SESSION['usr'];
+	$usr_qry=mysqli_query($dbconnect, $usr_sql);
+	$usr_res=mysqli_fetch_assoc($usr_qry);
+
+	$parsed_ini=parse_ini_file("../../fb.ini", true);
+	$app_id=$parsed_ini['FB']['app_id'];
+	$app_secret=$parsed_ini['FB']['app_secret'];
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -23,14 +35,55 @@
 
 	<!-- Login with facebook script -->
 	<div id="fb-root"></div>
-	<script>(function(d, s, id) {
-		var js, fjs = d.getElementsByTagName(s)[0];
-		if (d.getElementById(id)) return;
-		js = d.createElement(s); js.id = id;
-		// change to our app below 
-		js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.12&appId=111072682828913&autoLogAppEvents=1'; 
-		fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
+	<script>
+	  function statusChangeCallback(response) {
+	    console.log('statusChangeCallback');
+	    console.log(response.status);
+	    if(response.status==='connected'){
+	    	$.ajax({
+    				url: 'fbLogin.php',
+    				type: 'POST',
+    				data: {
+    					'login': 1,
+    				},
+    				success: function(data){
+    					window.location.href="library.php";
+    				}
+			});	
+	    }
+	    // The response object is returned with a status field that lets the
+	    // app know the current login status of the person.
+	    // Full docs on the response object can be found in the documentation
+	    // for FB.getLoginStatus().
+	  }
+    function checkLoginState() {
+	    FB.getLoginStatus(function(response) {
+	      statusChangeCallback(response);
+	    });
+	  }
+	  window.fbAsyncInit = function() {
+	    FB.init({
+	      appId: <?php echo $app_id;?>,
+	      autoLogAppEvents : true,
+	      xfbml            : true,
+	      cookie: true, // This is important, it's not enabled by default
+	      version: 'v2.8'
+	    });
+
+	    FB.getLoginStatus(function(response) {
+	      statusChangeCallback(response);
+	    });
+
+
+
+	  };
+	  (function(d, s, id){
+	    var js, fjs = d.getElementsByTagName(s)[0];
+	    if (d.getElementById(id)) {return;}
+	    js = d.createElement(s); js.id = id;
+	    js.src = "https://connect.facebook.net/en_US/sdk.js";
+	    fjs.parentNode.insertBefore(js, fjs);
+	  }(document, 'script', 'facebook-jssdk'));
 	</script>
 
 		<div id="wrapper">
@@ -66,7 +119,7 @@
 								<a href="my_projects.php">My Projects<i class="fa fa-caret-down" aria-hidden="true"></i></a>
 							</li>
 							<li>
-								<a href="#">{username}<i class="fa fa-caret-down" aria-hidden="true"></i></a>
+								<a href="#"><?php echo $usr_res['firstname'];?><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 								<ul class="sub-menu">
 									<li><a href="profile.php">Profile</a></li>
 									<li><a href="my_projects.php">My Projects</a></li>
@@ -87,7 +140,7 @@
 		<main id="main" class="site-main">
 			<div class="page-title background-page">
 				<div class="container">
-					<h1>Welcome aboard, {username}!</h1>
+					<h1>Welcome aboard, <?php echo $usr_res['firstname'];?>!</h1>
 				</div>
 			</div>
 			
@@ -100,7 +153,7 @@
 					<p align="center">Connect your Teamwerk account with Facebook so we can find you the top projects that would interest you the most.</p>
 					<!-- Facebook login button -->
 					<div id="fbcenter" style="margin-top: 15px;">
-						<div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="true"></div>
+						<div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" onlogin="checkLoginState();"></div>
 					</div>
 					<a href="library.php" align="center" style="font-size: 12px; margin-top: 8px;"><u>No thanks, take me to my account</u></a>
 

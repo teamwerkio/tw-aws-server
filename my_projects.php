@@ -121,7 +121,7 @@
 								<div class="account-main">
 									<div class="author clearfix">
 										<a class="author-avatar" href="#">
-											<?php echo '<img src="'.getimgURL($prof_res['profilepic'], 'profilepic').'"/>'; ?></a>
+											<?php echo '<img src="'.getProfURL($prof_res['profilepic']).'"/>'; ?></a>
 										<div class="author-content">
 											<div class="author-title">
 												<h3 style="margin-bottom: 0px;"><a style="font-size: 25px; margin-top: 30px; margin-bottom: 0px;"><?php echo $prof_res['firstname'];?> <?php echo $prof_res['lastname']; ?></a></h3>

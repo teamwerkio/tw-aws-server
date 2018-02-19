@@ -4,6 +4,52 @@
 	use Aws\S3\S3Client;
 	require '../vendor/autoload.php';
 
+	function getProfURL($name){
+
+		$parsed_ini=parse_ini_file("../../cred.ini", true);
+
+		$s3=S3Client::factory([
+		'credentials' => [
+			'key' => $parsed_ini["S3_bucket"]["key"],
+			'secret' => $parsed_ini["S3_bucket"]["secret"]
+		],
+		'region' => 'us-east-1',
+		'version' => 'latest'
+		]);
+
+		$images=$s3->getIterator('ListObjects',array(
+			'Bucket' => $parsed_ini["S3_bucket"]["bucket"],
+			'Prefix' => "img_assets/profilepic/",
+			'Delimiter' => "/"
+		));
+		
+		if(substr( $name, 0, 2 ) === "av" && strlen($name)<=4){
+			return "../images/avatars/".$name.".jpg";
+
+		}
+		else{
+			$url="";
+			foreach ($images as $image) {
+				$image_path=$image["Key"];
+				$exp_image_path=explode("/", $image_path);
+				$img_fn=end($exp_image_path);
+				$exp_img_fn=explode(".", $img_fn);
+
+				
+				
+				if(strcmp($name, $exp_img_fn[0])==0){
+
+					$url=$s3->getObjectURL($parsed_ini["S3_bucket"]["bucket"], $image_path);
+					break;
+				}
+				
+				
+			}
+			return $url;
+		}
+
+	}
+
 	function getimgURL($name, $dir){
 
 		$parsed_ini=parse_ini_file("../../cred.ini", true);
@@ -49,6 +95,7 @@
 				if(strcmp($name, $exp_img_fn[0])==0){
 
 					$url=$s3->getObjectURL($parsed_ini["S3_bucket"]["bucket"], $image_path);
+					break;
 				}
 				
 				
