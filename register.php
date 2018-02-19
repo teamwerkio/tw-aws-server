@@ -25,6 +25,9 @@
   	<link rel="stylesheet" href="https://formden.com/static/assets/demos/bootstrap-iso/bootstrap-iso/bootstrap-iso.css">
   	<link rel="stylesheet" href="https://formden.com/static/assets/demos/bootstrap-iso/bootstrap-iso/bootstrap-iso.css">
 
+  	<!-- sweetalerts -->
+  	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <style type="text/css">
 		/* Create two equal columns that floats next to each other */
 		.column {
@@ -38,11 +41,88 @@
 			display: table;
 			clear: both;
 		}
+		.column3 {
+			float: left;
+			width: 25%;
+			padding: 10px;
+		}
+		/* Clear floats after the columns */
+		.row3:after {
+			content: "";
+			display: table;
+			clear: both;
+		}
 		#fbcenter {
 			margin: 0 auto;
 			text-align: center;
 		}
     </style>
+    <script>
+		function validateForm() {
+
+			var firstname = document.forms["signup"]["firstname"].value;
+			var lastname = document.forms["signup"]["lastname"].value;
+			var email = document.forms["signup"]["email_signup"].value;
+			var pass = document.forms["signup"]["pass_signup"].value;
+			var passv = document.forms["signup"]["pass_signup_verify"].value;
+			var checkBoxes = document.getElementsByClassName( 'cb' );
+			var isChecked = false;
+			var touChecked = document.getElementById("tou").checked;
+			
+			if (firstname == "") {
+				swal("Missing field", "Please enter your First Name", "warning");
+				return false;
+			}
+
+			if (lastname == "") {
+				swal("Missing field", "Please enter your Last Name", "warning");
+				return false;
+			}
+
+			if (email == "") {
+				swal("Missing field", "Please enter your College Email", "warning");
+				return false;
+			}
+
+			if (pass == "") {
+				swal("Missing field", "Please enter a Password", "warning");
+				return false;
+			}
+
+			if (passv == "") {
+				swal("Missing field", "Please enter your Password again to verify", "warning");
+				return false;
+			}
+
+			if (pass != passv) {
+				swal("Passwords do not match", "Please check the Passwords you entered", "error");
+				return false;
+			}
+
+			for (var i = 0; i < checkBoxes.length; i++) {
+					if ( checkBoxes[i].checked ) {
+						isChecked = true;
+					};
+				};
+			
+			if ( isChecked == 0 ) {
+				swal("Missing field", "Please select at least one interest", "warning");
+				return false;
+			}
+
+			for (var i = 0; i < tou.length; i++) {
+					if ( tou[i].checked ) {
+						touChecked = true;
+					};
+				};
+			
+			if ( touChecked == false ) {
+				swal("Terms of Use", "Please agree to the Terms of Use to create an account", "warning");
+				return false;
+			}
+
+		}
+	</script>
 </head>
 
 <body>
@@ -79,15 +159,14 @@
 					<div class="form-login form-register">
 
 						<h2>Create an account</h2>
-						<form id="reg_form" name="signup" action="usr.php" method="post" enctype="multipart/form-data" class="clearfix">
+
+						<form id="reg_form" name="signup" onsubmit="return validateForm()" action="social_connect.php" method="post" enctype="multipart/form-data" class="clearfix">
 			  				<div class="field">
 			  					<input name="firstname" type="text" value="" placeholder="First Name" />
 			  				</div>
 			  				<div class="field">
 			  					<input name="lastname" type="text" value="" placeholder="Last Name" />
-			  				</div>
-			  				<div class="field">
-			  					<input name="pitch" type="text" value="" placeholder="Talk to me about ..." />
+
 			  				</div>
 			  				<div class="row">
 			  					<div class="coloumn" style="margin-left: 15px; width: 49%;">
@@ -126,7 +205,7 @@
 
 			  				?>
 			  				<div class="payment" style="margin-top: 0px;">
-								<h4 style="font-size: 14px; margin-bottom: 5px; font-weight: bold; color: #555555">Your top interests *</h4>
+								<h4 style="font-size: 14px; margin-bottom: 5px; font-weight: bold; color: #555555">Your top interests</h4>
 								<h5 style="font-weight: normal; color: #555555; font-size: 14px; font-style: italic;">Pick your top interests</h5>
 								<div class="row" style="padding-left: 6px;">
 									<div class="column">
@@ -138,7 +217,7 @@
 													if($count>$half){
 														?>
 														<div class="create-account" style="margin-top: 10px;">
-										  					<input type="checkbox" id="<?php echo $int_res['catID'];?>" name="chk_<?php echo $int_res['catID'];?>" value="<?php echo $int_res['catID'];?>">
+										  					<input type="checkbox" class="cb" id="<?php echo $int_res['catID'];?>" name="chk_<?php echo $int_res['catID'];?>" value="<?php echo $int_res['catID'];?>">
 										  					<label for="<?php echo $int_res['catID'];?>" style="padding-left: 22px;"><?php echo $int_res['catName'];?></label>
 										  					<div class="checkbox" style="margin-top: 2px;"></div>
 									  					</div>
@@ -160,7 +239,7 @@
 				  									if($count<=$half){
 				  									?>
 								  						<div class="create-account" style="margin-top: 10px;">
-										  					<input type="checkbox" id="<?php echo $int_res['catID'];?>" name="chk_<?php echo $int_res['catID'];?>" value="<?php echo $int_res['catID'];?>">
+										  					<input type="checkbox" class="cb" id="<?php echo $int_res['catID'];?>" name="chk_<?php echo $int_res['catID'];?>" value="<?php echo $int_res['catID'];?>">
 										  					<label for="<?php echo $int_res['catID'];?>" style="padding-left: 22px;"><?php echo $int_res['catName'];?></label>
 										  					<div class="checkbox" style="margin-top: 2px;"></div>
 									  					</div>
@@ -174,9 +253,326 @@
 				  					</div>
 				  				</div>
 
+				  				<div class="field">
+			  						<input name="pitch" type="text" value="" placeholder="Other specific interests" />
+			  					</div>
+
 				  				<div class="field" style="margin-bottom: 0px; margin-top: 10px;">
-				  					<p><strong>Upload a Profile Picture *</strong></p>
-				  					<p><i>A size of 120 x 120 is preferred</i></p>
+				  					<p><strong>Select an avatar</strong></p>
+				  					<p><i>There's one for everyone.</i></p>
+				  					<div class="row3">
+
+				  						<!-- default avatar -->
+					  					<!-- <div class="payment" style="padding-left: 10px; margin-top: 10px;">
+					  						<ul>
+												<li>
+													<input type="radio" id="avdf" name="selector" checked="checked">
+													<label for="avdf"><img src="../images/avatars/avdf.jpg" style="max-width: 57.5px; max-height: 57.5px"></label>
+													<div class="payment-check"></div>
+												</li>
+											</ul>
+										</div> -->
+
+				  						<div class="column3">
+
+						  					<div class="payment" style="margin-top: 10px;">
+						  						<ul>
+													<li>
+														<input type="radio" id="av1" name="selector">
+														<label for="av1"><img src="../images/avatars/av1.jpg" style="max-width: 70px; max-height: 70px"></label>
+														<div class="payment-check"></div>
+													</li>
+												</ul>
+											</div>
+
+											<div class="payment" style="margin-top: 10px;">
+						  						<ul>
+													<li>
+														<input type="radio" id="av2" name="selector">
+														<label for="av2"><img src="../images/avatars/av2.jpg" style="max-width: 70px; max-height: 70px"></label>
+														<div class="payment-check"></div>
+													</li>
+												</ul>
+											</div>
+
+											<div class="payment" style="margin-top: 10px;">
+						  						<ul>
+													<li>
+														<input type="radio" id="av3" name="selector">
+														<label for="av3"><img src="../images/avatars/av3.jpg" style="max-width: 70px; max-height: 70px"></label>
+														<div class="payment-check"></div>
+													</li>
+												</ul>
+											</div>
+
+											<div class="payment" style="margin-top: 10px;">
+						  						<ul>
+													<li>
+														<input type="radio" id="av4" name="selector">
+														<label for="av4"><img src="../images/avatars/av4.jpg" style="max-width: 70px; max-height: 70px"></label>
+														<div class="payment-check"></div>
+													</li>
+												</ul>
+											</div>
+
+											<div class="payment" style="margin-top: 10px;">
+						  						<ul>
+													<li>
+														<input type="radio" id="av5" name="selector">
+														<label for="av5"><img src="../images/avatars/av5.jpg" style="max-width: 70px; max-height: 70px"></label>
+														<div class="payment-check"></div>
+													</li>
+												</ul>
+											</div>
+
+											<div class="payment" style="margin-top: 10px;">
+						  						<ul>
+													<li>
+														<input type="radio" id="av6" name="selector">
+														<label for="av6"><img src="../images/avatars/av6.jpg" style="max-width: 70px; max-height: 70px"></label>
+														<div class="payment-check"></div>
+													</li>
+												</ul>
+											</div>
+
+											<div class="payment" style="margin-top: 10px;">
+						  						<ul>
+													<li>
+														<input type="radio" id="av7" name="selector">
+														<label for="av7"><img src="../images/avatars/av7.jpg" style="max-width: 70px; max-height: 70px"></label>
+														<div class="payment-check"></div>
+													</li>
+												</ul>
+											</div>
+
+										</div>
+										<div class="column3">
+
+						  					<div class="payment" style="margin-top: 10px;">
+						  						<ul>
+													<li>
+														<input type="radio" id="av8" name="selector">
+														<label for="av8"><img src="../images/avatars/av8.jpg" style="max-width: 70px; max-height: 70px"></label>
+														<div class="payment-check"></div>
+													</li>
+												</ul>
+											</div>
+
+											<div class="payment" style="margin-top: 10px;">
+						  						<ul>
+													<li>
+														<input type="radio" id="av9" name="selector">
+														<label for="av9"><img src="../images/avatars/av9.jpg" style="max-width: 70px; max-height: 70px"></label>
+														<div class="payment-check"></div>
+													</li>
+												</ul>
+											</div>
+
+											<div class="payment" style="margin-top: 10px;">
+						  						<ul>
+													<li>
+														<input type="radio" id="av10" name="selector">
+														<label for="av10"><img src="../images/avatars/av10.jpg" style="max-width: 70px; max-height: 70px"></label>
+														<div class="payment-check"></div>
+													</li>
+												</ul>
+											</div>
+
+											<div class="payment" style="margin-top: 10px;">
+						  						<ul>
+													<li>
+														<input type="radio" id="av11" name="selector">
+														<label for="av11"><img src="../images/avatars/av11.jpg" style="max-width: 70px; max-height: 70px"></label>
+														<div class="payment-check"></div>
+													</li>
+												</ul>
+											</div>
+
+											<div class="payment" style="margin-top: 10px;">
+						  						<ul>
+													<li>
+														<input type="radio" id="av12" name="selector">
+														<label for="av12"><img src="../images/avatars/av12.jpg" style="max-width: 70px; max-height: 70px"></label>
+														<div class="payment-check"></div>
+													</li>
+												</ul>
+											</div>
+
+											<div class="payment" style="margin-top: 10px;">
+						  						<ul>
+													<li>
+														<input type="radio" id="av13" name="selector">
+														<label for="av13"><img src="../images/avatars/av13.jpg" style="max-width: 70px; max-height: 70px"></label>
+														<div class="payment-check"></div>
+													</li>
+												</ul>
+											</div>
+
+											<div class="payment" style="margin-top: 10px;">
+						  						<ul>
+													<li>
+														<input type="radio" id="av14" name="selector">
+														<label for="av14"><img src="../images/avatars/av14.jpg" style="max-width: 70px; max-height: 70px"></label>
+														<div class="payment-check"></div>
+													</li>
+												</ul>
+											</div>
+
+										</div>
+										<div class="column3">
+
+						  					<div class="payment" style="margin-top: 10px;">
+						  						<ul>
+													<li>
+														<input type="radio" id="av15" name="selector">
+														<label for="av15"><img src="../images/avatars/av15.jpg" style="max-width: 70px; max-height: 70px"></label>
+														<div class="payment-check"></div>
+													</li>
+												</ul>
+											</div>
+
+											<div class="payment" style="margin-top: 10px;">
+						  						<ul>
+													<li>
+														<input type="radio" id="av16" name="selector">
+														<label for="av16"><img src="../images/avatars/av16.jpg" style="max-width: 70px; max-height: 70px"></label>
+														<div class="payment-check"></div>
+													</li>
+												</ul>
+											</div>
+
+											<div class="payment" style="margin-top: 10px;">
+						  						<ul>
+													<li>
+														<input type="radio" id="av17" name="selector">
+														<label for="av17"><img src="../images/avatars/av17.jpg" style="max-width: 70px; max-height: 70px"></label>
+														<div class="payment-check"></div>
+													</li>
+												</ul>
+											</div>
+
+											<div class="payment" style="margin-top: 10px;">
+						  						<ul>
+													<li>
+														<input type="radio" id="av18" name="selector">
+														<label for="av18"><img src="../images/avatars/av18.jpg" style="max-width: 70px; max-height: 70px"></label>
+														<div class="payment-check"></div>
+													</li>
+												</ul>
+											</div>
+
+											<div class="payment" style="margin-top: 10px;">
+						  						<ul>
+													<li>
+														<input type="radio" id="av19" name="selector">
+														<label for="av19"><img src="../images/avatars/av19.jpg" style="max-width: 70px; max-height: 70px"></label>
+														<div class="payment-check"></div>
+													</li>
+												</ul>
+											</div>
+
+											<div class="payment" style="margin-top: 10px;">
+						  						<ul>
+													<li>
+														<input type="radio" id="av20" name="selector">
+														<label for="av20"><img src="../images/avatars/av20.jpg" style="max-width: 70px; max-height: 70px"></label>
+														<div class="payment-check"></div>
+													</li>
+												</ul>
+											</div>
+
+											<div class="payment" style="margin-top: 10px;">
+						  						<ul>
+													<li>
+														<input type="radio" id="av21" name="selector">
+														<label for="av21"><img src="../images/avatars/av21.jpg" style="max-width: 70px; max-height: 70px"></label>
+														<div class="payment-check"></div>
+													</li>
+												</ul>
+											</div>
+
+										</div>
+										<div class="column3">
+
+						  					<div class="payment" style="margin-top: 10px;">
+						  						<ul>
+													<li>
+														<input type="radio" id="av22" name="selector">
+														<label for="av22"><img src="../images/avatars/av22.jpg" style="max-width: 70px; max-height: 70px"></label>
+														<div class="payment-check"></div>
+													</li>
+												</ul>
+											</div>
+
+											<div class="payment" style="margin-top: 10px;">
+						  						<ul>
+													<li>
+														<input type="radio" id="av23" name="selector">
+														<label for="av23"><img src="../images/avatars/av23.jpg" style="max-width: 70px; max-height: 70px"></label>
+														<div class="payment-check"></div>
+													</li>
+												</ul>
+											</div>
+
+											<div class="payment" style="margin-top: 10px;">
+						  						<ul>
+													<li>
+														<input type="radio" id="av24" name="selector">
+														<label for="av24"><img src="../images/avatars/av24.jpg" style="max-width: 70px; max-height: 70px"></label>
+														<div class="payment-check"></div>
+													</li>
+												</ul>
+											</div>
+
+											<div class="payment" style="margin-top: 10px;">
+						  						<ul>
+													<li>
+														<input type="radio" id="av25" name="selector">
+														<label for="av25"><img src="../images/avatars/av25.jpg" style="max-width: 70px; max-height: 70px"></label>
+														<div class="payment-check"></div>
+													</li>
+												</ul>
+											</div>
+
+											<div class="payment" style="margin-top: 10px;">
+						  						<ul>
+													<li>
+														<input type="radio" id="av26" name="selector">
+														<label for="av26"><img src="../images/avatars/av26.jpg" style="max-width: 70px; max-height: 70px"></label>
+														<div class="payment-check"></div>
+													</li>
+												</ul>
+											</div>
+
+											<div class="payment" style="margin-top: 10px;">
+						  						<ul>
+													<li>
+														<input type="radio" id="av27" name="selector">
+														<label for="av27"><img src="../images/avatars/av27.jpg" style="max-width: 70px; max-height: 70px"></label>
+														<div class="payment-check"></div>
+													</li>
+												</ul>
+											</div>
+
+											<div class="payment" style="margin-top: 10px;">
+						  						<ul>
+													<li>
+														<input type="radio" id="av28" name="selector">
+														<label for="av28"><img src="../images/avatars/av28.jpg" style="max-width: 70px; max-height: 70px"></label>
+														<div class="payment-check"></div>
+													</li>
+												</ul>
+											</div>
+
+										</div>
+									</div>
+				  				</div>
+
+				  				<h4 align="center" style="margin-top: 20px;">OR</h4>
+
+				  				<div class="field" style="margin-bottom: 0px; margin-top: 10px;">
+				  					<p><strong>Upload your picture</strong></p>
+				  					<p><i>Make sure its your coolest photo!</i></p>
 				  					<div class="file-upload">
 				  						<div class="upload-bg">
 					  						<div id="myfileupload1">
@@ -194,13 +590,17 @@
 					  					</div>
 				  					</div>
 				  				</div>
-				  				<div class="create-account" style="margin-top: 14.5px; /*margin-bottom: 15px;*/ float: right;">
+
+				  				<div class="create-account" style="margin-top: 10px;">
+
 				  					<input type="checkbox" id="tou" name="" value="" checked>
 				  					<label for="tou" style="padding-left: 22px;">I agree to the <u><a style="display: inline;" href="termsofuse.html">Terms of Use</a></u></label>
 				  					<div class="checkbox" style="margin-top: 2px;"></div>
 				  				</div>
 							</div>
-							<a href="social_connect.php" class="btn-primary">Create account</a>
+
+							<input type="submit" value="Create account" class="btn-primary" style="margin-top: 10px;"></input>
+
 							<!-- <button id="signup" type="submit" class="btn-primary" data-toggle="modal" data-target="#modal-1" style="color: white;">No, proceed without Facebook</button>
 							<fb:login-button size="xlarge"  onlogin="checkLoginState();">Continue with Facebook
 							</fb:login-button> -->
