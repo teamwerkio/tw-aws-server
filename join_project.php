@@ -24,7 +24,7 @@
 
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link rel="stylesheet" type="text/css" href="css/responsive.css" />
-    <link rel="icon" href="images/favicon.png" type="image/x-icon"/>
+    <link rel="icon" href="../images/favicon.png" type="image/x-icon"/>
 </head>
 
 <body class="campaign-detail">		
@@ -49,11 +49,23 @@
 									<select name="j_role" id="">
 										<option value="">Select a Role</option>
 										<?php
+											
+											$join_req_sql="SELECT * FROM join_req WHERE usrID=".$_SESSION['usr']." AND projID=".$_GET['projID'];
+											$join_req_qry=mysqli_query($dbconnect, $join_req_sql);
+											$join_req_res=mysqli_fetch_assoc($join_req_qry);
+											$role_arr=array();
+
 											do{
+												array_push($role_arr, $join_req_res['roleID']);
+												
+											}while($join_req_res=mysqli_fetch_assoc($join_req_qry));
+											
+											do{
+												if(!in_array($role_res['roleID'], $role_arr)){
 												?>
 													<option value="<?php echo $role_res['roleID']?>"><?php echo $role_res['title']?></option>
 												<?php
-											}while($role_res=mysqli_fetch_assoc($role_qry));
+											}}while($role_res=mysqli_fetch_assoc($role_qry));
 										?>
 <!-- 										<option value="1">A</option>
 										<option value="2">B</option>

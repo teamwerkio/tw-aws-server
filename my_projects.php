@@ -2,34 +2,27 @@
 	include("dbconnect.php");
 	include("img_url.php");
 	session_start();
+	function returnCat($table, $col, $idx, $dbconnect, $idtype){
+		$cat_sql="SELECT ".$col." FROM ".$table." WHERE ".$idtype."='".$idx."'";
+		$cat_qry=mysqli_query($dbconnect, $cat_sql);
+		$cat_res=mysqli_fetch_assoc($cat_qry);
+		return $cat_res[$col];
+	}
 
 	if(!isset($_SESSION['usr'])){
 		header("Location:library.php");
 	}
 	else{
-		if(!isset($_GET['other_usr'])){
-			$prof_sql = "SELECT * FROM users WHERE usrID='".$_SESSION['usr']."'";
-			$prof_qry = mysqli_query($dbconnect, $prof_sql);
-			$prof_res = mysqli_fetch_assoc($prof_qry);
-			$show=true;
-		}
-		else{
-			$prof_sql = "SELECT * FROM users WHERE usrID='".$_GET['other_usr']."'";
-			$prof_qry = mysqli_query($dbconnect, $prof_sql);
-			$prof_res = mysqli_fetch_assoc($prof_qry);
-			$show=false;
-			if($_GET['other_usr']==$_SESSION['usr']){
-				$show=true;
-			}
-			
-		}
-		
+		$proj_sql = "SELECT * FROM project WHERE usrID=".$_SESSION['usr'];
+		$proj_qry = mysqli_query($dbconnect, $proj_sql);
+		$proj_res = mysqli_fetch_assoc($proj_qry);
+
+		$prof_sql = "SELECT * FROM users WHERE usrID=".$_SESSION['usr'];
+		$prof_qry = mysqli_query($dbconnect, $prof_sql);
+		$prof_res = mysqli_fetch_assoc($prof_qry);
 
 		
 	}
-	$name_sql = "SELECT firstname FROM users WHERE usrID='".$_SESSION['usr']."'";
-	$name_qry = mysqli_query($dbconnect, $name_sql);
-	$name_res = mysqli_fetch_assoc($name_qry);
 ?>
 <!doctype html>
 <html lang="en">
@@ -85,7 +78,7 @@
 								<a href="my_projects.php">My Projects<i class="fa fa-caret-down" aria-hidden="true"></i></a>
 							</li>
 							<li>
-								<a href="profile.php"><?php echo $name_res['firstname']; ?><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+								<a href="profile.php"><?php echo $prof_res['firstname']; ?><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 								<ul class="sub-menu">
 									<li><a href="profile.php">Profile</a></li>
 									<li><a href="my_projects.php">My Projects</a></li>
@@ -108,9 +101,7 @@
 			<div class="account-wrapper">
 				<div class="container">
 					<div class="row">
-						<?php
-							if($show){
-						?>
+
 						<div class="col-lg-3">
 							<nav class="account-bar">
 								<ul>
@@ -123,9 +114,7 @@
 								</ul>
 							</nav>
 						</div>
-						<?php
-							}
-						?>
+
 						<div class="col-lg-9">
 							<div class="account-content profile">
 								<h3 class="account-title">My Projects</h3>
@@ -146,12 +135,49 @@
 									</div>
 
 									<!-- my projects -->
+
+
 									<div class="dashboard-latest" style="margin-bottom: 1px;">
 										<h3 style="margin-bottom: 20px;">Projects started by <?php echo $prof_res['firstname'];?></h3>
+
+									<?php
+										if(mysqli_num_rows($proj_qry)==0){
+											echo "<p>You have not posted any projects yet. Go ahead and create one!</p>";
+										}
+										else{
+
+
+									?>
 										<div class="row" style="margin-left: 1px;">
 											<div class="coloumn">
 												<ul>
-													<li>
+
+													<?php
+														$half=ceil(mysqli_num_rows($proj_qry)/2);
+														
+														$count=0;
+														do{
+															$count+=1;
+															if($count<=$half){
+
+
+															?>
+																<li>
+																	<a href="project.php?projID=<?php echo $proj_res['projID'];?>"><img src="<?php echo getimgURL($proj_res['proj_icon'], "proj_icon");?>" style="width: 70px; height: 70px;" alt=""></a>
+																	<div class="dashboard-latest-box">
+																		<div class="category"><a href="#"><?php echo returnCat('proj_categories', 'catName', $proj_res['catID'], $dbconnect, 'catID');?></a></div>
+																		<h4><a href="project.php?projID=<?php echo $proj_res['projID'];?>"><?php echo $proj_res['projName'];?></a></h4>
+																	</div>
+																</li>
+															<?php
+
+														}
+														else{
+															break;
+														}
+													}while($proj_res = mysqli_fetch_assoc($proj_qry));
+													?>
+<!-- 													<li>
 														<a href="#"><img src="../images/placeholder/70x70.png" style="width: 70px; height: 70px;" alt=""></a>
 														<div class="dashboard-latest-box">
 															<div class="category"><a href="#">Film & Video</a></div>
@@ -178,12 +204,26 @@
 															<div class="category"><a href="#">Box</a></div>
 															<h4><a href="#">Unbuonded: A Feature Documentary</a></h4>
 														</div>
-													</li>
+													</li> -->
 												</ul>
 											</div>
 											<div class="coloumn" style="margin-left: 20px;">
 												<ul>
-													<li>
+													<?php
+														do{
+															?>
+																<li>
+																	<a href="project.php?projID=<?php echo $proj_res['projID'];?>"><img src="<?php echo getimgURL($proj_res['proj_icon'], "proj_icon");?>" style="width: 70px; height: 70px;" alt=""></a>
+																	<div class="dashboard-latest-box">
+																		<div class="category"><a href="#"><?php echo returnCat('proj_categories', 'catName', $proj_res['catID'], $dbconnect, 'catID');?></a></div>
+																		<h4><a href="project.php?projID=<?php echo $proj_res['projID'];?>"><?php echo $proj_res['projName'];?></a></h4>
+																	</div>
+																</li>
+															<?php
+
+														}while($proj_res = mysqli_fetch_assoc($proj_qry));
+													?>
+													<!-- <li>
 														<a href="#"><img src="../images/placeholder/70x70.png" style="width: 70px; height: 70px;" alt=""></a>
 														<div class="dashboard-latest-box">
 															<div class="category"><a href="#">Film & Video</a></div>
@@ -210,11 +250,15 @@
 															<div class="category"><a href="#">Box</a></div>
 															<h4><a href="#">Unbuonded: A Feature Documentary</a></h4>
 														</div>
-													</li>
+													</li> -->
 												</ul>
 											</div>
 										</div>
+									<?php
+										}
+									?>
 									</div>
+
 								</div>
 							</div>
 						</div>

@@ -51,8 +51,12 @@
 			$lqry=mysqli_query($dbconnect, $lsql);
 			$lres=mysqli_fetch_assoc($lqry);
 
-			userEmail($email, $user_res['firstname'], $lres['email'], $lres['firstname']);
-			leaderEmail($lres['email'], $lres['firstname'], $email, $user_res['firstname']);
+			$projName=returnCat('project','projName', $projID, $dbconnect, 'projID');
+			$position=returnCat('team_roles', 'title', $roleID, $dbconnect, 'roleID');
+
+			leader_noti_f($lres['email'], $projName, $lres['firstname'], $lres['lastname'], $position, $email, $user_res['firstname'], $user_res['lastname'], $reason);
+			requester_email_f($projName, $email, $user_res['firstname'], $user_res['lastname']);
+
 			unset($_POST['join_proj']);
 			
 		}

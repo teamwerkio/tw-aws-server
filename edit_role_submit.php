@@ -1,6 +1,7 @@
 <?php
 	include("dbconnect.php");
 	session_start();
+	error_log("logging update");
 	if(empty($_POST)){
 		header("Location:project.php?projID=".$_GET['projID']);
 		

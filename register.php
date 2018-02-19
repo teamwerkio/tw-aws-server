@@ -159,12 +159,14 @@
 					<div class="form-login form-register">
 
 						<h2>Create an account</h2>
+
 						<form id="reg_form" name="signup" onsubmit="return validateForm()" action="social_connect.php" method="post" enctype="multipart/form-data" class="clearfix">
 			  				<div class="field">
 			  					<input name="firstname" type="text" value="" placeholder="First Name" />
 			  				</div>
 			  				<div class="field">
 			  					<input name="lastname" type="text" value="" placeholder="Last Name" />
+
 			  				</div>
 			  				<div class="row">
 			  					<div class="coloumn" style="margin-left: 15px; width: 49%;">
@@ -588,13 +590,17 @@
 					  					</div>
 				  					</div>
 				  				</div>
+
 				  				<div class="create-account" style="margin-top: 10px;">
+
 				  					<input type="checkbox" id="tou" name="" value="" checked>
 				  					<label for="tou" style="padding-left: 22px;">I agree to the <u><a style="display: inline;" href="termsofuse.html">Terms of Use</a></u></label>
 				  					<div class="checkbox" style="margin-top: 2px;"></div>
 				  				</div>
 							</div>
+
 							<input type="submit" value="Create account" class="btn-primary" style="margin-top: 10px;"></input>
+
 							<!-- <button id="signup" type="submit" class="btn-primary" data-toggle="modal" data-target="#modal-1" style="color: white;">No, proceed without Facebook</button>
 							<fb:login-button size="xlarge"  onlogin="checkLoginState();">Continue with Facebook
 							</fb:login-button> -->

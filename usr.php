@@ -1,4 +1,5 @@
 <?php
+
 	session_start();
 	include("dbconnect.php");
 	if(isset($_GET['action'])) {
@@ -18,7 +19,7 @@
 
 	  
 		
-	} elseif (isset($_POST['signup'])) {
+	} elseif (isset($_POST['pass_signup_verify'])) {
 		include("register_form.php");
 	}
 
