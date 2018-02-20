@@ -151,7 +151,7 @@
 													  	<label class="filename1"></label>
 								  					</div>
 							  					</div>
- -->						  				</div>
+						  				</div>
 						  				<h3 style="margin-bottom: 20px; margin-top: 20px;">Reset Password</h3>
 						  				<div class="field">
 						  					<input name="old_pass" type="password" value="" name="s" placeholder="Old Password" />

@@ -443,7 +443,7 @@
 						</div>
 					</div>
 					
-					<div class="latest-button wow fadeInUp" name="loading" data-wow-delay=".1s" ><a data-finalID="<?php echo $final_id;?>" id="load_more" href="#" class="btn-primary">Load more</a></div>
+					<div class="latest-button wow fadeInUp" name="loading" data-wow-delay=".1s" ><a data-finalID="<?php echo $final_id;?>" id="load_more" class="btn-primary">Load more</a></div>
 
 				</div>
 			</div><!-- .latest -->

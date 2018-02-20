@@ -57,7 +57,20 @@
 			text-align: center;
 		}
     </style>
-    <script>
+    <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="libs/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="libs/owl-carousel/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="libs/jquery.countdown/jquery.countdown.min.js"></script>
+    <script type="text/javascript" src="libs/wow/wow.min.js"></script>
+    <script type="text/javascript" src="libs/isotope/isotope.pkgd.min.js"></script>
+    <script type="text/javascript" src="libs/bxslider/jquery.bxslider.min.js"></script>
+    <!-- orther script -->
+    <script  type="text/javascript" src="js/main.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script> 
+    <script src="http://malsup.github.com/jquery.form.js"></script>
+    <script type="text/javascript">
+
 		function validateForm() {
 			
 
@@ -72,6 +85,10 @@
 			var touChecked = document.getElementById("tou").checked;
 			var avatar=document.getElementsByClassName('avatar');
 			var image=document.getElementById("uploadfile1");
+			var em=email+"@"+ext;
+			var emailExists=true;
+			console.log(em);
+
 			
 			var avCheck=false;
 
@@ -111,6 +128,10 @@
 				swal("Passwords do not match", "Please check the Passwords you entered", "error");
 				return false;
 			}
+			// if(emailExists==true){
+				
+			// 	return false;
+			// }
 			if(!avCheck && image.files.length==0){
 				swal("Missing field", "Please select an avatar or upload an image", "warning");
 				return false;
@@ -135,6 +156,7 @@
 				return false;
 			}
 
+
 			for (var i = 0; i < tou.length; i++) {
 					if ( tou[i].checked ) {
 						touChecked = true;
@@ -145,8 +167,39 @@
 				swal("Terms of Use", "Please agree to the Terms of Use to create an account", "warning");
 				return false;
 			}
+			
+			$.ajax({
+				url: 'update_server.php',
+				type: 'POST',
+				timeout: 3000,
+				async: false,
+				data: {
+					'email_chk': 1,
+					'email': em,
+				},
+				success: function(data){
+					console.log("data: "+data);
+					if(Number(data)!=0){
+						
+						swal("Incorrect Email", "Email already used to sign up", "error");
+						return false;
+					}
+					else{
+						console.log("working");
+						document.forms["signup"].submit();
+						return true;
+					}
+				},
+				error: function(jqXHR,error, errorThrown){
+					
+					console.log("status: "+jqXHR.status);
+					return false;
+				}
 
-			return true;
+			});
+
+
+			return false;
 
 		}
 	</script>
@@ -463,62 +516,18 @@
 		</footer> <!-- site-footer -->
 	</div><!-- #wrapper -->
 	<!-- jQuery -->    
-    <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+<!--     <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
     <script type="text/javascript" src="libs/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="libs/owl-carousel/owl.carousel.min.js"></script>
     <script type="text/javascript" src="libs/jquery.countdown/jquery.countdown.min.js"></script>
     <script type="text/javascript" src="libs/wow/wow.min.js"></script>
     <script type="text/javascript" src="libs/isotope/isotope.pkgd.min.js"></script>
-    <script type="text/javascript" src="libs/bxslider/jquery.bxslider.min.js"></script>
+    <script type="text/javascript" src="libs/bxslider/jquery.bxslider.min.js"></script> -->
     <!-- orther script -->
-    <script  type="text/javascript" src="js/main.js"></script>
+<!--     <script  type="text/javascript" src="js/main.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script> 
-    <script src="http://malsup.github.com/jquery.form.js"></script> 
-
-    <script type="text/javascript">
-
-	  // function statusChangeCallback(response) {
-	  //   console.log('statusChangeCallback');
-	  //   console.log(response.status);
-	  //   if(response.status==='connected'){
-	  //   	$("#signup").click();
-	  //   }
-	  //   // The response object is returned with a status field that lets the
-	  //   // app know the current login status of the person.
-	  //   // Full docs on the response object can be found in the documentation
-	  //   // for FB.getLoginStatus().
-	  // }
-	  //   function checkLoginState() {
-		 //    FB.getLoginStatus(function(response) {
-		 //      statusChangeCallback(response);
-		 //    });
-		 //  }
-	  // window.fbAsyncInit = function() {
-	  //   FB.init({
-	  //     appId: <?php echo $app_id;?>,
-	  //     autoLogAppEvents : true,
-	  //     xfbml            : true,
-	  //     cookie: true, // This is important, it's not enabled by default
-	  //     version: 'v2.8'
-	  //   });
-
-	  //   FB.getLoginStatus(function(response) {
-	  //     statusChangeCallback(response);
-	  //   });
-
-
-
-	  // };
-	  // (function(d, s, id){
-	  //   var js, fjs = d.getElementsByTagName(s)[0];
-	  //   if (d.getElementById(id)) {return;}
-	  //   js = d.createElement(s); js.id = id;
-	  //   js.src = "https://connect.facebook.net/en_US/sdk.js";
-	  //   fjs.parentNode.insertBefore(js, fjs);
-	  // }(document, 'script', 'facebook-jssdk'));
-
-    </script>
+    <script src="http://malsup.github.com/jquery.form.js"></script>  -->
 </body>
 </html>
 

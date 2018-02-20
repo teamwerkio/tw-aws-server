@@ -1,18 +1,13 @@
 <?php
 	include("dbconnect.php");
 	include("img_url.php");
+	include("utilities.php");
 	session_start();
 	$other=false;
-	function returnCat($table, $col, $idx, $dbconnect, $idtype){
-		$cat_sql="SELECT ".$col." FROM ".$table." WHERE ".$idtype."='".$idx."'";
-		$cat_qry=mysqli_query($dbconnect, $cat_sql);
-		$cat_res=mysqli_fetch_assoc($cat_qry);
-		return $cat_res[$col];
-	}
 	if(!isset($_SESSION['usr'])){
 		header("Location:library.php");
 	}
-	elseif (isset($_GET['other_usr'])){
+	elseif (isset($_GET['other_usr']) && $_GET['other_usr']!==$_SESSION['usr']){
 		$other=true;
 		$prof_sql = "SELECT * FROM users WHERE usrID=".$_GET['other_usr'];
 		$prof_qry = mysqli_query($dbconnect, $prof_sql);

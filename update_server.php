@@ -1,7 +1,11 @@
 <?php
 	include("dbconnect.php");
-	session_start();
+	
+	
+	error_log("going");
+
 	if(isset($_POST['check'])){
+		session_start();
 		$upID=$_POST['upID'];
 		$projID=$_POST['projID'];
 		$up_sql="UPDATE proj_updates SET status='1' WHERE upID=".mysqli_real_escape_string($dbconnect, $upID);
@@ -13,6 +17,7 @@
 		echo mysqli_num_rows($up2_qry);		
 	}
 	elseif (isset($_POST['del'])) {
+		session_start();
 		$upID=$_POST['upID'];
 		$projID=$_POST['projID'];
 		$up_sql="DELETE FROM proj_updates WHERE upID=".mysqli_real_escape_string($dbconnect, $upID);
@@ -26,6 +31,7 @@
 
 	}
 	elseif (isset($_POST['clicked'])) {
+		session_start();
 		$usrID=$_POST['usrID'];
 		$projID=$_POST['projID'];
 
@@ -41,6 +47,16 @@
 			$sql_up="UPDATE users SET clicked='".mysqli_escape_string($dbconnect,$json_str)."' WHERE usrID=".mysqli_escape_string($dbconnect,$usrID);
 			$qry_up=mysqli_query($dbconnect, $sql_up);
 		}
+	}
+	elseif(isset($_POST['email_chk'])){
+		session_start();
+		$email=$_POST['email'];
+
+		$qry="SELECT usrID FROM users WHERE email='".$email."'";
+		$qry2=mysqli_query($dbconnect, $qry);
+		error_log(mysqli_num_rows($qry2));
+
+		echo mysqli_num_rows($qry2);
 	}
 ?>
 

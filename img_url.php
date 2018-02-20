@@ -24,10 +24,13 @@
 		));
 		
 		if(substr( $name, 0, 2 ) === "av" && strlen($name)<=4){
+
 			return "../images/avatars/".$name.".jpg";
 
 		}
 		else{
+			
+			
 			$url="";
 			foreach ($images as $image) {
 				$image_path=$image["Key"];

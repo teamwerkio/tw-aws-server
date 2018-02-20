@@ -49,7 +49,7 @@
 								<h3><a href="project.php?projID='.$load_res['projID'].'">'.$load_res['projName'].'</a></h3>
 								<div class="campaign-description">'.$load_res['sm_desc'].'</div>
 								<div class="campaign-author"><a class="author-icon" href="profile.php?other_usr='.$load_res['usrID'].'">
-									<img src="'.getimgURL($owner_p, "profilepic").'" /></a>by <a class="author-name" href="profile.php?other_usr='.$load_res['usrID'].'">'.$owner_f.'		
+									<img src="'.getProfURL($owner_p).'" /></a>by <a class="author-name" href="profile.php?other_usr='.$load_res['usrID'].'">'.$owner_f.'		
 								</a></div>
 								<div class="process">
 									<div class="raised"><span style="width: '.$load_res['progress'].'%;"></span></div>
