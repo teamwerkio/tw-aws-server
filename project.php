@@ -694,7 +694,7 @@
 										<h2 style="margin-bottom: 10px; color:">Team Settings</h2>
 										<p>Use the settings below to change settings for your team.</p>
 
-										<form name="proj_set" action="proj_set_submit.php?projID=<?php echo $_GET['projID'];?>" method="post" enctype="multipart/form-data">
+										<form name="proj_set" onsubmit="return validateSet()" action="proj_set_submit.php?projID=<?php echo $_GET['projID'];?>" method="post" enctype="multipart/form-data">
 											<div class="field clearfix">
 							  					<label for="">Team size *</label>
 								  				<div class="field">
@@ -960,10 +960,21 @@
 															$col_qry=mysqli_query($dbconnect, $col_sql);
 															$col_res=mysqli_fetch_assoc($col_qry);
 
+
+
 															do{
-																?>
-																	<option value="<?php echo $col_res['colID'];?>"><?php echo $col_res['colName'];?></option>
-																<?php
+
+																if($p_res['colID']==$col_res['colID']){
+																		?>
+																		<option value="<?php echo $col_res['colID'];?>" selected><?php echo $col_res['colName'];?></option>
+																		<?php
+																	}
+																	else{
+																		?>
+																		<option value="<?php echo $col_res['colID'];?>"><?php echo $col_res['colName'];?></option>
+																		<?php
+																	}
+
 															}while($col_res=mysqli_fetch_assoc($col_qry));
 														?>
 													</select>
@@ -979,9 +990,17 @@
 															$cat_res=mysqli_fetch_assoc($cat_qry);
 
 															do{
-																?>
-																<option value="<?php echo $cat_res['catID'];?>"><?php echo $cat_res['catName'];?></option>
-																<?php
+
+																if($p_res['catID']==$cat_res['catID']){
+																		?>
+																		<option value="<?php echo $cat_res['catID'];?>" selected><?php echo $cat_res['catName'];?></option>
+																		<?php
+																	}
+																	else{
+																		?>
+																		<option value="<?php echo $cat_res['catID'];?>"><?php echo $cat_res['catName'];?></option>
+																		<?php
+																	}
 															}while($cat_res=mysqli_fetch_assoc($cat_qry));
 														?>
 													</select>
@@ -1445,6 +1464,68 @@
 
 
 		});
+
+
+		function validateSet(){
+			var projname = document.forms["proj_set"]["projname"].value;
+			var tagline = document.forms["proj_set"]["projtagl"].value;
+			var shDesc = document.forms["proj_set"]["proj_sh_desc"].value;
+			var lgDesc = document.forms["proj_set"]["proj_lg_desc"].value;
+			var tags = document.forms["proj_set"]["tags"].value;
+			var bigBan=document.getElementById("uploadfile1");
+			var smBan=document.getElementById("uploadfile1");
+			var ico=document.getElementById("uploadfile3");
+
+			if (projname == "") {
+				swal("Missing field", "Project Name field cannot be empty", "warning");
+				return false;
+			}
+
+			if (tagline == "") {
+				swal("Missing field", "Tagline field cannot be empty", "warning");
+				return false;
+			}
+			if (shDesc == "") {
+				swal("Missing field", "Short Description field cannot be empty", "warning");
+				return false;
+			}
+			if (lgDesc == "") {
+				swal("Missing field", "Long Description field cannot be empty", "warning");
+				return false;
+			}
+			if (tags == "") {
+				swal("Missing field", "Tags field cannot be empty", "warning");
+				return false;
+			}
+			if(bigBan.files.length!=0){
+				var img2=bigBan.files[0]['type'];
+				if(img2.split('/')[0]!='image'){
+					swal("Big Banner filetype is not supported", "", "error");
+					return false;
+				}
+			}
+			if(smBan.files.length!=0){
+				var img2=smBan.files[0]['type'];
+				if(img2.split('/')[0]!='image'){
+					swal("Small Banner filetype is not supported", "", "error");
+					return false;
+				}
+			}
+			if(ico.files.length!=0){
+				var img2=ico.files[0]['type'];
+				if(img2.split('/')[0]!='image'){
+					swal("Icon filetype is not supported", "", "error");
+					return false;
+				}
+			}
+
+			return true;
+
+		}
+
+
+
+
     </script>
     <script type="text/javascript" src="js/upvotes.js"></script>
     <script type="text/javascript" src="js/update.js"></script>
