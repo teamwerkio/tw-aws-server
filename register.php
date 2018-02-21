@@ -171,8 +171,6 @@
 			$.ajax({
 				url: 'update_server.php',
 				type: 'POST',
-				timeout: 3000,
-				async: false,
 				data: {
 					'email_chk': 1,
 					'email': em,

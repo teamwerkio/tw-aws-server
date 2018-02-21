@@ -27,6 +27,14 @@
     <link rel="stylesheet" type="text/css" href="css/responsive.css" />
     <link rel="icon" href="../images/favicon.png" type="image/x-icon"/>
 
+    <!-- bootstrap wrappable css to avoid conflicts -->
+  	<link rel="stylesheet" href="https://formden.com/static/assets/demos/bootstrap-iso/bootstrap-iso/bootstrap-iso.css">
+  	<link rel="stylesheet" href="https://formden.com/static/assets/demos/bootstrap-iso/bootstrap-iso/bootstrap-iso.css">
+
+  	<!-- sweetalerts -->
+  	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
     <style type="text/css">
 		/* Create two equal columns that floats next to each other */
 		.column {
@@ -121,7 +129,7 @@
 								<div class="account-main">
 
 									<h3 style="margin-bottom: 20px;">Basic Information</h3>
-									<form name="prof_set" action="profile_settings_submit.php" method="post" enctype="multipart/form-data">
+									<form name="prof_set" onsubmit="return validateProf()" action="profile_settings_submit.php" method="post" enctype="multipart/form-data">
 						  				<div class="field">
 						  					<input name="firstname" type="text" value="<?php echo $usr_res['firstname'];?>" name="s" placeholder="First Name" />
 						  				</div>
@@ -252,5 +260,80 @@
     <script type="text/javascript" src="libs/bxslider/jquery.bxslider.min.js"></script>
     <!-- orther script -->
     <script  type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript">
+    	function validateProf(){
+    		var firstname = document.forms["prof_set"]["firstname"].value;
+    		var lastname = document.forms["prof_set"]["lastname"].value;
+    		var image=document.getElementById("uploadfile1");
+
+    		var oldPass = document.forms["prof_set"]["old_pass"].value;
+    		var newPass = document.forms["prof_set"]["pass_signup"].value;
+    		var passVer = document.forms["prof_set"]["pass_signup_verify"].value;
+
+    		if (firstname == "") {
+				swal("Missing field", "Please enter your First Name", "warning");
+				return false;
+			}
+			if (lastname == "") {
+				swal("Missing field", "Please enter your Last Name", "warning");
+				return false;
+			}
+
+			if(image.files.length!=0){
+				var img2=image.files[0]['type'];
+				if(img2.split('/')[0]!='image'){
+					swal("The image filetype is not supported", "", "error");
+					return false;
+				}
+			}
+			$.ajax({
+					url: 'update_server.php',
+					type: 'POST',
+					data: {
+						'pass_chk': 1,
+						'oldPass': oldPass,
+					},
+					success: function(data){
+						
+						if(Number(data)==0){
+							if(newPass=="" && passVer==""){
+								document.forms["prof_set"].submit();
+								return true;
+							}
+							else{
+								swal("Password Error", "Please enter your old password", "error");
+								return false;
+							}
+						}
+						else if(Number(data)==-1){
+							swal("Password Error", "Incorrect old password", "error");
+							return false;
+						}
+						else if(Number(data)==1){
+							if(newPass!=passVer){
+								swal("Password Error", "New passwords do not match", "error");
+								return false;
+							}
+							else{
+								document.forms["prof_set"].submit();
+								return true;
+							}
+						}
+						
+					},
+					error: function(jqXHR,error, errorThrown){
+					
+						console.log("status2: "+jqXHR.status);
+						return false;
+					}	
+
+
+			});
+			return false;
+
+
+    	}
+
+    </script>
 </body>
 </html>

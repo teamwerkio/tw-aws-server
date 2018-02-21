@@ -54,9 +54,28 @@
 
 		$qry="SELECT usrID FROM users WHERE email='".$email."'";
 		$qry2=mysqli_query($dbconnect, $qry);
-		error_log(mysqli_num_rows($qry2));
+		
 
 		echo mysqli_num_rows($qry2);
+	}
+	elseif(isset($_POST['pass_chk'])){
+		session_start();
+		$oldPass=sha1($_POST['oldPass']);
+
+		$qry="SELECT * FROM users WHERE usrID=".$_SESSION['usr'];
+		$qry2=mysqli_query($dbconnect, $qry);
+		$qry_res=mysqli_fetch_assoc($qry2);
+		
+		if($_POST['oldPass']==""){
+			echo "0";
+		}
+		elseif($qry_res['password']===$oldPass){
+			echo "1";
+		}
+		elseif($qry_res['password']!==$oldPass){
+			echo "-1";
+		}
+
 	}
 ?>
 

@@ -29,7 +29,7 @@
 
 		if($varbool==False){
 
-			if(getimagesize($big_ban['tmp_name'])==true){
+			if(is_uploaded_file($big_ban['tmp_name'])==true){
 				$big_ban_name=$usrID."big_ban".$date;
 				img_uploader($big_ban, "banner_big", $big_ban_name);
 			}
@@ -39,7 +39,7 @@
 			
 
 
-			if(getimagesize($sm_ban['tmp_name'])==true){
+			if(is_uploaded_file($sm_ban['tmp_name'])==true){
 				$sm_ban_name=$usrID."sm_ban".$date;
 				img_uploader($sm_ban, "banner_small", $sm_ban_name);
 			}
@@ -48,7 +48,7 @@
 			}
 			
 
-			if(getimagesize($proj_icon['tmp_name'])==true){
+			if(is_uploaded_file($proj_icon['tmp_name'])==true){
 				$icon_name=$usrID."icon".$date;
 				img_uploader($proj_icon, "proj_icon", $icon_name);
 			}
