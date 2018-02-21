@@ -29,6 +29,23 @@
 		$owner_ID=$p_res['usrID'];
 
 		$sess_ID=$_SESSION['usr'];
+
+		$isAdmin=false;
+		$isMem=false;
+
+		$teamJ=json_decode($p_res['team'],true);
+		foreach ($teamJ["member"] as $m) {
+			if($m["id"]===$sess_ID){
+				$isMem=true;
+				break;
+			}
+		}
+		foreach ($teamJ["admin"] as $a) {
+			if($a["id"]===$sess_ID){
+				$isAdmin=true;
+				break;
+			}
+		}
 	}
 ?>
 <!doctype html>
@@ -337,7 +354,7 @@
 								?>
 								<div class="button">
 									<?php
-										if(mysqli_num_rows($role_qry)!=0){
+										if(mysqli_num_rows($role_qry)!=0 && !$isMem && !$isAdmin){
 									?>
 									<form action="" id="priceForm" class="campaign-price quantity">
 										<button class="btn-primary" type="button" data-toggle="modal" data-target="#modal-33" style="cursor: pointer;">Join this project</button>
@@ -410,7 +427,7 @@
 									<div class="col-lg-15" style="margin-top: 0px;">
 									<div class="support support-campaign" style="margin-top: 41px;">
 
-										<div class="team" style="margin-top: 0px; margin-bottom: 0px;">
+										<div id="teamprof" class="team" style="margin-top: 0px; margin-bottom: 0px;">
 											<?php
 												$team_json=json_decode($p_res['team'],true);
 												$admin_arr=$team_json["admin"];
@@ -646,14 +663,10 @@
 																			</a>
 																		</td>
 																		<td>
-																			<a class="accbutt" style="color: #73b941; cursor: pointer;" onclick="
-																			swal('Invitation Accpeted', '<?php echo $fn." ".$ln;?> is now a part of your team', 'success');
-																			">
+																			<a data-reqid="<?php echo $req_res['reqID'];?>" data-name="<?php echo $fn.' '.$ln;?>" class="accbutt" style="color: #73b941; cursor: pointer;">
 																				<i class="fa fa-check"></i>
 																			</a>
-																			<a class="rejbutt" style="color: #b10000; cursor: pointer;" onclick="
-																			swal('Invitation Declined', '<?php echo $fn." ".$ln;?> will not be a part of your team', 'error');
-																			">
+																			<a data-reqid="<?php echo $req_res['reqID'];?>" data-name="<?php echo $fn.' '.$ln;?>" class="rejbutt" style="color: #b10000; cursor: pointer;">
 																				<i class="fa fa-times"></i>
 																			</a>
 																		</td>
@@ -671,135 +684,6 @@
 											}
 
 										?>
-<!-- 										<h3 style="margin-bottom: 10px;">Position #1</h3>
-
-										<table id="xyz">
-											<tr>
-												<th>Name</th>
-												<th>140 Character Pitch</th>
-												<th>Contact</th>
-												<th>Action</th>
-											</tr>
-											<tr>
-												<td><a href="linktoprofile" style="text-decoration: underline; cursor: pointer;">Andrew McDonald</a></td>
-												<td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et ma</td>
-												<td>
-													<a href="mailto:someone@example.com?Subject=Teamwerk%20Project%20Invitation&body=Hey%20member%20name,%20thank%20you%20for%20your%20interest%20in%20project%20name.%20I%20would%20love%20to%20hear%20more%20about%20you,%20have%20you%20engaged%20in%20a%20project%20like%20this%20before?" style="font-size: 16px; text-align: center; cursor: pointer; color: #545BEE;">
-														<i class="fa fa-envelope"></i>
-													</a>
-												</td>
-												<td>
-													<a class="accbutt" style="color: #73b941; cursor: pointer;" onclick="
-													swal('Invitation Accpeted', '{member name} is now a part of your team', 'success');
-													">
-														<i class="fa fa-check"></i>
-													</a>
-													<a class="rejbutt" style="color: #b10000; cursor: pointer;" onclick="
-													swal('Invitation Declined', '{member name} will not be a part of your team', 'error');
-													">
-														<i class="fa fa-times"></i>
-													</a>
-												</td>
-											</tr>
-											<tr>
-												<td><a href="linktoprofile" style="text-decoration: underline; cursor: pointer;">Old McDonald</a></td>
-												<td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et ma</td>
-												<td>
-													<a href="mailto:someone@example.com?Subject=Teamwerk%20Project%20Invitation&body=Hey%20member%20name,%20thank%20you%20for%20your%20interest%20in%20project%20name.%20I%20would%20love%20to%20hear%20more%20about%20you,%20have%20you%20engaged%20in%20a%20project%20like%20this%20before?" style="font-size: 16px; text-align: center; cursor: pointer; color: #545BEE;">
-														<i class="fa fa-envelope"></i>
-													</a>
-												</td>
-												<td>
-													<a class="accbutt" style="color: #73b941; cursor: pointer;" onclick="
-													swal('Invitation Accpeted', '{member name} is now a part of your team', 'success');
-													">
-														<i class="fa fa-check"></i>
-													</a>
-													<a class="rejbutt" style="color: #b10000; cursor: pointer;" onclick="
-													swal('Invitation Declined', '{member name} will not be a part of your team', 'error');
-													">
-														<i class="fa fa-times"></i>
-													</a>
-												</td>
-											</tr>										
-										</table>
-
-										<h3 style="margin-bottom: 10px; margin-top: 20px;">Position #2</h3>
-										<p>No requests for this position so far.</p>
-
-										<h3 style="margin-bottom: 10px; margin-top: 20px;">Position #3</h3>
-										<table id="xyz">
-											<tr>
-												<th>Name</th>
-												<th>140 Character Pitch</th>
-												<th>Contact</th>
-												<th>Action</th>
-											</tr>
-											<tr>
-												<td><a href="linktoprofile" style="text-decoration: underline; cursor: pointer;">Andrew McDonald</a></td>
-												<td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et ma</td>
-												<td>
-													<a href="mailto:someone@example.com?Subject=Teamwerk%20Project%20Invitation&body=Hey%20member%20name,%20thank%20you%20for%20your%20interest%20in%20project%20name.%20I%20would%20love%20to%20hear%20more%20about%20you,%20have%20you%20engaged%20in%20a%20project%20like%20this%20before?" style="font-size: 16px; text-align: center; cursor: pointer; color: #545BEE;">
-														<i class="fa fa-envelope"></i>
-													</a>
-												</td>
-												<td>
-													<a class="accbutt" style="color: #73b941; cursor: pointer;" onclick="
-													swal('Invitation Accpeted', '{member name} is now a part of your team', 'success');
-													">
-														<i class="fa fa-check"></i>
-													</a>
-													<a class="rejbutt" style="color: #b10000; cursor: pointer;" onclick="
-													swal('Invitation Declined', '{member name} will not be a part of your team', 'error');
-													">
-														<i class="fa fa-times"></i>
-													</a>
-												</td>
-											</tr>
-											<tr>
-												<td><a href="linktoprofile" style="text-decoration: underline; cursor: pointer;">Old McDonald</a></td>
-												<td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et ma</td>
-												<td>
-													<a href="mailto:someone@example.com?Subject=Teamwerk%20Project%20Invitation&body=Hey%20member%20name,%20thank%20you%20for%20your%20interest%20in%20project%20name.%20I%20would%20love%20to%20hear%20more%20about%20you,%20have%20you%20engaged%20in%20a%20project%20like%20this%20before?" style="font-size: 16px; text-align: center; cursor: pointer; color: #545BEE;">
-														<i class="fa fa-envelope"></i>
-													</a>
-												</td>
-												<td>
-													<a class="accbutt" style="color: #73b941; cursor: pointer;" onclick="
-													swal('Invitation Accpeted', '{member name} is now a part of your team', 'success');
-													">
-														<i class="fa fa-check"></i>
-													</a>
-													<a class="rejbutt" style="color: #b10000; cursor: pointer;" onclick="
-													swal('Invitation Declined', '{member name} will not be a part of your team', 'error');
-													">
-														<i class="fa fa-times"></i>
-													</a>
-												</td>
-											</tr>
-											<tr>
-												<td><a href="linktoprofile" style="text-decoration: underline; cursor: pointer;">Daddy McDonald</a></td>
-												<td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et ma</td>
-												<td>
-													<a href="mailto:someone@example.com?Subject=Teamwerk%20Project%20Invitation&body=Hey%20member%20name,%20thank%20you%20for%20your%20interest%20in%20project%20name.%20I%20would%20love%20to%20hear%20more%20about%20you,%20have%20you%20engaged%20in%20a%20project%20like%20this%20before?" style="font-size: 16px; text-align: center; cursor: pointer; color: #545BEE;">
-														<i class="fa fa-envelope"></i>
-													</a>
-												</td>
-												<td>
-													<a class="accbutt" style="color: #73b941; cursor: pointer;" onclick="
-													swal('Invitation Accpeted', '{member name} is now a part of your team', 'success');
-													">
-														<i class="fa fa-check"></i>
-													</a>
-													<a class="rejbutt" style="color: #b10000; cursor: pointer;" onclick="
-													swal('Invitation Declined', '{member name} will not be a part of your team', 'error');
-													">
-														<i class="fa fa-times"></i>
-													</a>
-												</td>
-											</tr>											
-
-										</table> -->
 										<button name="" class="btn-primary" type="submit" style="cursor: pointer; margin-top: 20px; background-color: #73b941; padding-left: 8px; padding-right: 8px;" onclick="
 										swal('Download Spreadsheet', 'This feature is under construction. Coming soon.', 'info');
 										">Download as spreadsheet
@@ -928,7 +812,7 @@
 																<td>
 																	<a href="profile.php?other_usr=<?php echo $ad["id"];?>" style="text-decoration: underline; cursor: pointer;"><?php echo $ad_res['firstname']." ".$ad_res['lastname'];?></a>
 																</td>
-																<td><?php $ad["pos"];?></td>
+																<td><?php echo $ad["pos"];?></td>
 																<td>
 																	<div class="field">
 													  					<div class="field-select">
