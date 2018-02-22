@@ -473,7 +473,7 @@
 												?>
 
 													<div class="plan" style="margin-bottom: 15px;">
-														<a href="#">
+														<a>
 															
 																		
 															<h4><?php echo $role_res['title'];
@@ -842,7 +842,7 @@
 															?>
 															<tr>
 																<td>
-																	<a href="profile.php?other_usr=<?php echo $mem;?>" style="text-decoration: underline; cursor: pointer;"><?php echo $mem_res['firstname']." ".$mem_res['lastname'];?></a>
+																	<a href="profile.php?other_usr=<?php echo $mem["id"];?>" style="text-decoration: underline; cursor: pointer;"><?php echo $mem_res['firstname']." ".$mem_res['lastname'];?></a>
 																</td>
 																<td><?php echo $mem["pos"];?></td>
 																<td>
@@ -1260,7 +1260,7 @@
 										<a class="fa fa-facebook-square" style="font-size: 35px; margin-left: 5px;" href=""></a>
 										<a class="fa fa-twitter-square" style="font-size: 35px; margin-left: 10px;" href=""></a>
 										<a class="fa fa-google-plus-square" style="font-size: 35px; margin-left: 10px;" href=""></a>
-										<a class="fa fa-clone" style="font-size: 30px; margin-left: 10px;" href=""></a>					
+										<a class="fa fa-clone" style="font-size: 30px; margin-left: 10px;"></a>					
 									</div>
 								</div>
 
@@ -1456,6 +1456,7 @@
 			    dummy.select();
 			    document.execCommand("copy");
 			    document.body.removeChild(dummy);
+			    swal('Share link copied to clipboard!', '', 'success');
 
 				
 
