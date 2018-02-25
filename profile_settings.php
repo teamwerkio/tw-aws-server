@@ -11,6 +11,9 @@
 		$usr_sql = "SELECT * FROM users WHERE usrID=".$_SESSION['usr'];
 		$usr_qry = mysqli_query($dbconnect, $usr_sql);
 		$usr_res = mysqli_fetch_assoc($usr_qry);
+		$parsed_ini=parse_ini_file("../../fb.ini", true);
+		$app_id=$parsed_ini['FB']['app_id'];
+		$app_secret=$parsed_ini['FB']['app_secret'];
 		
 	}
 

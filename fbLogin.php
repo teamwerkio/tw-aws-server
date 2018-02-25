@@ -50,6 +50,7 @@
 	$json_status="0";
 	if($json_usr_data!=""){
 		$json_status="1";
+		error_log($json_usr_data);
 	}
 
 	$fbSQL="UPDATE users SET 
