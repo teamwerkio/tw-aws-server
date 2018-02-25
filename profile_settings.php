@@ -280,6 +280,7 @@
 			}
 
 			if(image.files.length!=0){
+				console.log("imgae is there");
 				var img2=image.files[0]['type'];
 				if(img2.split('/')[0]!='image'){
 					swal("The image filetype is not supported", "", "error");

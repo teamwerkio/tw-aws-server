@@ -300,41 +300,6 @@
 												<?php
 											}
 										?>
-										<!-- INVOLVEMENT -->
-
-										<!-- < 10 hrs/week -->
-										<!-- <div class="process-time"><span>
-											<a data-tooltip="< 10 hrs/week (approx.)">
-											<i class="fa fa-clock-o"></i></a>
-										</span>involvement</div> -->
-
-										<!-- 11 to 20 hrs/week -->
-										<!-- <div class="process-time"><span>
-											<a data-tooltip="11 to 20 hrs/week (approx.)">
-											<i class="fa fa-clock-o"></i>
-											<i class="fa fa-clock-o"></i></a>
-										</span>involvement</div> -->
-
-										<!-- 21 to 30 hrs/week -->
-										<!-- <div class="process-time"><span>
-											<a data-tooltip="21 to 30 hrs/week (approx.)">
-											<i class="fa fa-clock-o"></i>
-											<i class="fa fa-clock-o"></i>
-											<i class="fa fa-clock-o"></i></a>
-										</span>involvement</div> -->
-
-										<!-- > 31 hrs/week -->
-										<!-- <div class="process-time"><span>
-											<a data-tooltip="> 31 hrs/week (approx.)">
-											<i class="fa fa-clock-o"></i>
-											<i class="fa fa-clock-o"></i>
-											<i class="fa fa-clock-o"></i>
-											<i class="fa fa-clock-o"></i></a>
-										</span>involvement</div> -->
-
-										<!-- =============== -->
-
-										<!-- DAYS AGO -->
 
 										<div class="process-time"><span>
 										<a data-tooltip="Project started <?php echo timedifference_d($p_res['dt']);?> days ago">
@@ -495,17 +460,17 @@
 																<p2 style="margin-right: 5px; float: right;">
 																	<a-edit-black>
 																		<div class="bootstrap-iso">
-																		<i class="fa fa-pencil edit-role" data-roleID="<?php echo $role_res['roleID'];?>" data-toggle="modal" data-target="#modal-3"></i>
+																		<i class="fa fa-pencil edit-role" data-roleid="<?php echo $role_res['roleID'];?>" data-toggle="modal" data-target="#modal-3"></i>
 																		  <div class="modal fade" id="modal-3">
 																		    <div class="modal-dialog modal-3g" >
 																		      <div class="modal-content" style="height: 550px; width: 550px;">
-																		         <div class="modal-body">
+																		         <div class="modal-body" id="body-erole">
 																		          <!-- <iframe id="if_role_e" src="role_update.php?edit=1&roleID=<?php echo $role_res['roleID'];?>&projID=<?php echo $p_res['projID'];?>" style="width: 100%;" height="400" frameborder="0">
 																		          </iframe> -->
 																		         </div>
 																		         <div class="modal-footer">
 																		          <button class="btn-mainb cl" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
-																		          <button id="update_role" name="" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Edit Role</button>
+																		          <button data-rolename="<?php echo $role_res['title'];?>" data-roleid="<?php echo $role_res['roleID'];?>" id="update_role" name="" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Edit Role</button>
 																		         </div>
 																		      </div>
 																		    </div>
@@ -1177,31 +1142,29 @@
 													do{
 														?>
 															<li>
-																<p class="date"><?php echo date( 'Y-m-d', strtotime($up_res['dt']));?>
+																<p class="date"><?php echo date( 'Y-m-d', strtotime($up_res['dt']));?></p>
 																	<?php
 																		if($owner_ID==$sess_ID){
 																	?>
-																	<div class="bootstrap-iso">
+																	
 																	<p2>
 																		<a-remove>
 																			<i data-id="<?php echo $up_res['upID'];?>" data-id2="<?php echo $up_res['projID'];?>" class="fa fa-times del-up"></i>
 																		</a-remove>
 																	</p2>
-																	<p2 style ="margin-right: 5px;" onclick="turnEditable('updateTitle1', 'updateDesc1');">
+																	<p2 style ="margin-right: 5px;float: right;">
 																		<a-edit-black>
 
 																			<div class="bootstrap-iso">
-																			<i class="fa fa-pencil edit-upForm" data-upID="<?php echo $up_res['upID'];?>" data-toggle="modal" data-target="#modal-4"></i>
+																			<i class="fa fa-pencil edit-upform" data-upid="<?php echo $up_res['upID'];?>" data-toggle="modal" data-target="#modal-4"></i>
 																			  <div class="modal fade" id="modal-4">
 																			    <div class="modal-dialog modal-4g" >
 																			      <div class="modal-content" style="height: 550px;">
-																			         <div class="modal-body">
-																			          <!-- <iframe id="if_role_e" src="role_update.php?edit=1&roleID=<?php echo $role_res['roleID'];?>&projID=<?php echo $p_res['projID'];?>" style="width: 100%;" height="400" frameborder="0">
-																			          </iframe> -->
+																			         <div class="modal-body" id="body-eup">
 																			         </div>
 																			         <div class="modal-footer">
 																			          <button class="btn-mainb cl" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
-																			          <button id="edit_update" name="" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Edit Update</button>
+																			          <button data-upname="<?php echo $up_res['title'];?>" data-upid="<?php echo $up_res['upID'];?>" id="edit_update" name="" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Edit Update</button>
 																			         </div>
 																			      </div>
 																			    </div>
@@ -1214,7 +1177,7 @@
 																	<?php
 																		}
 																	?>
-																</p>
+																
 																<h3 id="updateTitle1"><?php echo $up_res['title'];?></h3>
 																<div class="desc" id="updateDesc1"><p><?php echo $up_res['details'];?></p></div>
 															</li>
@@ -1411,35 +1374,62 @@
 				});
 				
 			});
-
+			var editRole=0;
 
 			$("#update_role").click(function(){
-				$("#if_role_e").contents().find("#role_edit").submit();
-				$(".modal").modal('hide');
-				location.reload();
+				var button=$(this);
+				var roleID=editRole;
+				var name=button.data('rolename');
+				$.ajax({
+					url: 'edit_role_submit.php?roleID='+roleID+'&projID='+proj_id,
+					type: 'POST',
+					data: $("#if_role_e").contents().find("#role_edit").serialize(),
+					success: function(data){
+						button.html("Success!")
+						$(".modal").modal('hide');
+						location.reload();
+					}
+
+				});
+				// $("#if_role_e").contents().find("#role_edit").submit();
+				// $(".modal").modal('hide');
+				// location.reload();
 			});
 			$(".edit-role").click(function(){
 				$(".modal-body").html("Loading...");
 				var button=$(this);
-				var roleID=button.attr('data-roleID');
+				var roleID=Number(button.data('roleid'));
+				editRole=roleID;
 				var iFrame='<iframe id="if_role_e" src="role_update.php?edit=1&roleID='+roleID+'&projID='+proj_id+'" style="width: 100%;" height="400" frameborder="0"></iframe>';
-				$(".modal-body").html(iFrame);
+				$("#body-erole").html(iFrame);
 			});
 
-
+			var editUpdate=0;
 			$("#edit_update").click(function(){
-				console.log("f");
-				$("#if_up_e").contents().find("#update_edited").submit();
-				console.log("edit_update");
-				$(".modal").modal('hide');
-				location.reload();
+				var button=$(this);
+				var upID=Number(button.data('upid'));
+				upID=editUpdate;
+				console.log($("#if_up_e").contents().find("#update_edited").serialize());
+				$.ajax({
+					url: 'timeline_update_submit.php?upID='+upID+'&projID='+proj_id,
+					type: 'POST',
+					data: $("#if_up_e").contents().find("#update_edited").serialize(),
+					success: function(data){
+						button.html("Success!")
+						$(".modal").modal('hide');
+						location.reload();
+					}
+
+				});
 			});
-			$(".edit-upForm").click(function(){
+			$(".edit-upform").click(function(){
 				$(".modal-body").html("Loading...");
 				var button=$(this);
-				var upID=button.attr('data-upID');
+				var upID=Number(button.data('upid'));
+				
+				editUpdate=upID;
 				var iFrame='<iframe id="if_up_e" src="timeline_update.php?edit=1&upID='+upID+'&projID='+proj_id+'" style="width: 100%;" height="400" frameborder="0"></iframe>';
-				$(".modal-body").html(iFrame);
+				$("#body-eup").html(iFrame);
 			});
 
 
