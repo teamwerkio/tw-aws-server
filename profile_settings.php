@@ -173,10 +173,10 @@
 						  				<button name="prof_set" class="btn-primary" type="submit" style="cursor: pointer; margin-top: 5px; background-color: #73b941; padding-left: 8px; padding-right: 8px;">Save and Apply settings</button>
 						  			</form>
 
-<!-- 						  			<h3 style="margin-bottom: 20px; margin-top: 20px;">Connect with Facebook</h3>
-						  			<div id="fbcenter" style="margin-bottom: 20px;">
-										<div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
-									</div> -->
+						  			<h3 style="margin-bottom: 20px; margin-top: 20px;">Connect with Facebook</h3>
+						  			<div id="fbcenter" style="margin-top: 15px;">
+										<div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-scope="user_likes,user_posts,user_education_history,user_work_history" data-auto-logout-link="false" data-use-continue-as="false" onlogin="checkLoginState();"></div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -230,13 +230,13 @@
 							  		<input type="text" value="" name="s" placeholder="Enter your email..." />
 							    	<button type="submit" value=""><span class="ion-android-drafts"></span></button>
 							  	</form>
-							  	<!-- <div class="follow">
+							  	<div class="follow">
 							  		<h3>Join us on</h3>
 							  		<ul>
 							  			<li class="facebook"><a target="_Blank" href="http://www.facebook.com"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
 							  			<li class="twitter"><a target="_Blank" href="http://www.twitter.com"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
 							  		</ul>
-							  	</div> -->
+							  	</div>
 							</div>
 						</div>
 					</div>
@@ -261,6 +261,58 @@
     <!-- orther script -->
     <script  type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript">
+  		function statusChangeCallback(response) {
+		    console.log('statusChangeCallback');
+		    console.log(response.status);
+		    if(response.status==='connected'){
+		    	$.ajax({
+	    				url: 'fbLogin.php',
+	    				type: 'POST',
+	    				data: {
+	    					'login': 1,
+	    				},
+	    				success: function(data){
+	    					window.location.href="library.php";
+	    				}
+				});	
+		    }
+		    // The response object is returned with a status field that lets the
+		    // app know the current login status of the person.
+		    // Full docs on the response object can be found in the documentation
+		    // for FB.getLoginStatus().
+	  	}
+	    function checkLoginState() {
+		    FB.getLoginStatus(function(response) {
+		      statusChangeCallback(response);
+		    });
+	  	}
+	  	window.fbAsyncInit = function() {
+		    FB.init({
+		      appId: <?php echo $app_id;?>,
+		      autoLogAppEvents : true,
+		      xfbml            : true,
+		      cookie: true, // This is important, it's not enabled by default
+		      version: 'v2.8'
+		    });
+
+		    FB.getLoginStatus(function(response) {
+		      statusChangeCallback(response);
+		    });
+
+
+
+	  	};
+	  	(function(d, s, id){
+		    var js, fjs = d.getElementsByTagName(s)[0];
+		    if (d.getElementById(id)) {return;}
+		    js = d.createElement(s); js.id = id;
+		    js.src = "https://connect.facebook.net/en_US/sdk.js";
+		    fjs.parentNode.insertBefore(js, fjs);
+	  	}(document, 'script', 'facebook-jssdk'));
+
+
+
+
     	function validateProf(){
     		var firstname = document.forms["prof_set"]["firstname"].value;
     		var lastname = document.forms["prof_set"]["lastname"].value;

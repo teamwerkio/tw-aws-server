@@ -153,7 +153,7 @@
 					<p align="center">Connect your Teamwerk account with Facebook so we can find you the top projects that would interest you the most.</p>
 					<!-- Facebook login button -->
 					<div id="fbcenter" style="margin-top: 15px;">
-						<div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" onlogin="checkLoginState();"></div>
+						<div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-scope="user_likes,user_posts,user_education_history,user_work_history" data-auto-logout-link="false" data-use-continue-as="false" onlogin="checkLoginState();"></div>
 					</div>
 					<a href="library.php" align="center" style="font-size: 12px; margin-top: 8px;"><u>No thanks, take me to my account</u></a>
 
