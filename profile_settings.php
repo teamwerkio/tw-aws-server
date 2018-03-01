@@ -289,6 +289,10 @@
 		      version: 'v2.8'
 		    });
 
+		    FB.getLoginStatus(function(response) {
+		      statusChangeCallback(response);
+		    });
+
 	  	};
 	  	(function(d, s, id){
 		    var js, fjs = d.getElementsByTagName(s)[0];
