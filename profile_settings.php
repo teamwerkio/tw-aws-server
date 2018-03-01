@@ -55,15 +55,6 @@
 </head>
 
 <body>
-
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.12&appId=1841177166173972&autoLogAppEvents=1';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>	
-
 	<div id="wrapper">
 		<header id="header" class="site-header">
 			<div class="container">
@@ -297,12 +288,6 @@
 		      cookie: true, // This is important, it's not enabled by default
 		      version: 'v2.8'
 		    });
-
-		    FB.getLoginStatus(function(response) {
-		      statusChangeCallback(response);
-		    });
-
-
 
 	  	};
 	  	(function(d, s, id){
