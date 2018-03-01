@@ -47,7 +47,7 @@
 			  					<div class="field-select">
 
 									<select name="j_role" id="">
-										<option value="">Select a Role</option>
+										
 										<?php
 											
 											$join_req_sql="SELECT * FROM join_req WHERE usrID=".$_SESSION['usr']." AND projID=".$_GET['projID'];
