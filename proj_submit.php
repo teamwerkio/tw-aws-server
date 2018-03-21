@@ -83,6 +83,20 @@
 			$proj_query=mysqli_query($dbconnect, $proj_sql);
 
 			$highest_id = mysqli_fetch_row(mysqli_query($dbconnect, "SELECT MAX(projID) FROM project"))[0];
+
+			$defUpSQL1="INSERT INTO proj_updates(projID, title, dt) VALUES ('".
+			mysqli_real_escape_string($dbconnect, $highest_id)."', '".
+			mysqli_real_escape_string($dbconnect, "Project started")."', '".
+			mysqli_real_escape_string($dbconnect, $date)."')";
+
+			$defUpSQL2="INSERT INTO proj_updates(projID, title, dt) VALUES ('".
+			mysqli_real_escape_string($dbconnect, $highest_id)."', '".
+			mysqli_real_escape_string($dbconnect, "Going live soon!")."', '".
+			mysqli_real_escape_string($dbconnect, $date)."')";
+
+			mysqli_query($dbconnect, $defUpSQL1);
+			mysqli_query($dbconnect, $defUpSQL2);
+
 			unset($_POST['addp']);
 			header("Location:project.php?projID=".$highest_id);
 
