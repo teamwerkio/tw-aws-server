@@ -320,14 +320,6 @@
 								</div>
 								<?php
 								} ?>
-								<!-- <div class="share" style="margin-top: 42px;">
-									<p style="margin-bottom: 5px;">Share this project</p>
-									<ul>
-										<li class="share-facebook"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-										<li class="share-twitter"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-										<li class="share-code"><a href="#"><i class="fa fa-code" aria-hidden="true"></i></a></li>
-									</ul>
-								</div> -->
 							</div>
 						</div>
 					</div>

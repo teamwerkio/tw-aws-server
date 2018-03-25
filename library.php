@@ -17,6 +17,14 @@
 	$proj_qry=mysqli_query($dbconnect, $proj_sql);
 	$proj_res=mysqli_fetch_assoc($proj_qry);
 
+	$testIds=array();
+	$testSql="SELECT usrID FROM Testers";
+	$testqry=mysqli_query($dbconnect, $testSql);
+	$testRes=mysqli_fetch_assoc($testqry);
+	do{
+		array_push($testIds, $testRes["usrID"]);
+	}while($testRes=mysqli_fetch_assoc($testqry));
+
 	$trending_proj_id=0;
 	do{
 		$json_dec=json_decode($proj_res['tags'], true);
@@ -309,7 +317,17 @@
 								$final_id=0;
 
 								do{
-									if($proj_res['projID']!==$trending_proj_id && $count<9){
+
+									$tagJson=json_decode($proj_res['tags'],true);
+									$notPriv=true;
+									if(@$tagJson["private"]==true){
+										if(!in_array($_SESSION['usr'], $testIds)){
+											$notPriv=false;
+										}
+										
+										
+									}
+									if($proj_res['projID']!==$trending_proj_id && $count<9 && $notPriv){
 										$count+=1;
 										$cat=returnCat('proj_categories', 'catName', $proj_res['catID'], $dbconnect, 'catID');
 										$owner_f=returnCat('users', 'firstname', $proj_res['usrID'], $dbconnect, 'usrID');
