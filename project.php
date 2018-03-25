@@ -409,8 +409,8 @@
 
 
 														<div class="bootstrap-iso">
-														  <div id="jpmodal<?php echo $role_res['roleID'];?>" class="modal jpmodal fade" id="modal-33">
-														    <div class="modal-dialog modal-33g">
+														  <div id="jpmodal<?php echo $role_res['roleID'];?>" class="modal jp fade" id="modal-77">
+														    <div class="modal-dialog modal-77g">
 														      <div class="modal-content" style="height: 700px; width: 500px;">
 
 														         <div class="modal-body" id="modal_join">
@@ -1330,7 +1330,9 @@
 				}
 				
 			});
-
+			$('.jp').on('hidden.bs.modal', function () {
+  				location.reload();
+			});
 			$("#update_button").click(function(){
 
 				$.ajax({
@@ -1349,10 +1351,10 @@
 			});
 
 
-			$('.modal').on('hidden.bs.modal', function(){
-				console.log("erasing");
-			    $(this).find('form')[0].reset();
-			});
+			// $('.modal').on('hidden.bs.modal', function(){
+			// 	console.log("erasing");
+			//     $(this).find('form')[0].reset();
+			// });
 
 
 			$("#role_button").click(function(){
