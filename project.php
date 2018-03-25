@@ -221,39 +221,6 @@
 												<?php
 											}
 										?>
-										<!-- Small Team -->
-										<!-- <div class="process-pledged"><span>
-											<a data-tooltip="Small team">
-											<i class="fa fa-user"></i>
-											<i class="fa fa-user"></i></a>
-										</span>team size</div> -->
-
-										<!-- Medium Team -->
-										<!-- <div class="process-pledged"><span>
-											<a data-tooltip="Medium team">
-											<i class="fa fa-user"></i>
-											<i class="fa fa-user"></i>
-											<i class="fa fa-user"></i></a>
-										</span>team size</div> -->
-
-										<!-- Large Team -->
-										<!-- <div class="process-pledged"><span>
-											<a data-tooltip="Large team">
-											<i class="fa fa-user"></i>
-											<i class="fa fa-user"></i>
-											<i class="fa fa-user"></i>
-											<i class="fa fa-user"></i></a>
-										</span>team size</div> -->
-
-										<!-- Extra Large Team -->
-										<!-- <div class="process-pledged"><span>
-											<a data-tooltip="Extra large team">
-											<i class="fa fa-user"></i>
-											<i class="fa fa-user"></i>
-											<i class="fa fa-user"></i>
-											<i class="fa fa-user-plus"></i></a>
-										</span>team size</div> -->
-
 										<!-- =============== -->
 										<?php
 											$inv_id=$p_res['commID'];
@@ -437,7 +404,33 @@
 											do{
 												?>
 
-													<div class="plan" style="margin-bottom: 15px;">
+													<div data-roleid="<?php echo $role_res['roleID'];?>" class="plan rolediv" style="margin-bottom: 15px;">
+
+
+
+														<div class="bootstrap-iso">
+														  <div id="jpmodal<?php echo $role_res['roleID'];?>" class="modal jpmodal fade" id="modal-33">
+														    <div class="modal-dialog modal-33g">
+														      <div class="modal-content" style="height: 700px; width: 500px;">
+
+														         <div class="modal-body" id="modal_join">
+
+														          <iframe id="if_join" src="join_project.php?projID=<?php echo $id;?>&roleID=<?php echo $role_res['roleID'];?>" style="width: 100%; overflow: scroll;" height="550" frameborder="0">
+														          </iframe>
+														         </div>
+														         <div class="modal-footer">
+														          <button class="btn-mainb cl" data-dismiss="modal" style="cursor: pointer; width: 100px; color: white;">Close</button>
+
+														          <button id="join_proj" name="projID" value=<?php echo $id;?> type="submit" class="btn-mainb" style="cursor: pointer; width: 100px; color: white;">Join</button>
+
+														         </div>
+														      </div>
+														    </div>
+														  </div>
+														</div>
+
+
+
 														<a>
 															
 																		
@@ -1299,6 +1292,13 @@
 				</div>
 			</div>
 		</footer><!-- site-footer -->
+
+
+
+
+
+
+
 	</div><!-- #wrapper -->
 	<!-- jQuery -->  
     <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
@@ -1318,6 +1318,19 @@
     	var usr_id="<?php echo $sess_ID?>";
 		var proj_id="<?php echo $id?>";
 		$(document).ready(function(){
+
+
+
+			$(".rolediv").click(function(){
+				var owner_id="<?php echo $owner_ID?>";
+				var div=$(this);
+				var role_id=Number(div.data('roleid'));
+				if(owner_id!=usr_id){
+					$("#jpmodal"+role_id).modal('show');	
+				}
+				
+			});
+
 			$("#update_button").click(function(){
 
 				$.ajax({

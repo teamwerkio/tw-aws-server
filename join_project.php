@@ -13,6 +13,9 @@
 	$usr_sql="SELECT * FROM users WHERE usrID=".$_SESSION['usr'];
 	$usr_qry=mysqli_query($dbconnect, $usr_sql);
 	$usr_res=mysqli_fetch_assoc($usr_qry);
+
+
+
 ?>
 
 <!doctype html>
@@ -61,11 +64,18 @@
 											}while($join_req_res=mysqli_fetch_assoc($join_req_qry));
 											
 											do{
-												if(!in_array($role_res['roleID'], $role_arr)){
+												if(!in_array($role_res['roleID'], $role_arr) && isset($_GET['roleID']) && $_GET['roleID']==$role_res['roleID']){
+												?>
+													<option value="<?php echo $role_res['roleID']?>" selected="selected"><?php echo $role_res['title']?></option>
+												<?php
+												}
+												elseif(!in_array($role_res['roleID'], $role_arr)){
 												?>
 													<option value="<?php echo $role_res['roleID']?>"><?php echo $role_res['title']?></option>
 												<?php
-											}}while($role_res=mysqli_fetch_assoc($role_qry));
+												}
+
+										}while($role_res=mysqli_fetch_assoc($role_qry));
 										?>
 <!-- 										<option value="1">A</option>
 										<option value="2">B</option>
