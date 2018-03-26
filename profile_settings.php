@@ -14,6 +14,9 @@
 		$parsed_ini=parse_ini_file("../../fb.ini", true);
 		$app_id=$parsed_ini['FB']['app_id'];
 		$app_secret=$parsed_ini['FB']['app_secret'];
+
+		$fb_data=$usr_res['fb_data_status'];
+
 		
 	}
 
@@ -166,11 +169,18 @@
 						  				</div>	
 						  				<button name="prof_set" class="btn-primary" type="submit" style="cursor: pointer; margin-top: 5px; background-color: #73b941; padding-left: 8px; padding-right: 8px;">Save and Apply settings</button>
 						  			</form>
+									<?php
+										if($fb_data===0){
 
+
+									?>
 						  			<h3 style="margin-bottom: 20px; margin-top: 20px;">Connect with Facebook</h3>
 						  			<div id="fbcenter" style="margin-top: 15px;">
 										<div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-scope="user_likes,user_posts,user_education_history,user_work_history" data-auto-logout-link="false" data-use-continue-as="false" onlogin="checkLoginState();"></div>
 									</div>
+									<?php
+										}
+									?>
 								</div>
 							</div>
 						</div>
@@ -254,6 +264,11 @@
     <script type="text/javascript" src="libs/bxslider/jquery.bxslider.min.js"></script>
     <!-- orther script -->
     <script  type="text/javascript" src="js/main.js"></script>
+  	<?php
+  		if($fb_data===0){
+
+
+  	?>
     <script type="text/javascript">
   		function statusChangeCallback(response) {
 		    console.log('statusChangeCallback');
@@ -275,6 +290,8 @@
 		    // Full docs on the response object can be found in the documentation
 		    // for FB.getLoginStatus().
 	  	}
+ 
+
 	    function checkLoginState() {
 		    FB.getLoginStatus(function(response) {
 		      statusChangeCallback(response);
@@ -302,8 +319,11 @@
 		    fjs.parentNode.insertBefore(js, fjs);
 	  	}(document, 'script', 'facebook-jssdk'));
 
-
-
+	</script>
+	<?php
+		}
+	?>
+  	<script type="text/javascript">
 
     	function validateProf(){
     		var firstname = document.forms["prof_set"]["firstname"].value;
