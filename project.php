@@ -407,13 +407,13 @@
 
 														         <div class="modal-body" id="modal_join">
 
-														          <iframe id="if_join" src="join_project.php?projID=<?php echo $id;?>&roleID=<?php echo $role_res['roleID'];?>" style="width: 100%; overflow: scroll;" height="550" frameborder="0">
+														          <iframe id="if_join<?php echo $id;?>" src="join_project.php?projID=<?php echo $id;?>&roleID=<?php echo $role_res['roleID'];?>" style="width: 100%; overflow: scroll;" height="550" frameborder="0">
 														          </iframe>
 														         </div>
 														         <div class="modal-footer">
 														          <button class="btn-mainb cl" data-dismiss="modal" style="cursor: pointer; width: 100px; color: white;">Close</button>
 
-														          <button id="join_proj" name="projID" value=<?php echo $id;?> type="submit" class="btn-mainb" style="cursor: pointer; width: 100px; color: white;">Join</button>
+														          <button class="join_proj2" name="projID" value=<?php echo $id;?> type="submit" class="btn-mainb" style="cursor: pointer; width: 100px; color: white;">Join</button>
 
 														         </div>
 														      </div>
@@ -1309,12 +1309,14 @@
     <script type="text/javascript">
     	var usr_id="<?php echo $sess_ID?>";
 		var proj_id="<?php echo $id?>";
+		
 		$(document).ready(function(){
 
 
 
 			$(".rolediv").click(function(){
 				var owner_id="<?php echo $owner_ID?>";
+				
 				var div=$(this);
 				var role_id=Number(div.data('roleid'));
 				if(owner_id!=usr_id){
@@ -1379,8 +1381,25 @@
 					}
 
 				});
+			});
+
+
+
+			$(".join_proj2").click(function(){
+				$.ajax({
+					url: 'join_project_submit.php?projID='+proj_id,
+					type: 'POST',
+					data: $("#if_join"+proj_id).contents().find("#proj_join").serialize(),
+					success: function(data){
+						$(".modal").modal('hide');
+						location.reload();
+						
+					}
+
+				});
 				
 			});
+
 			var editRole=0;
 
 			$("#update_role").click(function(){
