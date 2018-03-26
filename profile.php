@@ -19,6 +19,10 @@
 
 		$clicked_json=json_decode($prof_res['clicked'],true);
 		$clicked=$clicked_json["clicked"];
+
+		$prof2_sql = "SELECT * FROM users WHERE usrID=".$_SESSION['usr'];
+		$prof2_qry = mysqli_query($dbconnect, $prof2_sql);
+		$prof2_res = mysqli_fetch_assoc($prof2_qry);
 	}
 	
 	else{
@@ -102,9 +106,7 @@
 										<?php
 									}
 									else{
-										$prof2_sql = "SELECT * FROM users WHERE usrID=".$_SESSION['usr'];
-										$prof2_qry = mysqli_query($dbconnect, $prof2_sql);
-										$prof2_res = mysqli_fetch_assoc($prof2_qry);
+
 										?>
 										<a href="profile.php"><?php echo $prof2_res['firstname']; ?><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 										<?php
@@ -138,17 +140,19 @@
 							<nav class="account-bar">
 								<ul>
 									<!-- <li><a href="dashboard.php">Dashboard</a></li> -->
-									<li class="active"><a href="profile.php">Profile</a></li>
+									
 									<!-- <li><a href="ongoing_projects.php">Ongoing Projects</a></li>
 									<li><a href="past_projects.php">Past Projects</a></li> -->
 									<?php
 										if($other){
 											?>
-												<li><a href="my_projects.php"><?php echo $prof_res['firstname'];?>'s Projects</a></li>
+												<li class="active"><a href="profile.php?other_usr=<?php echo $_GET['other_usr'];?>"><?php echo $prof_res['firstname'];?>s' profile</a></li>
+												<li><a href="my_projects.php?other_usr=<?php echo $_GET['other_usr'];?>"><?php echo $prof_res['firstname'];?>'s projects</a></li>
 											<?php
 										}
 										else{
 											?>
+												<li class="active"><a href="profile.php">Profile</a></li>
 												<li><a href="my_projects.php">My Projects</a></li>
 												<li><a href="profile_settings.php">Profile Settings</a></li>
 											<?php
