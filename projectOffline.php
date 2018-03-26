@@ -66,9 +66,6 @@
     <!-- bootstrap wrappable css to avoid conflicts -->
   	<link rel="stylesheet" href="https://formden.com/static/assets/demos/bootstrap-iso/bootstrap-iso/bootstrap-iso.css">
   	<link rel="stylesheet" href="https://formden.com/static/assets/demos/bootstrap-iso/bootstrap-iso/bootstrap-iso.css">
-<!-- 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script> -->
 </head>
 
 <body class="campaign-detail">
@@ -174,7 +171,7 @@
 								<div class="campaign-description"><p><?php echo $p_res['sm_desc']; ?></p></div>
 								<div class="campaign-author clearfix">
 									<div class="author-profile">
-										<a class="author-icon" href="profile.php?other_usr=<?php echo $p_res['usrID']; ?>"><?php echo '<img src="'.getimgURL($owner_p, "profilepic").'" />'; ?></a>by <a class="author-name" href="profile.php?other_usr=<?php echo $p_res['usrID']; ?>"><?php echo $owner_f; ?> <?php echo $owner_l; ?></a>
+										<a class="author-icon" href="profile.php?other_usr=<?php echo $p_res['usrID']; ?>"><?php echo '<img src="'.getProfURL($owner_p).'" />'; ?></a>by <a class="author-name" href="profile.php?other_usr=<?php echo $p_res['usrID']; ?>"><?php echo $owner_f; ?> <?php echo $owner_l; ?></a>
 									</div>
 									<div class="author-address"><span class="ion-location"></span><?php echo $proj_col; ?>, Amherst, MA</div>
 								</div>
@@ -448,14 +445,37 @@
 									<div class="col-lg-15" style="margin-top: 0px;">
 									<div class="support support-campaign" style="margin-top: 41px;">
 
-										<div class="team" style="margin-top: 0px; margin-bottom: 0px;">
-											<img src="../images/placeholder/150x150.png">
-											<img src="../images/placeholder/150x150.png">
-											<img src="../images/placeholder/150x150.png">
-											<img src="../images/placeholder/150x150.png">
-											<img src="../images/placeholder/150x150.png">
-											<img src="../images/placeholder/150x150.png">
-											<img src="../images/placeholder/150x150.png">
+										<div id="teamprof" class="team" style="margin-top: 0px; margin-bottom: 0px;">
+											<?php
+												$team_json=json_decode($p_res['team'],true);
+												$admin_arr=$team_json["admin"];
+												$mem_arr=$team_json["member"];
+												
+											?>
+											<img src="<?php echo getProfURL($owner_p);?>">
+											<?php
+												foreach ($admin_arr as $admin) {
+													$ad_sql="SELECT * FROM users WHERE usrID=".$admin["id"];
+													$ad_qry=mysqli_query($dbconnect, $ad_sql);
+													$ad_res=mysqli_fetch_assoc($ad_qry);
+													?>
+													<img src="<?php echo getProfURL($ad_res['profilepic']);?>">
+													<?php
+													
+												}
+											?>
+											<?php
+												foreach ($mem_arr as $mem) {
+													$mem_sql="SELECT * FROM users WHERE usrID=".$mem["id"];
+													$mem_qry=mysqli_query($dbconnect, $mem_sql);
+													$mem_res=mysqli_fetch_assoc($mem_qry);
+													?>
+													<img src="<?php echo getProfURL($mem_res['profilepic']);?>">
+													<?php
+													
+												}
+											?>
+
 										</div>
 
 										<!-- <h1 style="margin-bottom: 3px; font-weight: 500; font-size: 20px;">Open</h1> -->

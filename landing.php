@@ -190,7 +190,8 @@
 													<a href="#" class="category"><?php echo returnCat('proj_categories', 'catName', $item_res['catID'], $dbconnect, 'catID');?></a>
 													<h3><a href="projectOffline.php?projID=<?php echo $feat['id'];?>&viewOff=true"><?php echo $item_res['projName'];?></a></h3>
 													<div class="campaign-description"><?php echo $item_res['sm_desc'];?></div>
-													<div class="campaign-author"><a class="author-icon" href="#"><img src="<?php echo getimgURL(returnCat('users', 'profilepic', $item_res['usrID'], $dbconnect, 'usrID'), "profilepic");?>" alt=""></a>by <a class="author-name" href="#"><?php echo returnCat('users', 'firstname', $item_res['usrID'], $dbconnect, 'usrID');?></a></div>
+													<div class="campaign-author"><a class="author-icon" href="#"><img src="<?php echo
+													 getProfURL(returnCat('users', 'profilepic', $item_res['usrID'], $dbconnect, 'usrID'));?>" alt=""></a>by <a class="author-name" href="#"><?php echo returnCat('users', 'firstname', $item_res['usrID'], $dbconnect, 'usrID');?></a></div>
 													<div class="process">
 														<div class="raised"><span style="width: <?php echo $item_res['progress'];?>%;"></span></div>
 														<div class="process-info">
