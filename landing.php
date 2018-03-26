@@ -126,22 +126,42 @@
 								$feat_res=mysqli_fetch_assoc($feat_qry);
 								$feat_array=array();
 								do{
-									$curr_json=json_decode($feat_res['subs'], true);
-									$sub_size=count($curr_json["subs"]);
-									$curr_arr=array('id' => $feat_res['projID'], 'count'=>$sub_size);
-									if(empty($feat_array)){array_push($feat_array, $curr_arr);}
-									elseif ($feat_array[0]['count']<=$curr_arr['count']) {
-										array_unshift($feat_array, $curr_arr);
+
+									$tagJson=json_decode($feat_res['tags'],true);
+									$notPriv=true;
+									if(@$tagJson["private"]==true){
+										$notPriv=false;
 									}
-									else{
-										array_push($feat_array, $curr_arr);
+
+									if($notPriv){
+										$curr_json=json_decode($feat_res['subs'], true);
+										$sub_size=count($curr_json["subs"]);
+										$curr_arr=array('id' => $feat_res['projID'], 'count'=>$sub_size);
+										if(empty($feat_array)){array_push($feat_array, $curr_arr);}
+										elseif ($feat_array[0]['count']<=$curr_arr['count']) {
+											array_unshift($feat_array, $curr_arr);
+										}
+										else{
+											array_push($feat_array, $curr_arr);
+										}
 									}
+
+
 
 								}while($feat_res=mysqli_fetch_assoc($feat_qry));
 
 								$feat_count=0;
 
 								foreach ($feat_array as $feat) {
+
+									$tagJson=json_decode($feat_res['tags'],true);
+									$notPriv=true;
+									if(@$tagJson["private"]==true){
+										if(!in_array($_SESSION['usr'], $testIds)){
+											$notPriv=false;
+										}
+									}
+
 									$item_sql="SELECT * FROM project WHERE projID=".$feat['id'];
 									$item_qry=mysqli_query($dbconnect, $item_sql);
 									$item_res=mysqli_fetch_assoc($item_qry);
