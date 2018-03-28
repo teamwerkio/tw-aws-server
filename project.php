@@ -351,21 +351,21 @@
 									<div class="col-lg-15" style="margin-top: 0px;">
 									<div class="support support-campaign" style="margin-top: 41px;">
 
-										<div id="teamprof" class="team" style="margin-top: 0px; margin-bottom: 0px;">
+										<ul id="teamprof" class="team" style="list-style:none; margin-top: 0px; margin-bottom: 0px;">
 											<?php
 												$team_json=json_decode($p_res['team'],true);
 												$admin_arr=$team_json["admin"];
 												$mem_arr=$team_json["member"];
 												
 											?>
-											<img src="<?php echo getProfURL($owner_p);?>">
+											<li style="display:inline;"><a style="display:inline-block;" href="profile.php?other_usr=<?php echo $owner_ID;?>"><img src="<?php echo getProfURL($owner_p);?>"/></a></li>
 											<?php
 												foreach ($admin_arr as $admin) {
 													$ad_sql="SELECT * FROM users WHERE usrID=".$admin["id"];
 													$ad_qry=mysqli_query($dbconnect, $ad_sql);
 													$ad_res=mysqli_fetch_assoc($ad_qry);
 													?>
-													<img src="<?php echo getProfURL($ad_res['profilepic']);?>">
+													<li style="display:inline;"><a style="display:inline-block;" href="profile.php?other_usr=<?php echo $admin["id"];?>"><img src="<?php echo getProfURL($ad_res['profilepic']);?>"/></a></li>
 													<?php
 													
 												}
@@ -376,13 +376,13 @@
 													$mem_qry=mysqli_query($dbconnect, $mem_sql);
 													$mem_res=mysqli_fetch_assoc($mem_qry);
 													?>
-													<img src="<?php echo getProfURL($mem_res['profilepic']);?>">
+													<li style="display:inline;"><a style="display:inline-block;" href="profile.php?other_usr=<?php echo $mem["id"];?>"><img src="<?php echo getProfURL($mem_res['profilepic']);?>"/></a></li>
 													<?php
 													
 												}
 											?>
 
-										</div>
+										</ul>
 
 										<!-- <h1 style="margin-bottom: 3px; font-weight: 500; font-size: 20px;">Open</h1> -->
 										<?php
