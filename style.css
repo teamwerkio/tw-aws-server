@@ -2106,7 +2106,7 @@ select,.field input{
 	padding: 0 18px;
 	bottom: 0;
   z-index: 5;
-	border-left: 1px solid #ededed;
+	/*border-left: 1px solid #ededed;*/
 }
 .calculate-shipping .align-left.field-select:after{
 	right: 15px;
