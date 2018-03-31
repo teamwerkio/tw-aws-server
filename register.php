@@ -85,7 +85,7 @@
 			var avatar=document.getElementsByClassName('avatar');
 			var image=document.getElementById("uploadfile1");
 			var emailExists=true;
-			console.log(em);
+			
 
 			
 			var avCheck=false;
