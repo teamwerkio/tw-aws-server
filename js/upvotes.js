@@ -37,9 +37,69 @@ $(document).ready(function() {
 			},
 			success: function(data){
 				button.closest('div').remove();
+
 				
 				if(Number(data)==0){
 					$('#no-roles').html("No roles available at this moment");
+				}
+			}
+
+		});
+	});
+
+	$(document).on('click', '.rejbutt', function(){
+		var button=$(this);
+		var reqID=Number(button.data('reqid'));
+		var name=button.data('name');
+		
+		
+		$.ajax({
+			url: 'join_proj_acc_rej.php',
+			type: 'POST',
+			data: {
+				'rej': 1,
+				'reqID': reqID,
+			},
+			success: function(data){
+				
+				
+				
+				if(Number(data)==0){
+
+					button.closest('table').remove();
+					swal('Invitation Declined', name+' will not be a part of your team', 'error');
+				}
+				else{
+					button.closest('tr').remove();
+				}
+			}
+
+		});
+	});
+
+	$(document).on('click', '.accbutt', function(){
+		var button=$(this);
+		var reqID=Number(button.data('reqid'));
+		var name=button.data('name');
+		$.ajax({
+			url: 'join_proj_acc_rej.php',
+			type: 'POST',
+			data: {
+				'acc': 1,
+				'reqID': reqID,
+			},
+			success: function(data){
+				var json=JSON.parse(data);
+				
+				
+				if(Number(json.rows)==0){
+					$("#teamprof").append(json.html);
+					button.closest('table').remove();
+					swal('Invitation Accpeted', name+' is now a part of your team', 'success');
+				}
+				else{
+					$("#teamprof").append(json.html);
+					button.closest('tr').remove();
 				}
 			}
 

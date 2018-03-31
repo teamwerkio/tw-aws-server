@@ -11,6 +11,12 @@
 		$usr_sql = "SELECT * FROM users WHERE usrID=".$_SESSION['usr'];
 		$usr_qry = mysqli_query($dbconnect, $usr_sql);
 		$usr_res = mysqli_fetch_assoc($usr_qry);
+		$parsed_ini=parse_ini_file("../../fb.ini", true);
+		$app_id=$parsed_ini['FB']['app_id'];
+		$app_secret=$parsed_ini['FB']['app_secret'];
+
+		$fb_data=$usr_res['fb_data_status'];
+
 		
 	}
 
@@ -26,6 +32,14 @@
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link rel="stylesheet" type="text/css" href="css/responsive.css" />
     <link rel="icon" href="../images/favicon.png" type="image/x-icon"/>
+
+    <!-- bootstrap wrappable css to avoid conflicts -->
+  	<link rel="stylesheet" href="https://formden.com/static/assets/demos/bootstrap-iso/bootstrap-iso/bootstrap-iso.css">
+  	<link rel="stylesheet" href="https://formden.com/static/assets/demos/bootstrap-iso/bootstrap-iso/bootstrap-iso.css">
+
+  	<!-- sweetalerts -->
+  	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 
     <style type="text/css">
 		/* Create two equal columns that floats next to each other */
@@ -44,15 +58,6 @@
 </head>
 
 <body>
-
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.12&appId=1841177166173972&autoLogAppEvents=1';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>	
-
 	<div id="wrapper">
 		<header id="header" class="site-header">
 			<div class="container">
@@ -121,7 +126,7 @@
 								<div class="account-main">
 
 									<h3 style="margin-bottom: 20px;">Basic Information</h3>
-									<form name="prof_set" action="profile_settings_submit.php" method="post" enctype="multipart/form-data">
+									<form name="prof_set" onsubmit="return validateProf()" action="profile_settings_submit.php" method="post" enctype="multipart/form-data">
 						  				<div class="field">
 						  					<input name="firstname" type="text" value="<?php echo $usr_res['firstname'];?>" name="s" placeholder="First Name" />
 						  				</div>
@@ -151,7 +156,7 @@
 													  	<label class="filename1"></label>
 								  					</div>
 							  					</div>
- -->						  				</div>
+						  				</div>
 						  				<h3 style="margin-bottom: 20px; margin-top: 20px;">Reset Password</h3>
 						  				<div class="field">
 						  					<input name="old_pass" type="password" value="" name="s" placeholder="Old Password" />
@@ -164,11 +169,18 @@
 						  				</div>	
 						  				<button name="prof_set" class="btn-primary" type="submit" style="cursor: pointer; margin-top: 5px; background-color: #73b941; padding-left: 8px; padding-right: 8px;">Save and Apply settings</button>
 						  			</form>
+									<?php
+										if($fb_data===0){
 
-<!-- 						  			<h3 style="margin-bottom: 20px; margin-top: 20px;">Connect with Facebook</h3>
-						  			<div id="fbcenter" style="margin-bottom: 20px;">
-										<div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
-									</div> -->
+
+									?>
+						  			<h3 style="margin-bottom: 20px; margin-top: 20px;">Connect with Facebook</h3>
+						  			<div id="fbcenter" style="margin-top: 15px;">
+										<div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-scope="user_likes,user_posts,user_education_history,user_work_history" data-auto-logout-link="false" data-use-continue-as="false" onlogin="checkLoginState();"></div>
+									</div>
+									<?php
+										}
+									?>
 								</div>
 							</div>
 						</div>
@@ -222,13 +234,13 @@
 							  		<input type="text" value="" name="s" placeholder="Enter your email..." />
 							    	<button type="submit" value=""><span class="ion-android-drafts"></span></button>
 							  	</form>
-							  	<!-- <div class="follow">
+							  	<div class="follow">
 							  		<h3>Join us on</h3>
 							  		<ul>
 							  			<li class="facebook"><a target="_Blank" href="http://www.facebook.com"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
 							  			<li class="twitter"><a target="_Blank" href="http://www.twitter.com"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
 							  		</ul>
-							  	</div> -->
+							  	</div>
 							</div>
 						</div>
 					</div>
@@ -252,5 +264,141 @@
     <script type="text/javascript" src="libs/bxslider/jquery.bxslider.min.js"></script>
     <!-- orther script -->
     <script  type="text/javascript" src="js/main.js"></script>
+  	<?php
+  		if($fb_data===0){
+
+
+  	?>
+    <script type="text/javascript">
+  		function statusChangeCallback(response) {
+		    console.log('statusChangeCallback');
+		    console.log(response.status);
+		    if(response.status==='connected'){
+		    	$.ajax({
+	    				url: 'fbLogin.php',
+	    				type: 'POST',
+	    				data: {
+	    					'login': 1,
+	    				},
+	    				success: function(data){
+	    					window.location.href="library.php";
+	    				}
+				});	
+		    }
+		    // The response object is returned with a status field that lets the
+		    // app know the current login status of the person.
+		    // Full docs on the response object can be found in the documentation
+		    // for FB.getLoginStatus().
+	  	}
+ 
+
+	    function checkLoginState() {
+		    FB.getLoginStatus(function(response) {
+		      statusChangeCallback(response);
+		    });
+	  	}
+	  	window.fbAsyncInit = function() {
+		    FB.init({
+		      appId: <?php echo $app_id;?>,
+		      autoLogAppEvents : true,
+		      xfbml            : true,
+		      cookie: true, // This is important, it's not enabled by default
+		      version: 'v2.8'
+		    });
+
+		    FB.getLoginStatus(function(response) {
+		      statusChangeCallback(response);
+		    });
+
+	  	};
+	  	(function(d, s, id){
+		    var js, fjs = d.getElementsByTagName(s)[0];
+		    if (d.getElementById(id)) {return;}
+		    js = d.createElement(s); js.id = id;
+		    js.src = "https://connect.facebook.net/en_US/sdk.js";
+		    fjs.parentNode.insertBefore(js, fjs);
+	  	}(document, 'script', 'facebook-jssdk'));
+
+	</script>
+	<?php
+		}
+	?>
+  	<script type="text/javascript">
+
+    	function validateProf(){
+    		var firstname = document.forms["prof_set"]["firstname"].value;
+    		var lastname = document.forms["prof_set"]["lastname"].value;
+    		var image=document.getElementById("uploadfile1");
+
+    		var oldPass = document.forms["prof_set"]["old_pass"].value;
+    		var newPass = document.forms["prof_set"]["pass_signup"].value;
+    		var passVer = document.forms["prof_set"]["pass_signup_verify"].value;
+
+    		if (firstname == "") {
+				swal("Missing field", "Please enter your First Name", "warning");
+				return false;
+			}
+			if (lastname == "") {
+				swal("Missing field", "Please enter your Last Name", "warning");
+				return false;
+			}
+
+			if(image.files.length!=0){
+				console.log("imgae is there");
+				var img2=image.files[0]['type'];
+				if(img2.split('/')[0]!='image'){
+					swal("The image filetype is not supported", "", "error");
+					return false;
+				}
+			}
+			$.ajax({
+					url: 'update_server.php',
+					type: 'POST',
+					data: {
+						'pass_chk': 1,
+						'oldPass': oldPass,
+					},
+					success: function(data){
+						
+						if(Number(data)==0){
+							if(newPass=="" && passVer==""){
+								document.forms["prof_set"].submit();
+								return true;
+							}
+							else{
+								swal("Password Error", "Please enter your old password", "error");
+								return false;
+							}
+						}
+						else if(Number(data)==-1){
+							swal("Password Error", "Incorrect old password", "error");
+							return false;
+						}
+						else if(Number(data)==1){
+							if(newPass!=passVer){
+								swal("Password Error", "New passwords do not match", "error");
+								return false;
+							}
+							else{
+								document.forms["prof_set"].submit();
+								return true;
+							}
+						}
+						
+					},
+					error: function(jqXHR,error, errorThrown){
+					
+						console.log("status2: "+jqXHR.status);
+						return false;
+					}	
+
+
+			});
+			return false;
+
+
+    	}
+
+    </script>
 </body>
 </html>

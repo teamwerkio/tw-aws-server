@@ -57,17 +57,47 @@
 			text-align: center;
 		}
     </style>
-    <script>
+    <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="libs/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="libs/owl-carousel/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="libs/jquery.countdown/jquery.countdown.min.js"></script>
+    <script type="text/javascript" src="libs/wow/wow.min.js"></script>
+    <script type="text/javascript" src="libs/isotope/isotope.pkgd.min.js"></script>
+    <script type="text/javascript" src="libs/bxslider/jquery.bxslider.min.js"></script>
+    <!-- orther script -->
+    <script  type="text/javascript" src="js/main.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script> 
+    <script src="http://malsup.github.com/jquery.form.js"></script>
+    <script type="text/javascript">
+
 		function validateForm() {
+			
 
 			var firstname = document.forms["signup"]["firstname"].value;
 			var lastname = document.forms["signup"]["lastname"].value;
 			var email = document.forms["signup"]["email_signup"].value;
+			var ext=document.forms["signup"]["em_ext"].options[document.forms["signup"]["em_ext"].selectedIndex].value;
 			var pass = document.forms["signup"]["pass_signup"].value;
 			var passv = document.forms["signup"]["pass_signup_verify"].value;
 			var checkBoxes = document.getElementsByClassName( 'cb' );
 			var isChecked = false;
 			var touChecked = document.getElementById("tou").checked;
+			var avatar=document.getElementsByClassName('avatar');
+			var image=document.getElementById("uploadfile1");
+			var em=email+"@"+ext;
+			var emailExists=true;
+			console.log(em);
+
+			
+			var avCheck=false;
+
+			for(var i=0; i<avatar.length; i++){
+				if(avatar[i].checked){
+					avCheck=true;
+				}
+			}
+
 			
 			if (firstname == "") {
 				swal("Missing field", "Please enter your First Name", "warning");
@@ -98,6 +128,22 @@
 				swal("Passwords do not match", "Please check the Passwords you entered", "error");
 				return false;
 			}
+			// if(emailExists==true){
+				
+			// 	return false;
+			// }
+			if(!avCheck && image.files.length==0){
+				swal("Missing field", "Please select an avatar or upload an image", "warning");
+				return false;
+			}
+			else if(image.files.length!=0){
+				var img2=image.files[0]['type'];
+				if(img2.split('/')[0]!='image'){
+					swal("The image filetype is not supported", "", "error");
+					return false;
+				}
+			}
+
 
 			for (var i = 0; i < checkBoxes.length; i++) {
 					if ( checkBoxes[i].checked ) {
@@ -110,6 +156,7 @@
 				return false;
 			}
 
+
 			for (var i = 0; i < tou.length; i++) {
 					if ( tou[i].checked ) {
 						touChecked = true;
@@ -120,6 +167,37 @@
 				swal("Terms of Use", "Please agree to the Terms of Use to create an account", "warning");
 				return false;
 			}
+			
+			$.ajax({
+				url: 'update_server.php',
+				type: 'POST',
+				data: {
+					'email_chk': 1,
+					'email': em,
+				},
+				success: function(data){
+					console.log("data: "+data);
+					if(Number(data)!=0){
+						
+						swal("Incorrect Email", "Email already used to sign up", "error");
+						return false;
+					}
+					else{
+						console.log("working");
+						document.forms["signup"].submit();
+						return true;
+					}
+				},
+				error: function(jqXHR,error, errorThrown){
+					
+					console.log("status: "+jqXHR.status);
+					return false;
+				}
+
+			});
+
+
+			return false;
 
 		}
 	</script>
@@ -160,7 +238,7 @@
 
 						<h2>Create an account</h2>
 
-						<form id="reg_form" name="signup" onsubmit="return validateForm()" action="social_connect.php" method="post" enctype="multipart/form-data" class="clearfix">
+						<form id="reg_form" name="signup" onsubmit="return validateForm()" action="usr.php" method="post" enctype="multipart/form-data" class="clearfix">
 			  				<div class="field">
 			  					<input name="firstname" type="text" value="" placeholder="First Name" />
 			  				</div>
@@ -272,299 +350,58 @@
 												</li>
 											</ul>
 										</div> -->
+										<?php
+											?>
+											<div class="column3">
+											<?php
+											foreach(range(1,28) as $i){
+												if($i==28){
+													?>
+														<div class="payment" style="margin-top: 10px;">
+									  						<ul>
+																<li>
+																	<input type="radio" class="avatar" id="av<?php echo $i?>" value="av<?php echo $i?>" name="avatar">
+																	<label for="av<?php echo $i?>"><img src="../images/avatars/av<?php echo $i?>.jpg" style="max-width: 70px; max-height: 70px"></label>
+																	<div class="payment-check"></div>
+																</li>
+															</ul>
+														</div>
+													</div>
+													<?php
 
-				  						<div class="column3">
+												}
+												elseif(($i%7)==0){
+													?>
+														<div class="payment" style="margin-top: 10px;">
+									  						<ul>
+																<li>
+																	<input type="radio" class="avatar" id="av<?php echo $i?>" value="av<?php echo $i?>" name="avatar">
+																	<label for="av<?php echo $i?>"><img src="../images/avatars/av<?php echo $i?>.jpg" style="max-width: 70px; max-height: 70px"></label>
+																	<div class="payment-check"></div>
+																</li>
+															</ul>
+														</div>
+													</div>
+													<div class="column3">
+													<?php
 
-						  					<div class="payment" style="margin-top: 10px;">
-						  						<ul>
-													<li>
-														<input type="radio" id="av1" name="selector">
-														<label for="av1"><img src="../images/avatars/av1.jpg" style="max-width: 70px; max-height: 70px"></label>
-														<div class="payment-check"></div>
-													</li>
-												</ul>
-											</div>
+												}
+												else{
+													?>
+									  					<div class="payment" style="margin-top: 10px;">
+									  						<ul>
+																<li>
+																	<input type="radio" class="avatar" id="av<?php echo $i?>" value="av<?php echo $i?>" name="avatar">
+																	<label for="av<?php echo $i?>"><img src="../images/avatars/av<?php echo $i?>.jpg" style="max-width: 70px; max-height: 70px"></label>
+																	<div class="payment-check"></div>
+																</li>
+															</ul>
+														</div>
+													<?php
 
-											<div class="payment" style="margin-top: 10px;">
-						  						<ul>
-													<li>
-														<input type="radio" id="av2" name="selector">
-														<label for="av2"><img src="../images/avatars/av2.jpg" style="max-width: 70px; max-height: 70px"></label>
-														<div class="payment-check"></div>
-													</li>
-												</ul>
-											</div>
-
-											<div class="payment" style="margin-top: 10px;">
-						  						<ul>
-													<li>
-														<input type="radio" id="av3" name="selector">
-														<label for="av3"><img src="../images/avatars/av3.jpg" style="max-width: 70px; max-height: 70px"></label>
-														<div class="payment-check"></div>
-													</li>
-												</ul>
-											</div>
-
-											<div class="payment" style="margin-top: 10px;">
-						  						<ul>
-													<li>
-														<input type="radio" id="av4" name="selector">
-														<label for="av4"><img src="../images/avatars/av4.jpg" style="max-width: 70px; max-height: 70px"></label>
-														<div class="payment-check"></div>
-													</li>
-												</ul>
-											</div>
-
-											<div class="payment" style="margin-top: 10px;">
-						  						<ul>
-													<li>
-														<input type="radio" id="av5" name="selector">
-														<label for="av5"><img src="../images/avatars/av5.jpg" style="max-width: 70px; max-height: 70px"></label>
-														<div class="payment-check"></div>
-													</li>
-												</ul>
-											</div>
-
-											<div class="payment" style="margin-top: 10px;">
-						  						<ul>
-													<li>
-														<input type="radio" id="av6" name="selector">
-														<label for="av6"><img src="../images/avatars/av6.jpg" style="max-width: 70px; max-height: 70px"></label>
-														<div class="payment-check"></div>
-													</li>
-												</ul>
-											</div>
-
-											<div class="payment" style="margin-top: 10px;">
-						  						<ul>
-													<li>
-														<input type="radio" id="av7" name="selector">
-														<label for="av7"><img src="../images/avatars/av7.jpg" style="max-width: 70px; max-height: 70px"></label>
-														<div class="payment-check"></div>
-													</li>
-												</ul>
-											</div>
-
-										</div>
-										<div class="column3">
-
-						  					<div class="payment" style="margin-top: 10px;">
-						  						<ul>
-													<li>
-														<input type="radio" id="av8" name="selector">
-														<label for="av8"><img src="../images/avatars/av8.jpg" style="max-width: 70px; max-height: 70px"></label>
-														<div class="payment-check"></div>
-													</li>
-												</ul>
-											</div>
-
-											<div class="payment" style="margin-top: 10px;">
-						  						<ul>
-													<li>
-														<input type="radio" id="av9" name="selector">
-														<label for="av9"><img src="../images/avatars/av9.jpg" style="max-width: 70px; max-height: 70px"></label>
-														<div class="payment-check"></div>
-													</li>
-												</ul>
-											</div>
-
-											<div class="payment" style="margin-top: 10px;">
-						  						<ul>
-													<li>
-														<input type="radio" id="av10" name="selector">
-														<label for="av10"><img src="../images/avatars/av10.jpg" style="max-width: 70px; max-height: 70px"></label>
-														<div class="payment-check"></div>
-													</li>
-												</ul>
-											</div>
-
-											<div class="payment" style="margin-top: 10px;">
-						  						<ul>
-													<li>
-														<input type="radio" id="av11" name="selector">
-														<label for="av11"><img src="../images/avatars/av11.jpg" style="max-width: 70px; max-height: 70px"></label>
-														<div class="payment-check"></div>
-													</li>
-												</ul>
-											</div>
-
-											<div class="payment" style="margin-top: 10px;">
-						  						<ul>
-													<li>
-														<input type="radio" id="av12" name="selector">
-														<label for="av12"><img src="../images/avatars/av12.jpg" style="max-width: 70px; max-height: 70px"></label>
-														<div class="payment-check"></div>
-													</li>
-												</ul>
-											</div>
-
-											<div class="payment" style="margin-top: 10px;">
-						  						<ul>
-													<li>
-														<input type="radio" id="av13" name="selector">
-														<label for="av13"><img src="../images/avatars/av13.jpg" style="max-width: 70px; max-height: 70px"></label>
-														<div class="payment-check"></div>
-													</li>
-												</ul>
-											</div>
-
-											<div class="payment" style="margin-top: 10px;">
-						  						<ul>
-													<li>
-														<input type="radio" id="av14" name="selector">
-														<label for="av14"><img src="../images/avatars/av14.jpg" style="max-width: 70px; max-height: 70px"></label>
-														<div class="payment-check"></div>
-													</li>
-												</ul>
-											</div>
-
-										</div>
-										<div class="column3">
-
-						  					<div class="payment" style="margin-top: 10px;">
-						  						<ul>
-													<li>
-														<input type="radio" id="av15" name="selector">
-														<label for="av15"><img src="../images/avatars/av15.jpg" style="max-width: 70px; max-height: 70px"></label>
-														<div class="payment-check"></div>
-													</li>
-												</ul>
-											</div>
-
-											<div class="payment" style="margin-top: 10px;">
-						  						<ul>
-													<li>
-														<input type="radio" id="av16" name="selector">
-														<label for="av16"><img src="../images/avatars/av16.jpg" style="max-width: 70px; max-height: 70px"></label>
-														<div class="payment-check"></div>
-													</li>
-												</ul>
-											</div>
-
-											<div class="payment" style="margin-top: 10px;">
-						  						<ul>
-													<li>
-														<input type="radio" id="av17" name="selector">
-														<label for="av17"><img src="../images/avatars/av17.jpg" style="max-width: 70px; max-height: 70px"></label>
-														<div class="payment-check"></div>
-													</li>
-												</ul>
-											</div>
-
-											<div class="payment" style="margin-top: 10px;">
-						  						<ul>
-													<li>
-														<input type="radio" id="av18" name="selector">
-														<label for="av18"><img src="../images/avatars/av18.jpg" style="max-width: 70px; max-height: 70px"></label>
-														<div class="payment-check"></div>
-													</li>
-												</ul>
-											</div>
-
-											<div class="payment" style="margin-top: 10px;">
-						  						<ul>
-													<li>
-														<input type="radio" id="av19" name="selector">
-														<label for="av19"><img src="../images/avatars/av19.jpg" style="max-width: 70px; max-height: 70px"></label>
-														<div class="payment-check"></div>
-													</li>
-												</ul>
-											</div>
-
-											<div class="payment" style="margin-top: 10px;">
-						  						<ul>
-													<li>
-														<input type="radio" id="av20" name="selector">
-														<label for="av20"><img src="../images/avatars/av20.jpg" style="max-width: 70px; max-height: 70px"></label>
-														<div class="payment-check"></div>
-													</li>
-												</ul>
-											</div>
-
-											<div class="payment" style="margin-top: 10px;">
-						  						<ul>
-													<li>
-														<input type="radio" id="av21" name="selector">
-														<label for="av21"><img src="../images/avatars/av21.jpg" style="max-width: 70px; max-height: 70px"></label>
-														<div class="payment-check"></div>
-													</li>
-												</ul>
-											</div>
-
-										</div>
-										<div class="column3">
-
-						  					<div class="payment" style="margin-top: 10px;">
-						  						<ul>
-													<li>
-														<input type="radio" id="av22" name="selector">
-														<label for="av22"><img src="../images/avatars/av22.jpg" style="max-width: 70px; max-height: 70px"></label>
-														<div class="payment-check"></div>
-													</li>
-												</ul>
-											</div>
-
-											<div class="payment" style="margin-top: 10px;">
-						  						<ul>
-													<li>
-														<input type="radio" id="av23" name="selector">
-														<label for="av23"><img src="../images/avatars/av23.jpg" style="max-width: 70px; max-height: 70px"></label>
-														<div class="payment-check"></div>
-													</li>
-												</ul>
-											</div>
-
-											<div class="payment" style="margin-top: 10px;">
-						  						<ul>
-													<li>
-														<input type="radio" id="av24" name="selector">
-														<label for="av24"><img src="../images/avatars/av24.jpg" style="max-width: 70px; max-height: 70px"></label>
-														<div class="payment-check"></div>
-													</li>
-												</ul>
-											</div>
-
-											<div class="payment" style="margin-top: 10px;">
-						  						<ul>
-													<li>
-														<input type="radio" id="av25" name="selector">
-														<label for="av25"><img src="../images/avatars/av25.jpg" style="max-width: 70px; max-height: 70px"></label>
-														<div class="payment-check"></div>
-													</li>
-												</ul>
-											</div>
-
-											<div class="payment" style="margin-top: 10px;">
-						  						<ul>
-													<li>
-														<input type="radio" id="av26" name="selector">
-														<label for="av26"><img src="../images/avatars/av26.jpg" style="max-width: 70px; max-height: 70px"></label>
-														<div class="payment-check"></div>
-													</li>
-												</ul>
-											</div>
-
-											<div class="payment" style="margin-top: 10px;">
-						  						<ul>
-													<li>
-														<input type="radio" id="av27" name="selector">
-														<label for="av27"><img src="../images/avatars/av27.jpg" style="max-width: 70px; max-height: 70px"></label>
-														<div class="payment-check"></div>
-													</li>
-												</ul>
-											</div>
-
-											<div class="payment" style="margin-top: 10px;">
-						  						<ul>
-													<li>
-														<input type="radio" id="av28" name="selector">
-														<label for="av28"><img src="../images/avatars/av28.jpg" style="max-width: 70px; max-height: 70px"></label>
-														<div class="payment-check"></div>
-													</li>
-												</ul>
-											</div>
-
-										</div>
+												}
+											}
+										?>
 									</div>
 				  				</div>
 
@@ -677,62 +514,18 @@
 		</footer> <!-- site-footer -->
 	</div><!-- #wrapper -->
 	<!-- jQuery -->    
-    <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+<!--     <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
     <script type="text/javascript" src="libs/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="libs/owl-carousel/owl.carousel.min.js"></script>
     <script type="text/javascript" src="libs/jquery.countdown/jquery.countdown.min.js"></script>
     <script type="text/javascript" src="libs/wow/wow.min.js"></script>
     <script type="text/javascript" src="libs/isotope/isotope.pkgd.min.js"></script>
-    <script type="text/javascript" src="libs/bxslider/jquery.bxslider.min.js"></script>
+    <script type="text/javascript" src="libs/bxslider/jquery.bxslider.min.js"></script> -->
     <!-- orther script -->
-    <script  type="text/javascript" src="js/main.js"></script>
+<!--     <script  type="text/javascript" src="js/main.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script> 
-    <script src="http://malsup.github.com/jquery.form.js"></script> 
-
-    <script type="text/javascript">
-
-	  function statusChangeCallback(response) {
-	    console.log('statusChangeCallback');
-	    console.log(response.status);
-	    if(response.status==='connected'){
-	    	$("#signup").click();
-	    }
-	    // The response object is returned with a status field that lets the
-	    // app know the current login status of the person.
-	    // Full docs on the response object can be found in the documentation
-	    // for FB.getLoginStatus().
-	  }
-	    function checkLoginState() {
-		    FB.getLoginStatus(function(response) {
-		      statusChangeCallback(response);
-		    });
-		  }
-	  window.fbAsyncInit = function() {
-	    FB.init({
-	      appId: <?php echo $app_id;?>,
-	      autoLogAppEvents : true,
-	      xfbml            : true,
-	      cookie: true, // This is important, it's not enabled by default
-	      version: 'v2.8'
-	    });
-
-	    FB.getLoginStatus(function(response) {
-	      statusChangeCallback(response);
-	    });
-
-
-
-	  };
-	  (function(d, s, id){
-	    var js, fjs = d.getElementsByTagName(s)[0];
-	    if (d.getElementById(id)) {return;}
-	    js = d.createElement(s); js.id = id;
-	    js.src = "https://connect.facebook.net/en_US/sdk.js";
-	    fjs.parentNode.insertBefore(js, fjs);
-	  }(document, 'script', 'facebook-jssdk'));
-
-    </script>
+    <script src="http://malsup.github.com/jquery.form.js"></script>  -->
 </body>
 </html>
 

@@ -3,21 +3,8 @@
 	include("dbconnect.php");
 	session_start();
 	include("img_url.php");
-	function timedifference_d($time){
-		date_default_timezone_set('US/Eastern');
-		$currtime=new DateTime();
-		$time=new DateTime($time);
-		$interval=$currtime->diff($time);
-		return $interval->format('%a');
-	}
-
+	include("utilities.php");
 	
-	function returnCat($table, $col, $idx, $dbconnect, $idtype){
-		$cat_sql="SELECT ".$col." FROM ".$table." WHERE ".$idtype."='".$idx."'";
-		$cat_qry=mysqli_query($dbconnect, $cat_sql);
-		$cat_res=mysqli_fetch_assoc($cat_qry);
-		return $cat_res[$col];
-	}
 
 
 	if(!isset($_SESSION['usr'])){
@@ -42,6 +29,23 @@
 		$owner_ID=$p_res['usrID'];
 
 		$sess_ID=$_SESSION['usr'];
+
+		$isAdmin=false;
+		$isMem=false;
+
+		$teamJ=json_decode($p_res['team'],true);
+		foreach ($teamJ["member"] as $m) {
+			if($m["id"]===$sess_ID){
+				$isMem=true;
+				break;
+			}
+		}
+		foreach ($teamJ["admin"] as $a) {
+			if($a["id"]===$sess_ID){
+				$isAdmin=true;
+				break;
+			}
+		}
 	}
 ?>
 <!doctype html>
@@ -149,7 +153,7 @@
 								<div class="campaign-description"><p><?php echo $p_res['sm_desc']; ?></p></div>
 								<div class="campaign-author clearfix">
 									<div class="author-profile">
-										<a class="author-icon" href="profile.php?other_usr=<?php echo $p_res['usrID']; ?>"><?php echo '<img src="'.getimgURL($owner_p, "profilepic").'" />'; ?></a>by <a class="author-name" href="profile.php?other_usr=<?php echo $p_res['usrID']; ?>"><?php echo $owner_f; ?> <?php echo $owner_l; ?></a>
+										<a class="author-icon" href="profile.php?other_usr=<?php echo $p_res['usrID']; ?>"><?php echo '<img src="'.getProfURL($owner_p).'" />'; ?></a>by <a class="author-name" href="profile.php?other_usr=<?php echo $p_res['usrID']; ?>"><?php echo $owner_f; ?> <?php echo $owner_l; ?></a>
 									</div>
 									<div class="author-address"><span class="ion-location"></span><?php echo $proj_col; ?>, Amherst, MA</div>
 								</div>
@@ -217,39 +221,6 @@
 												<?php
 											}
 										?>
-										<!-- Small Team -->
-										<!-- <div class="process-pledged"><span>
-											<a data-tooltip="Small team">
-											<i class="fa fa-user"></i>
-											<i class="fa fa-user"></i></a>
-										</span>team size</div> -->
-
-										<!-- Medium Team -->
-										<!-- <div class="process-pledged"><span>
-											<a data-tooltip="Medium team">
-											<i class="fa fa-user"></i>
-											<i class="fa fa-user"></i>
-											<i class="fa fa-user"></i></a>
-										</span>team size</div> -->
-
-										<!-- Large Team -->
-										<!-- <div class="process-pledged"><span>
-											<a data-tooltip="Large team">
-											<i class="fa fa-user"></i>
-											<i class="fa fa-user"></i>
-											<i class="fa fa-user"></i>
-											<i class="fa fa-user"></i></a>
-										</span>team size</div> -->
-
-										<!-- Extra Large Team -->
-										<!-- <div class="process-pledged"><span>
-											<a data-tooltip="Extra large team">
-											<i class="fa fa-user"></i>
-											<i class="fa fa-user"></i>
-											<i class="fa fa-user"></i>
-											<i class="fa fa-user-plus"></i></a>
-										</span>team size</div> -->
-
 										<!-- =============== -->
 										<?php
 											$inv_id=$p_res['commID'];
@@ -296,41 +267,6 @@
 												<?php
 											}
 										?>
-										<!-- INVOLVEMENT -->
-
-										<!-- < 10 hrs/week -->
-										<!-- <div class="process-time"><span>
-											<a data-tooltip="< 10 hrs/week (approx.)">
-											<i class="fa fa-clock-o"></i></a>
-										</span>involvement</div> -->
-
-										<!-- 11 to 20 hrs/week -->
-										<!-- <div class="process-time"><span>
-											<a data-tooltip="11 to 20 hrs/week (approx.)">
-											<i class="fa fa-clock-o"></i>
-											<i class="fa fa-clock-o"></i></a>
-										</span>involvement</div> -->
-
-										<!-- 21 to 30 hrs/week -->
-										<!-- <div class="process-time"><span>
-											<a data-tooltip="21 to 30 hrs/week (approx.)">
-											<i class="fa fa-clock-o"></i>
-											<i class="fa fa-clock-o"></i>
-											<i class="fa fa-clock-o"></i></a>
-										</span>involvement</div> -->
-
-										<!-- > 31 hrs/week -->
-										<!-- <div class="process-time"><span>
-											<a data-tooltip="> 31 hrs/week (approx.)">
-											<i class="fa fa-clock-o"></i>
-											<i class="fa fa-clock-o"></i>
-											<i class="fa fa-clock-o"></i>
-											<i class="fa fa-clock-o"></i></a>
-										</span>involvement</div> -->
-
-										<!-- =============== -->
-
-										<!-- DAYS AGO -->
 
 										<div class="process-time"><span>
 										<a data-tooltip="Project started <?php echo timedifference_d($p_res['dt']);?> days ago">
@@ -350,7 +286,7 @@
 								?>
 								<div class="button">
 									<?php
-										if(mysqli_num_rows($role_qry)!=0){
+										if(mysqli_num_rows($role_qry)!=0 && !$isMem && !$isAdmin){
 									?>
 									<form action="" id="priceForm" class="campaign-price quantity">
 										<button class="btn-primary" type="button" data-toggle="modal" data-target="#modal-33" style="cursor: pointer;">Join this project</button>
@@ -384,14 +320,6 @@
 								</div>
 								<?php
 								} ?>
-								<!-- <div class="share" style="margin-top: 42px;">
-									<p style="margin-bottom: 5px;">Share this project</p>
-									<ul>
-										<li class="share-facebook"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-										<li class="share-twitter"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-										<li class="share-code"><a href="#"><i class="fa fa-code" aria-hidden="true"></i></a></li>
-									</ul>
-								</div> -->
 							</div>
 						</div>
 					</div>
@@ -423,21 +351,21 @@
 									<div class="col-lg-15" style="margin-top: 0px;">
 									<div class="support support-campaign" style="margin-top: 41px;">
 
-										<div class="team" style="margin-top: 0px; margin-bottom: 0px;">
+										<ul id="teamprof" class="team" style="list-style:none; margin-top: 0px; margin-bottom: 0px;">
 											<?php
 												$team_json=json_decode($p_res['team'],true);
 												$admin_arr=$team_json["admin"];
 												$mem_arr=$team_json["member"];
 												
 											?>
-											<img src="<?php echo getimgURL($owner_p, "profilepic");?>">
+											<li style="display:inline;"><a style="display:inline-block;" href="profile.php?other_usr=<?php echo $owner_ID;?>"><img src="<?php echo getProfURL($owner_p);?>"/></a></li>
 											<?php
 												foreach ($admin_arr as $admin) {
 													$ad_sql="SELECT * FROM users WHERE usrID=".$admin["id"];
 													$ad_qry=mysqli_query($dbconnect, $ad_sql);
 													$ad_res=mysqli_fetch_assoc($ad_qry);
 													?>
-													<img src="<?php echo getimgURL($ad_res['profilepic'], "profilepic");?>">
+													<li style="display:inline;"><a style="display:inline-block;" href="profile.php?other_usr=<?php echo $admin["id"];?>"><img src="<?php echo getProfURL($ad_res['profilepic']);?>"/></a></li>
 													<?php
 													
 												}
@@ -448,13 +376,13 @@
 													$mem_qry=mysqli_query($dbconnect, $mem_sql);
 													$mem_res=mysqli_fetch_assoc($mem_qry);
 													?>
-													<img src="<?php echo getimgURL($mem_res['profilepic'], "profilepic");?>">
+													<li style="display:inline;"><a style="display:inline-block;" href="profile.php?other_usr=<?php echo $mem["id"];?>"><img src="<?php echo getProfURL($mem_res['profilepic']);?>"/></a></li>
 													<?php
 													
 												}
 											?>
 
-										</div>
+										</ul>
 
 										<!-- <h1 style="margin-bottom: 3px; font-weight: 500; font-size: 20px;">Open</h1> -->
 										<?php
@@ -468,8 +396,34 @@
 											do{
 												?>
 
-													<div class="plan" style="margin-bottom: 15px;">
-														<a href="#">
+													<div data-roleid="<?php echo $role_res['roleID'];?>" class="plan rolediv" style="margin-bottom: 15px;">
+
+
+
+														<div class="bootstrap-iso">
+														  <div id="jpmodal<?php echo $role_res['roleID'];?>" class="modal jp fade" id="modal-77">
+														    <div class="modal-dialog modal-77g">
+														      <div class="modal-content" style="height: 700px; width: 500px;">
+
+														         <div class="modal-body" id="modal_join">
+
+														          <iframe id="if_join<?php echo $id;?>" src="join_project.php?projID=<?php echo $id;?>&roleID=<?php echo $role_res['roleID'];?>" style="width: 100%; overflow: scroll;" height="550" frameborder="0">
+														          </iframe>
+														         </div>
+														         <div class="modal-footer">
+														          <button class="btn-mainb cl" data-dismiss="modal" style="cursor: pointer; width: 100px; color: white;">Close</button>
+
+														          <button class="join_proj2" name="projID" value=<?php echo $id;?> type="submit" class="btn-mainb" style="cursor: pointer; width: 100px; color: white;">Join</button>
+
+														         </div>
+														      </div>
+														    </div>
+														  </div>
+														</div>
+
+
+
+														<a>
 															
 																		
 															<h4><?php echo $role_res['title'];
@@ -491,17 +445,17 @@
 																<p2 style="margin-right: 5px; float: right;">
 																	<a-edit-black>
 																		<div class="bootstrap-iso">
-																		<i class="fa fa-pencil edit-role" data-roleID="<?php echo $role_res['roleID'];?>" data-toggle="modal" data-target="#modal-3"></i>
+																		<i class="fa fa-pencil edit-role" data-roleid="<?php echo $role_res['roleID'];?>" data-toggle="modal" data-target="#modal-3"></i>
 																		  <div class="modal fade" id="modal-3">
 																		    <div class="modal-dialog modal-3g" >
 																		      <div class="modal-content" style="height: 550px; width: 550px;">
-																		         <div class="modal-body">
+																		         <div class="modal-body" id="body-erole">
 																		          <!-- <iframe id="if_role_e" src="role_update.php?edit=1&roleID=<?php echo $role_res['roleID'];?>&projID=<?php echo $p_res['projID'];?>" style="width: 100%;" height="400" frameborder="0">
 																		          </iframe> -->
 																		         </div>
 																		         <div class="modal-footer">
 																		          <button class="btn-mainb cl" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
-																		          <button id="update_role" name="" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Edit Role</button>
+																		          <button data-rolename="<?php echo $role_res['title'];?>" data-roleid="<?php echo $role_res['roleID'];?>" id="update_role" name="" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Edit Role</button>
 																		         </div>
 																		      </div>
 																		    </div>
@@ -659,14 +613,10 @@
 																			</a>
 																		</td>
 																		<td>
-																			<a class="accbutt" style="color: #73b941; cursor: pointer;" onclick="
-																			swal('Invitation Accpeted', '<?php echo $fn." ".$ln;?> is now a part of your team', 'success');
-																			">
+																			<a data-reqid="<?php echo $req_res['reqID'];?>" data-name="<?php echo $fn.' '.$ln;?>" class="accbutt" style="color: #73b941; cursor: pointer;">
 																				<i class="fa fa-check"></i>
 																			</a>
-																			<a class="rejbutt" style="color: #b10000; cursor: pointer;" onclick="
-																			swal('Invitation Declined', '<?php echo $fn." ".$ln;?> will not be a part of your team', 'error');
-																			">
+																			<a data-reqid="<?php echo $req_res['reqID'];?>" data-name="<?php echo $fn.' '.$ln;?>" class="rejbutt" style="color: #b10000; cursor: pointer;">
 																				<i class="fa fa-times"></i>
 																			</a>
 																		</td>
@@ -684,135 +634,6 @@
 											}
 
 										?>
-<!-- 										<h3 style="margin-bottom: 10px;">Position #1</h3>
-
-										<table id="xyz">
-											<tr>
-												<th>Name</th>
-												<th>140 Character Pitch</th>
-												<th>Contact</th>
-												<th>Action</th>
-											</tr>
-											<tr>
-												<td><a href="linktoprofile" style="text-decoration: underline; cursor: pointer;">Andrew McDonald</a></td>
-												<td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et ma</td>
-												<td>
-													<a href="mailto:someone@example.com?Subject=Teamwerk%20Project%20Invitation&body=Hey%20member%20name,%20thank%20you%20for%20your%20interest%20in%20project%20name.%20I%20would%20love%20to%20hear%20more%20about%20you,%20have%20you%20engaged%20in%20a%20project%20like%20this%20before?" style="font-size: 16px; text-align: center; cursor: pointer; color: #545BEE;">
-														<i class="fa fa-envelope"></i>
-													</a>
-												</td>
-												<td>
-													<a class="accbutt" style="color: #73b941; cursor: pointer;" onclick="
-													swal('Invitation Accpeted', '{member name} is now a part of your team', 'success');
-													">
-														<i class="fa fa-check"></i>
-													</a>
-													<a class="rejbutt" style="color: #b10000; cursor: pointer;" onclick="
-													swal('Invitation Declined', '{member name} will not be a part of your team', 'error');
-													">
-														<i class="fa fa-times"></i>
-													</a>
-												</td>
-											</tr>
-											<tr>
-												<td><a href="linktoprofile" style="text-decoration: underline; cursor: pointer;">Old McDonald</a></td>
-												<td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et ma</td>
-												<td>
-													<a href="mailto:someone@example.com?Subject=Teamwerk%20Project%20Invitation&body=Hey%20member%20name,%20thank%20you%20for%20your%20interest%20in%20project%20name.%20I%20would%20love%20to%20hear%20more%20about%20you,%20have%20you%20engaged%20in%20a%20project%20like%20this%20before?" style="font-size: 16px; text-align: center; cursor: pointer; color: #545BEE;">
-														<i class="fa fa-envelope"></i>
-													</a>
-												</td>
-												<td>
-													<a class="accbutt" style="color: #73b941; cursor: pointer;" onclick="
-													swal('Invitation Accpeted', '{member name} is now a part of your team', 'success');
-													">
-														<i class="fa fa-check"></i>
-													</a>
-													<a class="rejbutt" style="color: #b10000; cursor: pointer;" onclick="
-													swal('Invitation Declined', '{member name} will not be a part of your team', 'error');
-													">
-														<i class="fa fa-times"></i>
-													</a>
-												</td>
-											</tr>										
-										</table>
-
-										<h3 style="margin-bottom: 10px; margin-top: 20px;">Position #2</h3>
-										<p>No requests for this position so far.</p>
-
-										<h3 style="margin-bottom: 10px; margin-top: 20px;">Position #3</h3>
-										<table id="xyz">
-											<tr>
-												<th>Name</th>
-												<th>140 Character Pitch</th>
-												<th>Contact</th>
-												<th>Action</th>
-											</tr>
-											<tr>
-												<td><a href="linktoprofile" style="text-decoration: underline; cursor: pointer;">Andrew McDonald</a></td>
-												<td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et ma</td>
-												<td>
-													<a href="mailto:someone@example.com?Subject=Teamwerk%20Project%20Invitation&body=Hey%20member%20name,%20thank%20you%20for%20your%20interest%20in%20project%20name.%20I%20would%20love%20to%20hear%20more%20about%20you,%20have%20you%20engaged%20in%20a%20project%20like%20this%20before?" style="font-size: 16px; text-align: center; cursor: pointer; color: #545BEE;">
-														<i class="fa fa-envelope"></i>
-													</a>
-												</td>
-												<td>
-													<a class="accbutt" style="color: #73b941; cursor: pointer;" onclick="
-													swal('Invitation Accpeted', '{member name} is now a part of your team', 'success');
-													">
-														<i class="fa fa-check"></i>
-													</a>
-													<a class="rejbutt" style="color: #b10000; cursor: pointer;" onclick="
-													swal('Invitation Declined', '{member name} will not be a part of your team', 'error');
-													">
-														<i class="fa fa-times"></i>
-													</a>
-												</td>
-											</tr>
-											<tr>
-												<td><a href="linktoprofile" style="text-decoration: underline; cursor: pointer;">Old McDonald</a></td>
-												<td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et ma</td>
-												<td>
-													<a href="mailto:someone@example.com?Subject=Teamwerk%20Project%20Invitation&body=Hey%20member%20name,%20thank%20you%20for%20your%20interest%20in%20project%20name.%20I%20would%20love%20to%20hear%20more%20about%20you,%20have%20you%20engaged%20in%20a%20project%20like%20this%20before?" style="font-size: 16px; text-align: center; cursor: pointer; color: #545BEE;">
-														<i class="fa fa-envelope"></i>
-													</a>
-												</td>
-												<td>
-													<a class="accbutt" style="color: #73b941; cursor: pointer;" onclick="
-													swal('Invitation Accpeted', '{member name} is now a part of your team', 'success');
-													">
-														<i class="fa fa-check"></i>
-													</a>
-													<a class="rejbutt" style="color: #b10000; cursor: pointer;" onclick="
-													swal('Invitation Declined', '{member name} will not be a part of your team', 'error');
-													">
-														<i class="fa fa-times"></i>
-													</a>
-												</td>
-											</tr>
-											<tr>
-												<td><a href="linktoprofile" style="text-decoration: underline; cursor: pointer;">Daddy McDonald</a></td>
-												<td>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et ma</td>
-												<td>
-													<a href="mailto:someone@example.com?Subject=Teamwerk%20Project%20Invitation&body=Hey%20member%20name,%20thank%20you%20for%20your%20interest%20in%20project%20name.%20I%20would%20love%20to%20hear%20more%20about%20you,%20have%20you%20engaged%20in%20a%20project%20like%20this%20before?" style="font-size: 16px; text-align: center; cursor: pointer; color: #545BEE;">
-														<i class="fa fa-envelope"></i>
-													</a>
-												</td>
-												<td>
-													<a class="accbutt" style="color: #73b941; cursor: pointer;" onclick="
-													swal('Invitation Accpeted', '{member name} is now a part of your team', 'success');
-													">
-														<i class="fa fa-check"></i>
-													</a>
-													<a class="rejbutt" style="color: #b10000; cursor: pointer;" onclick="
-													swal('Invitation Declined', '{member name} will not be a part of your team', 'error');
-													">
-														<i class="fa fa-times"></i>
-													</a>
-												</td>
-											</tr>											
-
-										</table> -->
 										<button name="" class="btn-primary" type="submit" style="cursor: pointer; margin-top: 20px; background-color: #73b941; padding-left: 8px; padding-right: 8px;" onclick="
 										swal('Download Spreadsheet', 'This feature is under construction. Coming soon.', 'info');
 										">Download as spreadsheet
@@ -823,7 +644,7 @@
 										<h2 style="margin-bottom: 10px; color:">Team Settings</h2>
 										<p>Use the settings below to change settings for your team.</p>
 
-										<form name="proj_set" action="proj_set_submit.php?projID=<?php echo $_GET['projID'];?>" method="post" enctype="multipart/form-data">
+										<form name="proj_set" onsubmit="return validateSet()" action="proj_set_submit.php?projID=<?php echo $_GET['projID'];?>" method="post" enctype="multipart/form-data">
 											<div class="field clearfix">
 							  					<label for="">Team size *</label>
 								  				<div class="field">
@@ -941,7 +762,7 @@
 																<td>
 																	<a href="profile.php?other_usr=<?php echo $ad["id"];?>" style="text-decoration: underline; cursor: pointer;"><?php echo $ad_res['firstname']." ".$ad_res['lastname'];?></a>
 																</td>
-																<td><?php $ad["pos"];?></td>
+																<td><?php echo $ad["pos"];?></td>
 																<td>
 																	<div class="field">
 													  					<div class="field-select">
@@ -971,7 +792,7 @@
 															?>
 															<tr>
 																<td>
-																	<a href="profile.php?other_usr=<?php echo $mem;?>" style="text-decoration: underline; cursor: pointer;"><?php echo $mem_res['firstname']." ".$mem_res['lastname'];?></a>
+																	<a href="profile.php?other_usr=<?php echo $mem["id"];?>" style="text-decoration: underline; cursor: pointer;"><?php echo $mem_res['firstname']." ".$mem_res['lastname'];?></a>
 																</td>
 																<td><?php echo $mem["pos"];?></td>
 																<td>
@@ -1089,10 +910,21 @@
 															$col_qry=mysqli_query($dbconnect, $col_sql);
 															$col_res=mysqli_fetch_assoc($col_qry);
 
+
+
 															do{
-																?>
-																	<option value="<?php echo $col_res['colID'];?>"><?php echo $col_res['colName'];?></option>
-																<?php
+
+																if($p_res['colID']==$col_res['colID']){
+																		?>
+																		<option value="<?php echo $col_res['colID'];?>" selected><?php echo $col_res['colName'];?></option>
+																		<?php
+																	}
+																	else{
+																		?>
+																		<option value="<?php echo $col_res['colID'];?>"><?php echo $col_res['colName'];?></option>
+																		<?php
+																	}
+
 															}while($col_res=mysqli_fetch_assoc($col_qry));
 														?>
 													</select>
@@ -1108,9 +940,17 @@
 															$cat_res=mysqli_fetch_assoc($cat_qry);
 
 															do{
-																?>
-																<option value="<?php echo $cat_res['catID'];?>"><?php echo $cat_res['catName'];?></option>
-																<?php
+
+																if($p_res['catID']==$cat_res['catID']){
+																		?>
+																		<option value="<?php echo $cat_res['catID'];?>" selected><?php echo $cat_res['catName'];?></option>
+																		<?php
+																	}
+																	else{
+																		?>
+																		<option value="<?php echo $cat_res['catID'];?>"><?php echo $cat_res['catName'];?></option>
+																		<?php
+																	}
 															}while($cat_res=mysqli_fetch_assoc($cat_qry));
 														?>
 													</select>
@@ -1287,31 +1127,29 @@
 													do{
 														?>
 															<li>
-																<p class="date"><?php echo date( 'Y-m-d', strtotime($up_res['dt']));?>
+																<p class="date"><?php echo date( 'Y-m-d', strtotime($up_res['dt']));?></p>
 																	<?php
 																		if($owner_ID==$sess_ID){
 																	?>
-																	<div class="bootstrap-iso">
+																	
 																	<p2>
 																		<a-remove>
 																			<i data-id="<?php echo $up_res['upID'];?>" data-id2="<?php echo $up_res['projID'];?>" class="fa fa-times del-up"></i>
 																		</a-remove>
 																	</p2>
-																	<p2 style ="margin-right: 5px;" onclick="turnEditable('updateTitle1', 'updateDesc1');">
+																	<p2 style ="margin-right: 5px;float: right;">
 																		<a-edit-black>
 
 																			<div class="bootstrap-iso">
-																			<i class="fa fa-pencil edit-upForm" data-upID="<?php echo $up_res['upID'];?>" data-toggle="modal" data-target="#modal-4"></i>
+																			<i class="fa fa-pencil edit-upform" data-upid="<?php echo $up_res['upID'];?>" data-toggle="modal" data-target="#modal-4"></i>
 																			  <div class="modal fade" id="modal-4">
 																			    <div class="modal-dialog modal-4g" >
 																			      <div class="modal-content" style="height: 550px;">
-																			         <div class="modal-body">
-																			          <!-- <iframe id="if_role_e" src="role_update.php?edit=1&roleID=<?php echo $role_res['roleID'];?>&projID=<?php echo $p_res['projID'];?>" style="width: 100%;" height="400" frameborder="0">
-																			          </iframe> -->
+																			         <div class="modal-body" id="body-eup">
 																			         </div>
 																			         <div class="modal-footer">
 																			          <button class="btn-mainb cl" data-dismiss="modal" style="cursor: pointer; width: 100px;">Close</button>
-																			          <button id="edit_update" name="" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Edit Update</button>
+																			          <button data-upname="<?php echo $up_res['title'];?>" data-upid="<?php echo $up_res['upID'];?>" id="edit_update" name="" type="submit" value="Save & Launch" class="btn-mainb" style="cursor: pointer; width: 200px;">Edit Update</button>
 																			         </div>
 																			      </div>
 																			    </div>
@@ -1324,7 +1162,7 @@
 																	<?php
 																		}
 																	?>
-																</p>
+																
 																<h3 id="updateTitle1"><?php echo $up_res['title'];?></h3>
 																<div class="desc" id="updateDesc1"><p><?php echo $up_res['details'];?></p></div>
 															</li>
@@ -1370,7 +1208,7 @@
 										<a class="fa fa-facebook-square" style="font-size: 35px; margin-left: 5px;" href=""></a>
 										<a class="fa fa-twitter-square" style="font-size: 35px; margin-left: 10px;" href=""></a>
 										<a class="fa fa-google-plus-square" style="font-size: 35px; margin-left: 10px;" href=""></a>
-										<a class="fa fa-clone" style="font-size: 30px; margin-left: 10px;" href=""></a>					
+										<a class="fa fa-clone" style="font-size: 30px; margin-left: 10px;"></a>					
 									</div>
 								</div>
 
@@ -1446,6 +1284,13 @@
 				</div>
 			</div>
 		</footer><!-- site-footer -->
+
+
+
+
+
+
+
 	</div><!-- #wrapper -->
 	<!-- jQuery -->  
     <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
@@ -1464,7 +1309,24 @@
     <script type="text/javascript">
     	var usr_id="<?php echo $sess_ID?>";
 		var proj_id="<?php echo $id?>";
+		
 		$(document).ready(function(){
+
+
+
+			$(".rolediv").click(function(){
+				var owner_id="<?php echo $owner_ID?>";
+				
+				var div=$(this);
+				var role_id=Number(div.data('roleid'));
+				if(owner_id!=usr_id){
+					$("#jpmodal"+role_id).modal('show');	
+				}
+				
+			});
+			$('.jp').on('hidden.bs.modal', function () {
+  				location.reload();
+			});
 			$("#update_button").click(function(){
 
 				$.ajax({
@@ -1483,10 +1345,10 @@
 			});
 
 
-			$('.modal').on('hidden.bs.modal', function(){
-				console.log("erasing");
-			    $(this).find('form')[0].reset();
-			});
+			// $('.modal').on('hidden.bs.modal', function(){
+			// 	console.log("erasing");
+			//     $(this).find('form')[0].reset();
+			// });
 
 
 			$("#role_button").click(function(){
@@ -1519,37 +1381,81 @@
 					}
 
 				});
-				
 			});
 
 
+
+			$(".join_proj2").click(function(){
+				$.ajax({
+					url: 'join_project_submit.php?projID='+proj_id,
+					type: 'POST',
+					data: $("#if_join"+proj_id).contents().find("#proj_join").serialize(),
+					success: function(data){
+						$(".modal").modal('hide');
+						location.reload();
+						
+					}
+
+				});
+				
+			});
+
+			var editRole=0;
+
 			$("#update_role").click(function(){
-				$("#if_role_e").contents().find("#role_edit").submit();
-				$(".modal").modal('hide');
-				location.reload();
+				var button=$(this);
+				var roleID=editRole;
+				var name=button.data('rolename');
+				$.ajax({
+					url: 'edit_role_submit.php?roleID='+roleID+'&projID='+proj_id,
+					type: 'POST',
+					data: $("#if_role_e").contents().find("#role_edit").serialize(),
+					success: function(data){
+						button.html("Success!")
+						$(".modal").modal('hide');
+						location.reload();
+					}
+
+				});
+				// $("#if_role_e").contents().find("#role_edit").submit();
+				// $(".modal").modal('hide');
+				// location.reload();
 			});
 			$(".edit-role").click(function(){
 				$(".modal-body").html("Loading...");
 				var button=$(this);
-				var roleID=button.attr('data-roleID');
+				var roleID=Number(button.data('roleid'));
+				editRole=roleID;
 				var iFrame='<iframe id="if_role_e" src="role_update.php?edit=1&roleID='+roleID+'&projID='+proj_id+'" style="width: 100%;" height="400" frameborder="0"></iframe>';
-				$(".modal-body").html(iFrame);
+				$("#body-erole").html(iFrame);
 			});
 
-
+			var editUpdate=0;
 			$("#edit_update").click(function(){
-				console.log("f");
-				$("#if_up_e").contents().find("#update_edited").submit();
-				console.log("edit_update");
-				$(".modal").modal('hide');
-				location.reload();
+				var button=$(this);
+				var upID=Number(button.data('upid'));
+				upID=editUpdate;
+				console.log($("#if_up_e").contents().find("#update_edited").serialize());
+				$.ajax({
+					url: 'timeline_update_submit.php?upID='+upID+'&projID='+proj_id,
+					type: 'POST',
+					data: $("#if_up_e").contents().find("#update_edited").serialize(),
+					success: function(data){
+						button.html("Success!")
+						$(".modal").modal('hide');
+						location.reload();
+					}
+
+				});
 			});
-			$(".edit-upForm").click(function(){
+			$(".edit-upform").click(function(){
 				$(".modal-body").html("Loading...");
 				var button=$(this);
-				var upID=button.attr('data-upID');
+				var upID=Number(button.data('upid'));
+				
+				editUpdate=upID;
 				var iFrame='<iframe id="if_up_e" src="timeline_update.php?edit=1&upID='+upID+'&projID='+proj_id+'" style="width: 100%;" height="400" frameborder="0"></iframe>';
-				$(".modal-body").html(iFrame);
+				$("#body-eup").html(iFrame);
 			});
 
 
@@ -1566,6 +1472,7 @@
 			    dummy.select();
 			    document.execCommand("copy");
 			    document.body.removeChild(dummy);
+			    swal('Share link copied to clipboard!', '', 'success');
 
 				
 
@@ -1574,6 +1481,68 @@
 
 
 		});
+
+
+		function validateSet(){
+			var projname = document.forms["proj_set"]["projname"].value;
+			var tagline = document.forms["proj_set"]["projtagl"].value;
+			var shDesc = document.forms["proj_set"]["proj_sh_desc"].value;
+			var lgDesc = document.forms["proj_set"]["proj_lg_desc"].value;
+			var tags = document.forms["proj_set"]["tags"].value;
+			var bigBan=document.getElementById("uploadfile1");
+			var smBan=document.getElementById("uploadfile1");
+			var ico=document.getElementById("uploadfile3");
+
+			if (projname == "") {
+				swal("Missing field", "Project Name field cannot be empty", "warning");
+				return false;
+			}
+
+			if (tagline == "") {
+				swal("Missing field", "Tagline field cannot be empty", "warning");
+				return false;
+			}
+			if (shDesc == "") {
+				swal("Missing field", "Short Description field cannot be empty", "warning");
+				return false;
+			}
+			if (lgDesc == "") {
+				swal("Missing field", "Long Description field cannot be empty", "warning");
+				return false;
+			}
+			if (tags == "") {
+				swal("Missing field", "Tags field cannot be empty", "warning");
+				return false;
+			}
+			if(bigBan.files.length!=0){
+				var img2=bigBan.files[0]['type'];
+				if(img2.split('/')[0]!='image'){
+					swal("Big Banner filetype is not supported", "", "error");
+					return false;
+				}
+			}
+			if(smBan.files.length!=0){
+				var img2=smBan.files[0]['type'];
+				if(img2.split('/')[0]!='image'){
+					swal("Small Banner filetype is not supported", "", "error");
+					return false;
+				}
+			}
+			if(ico.files.length!=0){
+				var img2=ico.files[0]['type'];
+				if(img2.split('/')[0]!='image'){
+					swal("Icon filetype is not supported", "", "error");
+					return false;
+				}
+			}
+
+			return true;
+
+		}
+
+
+
+
     </script>
     <script type="text/javascript" src="js/upvotes.js"></script>
     <script type="text/javascript" src="js/update.js"></script>

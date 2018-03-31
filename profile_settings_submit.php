@@ -5,7 +5,7 @@
 
 	date_default_timezone_set('US/Eastern');
 	
-	if(!isset($_POST['prof_set'])){
+	if(empty($_POST)){
 		header("Location:library.php");
 	}
 	else{
@@ -30,6 +30,7 @@
 		$varbool=empty($fname) || empty($lname) || empty($pitch);
 
 		if($varbool==False){
+			error_log($profilepic['tmp_name']);
 			$prof_sql="UPDATE users SET 
 			firstname='".mysqli_real_escape_string($dbconnect, $fname)."',
 			lastname='".mysqli_real_escape_string($dbconnect, $lname)."',
@@ -38,6 +39,7 @@
 			$prof_qry=mysqli_query($dbconnect, $prof_sql);
 
 			if(is_uploaded_file($profilepic['tmp_name'])==true){
+
 				$profilepic_name=$lname.$date;
 				img_uploader($profilepic, "profilepic", $profilepic_name);
 

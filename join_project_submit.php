@@ -19,9 +19,13 @@
 		}
 		$date=date('Y-m-d H:i:s:u');
 
+		$sqlVer="SELECT * FROM join_req WHERE projID=".$projID." AND roleID=".$roleID." AND usrID=".$usrID;
+		$qryVer=mysqli_query($dbconnect, $sqlVer);
+		
+
 		$fieldbool=$reason=="" || $email=="" || $roleID=="";
 
-		if($fieldbool==False){
+		if($fieldbool==False && mysqli_num_rows($qryVer)==0){
 			$req_sql="INSERT INTO join_req (projID, usrID, roleID, reason, email_pref, dt) VALUES ('".
 			mysqli_real_escape_string($dbconnect, $projID)."', '".
 			mysqli_real_escape_string($dbconnect, $usrID)."', '".

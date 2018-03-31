@@ -16,6 +16,16 @@
 <!doctype html>
 <html lang="en">
 <head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-116312021-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-116312021-1');
+	</script>
+
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Teamwerk | Build a team, find a team.</title>
@@ -126,22 +136,42 @@
 								$feat_res=mysqli_fetch_assoc($feat_qry);
 								$feat_array=array();
 								do{
-									$curr_json=json_decode($feat_res['subs'], true);
-									$sub_size=count($curr_json["subs"]);
-									$curr_arr=array('id' => $feat_res['projID'], 'count'=>$sub_size);
-									if(empty($feat_array)){array_push($feat_array, $curr_arr);}
-									elseif ($feat_array[0]['count']<=$curr_arr['count']) {
-										array_unshift($feat_array, $curr_arr);
+
+									$tagJson=json_decode($feat_res['tags'],true);
+									$notPriv=true;
+									if(@$tagJson["private"]==true){
+										$notPriv=false;
 									}
-									else{
-										array_push($feat_array, $curr_arr);
+
+									if($notPriv){
+										$curr_json=json_decode($feat_res['subs'], true);
+										$sub_size=count($curr_json["subs"]);
+										$curr_arr=array('id' => $feat_res['projID'], 'count'=>$sub_size);
+										if(empty($feat_array)){array_push($feat_array, $curr_arr);}
+										elseif ($feat_array[0]['count']<=$curr_arr['count']) {
+											array_unshift($feat_array, $curr_arr);
+										}
+										else{
+											array_push($feat_array, $curr_arr);
+										}
 									}
+
+
 
 								}while($feat_res=mysqli_fetch_assoc($feat_qry));
 
 								$feat_count=0;
 
 								foreach ($feat_array as $feat) {
+
+									$tagJson=json_decode($feat_res['tags'],true);
+									$notPriv=true;
+									if(@$tagJson["private"]==true){
+										if(!in_array($_SESSION['usr'], $testIds)){
+											$notPriv=false;
+										}
+									}
+
 									$item_sql="SELECT * FROM project WHERE projID=".$feat['id'];
 									$item_qry=mysqli_query($dbconnect, $item_sql);
 									$item_res=mysqli_fetch_assoc($item_qry);
@@ -160,7 +190,8 @@
 													<a href="#" class="category"><?php echo returnCat('proj_categories', 'catName', $item_res['catID'], $dbconnect, 'catID');?></a>
 													<h3><a href="projectOffline.php?projID=<?php echo $feat['id'];?>&viewOff=true"><?php echo $item_res['projName'];?></a></h3>
 													<div class="campaign-description"><?php echo $item_res['sm_desc'];?></div>
-													<div class="campaign-author"><a class="author-icon" href="#"><img src="<?php echo getimgURL(returnCat('users', 'profilepic', $item_res['usrID'], $dbconnect, 'usrID'), "profilepic");?>" alt=""></a>by <a class="author-name" href="#"><?php echo returnCat('users', 'firstname', $item_res['usrID'], $dbconnect, 'usrID');?></a></div>
+													<div class="campaign-author"><a class="author-icon" href="#"><img src="<?php echo
+													 getProfURL(returnCat('users', 'profilepic', $item_res['usrID'], $dbconnect, 'usrID'));?>" alt=""></a>by <a class="author-name" href="#"><?php echo returnCat('users', 'firstname', $item_res['usrID'], $dbconnect, 'usrID');?></a></div>
 													<div class="process">
 														<div class="raised"><span style="width: <?php echo $item_res['progress'];?>%;"></span></div>
 														<div class="process-info">

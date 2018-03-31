@@ -1,22 +1,28 @@
 <?php
 	include("dbconnect.php");
 	include("img_url.php");
+	include("utilities.php");
 	session_start();
 	$other=false;
-	function returnCat($table, $col, $idx, $dbconnect, $idtype){
-		$cat_sql="SELECT ".$col." FROM ".$table." WHERE ".$idtype."='".$idx."'";
-		$cat_qry=mysqli_query($dbconnect, $cat_sql);
-		$cat_res=mysqli_fetch_assoc($cat_qry);
-		return $cat_res[$col];
-	}
 	if(!isset($_SESSION['usr'])){
 		header("Location:library.php");
 	}
-	elseif (isset($_GET['other_usr'])){
+	elseif (isset($_GET['other_usr']) && $_GET['other_usr']!==$_SESSION['usr']){
 		$other=true;
+		$proj_sql = "SELECT * FROM project WHERE usrID=".$_GET['other_usr'];
+		$proj_qry = mysqli_query($dbconnect, $proj_sql);
+		$proj_res = mysqli_fetch_assoc($proj_qry);
+
 		$prof_sql = "SELECT * FROM users WHERE usrID=".$_GET['other_usr'];
 		$prof_qry = mysqli_query($dbconnect, $prof_sql);
 		$prof_res = mysqli_fetch_assoc($prof_qry);
+
+		$clicked_json=json_decode($prof_res['clicked'],true);
+		$clicked=$clicked_json["clicked"];
+
+		$prof2_sql = "SELECT * FROM users WHERE usrID=".$_SESSION['usr'];
+		$prof2_qry = mysqli_query($dbconnect, $prof2_sql);
+		$prof2_res = mysqli_fetch_assoc($prof2_qry);
 	}
 	
 	else{
@@ -35,7 +41,10 @@
 	}
 
 
+
 ?>
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -97,9 +106,7 @@
 										<?php
 									}
 									else{
-										$prof2_sql = "SELECT * FROM users WHERE usrID=".$_SESSION['usr'];
-										$prof2_qry = mysqli_query($dbconnect, $prof2_sql);
-										$prof2_res = mysqli_fetch_assoc($prof2_qry);
+
 										?>
 										<a href="profile.php"><?php echo $prof2_res['firstname']; ?><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 										<?php
@@ -131,22 +138,28 @@
 
 						<div class="col-lg-3">
 							<nav class="account-bar">
-								<?php
-									if(!$other){
-
-									
-								?>
 								<ul>
 									<!-- <li><a href="dashboard.php">Dashboard</a></li> -->
-									<li class="active"><a href="profile.php">Profile</a></li>
+									
 									<!-- <li><a href="ongoing_projects.php">Ongoing Projects</a></li>
 									<li><a href="past_projects.php">Past Projects</a></li> -->
-									<li><a href="my_projects.php">My Projects</a></li>
-									<li><a href="profile_settings.php">Profile Settings</a></li>
+									<?php
+										if($other){
+											?>
+												<li class="active"><a href="profile.php?other_usr=<?php echo $_GET['other_usr'];?>"><?php echo $prof_res['firstname'];?>s' profile</a></li>
+												<li><a href="my_projects.php?other_usr=<?php echo $_GET['other_usr'];?>"><?php echo $prof_res['firstname'];?>'s projects</a></li>
+											<?php
+										}
+										else{
+											?>
+												<li class="active"><a href="profile.php">Profile</a></li>
+												<li><a href="my_projects.php">My Projects</a></li>
+												<li><a href="profile_settings.php">Profile Settings</a></li>
+											<?php
+										}
+									?>
+									
 								</ul>
-								<?php
-									}
-								?>
 							</nav>
 						</div>
 
@@ -156,7 +169,7 @@
 								<div class="account-main">
 									<div class="author clearfix">
 										<a class="author-avatar" href="#">
-											<?php echo '<img src="'.getimgURL($prof_res['profilepic'], 'profilepic').'"/>'; ?></a>
+											<?php echo '<img src="'.getProfURL($prof_res['profilepic']).'"/>'; ?></a>
 										<div class="author-content">
 											<div class="author-title">
 												<h3 style="margin-bottom: 0px;"><a style="font-size: 25px; margin-top: 30px; margin-bottom: 0px;"><?php echo $prof_res['firstname'];?> <?php echo $prof_res['lastname']; ?></a></h3>
@@ -168,17 +181,18 @@
 											</div>
 										</div>
 									</div>
-									<?php
-										if(!$other){
-
-										
-									?>
 									<!-- Recently visited projects -->
 									<div class="dashboard-latest" style="margin-bottom: 1px;">
 										<h3 style="margin-bottom: 20px;">Recently Visited</h3>
 										<?php
 											if(count($clicked)==0){
-												echo "<p>You have not visited any projects yet. Go to the library page and explore!</p>";
+												if($other){
+													echo "<p>".$prof_res['firstname']." has not visited any projects yet.</p>";
+												}
+												else{
+													echo "<p>You have not visited any projects yet. Go to the library page and explore!</p>";
+												}
+												
 											}
 											else{
 
@@ -221,20 +235,6 @@
 
 
 													?>
-<!-- 													<li>
-														<a href="#"><img src="../images/placeholder/70x70.png" style="width: 70px; height: 70px;" alt=""></a>
-														<div class="dashboard-latest-box">
-															<div class="category"><a href="#">Film & Video</a></div>
-															<h4><a href="#">Space Odyssey - The Video Game</a></h4>
-														</div>
-													</li>
-													<li>
-														<a href="#"><img src="../images/placeholder/70x70.png" style="width: 70px; height: 70px;" alt=""></a>
-														<div class="dashboard-latest-box">
-															<div class="category"><a href="#">Box</a></div>
-															<h4><a href="#">Unbuonded: A Feature Documentary</a></h4>
-														</div>
-													</li> -->
 												</ul>
 											</div>
 											<div class="coloumn" style="margin-left: 20px;">
@@ -290,7 +290,13 @@
 										<h3 style="margin-bottom: 20px; margin-top: 20px;">Ongoing Projects</h3>
 									<?php
 										if(count($ongArr)==0){
-											echo "<p>You do not have any ongoing projects at this moment.</p>";
+											if($other){
+												echo "<p>".$prof_res['firstname']."does not have any ongoing projects at this moment.</p>";
+											}
+											else{
+												echo "<p>You do not have any ongoing projects at this moment.</p>";
+											}
+											
 										}
 										else{
 
@@ -322,21 +328,6 @@
 															
 														}
 													?>
-
-<!-- 													<li>
-														<a href="#"><img src="../images/placeholder/70x70.png" style="width: 70px; height: 70px;" alt=""></a>
-														<div class="dashboard-latest-box">
-															<div class="category"><a href="#">Film & Video</a></div>
-															<h4><a href="#">Space Odyssey - The Video Game</a></h4>
-														</div>
-													</li>
-													<li>
-														<a href="#"><img src="../images/placeholder/70x70.png" style="width: 70px; height: 70px;" alt=""></a>
-														<div class="dashboard-latest-box">
-															<div class="category"><a href="#">Box</a></div>
-															<h4><a href="#">Unbuonded: A Feature Documentary</a></h4>
-														</div>
-													</li> -->
 												</ul>
 											</div>
 											<div class="coloumn" style="margin-left: 20px;">
@@ -360,20 +351,6 @@
 														}
 
 													?>
-<!-- 													<li>
-														<a href="#"><img src="../images/placeholder/70x70.png" style="width: 70px; height: 70px;" alt=""></a>
-														<div class="dashboard-latest-box">
-															<div class="category"><a href="#">Film & Video</a></div>
-															<h4><a href="#">Space Odyssey - The Video Game</a></h4>
-														</div>
-													</li>
-													<li>
-														<a href="#"><img src="../images/placeholder/70x70.png" style="width: 70px; height: 70px;" alt=""></a>
-														<div class="dashboard-latest-box">
-															<div class="category"><a href="#">Box</a></div>
-															<h4><a href="#">Unbuonded: A Feature Documentary</a></h4>
-														</div>
-													</li> -->
 												</ul>
 											</div>
 										</div>
@@ -392,8 +369,14 @@
 										
 
 										if(count($pastArr)==0){
+											if($other){
+												echo "<p>".$prof_res['firstname']." does not have any past projects.</p>";
+											}
+											else{
+												echo "<p>You do not have any past projects.</p>";
+											}
 
-										echo "<p>You do not have any past projects.</p>";
+											
 										}
 										else{
 
@@ -485,9 +468,6 @@
 											}
 										?>
 									</div>
-									<?php
-										}
-									?>
 								</div>
 							</div>
 						</div>

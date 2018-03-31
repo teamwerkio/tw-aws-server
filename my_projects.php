@@ -1,16 +1,28 @@
 <?php
 	include("dbconnect.php");
 	include("img_url.php");
+	include("utilities.php");
 	session_start();
-	function returnCat($table, $col, $idx, $dbconnect, $idtype){
-		$cat_sql="SELECT ".$col." FROM ".$table." WHERE ".$idtype."='".$idx."'";
-		$cat_qry=mysqli_query($dbconnect, $cat_sql);
-		$cat_res=mysqli_fetch_assoc($cat_qry);
-		return $cat_res[$col];
-	}
+	$other=false;
 
 	if(!isset($_SESSION['usr'])){
 		header("Location:library.php");
+	}
+	elseif (isset($_GET['other_usr']) && $_GET['other_usr']!==$_SESSION['usr']){
+		$other=true;
+		$proj_sql = "SELECT * FROM project WHERE usrID=".$_GET['other_usr'];
+		$proj_qry = mysqli_query($dbconnect, $proj_sql);
+		$proj_res = mysqli_fetch_assoc($proj_qry);
+
+		$prof_sql = "SELECT * FROM users WHERE usrID=".$_GET['other_usr'];
+		$prof_qry = mysqli_query($dbconnect, $prof_sql);
+		$prof_res = mysqli_fetch_assoc($prof_qry);
+
+
+
+		$prof2_sql = "SELECT * FROM users WHERE usrID=".$_SESSION['usr'];
+		$prof2_qry = mysqli_query($dbconnect, $prof2_sql);
+		$prof2_res = mysqli_fetch_assoc($prof2_qry);
 	}
 	else{
 		$proj_sql = "SELECT * FROM project WHERE usrID=".$_SESSION['usr'];
@@ -78,7 +90,18 @@
 								<a href="my_projects.php">My Projects<i class="fa fa-caret-down" aria-hidden="true"></i></a>
 							</li>
 							<li>
-								<a href="profile.php"><?php echo $prof_res['firstname']; ?><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+								<?php
+									if(!$other){
+										?>
+											<a href="profile.php"><?php echo $prof_res['firstname']; ?><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+										<?php
+									}
+									else{
+										?>
+											<a href="profile.php"><?php echo $prof2_res['firstname']; ?><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+										<?php
+									}
+								?>
 								<ul class="sub-menu">
 									<li><a href="profile.php">Profile</a></li>
 									<li><a href="my_projects.php">My Projects</a></li>
@@ -104,14 +127,29 @@
 
 						<div class="col-lg-3">
 							<nav class="account-bar">
-								<ul>
-									<!-- <li><a href="dashboard.php">Dashboard</a></li> -->
-									<li><a href="profile.php">Profile</a></li>
-									<!-- <li><a href="ongoing_projects.php">Ongoing Projects</a></li>
-									<li><a href="past_projects.php">Past Projects</a></li> -->
-									<li class="active"><a href="my_projects.php">My Projects</a></li>
-									<li><a href="profile_settings.php">Profile Settings</a></li>
-								</ul>
+								<?php
+									if(!$other){
+										?>
+											<ul>
+												<li><a href="profile.php">Profile</a></li>
+
+												<li class="active"><a href="my_projects.php">My Projects</a></li>
+												<li><a href="profile_settings.php">Profile Settings</a></li>
+											</ul>
+
+										<?php
+									}
+									else{
+										?>
+											<ul>
+												<li><a href="profile.php?other_usr=<?php echo $_GET['other_usr'];?>"><?php echo $prof_res['firstname'];?>'s profile</a></li>
+
+												<li class="active"><a href="my_projects.php?other_usr=<?php echo $_GET['other_usr'];?>"><?php echo $prof_res['firstname'];?>'s projects</a></li>
+											</ul>
+										<?php
+									}
+								?>
+								
 							</nav>
 						</div>
 
@@ -121,7 +159,7 @@
 								<div class="account-main">
 									<div class="author clearfix">
 										<a class="author-avatar" href="#">
-											<?php echo '<img src="'.getimgURL($prof_res['profilepic'], 'profilepic').'"/>'; ?></a>
+											<?php echo '<img src="'.getProfURL($prof_res['profilepic']).'"/>'; ?></a>
 										<div class="author-content">
 											<div class="author-title">
 												<h3 style="margin-bottom: 0px;"><a style="font-size: 25px; margin-top: 30px; margin-bottom: 0px;"><?php echo $prof_res['firstname'];?> <?php echo $prof_res['lastname']; ?></a></h3>
@@ -135,6 +173,14 @@
 									</div>
 
 									<!-- my projects -->
+									<?php
+										$myArr=array();
+										
+										do{
+											$tag_json=json_decode($proj_res['tags'],true);
+											array_push($myArr, $proj_res['projID']);
+										}while($proj_res = mysqli_fetch_assoc($proj_qry));
+									?>
 
 
 									<div class="dashboard-latest" style="margin-bottom: 1px;">
@@ -151,106 +197,52 @@
 										<div class="row" style="margin-left: 1px;">
 											<div class="coloumn">
 												<ul>
-
 													<?php
-														$half=ceil(mysqli_num_rows($proj_qry)/2);
-														
-														$count=0;
-														do{
-															$count+=1;
-															if($count<=$half){
+														$halfO=ceil(count($myArr)/2);
 
+														$halfO1=array_slice($myArr, 0,$halfO);
+														$halfO2=array_slice($myArr, $halfO);
 
+														foreach ($halfO1 as $h1) {
+															$h1_sql="SELECT * FROM project WHERE projID=".$h1;
+															$h1_qry=mysqli_query($dbconnect, $h1_sql);
+															$h1_res=mysqli_fetch_assoc($h1_qry);
 															?>
 																<li>
-																	<a href="project.php?projID=<?php echo $proj_res['projID'];?>"><img src="<?php echo getimgURL($proj_res['proj_icon'], "proj_icon");?>" style="width: 70px; height: 70px;" alt=""></a>
+																	<a href="project.php?projID=<?php echo $h1;?>"><img src="<?php echo getimgURL($h1_res['proj_icon'], "proj_icon");?>" style="width: 70px; height: 70px;" alt=""></a>
 																	<div class="dashboard-latest-box">
-																		<div class="category"><a href="#"><?php echo returnCat('proj_categories', 'catName', $proj_res['catID'], $dbconnect, 'catID');?></a></div>
-																		<h4><a href="project.php?projID=<?php echo $proj_res['projID'];?>"><?php echo $proj_res['projName'];?></a></h4>
+																		<div class="category"><a href="#"><?php echo returnCat('proj_categories', 'catName', $h1_res['catID'], $dbconnect, 'catID');?></a></div>
+																		<h4><a href="#"><?php echo $h1_res['projName'];?></a></h4>
 																	</div>
 																</li>
-															<?php
 
+															<?php
+															
 														}
-														else{
-															break;
-														}
-													}while($proj_res = mysqli_fetch_assoc($proj_qry));
 													?>
-<!-- 													<li>
-														<a href="#"><img src="../images/placeholder/70x70.png" style="width: 70px; height: 70px;" alt=""></a>
-														<div class="dashboard-latest-box">
-															<div class="category"><a href="#">Film & Video</a></div>
-															<h4><a href="#">Space Odyssey - The Video Game</a></h4>
-														</div>
-													</li>
-													<li>
-														<a href="#"><img src="../images/placeholder/70x70.png" style="width: 70px; height: 70px;" alt=""></a>
-														<div class="dashboard-latest-box">
-															<div class="category"><a href="#">Box</a></div>
-															<h4><a href="#">Unbuonded: A Feature Documentary</a></h4>
-														</div>
-													</li>
-													<li>
-														<a href="#"><img src="../images/placeholder/70x70.png" style="width: 70px; height: 70px;" alt=""></a>
-														<div class="dashboard-latest-box">
-															<div class="category"><a href="#">Box</a></div>
-															<h4><a href="#">Unbuonded: A Feature Documentary</a></h4>
-														</div>
-													</li>
-													<li>
-														<a href="#"><img src="../images/placeholder/70x70.png" style="width: 70px; height: 70px;" alt=""></a>
-														<div class="dashboard-latest-box">
-															<div class="category"><a href="#">Box</a></div>
-															<h4><a href="#">Unbuonded: A Feature Documentary</a></h4>
-														</div>
-													</li> -->
 												</ul>
 											</div>
 											<div class="coloumn" style="margin-left: 20px;">
 												<ul>
 													<?php
-														do{
+														foreach ($halfO2 as $h2) {
+															$h2_sql="SELECT * FROM project WHERE projID=".$h2;
+															$h2_qry=mysqli_query($dbconnect, $h2_sql);
+															$h2_res=mysqli_fetch_assoc($h2_qry);
 															?>
 																<li>
-																	<a href="project.php?projID=<?php echo $proj_res['projID'];?>"><img src="<?php echo getimgURL($proj_res['proj_icon'], "proj_icon");?>" style="width: 70px; height: 70px;" alt=""></a>
+																	<a href="project.php?projID=<?php echo $h2;?>"><img src="<?php echo getimgURL($h2_res['proj_icon'], "proj_icon");?>" style="width: 70px; height: 70px;" alt=""></a>
 																	<div class="dashboard-latest-box">
-																		<div class="category"><a href="#"><?php echo returnCat('proj_categories', 'catName', $proj_res['catID'], $dbconnect, 'catID');?></a></div>
-																		<h4><a href="project.php?projID=<?php echo $proj_res['projID'];?>"><?php echo $proj_res['projName'];?></a></h4>
+																		<div class="category"><a href="#"><?php echo returnCat('proj_categories', 'catName', $h2_res['catID'], $dbconnect, 'catID');?></a></div>
+																		<h4><a href="#"><?php echo $h2_res['projName'];?></a></h4>
 																	</div>
 																</li>
-															<?php
 
-														}while($proj_res = mysqli_fetch_assoc($proj_qry));
+															<?php
+															
+														}
+
 													?>
-													<!-- <li>
-														<a href="#"><img src="../images/placeholder/70x70.png" style="width: 70px; height: 70px;" alt=""></a>
-														<div class="dashboard-latest-box">
-															<div class="category"><a href="#">Film & Video</a></div>
-															<h4><a href="#">Space Odyssey - The Video Game</a></h4>
-														</div>
-													</li>
-													<li>
-														<a href="#"><img src="../images/placeholder/70x70.png" style="width: 70px; height: 70px;" alt=""></a>
-														<div class="dashboard-latest-box">
-															<div class="category"><a href="#">Box</a></div>
-															<h4><a href="#">Unbuonded: A Feature Documentary</a></h4>
-														</div>
-													</li>
-													<li>
-														<a href="#"><img src="../images/placeholder/70x70.png" style="width: 70px; height: 70px;" alt=""></a>
-														<div class="dashboard-latest-box">
-															<div class="category"><a href="#">Box</a></div>
-															<h4><a href="#">Unbuonded: A Feature Documentary</a></h4>
-														</div>
-													</li>
-													<li>
-														<a href="#"><img src="../images/placeholder/70x70.png" style="width: 70px; height: 70px;" alt=""></a>
-														<div class="dashboard-latest-box">
-															<div class="category"><a href="#">Box</a></div>
-															<h4><a href="#">Unbuonded: A Feature Documentary</a></h4>
-														</div>
-													</li> -->
 												</ul>
 											</div>
 										</div>

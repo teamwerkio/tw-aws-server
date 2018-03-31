@@ -27,8 +27,7 @@
 
 		$id=$_GET['projID'];
 
-		$varbool=empty($size) || empty($commit) || empty($prog) || empty($name) || empty($tagline) || empty($sh_desc) || empty($lg_desc) || empty($cID) || empty($catID) || empty($tags);
-		error_log($varbool);
+		$varbool=empty($size) || empty($commit) || empty($name) || empty($tagline) || empty($sh_desc) || empty($lg_desc) || empty($cID) || empty($catID) || empty($tags);
 
 		if($varbool==False){
 			$tag_arr=explode(',', $tags);
@@ -56,6 +55,7 @@
 			catID='".mysqli_real_escape_string($dbconnect, $catID)."',
 			tags='".mysqli_real_escape_string($dbconnect, $tag_final)."'
 			 WHERE projID=".mysqli_real_escape_string($dbconnect, $id);
+			
 			
 			$set_qry=mysqli_query($dbconnect, $set_sql);
 

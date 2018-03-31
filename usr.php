@@ -23,7 +23,11 @@
 		include("register_form.php");
 	}
 
-	if(!isset($_SESSION['usr'])) {
+	if(isset($_SESSION['fb'])){
+		header("Location:social_connect.php");
+		exit;
+	}
+	elseif(!isset($_SESSION['usr'])) {
 		include("login.php");
 	} else{
 		header("Location:library.php");

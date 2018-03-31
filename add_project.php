@@ -24,6 +24,13 @@
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link rel="stylesheet" type="text/css" href="css/responsive.css" />
     <link rel="icon" href="../images/favicon.png" type="image/x-icon"/>
+
+    <!-- bootstrap wrappable css to avoid conflicts -->
+  	<link rel="stylesheet" href="https://formden.com/static/assets/demos/bootstrap-iso/bootstrap-iso/bootstrap-iso.css">
+  	<link rel="stylesheet" href="https://formden.com/static/assets/demos/bootstrap-iso/bootstrap-iso/bootstrap-iso.css">
+
+  	<!-- sweetalerts -->
+  	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body class="campaign-detail">
@@ -86,7 +93,7 @@
 			<div style="margin-top: 50px;"></div><!-- .page-title -->
 			<div class="campaign-form form-update">
 				<div class="container">
-					<form name="addp" action="proj_submit.php" method="post" enctype="multipart/form-data">
+					<form name="addp" onsubmit="return validateAddP()" action="proj_submit.php" method="post" enctype="multipart/form-data">
 						<!-- <legend>Start a campaign</legend> -->
 						<div class="field">
 							<label for="title">Project Name *</label>
@@ -180,7 +187,6 @@
 			  				<div class="field">
 			  					<div class="field-select">
 									<select name="college" id="">
-										<option value="">Select an Institution</option>
 										<option value="1">Amherst College</option>
 										<option value="2">Hampshire College</option>
 										<option value="3">Mount Holyoke College</option>
@@ -195,7 +201,6 @@
 							<span class="label-desc">To help potential team members find your project, select a broad category that best represents your project.</span>
 							<div class="field-select">
 								<select name="cat" id="">
-									<option value="">Select a Category</option>
 									<option value="1">Design &amp; Art</option>
 									<option value="2">Film &amp; Video</option>
 									<option value="3">Book</option>
@@ -295,5 +300,71 @@
     <script type="text/javascript" src="libs/bxslider/jquery.bxslider.min.js"></script>
     <!-- orther script -->
     <script  type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript">
+    	function validateAddP(){
+    		var projname = document.forms["addp"]["projname"].value;
+			var tagline = document.forms["addp"]["projtagl"].value;
+			var shDesc = document.forms["addp"]["proj_sh_desc"].value;
+			var lgDesc = document.forms["addp"]["proj_lg_desc"].value;
+			var tags = document.forms["addp"]["tags"].value;
+			var bigBan=document.getElementById("uploadfile1");
+			var smBan=document.getElementById("uploadfile1");
+			var ico=document.getElementById("uploadfile3");
+
+
+			if (projname == "") {
+				swal("Missing field", "Project Name field cannot be empty", "warning");
+				return false;
+			}
+
+			if (tagline == "") {
+				swal("Missing field", "Tagline field cannot be empty", "warning");
+				return false;
+			}
+			if (shDesc == "") {
+				swal("Missing field", "Short Description field cannot be empty", "warning");
+				return false;
+			}
+			if (lgDesc == "") {
+				swal("Missing field", "Long Description field cannot be empty", "warning");
+				return false;
+			}
+			if (tags == "") {
+				swal("Missing field", "Tags field cannot be empty", "warning");
+				return false;
+			}
+			if(bigBan.files.length==0){
+				swal("Missing image", "Please upload an image for Big Banner", "warning");
+				return false;
+			}
+			else{
+				var img2=bigBan.files[0]['type'];
+				if(img2.split('/')[0]!='image'){
+					swal("Big Banner filetype is not supported", "", "error");
+					return false;
+				}
+			}
+			if(smBan.files.length!=0){
+				var img2=smBan.files[0]['type'];
+				if(img2.split('/')[0]!='image'){
+					swal("Small Banner filetype is not supported", "", "error");
+					return false;
+				}
+			}
+			if(ico.files.length==0){
+				swal("Missing image", "Please upload an image for Project Icon", "warning");
+				return false;
+			}
+			else{
+				var img2=ico.files[0]['type'];
+				if(img2.split('/')[0]!='image'){
+					swal("Icon filetype is not supported", "", "error");
+					return false;
+				}
+			}
+
+			return true;
+    	}
+    </script>
 </body>
 </html>

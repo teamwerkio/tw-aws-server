@@ -2,23 +2,7 @@
 	include("dbconnect.php");
 	session_start();
 	include("img_url.php");
-
-
-	function timedifference_d($time){
-		date_default_timezone_set('US/Eastern');
-		$currtime=new DateTime();
-		$time=new DateTime($time);
-		$interval=$currtime->diff($time);
-		return $interval->format('%a');
-	}
-
-
-	function returnCat($table, $col, $idx, $dbconnect, $idtype){
-		$cat_sql="SELECT ".$col." FROM ".$table." WHERE ".$idtype."='".$idx."'";
-		$cat_qry=mysqli_query($dbconnect, $cat_sql);
-		$cat_res=mysqli_fetch_assoc($cat_qry);
-		return $cat_res[$col];
-	}
+	include("utilities.php");
 	
 	if(!isset($_SESSION['usr'])){
 		header("Location:usr.php");
@@ -33,6 +17,14 @@
 	$proj_qry=mysqli_query($dbconnect, $proj_sql);
 	$proj_res=mysqli_fetch_assoc($proj_qry);
 
+	$testIds=array();
+	$testSql="SELECT usrID FROM Testers";
+	$testqry=mysqli_query($dbconnect, $testSql);
+	$testRes=mysqli_fetch_assoc($testqry);
+	do{
+		array_push($testIds, $testRes["usrID"]);
+	}while($testRes=mysqli_fetch_assoc($testqry));
+
 	$trending_proj_id=0;
 	do{
 		$json_dec=json_decode($proj_res['tags'], true);
@@ -44,6 +36,16 @@
 <!doctype html>
 <html lang="en">
 <head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-116312021-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-116312021-1');
+	</script>
+
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Library | Teamwerk</title>
@@ -197,7 +199,7 @@
 										<div class="campaign-description"><?php echo $trend_res['sm_desc']; ?></div>
 										<div class="staff-picks-author">
 											<div class="author-profile">
-												<a class="author-avatar" href="profile.php?other_usr=<?php echo $trend_res['usrID']; ?>"><?php echo '<img src="'.getimgURL($owner_p, "profilepic").'" />'; ?></a>by <a class="author-name" href="profile.php?other_usr=<?php echo $trend_res['usrID']; ?>"><?php echo $owner_f.' '.$owner_l; ?></a>
+												<a class="author-avatar" href="profile.php?other_usr=<?php echo $trend_res['usrID']; ?>"><?php echo '<img src="'.getProfURL($owner_p).'" />'; ?></a>by <a class="author-name" href="profile.php?other_usr=<?php echo $trend_res['usrID']; ?>"><?php echo $owner_f.' '.$owner_l; ?></a>
 											</div>
 											<div class="author-address"><span class="ion-location"></span><?php echo $proj_col; ?>, Amherst, MA</div>
 										</div>
@@ -325,7 +327,17 @@
 								$final_id=0;
 
 								do{
-									if($proj_res['projID']!==$trending_proj_id && $count<9){
+
+									$tagJson=json_decode($proj_res['tags'],true);
+									$notPriv=true;
+									if(@$tagJson["private"]==true){
+										if(!in_array($_SESSION['usr'], $testIds)){
+											$notPriv=false;
+										}
+										
+										
+									}
+									if($proj_res['projID']!==$trending_proj_id && $count<9 && $notPriv){
 										$count+=1;
 										$cat=returnCat('proj_categories', 'catName', $proj_res['catID'], $dbconnect, 'catID');
 										$owner_f=returnCat('users', 'firstname', $proj_res['usrID'], $dbconnect, 'usrID');
@@ -342,7 +354,7 @@
 														<h3><a class="content" href="project.php?projID=<?php echo $proj_res['projID']; ?>"><?php echo $proj_res['projName']; ?></a></h3>
 														<div class="campaign-description"><?php echo $proj_res['sm_desc']; ?></div>
 														<div class="campaign-author"><a class="author-icon" href="profile.php?other_usr=<?php echo $proj_res['usrID']; ?>">
-															<?php echo '<img src="'.getimgURL($owner_p, "profilepic").'" />'; ?></a>by <a class="author-name" href="profile.php?other_usr=<?php echo $proj_res['usrID']; ?>"><?php echo $owner_f; ?>		
+															<?php echo '<img src="'.getProfURL($owner_p).'" />'; ?></a>by <a class="author-name" href="profile.php?other_usr=<?php echo $proj_res['usrID']; ?>"><?php echo $owner_f; ?>		
 														</a></div>
 														<div class="process">
 															<div class="raised"><span style="width: <?php echo $proj_res['progress'];?>%;"></span></div>
@@ -459,7 +471,7 @@
 						</div>
 					</div>
 					
-					<div class="latest-button wow fadeInUp" name="loading" data-wow-delay=".1s" ><a data-finalID="<?php echo $final_id;?>" id="load_more" href="#" class="btn-primary">Load more</a></div>
+					<div class="latest-button wow fadeInUp" name="loading" data-wow-delay=".1s" ><a data-finalID="<?php echo $final_id;?>" id="load_more" class="btn-primary">Load more</a></div>
 
 				</div>
 			</div><!-- .latest -->
