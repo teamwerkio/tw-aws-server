@@ -246,13 +246,13 @@
 			  					<input name="lastname" type="text" value="" placeholder="Last Name" />
 
 			  				</div>
-			  				<div class="row">
-			  					<div class="coloumn" style="margin-left: 15px; width: 49%;">
+			  				<!-- <div class="row"> -->
+			  					<!-- <div class="coloumn" style="margin-left: 15px; width: 49%;"> -->
 					  				<div class="field">
 					  					<input name="email_signup" type="" value="" placeholder="College Email" />
 					  				</div>
-					  			</div>
-					  			<div class="coloumn" style="margin-left: 5px; width: 200px;">
+					  			<!-- </div> -->
+					  			<!-- <div class="coloumn" style="margin-left: 5px; width: 200px;">
 					  				<div class="field clearfix">
 						  				<div class="field">
 						  					<div class="field-select">
@@ -266,8 +266,8 @@
 											</div>
 						  				</div>
 									</div>
-								</div>
-							</div>
+								</div> -->
+							<!-- </div> -->
 			  				<div class="field">
 			  					<input name="pass_signup" type="password" value=""  placeholder="Password" />
 			  				</div>

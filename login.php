@@ -153,7 +153,7 @@
 						<h2>Log in to Teamwerk</h2>
 						<form name="login" action="usr.php" method="post" id="loginForm" class="clearfix">
 			  				<div class="field">
-			  					<input type="email" value="" name="email" placeholder=".edu Email Address" />
+			  					<input type="email" value="" name="email" placeholder="College Email" />
 			  				</div>
 			  				<div class="field">
 			  					<input type="password" value="" name="pass" placeholder="Password" />
