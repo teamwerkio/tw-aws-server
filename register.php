@@ -77,7 +77,6 @@
 			var firstname = document.forms["signup"]["firstname"].value;
 			var lastname = document.forms["signup"]["lastname"].value;
 			var email = document.forms["signup"]["email_signup"].value;
-			var ext=document.forms["signup"]["em_ext"].options[document.forms["signup"]["em_ext"].selectedIndex].value;
 			var pass = document.forms["signup"]["pass_signup"].value;
 			var passv = document.forms["signup"]["pass_signup_verify"].value;
 			var checkBoxes = document.getElementsByClassName( 'cb' );
@@ -85,7 +84,6 @@
 			var touChecked = document.getElementById("tou").checked;
 			var avatar=document.getElementsByClassName('avatar');
 			var image=document.getElementById("uploadfile1");
-			var em=email+"@"+ext;
 			var emailExists=true;
 			console.log(em);
 
@@ -173,7 +171,7 @@
 				type: 'POST',
 				data: {
 					'email_chk': 1,
-					'email': em,
+					'email': email,
 				},
 				success: function(data){
 					console.log("data: "+data);

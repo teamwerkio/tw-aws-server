@@ -9,7 +9,7 @@
 	date_default_timezone_set('US/Eastern');
 	$name_f=$_POST['firstname'];
 	$name_l=$_POST['lastname'];
-	$email=$_POST['email_signup'].'@'.$_POST['em_ext'];
+	$email=$_POST['email_signup'];
 	
 	$pitch=$_POST['pitch'];
 	$pass=sha1($_POST['pass_signup']);
