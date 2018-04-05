@@ -1,0 +1,476 @@
+<?php
+	include("dbconnect.php");
+	session_start();
+	include("img_url.php");
+	include("utilities.php");
+	
+	if(!isset($_SESSION['usr'])){
+		header("Location:usr.php");
+	}
+	else{
+		$home_sql = "SELECT * FROM users WHERE usrID='".$_SESSION['usr']."'";
+		$home_qry = mysqli_query($dbconnect, $home_sql);
+		$home_res = mysqli_fetch_assoc($home_qry);
+		$tab_disp=$home_res['firstname'];
+	}
+	$proj_sql = "SELECT * FROM project";
+	$proj_qry=mysqli_query($dbconnect, $proj_sql);
+	$proj_res=mysqli_fetch_assoc($proj_qry);
+
+	$testIds=array();
+	$testSql="SELECT usrID FROM Testers";
+	$testqry=mysqli_query($dbconnect, $testSql);
+	$testRes=mysqli_fetch_assoc($testqry);
+	do{
+		array_push($testIds, $testRes["usrID"]);
+	}while($testRes=mysqli_fetch_assoc($testqry));
+
+	$trending_proj_id=0;
+	do{
+		$json_dec=json_decode($proj_res['tags'], true);
+		if(@$json_dec["trending"]==true){
+			$trending_proj_id=$proj_res['projID'];
+		}
+	}while($proj_res=mysqli_fetch_assoc($proj_qry));
+?>
+<!doctype html>
+<html lang="en">
+<head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-116312021-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-116312021-1');
+	</script>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Library | Teamwerk</title>
+
+	<!-- Style CSS -->
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="css/responsive.css" />
+    <link rel="icon" href="../images/favicon.png" type="image/x-icon"/>
+</head>
+
+<body>
+	<div id="wrapper">
+		<header id="header" class="site-header">
+			<div class="container">
+				<div class="site-brand">
+					<a href="library.php"><img src="../images/assets/logo.png" style="width: 205px; height: 40px;" alt=""></a>
+				</div><!-- .site-brand -->
+				<div class="right-header">					
+					<nav class="main-menu">
+						<button class="c-hamburger c-hamburger--htx"><span></span></button>
+						<ul>
+							<li>
+								<div class="search-icon">
+									<a href="#" class="ion-ios-search-strong"></a>
+									<div class="form-search"></div>
+									<form action="#" method="POST" id="searchForm">
+								  		<input type="text" value="" name="search" placeholder="Search..." />
+								    	<button type="submit" value=""><span class="ion-ios-search-strong"></span></button>
+								  	</form>
+								</div>	
+							</li>
+							<!-- notifications bell icon -->
+							<!-- <li style="margin-left: 0px;">
+								<div class="search-icon">
+									<a href="#" class="ion-ios-bell-outline" style="cursor: pointer;"></a>
+								</div>
+							</li> -->
+							<li>
+								<a href="library.php">Library<i class="fa fa-caret-down" aria-hidden="true"></i></a>
+							</li>
+							<li>
+								<a href="my_projects.php">My Projects<i class="fa fa-caret-down" aria-hidden="true"></i></a>
+							</li>
+							<li>
+								<a href="#"><?php echo $tab_disp; ?><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+								<ul class="sub-menu">
+									<?php if(!isset($_SESSION['usr'])){
+										?>
+										<li><a href="usr.php">Sign Up/Log In</a></li>
+										<?php
+									} ?>
+									<li><a href="profile.php">Profile</a></li>
+									<li><a href="my_projects.php">My Projects</a></li>
+									<li><a href="profile_settings.php">Profile Settings</a></li>
+									<?php if(isset($_SESSION['usr'])) {
+										?>
+										<li><a href="usr.php?action=logout">Logout</a></li>
+
+										<?php
+									} ?>									
+								</ul>
+							</li>
+						</ul>
+					</nav><!-- .main-menu -->
+
+
+					<div class="login login-button">
+						<a href="add_project.php" class="btn-primary">+ Project</a>
+					</div><!-- .login -->
+				</div><!--. right-header -->
+			</div><!-- .container -->
+		</header><!-- .site-header -->
+
+		<main id="main" class="site-main">
+
+			<div style="margin-top: 20px;"></div><!-- .page-title -->
+
+			<div class='container' style="margin-bottom: 25px;">
+					<h2 style="margin-top: 13px; float: left;"><i class="fa fa-search"></i> Showing results for: [bleebloh]</h2>
+					<div class="field-select" style="width: 280px; float: right;">
+						<select name="em_ext" id="" style="margin-bottom: 0px; border-radius: 0px;">
+							<option value="">Sort by A-Z</option>
+							<option value="">Sort by Z-A</option>
+							<option value="">Sort by Newest-Oldest</option>
+							<option value="">Sort by Oldest-Newest</option>
+							<option value="">Sort by Team Size [High to Low]</option>
+							<option value="">Sort by Team Size [Low to High]</option>
+							<option value="">Sort by Involvement [High to Low]</option>
+							<option value="">Sort by Involvement [Low to High]</option>
+							<option value="">Sort by Interest [High to Low]</option>
+							<option value="">Sort by Interest [Low to High]</option>
+						</select>
+					</div>
+				</div>
+
+			<div class="campaigns">
+				<div class="container">
+					<div class="campaign-content">
+						<div class="row" id="lib-pg">
+							<?php
+								$trend_sql="SELECT * FROM project where projID='".$trending_proj_id."'";
+								$trend_qry=mysqli_query($dbconnect, $trend_sql);
+								$trend_res=mysqli_fetch_assoc($trend_qry);
+
+								$days_elapsed=timedifference_d($trend_res['dt']);
+								$cat=returnCat('proj_categories', 'catName', $trend_res['catID'], $dbconnect, 'catID');
+								$owner_f=returnCat('users', 'firstname', $trend_res['usrID'], $dbconnect, 'usrID');
+								$owner_l=returnCat('users', 'lastname', $trend_res['usrID'], $dbconnect, 'usrID');
+								$owner_p=returnCat('users', 'profilepic', $trend_res['usrID'], $dbconnect, 'usrID');
+								$proj_col=returnCat('colleges', 'colName', $trend_res['colID'], $dbconnect, 'colID');
+							?>
+
+
+							<?php
+
+								$proj_sql = "SELECT * FROM project LIMIT 10";
+								$proj_qry=mysqli_query($dbconnect, $proj_sql);
+								$proj_res=mysqli_fetch_assoc($proj_qry);
+								$count=0;
+								$final_id=0;
+
+								do{
+
+									$tagJson=json_decode($proj_res['tags'],true);
+									$notPriv=true;
+									if(@$tagJson["private"]==true){
+										if(!in_array($_SESSION['usr'], $testIds)){
+											$notPriv=false;
+										}
+										
+										
+									}
+									if($proj_res['projID']!==$trending_proj_id && $count<9 && $notPriv){
+										$count+=1;
+										$cat=returnCat('proj_categories', 'catName', $proj_res['catID'], $dbconnect, 'catID');
+										$owner_f=returnCat('users', 'firstname', $proj_res['usrID'], $dbconnect, 'usrID');
+										$owner_p=returnCat('users', 'profilepic', $proj_res['usrID'], $dbconnect, 'usrID');
+										?>
+											<div class="col-lg-4 col-sm-6 col-6" data-id2="<?php echo $proj_res['projID']; ?>">
+												<div class="campaign-item wow fadeInUp" data-wow-delay=".1s">
+													<a class="overlay content" style="height: 240px;" href="project.php?projID=<?php echo $proj_res['projID']; ?>">
+														<?php echo '<img src="'.getimgURL($proj_res['small_ban'], "banner_small").'" style="height: 240px;" />'; ?>
+														<span class="ion-paper-airplane"></span>
+													</a>
+													<div class="campaign-box">
+														<a href="#" class="category"><?php echo $cat; ?></a>
+														<h3><a class="content" href="project.php?projID=<?php echo $proj_res['projID']; ?>"><?php echo $proj_res['projName']; ?></a></h3>
+														<div class="campaign-description"><?php echo $proj_res['sm_desc']; ?></div>
+														<div class="campaign-author"><a class="author-icon" href="profile.php?other_usr=<?php echo $proj_res['usrID']; ?>">
+															<?php echo '<img src="'.getProfURL($owner_p).'" />'; ?></a>by <a class="author-name" href="profile.php?other_usr=<?php echo $proj_res['usrID']; ?>"><?php echo $owner_f; ?>		
+														</a></div>
+														<div class="process">
+															<div class="raised"><span style="width: <?php echo $proj_res['progress'];?>%;"></span></div>
+															<div class="process-info">
+																<div class="process-pledged"><span><?php
+																		$json=$proj_res['subs'];
+																		$json=json_decode($json, true);
+																		echo count($json['subs']);?></span>interest</div>
+
+																	<?php
+																		$size_id=$proj_res['tsizeID'];
+																		if($size_id==1){
+																			?>
+																			<!-- Small Team -->
+																			<div class="process-pledged"><span>
+																				<a data-tooltip="Small team">
+																				<i class="fa fa-user"></i>
+																				<i class="fa fa-user"></i></a>
+																			</span>team size</div>
+																			<?php
+																		}
+																		elseif ($size_id==2) {
+																			?>
+																			<!-- Medium Team -->
+																			<div class="process-pledged"><span>
+																				<a data-tooltip="Medium team">
+																				<i class="fa fa-user"></i>
+																				<i class="fa fa-user"></i>
+																				<i class="fa fa-user"></i></a>
+																			</span>team size</div>
+																			<?php
+																		}
+																		elseif ($size_id==3) {
+																			?>
+																			<!-- Large Team -->
+																			<div class="process-pledged"><span>
+																				<a data-tooltip="Large team">
+																				<i class="fa fa-user"></i>
+																				<i class="fa fa-user"></i>
+																				<i class="fa fa-user"></i>
+																				<i class="fa fa-user"></i></a>
+																			</span>team size</div>
+																			<?php
+																		}
+																		elseif ($size_id==4) {
+																			?>
+																			<!-- Extra Large Team -->
+																			<div class="process-pledged"><span>
+																				<a data-tooltip="Extra large team">
+																				<i class="fa fa-user"></i>
+																				<i class="fa fa-user"></i>
+																				<i class="fa fa-user"></i>
+																				<i class="fa fa-user-plus"></i></a>
+																			</span>team size</div>
+																			<?php
+																		}
+																	?>
+																	<?php
+																		$inv_id=$proj_res['commID'];
+																		if($inv_id==1){
+																			?>
+																			<!-- < 10 hrs/week -->
+																			<div class="process-time"><span>
+																				<a data-tooltip="< 10 hrs/week (approx.)">
+																				<i class="fa fa-clock-o"></i></a>
+																			</span>involvement</div>
+																			<?php
+																		}
+																		elseif ($inv_id==2) {
+																			?>
+																			<!-- 11 to 20 hrs/week -->
+																			<div class="process-time"><span>
+																				<a data-tooltip="11 to 20 hrs/week (approx.)">
+																				<i class="fa fa-clock-o"></i>
+																				<i class="fa fa-clock-o"></i></a>
+																			</span>involvement</div>
+																			<?php
+																		}
+																		elseif ($inv_id==3) {
+																			?>
+																			<!-- 21 to 30 hrs/week -->
+																			<div class="process-time"><span>
+																				<a data-tooltip="21 to 30 hrs/week (approx.)">
+																				<i class="fa fa-clock-o"></i>
+																				<i class="fa fa-clock-o"></i>
+																				<i class="fa fa-clock-o"></i></a>
+																			</span>involvement</div>
+																			<?php
+																		}
+																		elseif ($inv_id==4) {
+																			?>
+																			<!-- > 31 hrs/week -->
+																			<div class="process-time"><span>
+																				<a data-tooltip="> 31 hrs/week (approx.)">
+																				<i class="fa fa-clock-o"></i>
+																				<i class="fa fa-clock-o"></i>
+																				<i class="fa fa-clock-o"></i>
+																				<i class="fa fa-clock-o"></i></a>
+																			</span>involvement</div>
+																			<?php
+																		}
+																	?>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										<?php
+										$final_id=$proj_res['projID'];
+
+								}}while($proj_res=mysqli_fetch_assoc($proj_qry));
+
+							?>											
+						</div>
+					</div>
+					
+					<div class="latest-button wow fadeInUp" name="loading" data-wow-delay=".1s" ><a data-finalID="<?php echo $final_id;?>" id="load_more" class="btn-primary">Load more</a></div>
+
+				</div>
+			</div><!-- .latest -->
+		</main><!-- .site-main -->
+
+
+		<footer id="footer" class="site-footer">
+			<div class="footer-menu">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-3 col-sm-4 col-4">
+							<div class="footer-menu-item">
+								<h3>Company</h3>
+								<ul>
+									<li><a href="about.html">About</a></li>
+									<li><a href="press.html">Press</a></li>
+									<li><a href="contact.html">Contact</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-lg-3 col-sm-4 col-4">
+							<div class="footer-menu-item">
+								<h3>Community</h3>
+								<ul>
+									<li><a href="support.html">Support</a></li>
+									<li><a href="guidelines.html">Guidelines</a></li>
+									<li><a href="termsofuse.html">Terms of Use</a></li>
+									<li><a href="privacypolicy.html">Privacy Policy</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-lg-3 col-sm-4 col-4">
+							<div class="footer-menu-item">
+								<h3>Projects</h3>
+								<ul>
+									<li><a href="#">Technology</a></li>
+									<li><a href="#">Games</a></li>
+									<li><a href="#">Design &amp; Art</a></li>
+									<li><a href="#">Film &amp; Video</a></li>
+									<li><a href="#">Performances</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-lg-3 col-sm-12 col-12">
+							<div class="footer-menu-item newsletter">
+								<h3>Subscribe</h3>
+								<div class="newsletter-description">Join the Teamwerk community</div>
+								<form action="s" method="POST" id="newsletterForm">
+							  		<input type="text" value="" name="s" placeholder="Enter your email..." />
+							    	<button type="submit" value=""><span class="ion-android-drafts"></span></button>
+							  	</form>
+							  	<!-- <div class="follow">
+							  		<h3>Join us on</h3>
+							  		<ul>
+							  			<li class="facebook"><a target="_Blank" href="http://www.facebook.com"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+							  			<li class="twitter"><a target="_Blank" href="http://www.twitter.com"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+							  		</ul>
+							  	</div> -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><!-- .footer-menu -->
+			<div class="footer-copyright">
+				<div class="container">
+					<p class="copyright">© Copyrights 2018 by Teamwerk. All Rights Reserved.</p>
+					<a href="#" class="back-top">Back to top<span class="ion-android-arrow-up"></span></a>
+				</div>
+			</div>
+		</footer><!-- site-footer -->
+	</div><!-- #wrapper -->
+	<!-- jQuery -->    
+    <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="libs/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="libs/owl-carousel/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="libs/jquery.countdown/jquery.countdown.min.js"></script>
+    <script type="text/javascript" src="libs/wow/wow.min.js"></script>
+    <script type="text/javascript" src="libs/isotope/isotope.pkgd.min.js"></script>
+    <script type="text/javascript" src="libs/bxslider/jquery.bxslider.min.js"></script>
+    <!-- orther script -->
+    <script  type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript">
+    	var trend=<?php echo $trending_proj_id;?>;
+
+
+    	$(document).ready(function(){
+    		$(".trend").click(function(){
+    			var button=$(this);
+    			
+    			$.ajax({
+    				url: 'update_server.php',
+    				type: 'POST',
+    				data: {
+    					'clicked': 1,
+    					'projID': button.closest('.clearfix').data("id"),
+    					'usrID': <?php echo $_SESSION['usr'];?>,
+    				},
+    				success: function(data){
+    					
+    				}
+    			});
+    		});
+    		$(".content").click(function(){
+    			var button=$(this);
+ 				
+    			$.ajax({
+    				url: 'update_server.php',
+    				type: 'POST',
+    				data: {
+    					'clicked': 1,
+    					'projID': button.closest('.col-sm-6').data("id2"),
+    					'usrID': <?php echo $_SESSION['usr'];?>,
+    				},
+    				success: function(data){
+
+    				}
+    			});
+    			
+    		});
+    	});
+
+
+    	$(document).on('click', '#load_more', function(){
+    		var button=$(this);
+    		var finID=button.attr("data-finalID");
+    		button.html("Loading...");
+    		$.ajax({
+    			url: 'load_more_req.php',
+    			type: 'POST',
+    			data: {
+    				'load': 1,
+    				'finID': finID,
+    				'trend': trend,
+    			},
+    			success: function(data){
+    				console.log(data);
+    				if(data==="0"){
+    					button.html("All showing");
+
+    				}
+    				else{
+    					var json=JSON.parse(data);
+    					
+    					$("#lib-pg").append(json.html);
+    					if(json.count==="0"){
+    						button.html("All showing");
+    					}
+    					else{
+    						$("#load_more").attr("data-finalID",json.final);
+
+    						button.html("Load more");
+    					}
+    					
+    				}
+    			}
+    		});
+    	});
+    </script>
+    
+</body>
+</html>
