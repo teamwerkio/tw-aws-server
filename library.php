@@ -320,7 +320,7 @@
 
 							<?php
 
-								$proj_sql = "SELECT * FROM project LIMIT 10";
+								$proj_sql = "SELECT * FROM project LIMIT 12";
 								$proj_qry=mysqli_query($dbconnect, $proj_sql);
 								$proj_res=mysqli_fetch_assoc($proj_qry);
 								$count=0;
@@ -342,11 +342,18 @@
 										$cat=returnCat('proj_categories', 'catName', $proj_res['catID'], $dbconnect, 'catID');
 										$owner_f=returnCat('users', 'firstname', $proj_res['usrID'], $dbconnect, 'usrID');
 										$owner_p=returnCat('users', 'profilepic', $proj_res['usrID'], $dbconnect, 'usrID');
+										$small_ban=$proj_res['small_ban'];
+										$small_ban_tag='banner_small';
+
+										
+										$small_ban_tag=(($small_ban=="") ? 'banner_big' : $small_ban_tag);
+										$small_ban=(($small_ban=="") ? $proj_res['big_ban'] : $small_ban);
+								
 										?>
 											<div class="col-lg-4 col-sm-6 col-6" data-id2="<?php echo $proj_res['projID']; ?>">
 												<div class="campaign-item wow fadeInUp" data-wow-delay=".1s">
 													<a class="overlay content" style="height: 240px;" href="project.php?projID=<?php echo $proj_res['projID']; ?>">
-														<?php echo '<img src="'.getimgURL($proj_res['small_ban'], "banner_small").'" style="height: 240px;" />'; ?>
+														<?php echo '<img src="'.getimgURL($small_ban, $small_ban_tag).'" style="height: 240px;" />'; ?>
 														<span class="ion-paper-airplane"></span>
 													</a>
 													<div class="campaign-box">

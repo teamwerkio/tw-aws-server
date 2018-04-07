@@ -37,11 +37,20 @@
 					$size_id=$load_res['tsizeID'];
 					$inv_id=$load_res['commID'];
 
+
+					$small_ban=$load_res['small_ban'];
+					$small_ban_tag='banner_small';
+
+					
+					$small_ban_tag=(($small_ban=="") ? 'banner_big' : $small_ban_tag);
+					$small_ban=(($small_ban=="") ? $load_res['big_ban'] : $small_ban);
+
+
 					$output.='
 					<div class="col-lg-4 col-sm-6 col-6">
 						<div class="campaign-item wow fadeInUp" data-wow-delay=".1s">
 							<a class="overlay" style="height: 240px;" href="project.php?projID='.$load_res['projID'].'">
-								<img src="'.getimgURL($load_res['small_ban'], "banner_small").'" style="height: 240px;" />
+								<img src="'.getimgURL($small_ban, $small_ban_tag).'" style="height: 240px;" />
 								<span class="ion-paper-airplane"></span>
 							</a>
 							<div class="campaign-box">
