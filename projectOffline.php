@@ -66,6 +66,11 @@
     <!-- bootstrap wrappable css to avoid conflicts -->
   	<link rel="stylesheet" href="https://formden.com/static/assets/demos/bootstrap-iso/bootstrap-iso/bootstrap-iso.css">
   	<link rel="stylesheet" href="https://formden.com/static/assets/demos/bootstrap-iso/bootstrap-iso/bootstrap-iso.css">
+  	<!-- sweet alerts -->
+  	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!-- 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script> -->
 </head>
 
 <body class="campaign-detail">
@@ -406,7 +411,7 @@
 								</div>
 								<?php
 								} ?>
-								<a href="login.php" class="btn-secondary" style="background-color: #73b941; border-color: #73b941; border-radius: 2px; border: 2px; margin-bottom: 3px;"><i class="fa fa-hand-o-up" aria-hidden="true"></i>Keep me posted</a>
+								<a href="login.php" class="btn-secondary" style="background-color: #73b941; border-color: #73b941;"><i class="fa fa-hand-o-up" aria-hidden="true"></i>Keep me posted</a>
 								<!-- <div class="share" style="margin-top: 42px;">
 									<p style="margin-bottom: 5px;">Share this project</p>
 									<ul>
@@ -491,7 +496,7 @@
 												?>
 
 													<div class="plan" style="margin-bottom: 15px;">
-														<a href="#">
+														<a href="login.php">
 															
 																		
 															<h4><?php echo $role_res['title'];
