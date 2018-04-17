@@ -183,7 +183,7 @@
 										<div class="col-lg-4 col-md-6 col-sm-6 col-6 filterinteresting filterpopular filterlatest">
 											<div class="campaign-item wow fadeInUp" data-wow-delay=".1s">
 												<a class="overlay" href="projectOffline.php?projID=<?php echo $feat['id'];?>&viewOff=true">
-													<img src="<?php echo getimgURL($item_res['small_ban'], "banner_small");?>" alt="">
+													<img src="<?php echo getimgURL($item_res['small_ban'], "banner_small");?>" style="height: 240px;" alt="">
 													<span class="ion-paper-airplane"></span>
 												</a>
 												<div class="campaign-box">
