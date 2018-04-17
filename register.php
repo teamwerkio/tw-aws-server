@@ -87,7 +87,7 @@
 			var emailExists=true;
 			
 
-			
+			var re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 			var avCheck=false;
 
 			for(var i=0; i<avatar.length; i++){
@@ -112,6 +112,10 @@
 				return false;
 			}
 
+			if(!re.test(String(email.toLowerCase()))){
+				swal("Incorrect Email", "Unsupported characters present in Email", "error");
+				return false;
+			}
 			if (pass == "") {
 				swal("Missing field", "Please enter a Password", "warning");
 				return false;
