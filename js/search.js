@@ -216,11 +216,18 @@ $(document).ready(function(){
 		tryCount: 0,
 		retryLimit: 4,
 		success: function(data){
-			let prof=data.projects.map(x =>x.profilepic);
-			let bigBan=data.projects.map(x =>x.big_ban);
-			let smallBan=data.projects.map(x =>x.small_ban);
+			if(data.projects.length==0){
+				ReactDOM.render(<h1>No results available :(</h1>,
+					document.getElementById('proj-res'));
+			}
+			else{
+				let prof=data.projects.map(x =>x.profilepic);
+				let bigBan=data.projects.map(x =>x.big_ban);
+				let smallBan=data.projects.map(x =>x.small_ban);
 			
-			generateObject(data.projects, prof, bigBan, smallBan);
+				generateObject(data.projects, prof, bigBan, smallBan);
+			}
+			
 
 			
 		},
