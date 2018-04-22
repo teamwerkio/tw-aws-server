@@ -107,4 +107,30 @@
 		}
 
 	}
+
+	function smallbanChecker($small,$big){
+		if($small===""){
+			return getimgURL($big, 'banner_big');
+		}
+		else{
+			return getimgURL($small, 'banner_small');
+		}
+	}
+	if(isset($_POST['profilepic'])){
+		$profilepic_url=array_map("getProfURL", $_POST['profilepic']);
+		$ban_url=array_map("smallbanChecker", $_POST['smallban'], $_POST['bigban']);
+		$json=array("profilepic"=>$profilepic_url, "banner"=>$ban_url);
+		echo json_encode($json);
+
+	}
+	// if(isset($_GET['jsimg'])){
+	// 	if(isset($_GET['imagetype'])=="profilepic"){
+	// 		error_log(getProfURL($_GET['jsimg']));
+	// 		echo getProfURL($_GET['jsimg']);
+	// 	}
+	// 	else{
+	// 		error_log(getimgURL($_GET['jsimg'], $_GET['imagetype']));
+	// 		echo getimgURL($_GET['jsimg'], $_GET['imagetype']);
+	// 	}
+	// }
 ?>

@@ -4,7 +4,7 @@
 	include("img_url.php");
 	include("utilities.php");
 	
-	if(!isset($_SESSION['usr'])){
+	if(!isset($_SESSION['usr']) || !isset($_POST['search'])){
 		header("Location:usr.php");
 	}
 	else{
@@ -12,43 +12,28 @@
 		$home_qry = mysqli_query($dbconnect, $home_sql);
 		$home_res = mysqli_fetch_assoc($home_qry);
 		$tab_disp=$home_res['firstname'];
-	}
-	$proj_sql = "SELECT * FROM project";
-	$proj_qry=mysqli_query($dbconnect, $proj_sql);
-	$proj_res=mysqli_fetch_assoc($proj_qry);
 
-	$testIds=array();
-	$testSql="SELECT usrID FROM Testers";
-	$testqry=mysqli_query($dbconnect, $testSql);
-	$testRes=mysqli_fetch_assoc($testqry);
-	do{
-		array_push($testIds, $testRes["usrID"]);
-	}while($testRes=mysqli_fetch_assoc($testqry));
-
-	$trending_proj_id=0;
-	do{
-		$json_dec=json_decode($proj_res['tags'], true);
-		if(@$json_dec["trending"]==true){
-			$trending_proj_id=$proj_res['projID'];
+		$queryTerm=$_POST['search'];
+		if($queryTerm===""){
+			header("Location:usr.php");
 		}
-	}while($proj_res=mysqli_fetch_assoc($proj_qry));
+
+		$parsed_ini=parse_ini_file("../../cred.ini", true);
+
+		$apiKey=$parsed_ini["API"]["apiKey"];
+	}
+
+
+
+
+
 ?>
 <!doctype html>
 <html lang="en">
 <head>
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-116312021-1"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-
-	  gtag('config', 'UA-116312021-1');
-	</script>
-
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Library | Teamwerk</title>
+	<title>Search Results | Teamwerk</title>
 
 	<!-- Style CSS -->
     <link rel="stylesheet" type="text/css" href="style.css" />
@@ -71,7 +56,7 @@
 								<div class="search-icon">
 									<a href="#" class="ion-ios-search-strong"></a>
 									<div class="form-search"></div>
-									<form action="#" method="POST" id="searchForm">
+									<form action="searchresults.php" method="POST" id="searchForm">
 								  		<input type="text" value="" name="search" placeholder="Search..." />
 								    	<button type="submit" value=""><span class="ion-ios-search-strong"></span></button>
 								  	</form>
@@ -124,7 +109,7 @@
 			<div style="margin-top: 20px;"></div><!-- .page-title -->
 
 			<div class='container' style="margin-bottom: 25px;">
-					<h2 style="margin-top: 13px; float: left;"><i class="fa fa-search"></i> Showing results for: [bleebloh]</h2>
+					<h2 style="margin-top: 13px; float: left;"><i class="fa fa-search"></i> Showing results for: <?php echo $_POST['search'];?></h2>
 					<div class="field-select" style="width: 280px; float: right;">
 						<select name="em_ext" id="" style="margin-bottom: 0px; border-radius: 0px;">
 							<option value="">Sort by A-Z</option>
@@ -143,176 +128,8 @@
 
 			<div class="campaigns">
 				<div class="container">
-					<div class="campaign-content">
-						<div class="row" id="lib-pg">
-							<?php
-								$trend_sql="SELECT * FROM project where projID='".$trending_proj_id."'";
-								$trend_qry=mysqli_query($dbconnect, $trend_sql);
-								$trend_res=mysqli_fetch_assoc($trend_qry);
-
-								$days_elapsed=timedifference_d($trend_res['dt']);
-								$cat=returnCat('proj_categories', 'catName', $trend_res['catID'], $dbconnect, 'catID');
-								$owner_f=returnCat('users', 'firstname', $trend_res['usrID'], $dbconnect, 'usrID');
-								$owner_l=returnCat('users', 'lastname', $trend_res['usrID'], $dbconnect, 'usrID');
-								$owner_p=returnCat('users', 'profilepic', $trend_res['usrID'], $dbconnect, 'usrID');
-								$proj_col=returnCat('colleges', 'colName', $trend_res['colID'], $dbconnect, 'colID');
-							?>
-
-
-							<?php
-
-								$proj_sql = "SELECT * FROM project LIMIT 10";
-								$proj_qry=mysqli_query($dbconnect, $proj_sql);
-								$proj_res=mysqli_fetch_assoc($proj_qry);
-								$count=0;
-								$final_id=0;
-
-								do{
-
-									$tagJson=json_decode($proj_res['tags'],true);
-									$notPriv=true;
-									if(@$tagJson["private"]==true){
-										if(!in_array($_SESSION['usr'], $testIds)){
-											$notPriv=false;
-										}
-										
-										
-									}
-									if($proj_res['projID']!==$trending_proj_id && $count<9 && $notPriv){
-										$count+=1;
-										$cat=returnCat('proj_categories', 'catName', $proj_res['catID'], $dbconnect, 'catID');
-										$owner_f=returnCat('users', 'firstname', $proj_res['usrID'], $dbconnect, 'usrID');
-										$owner_p=returnCat('users', 'profilepic', $proj_res['usrID'], $dbconnect, 'usrID');
-										?>
-											<div class="col-lg-4 col-sm-6 col-6" data-id2="<?php echo $proj_res['projID']; ?>">
-												<div class="campaign-item wow fadeInUp" data-wow-delay=".1s">
-													<a class="overlay content" style="height: 240px;" href="project.php?projID=<?php echo $proj_res['projID']; ?>">
-														<?php echo '<img src="'.getimgURL($proj_res['small_ban'], "banner_small").'" style="height: 240px;" />'; ?>
-														<span class="ion-paper-airplane"></span>
-													</a>
-													<div class="campaign-box">
-														<a href="#" class="category"><?php echo $cat; ?></a>
-														<h3><a class="content" href="project.php?projID=<?php echo $proj_res['projID']; ?>"><?php echo $proj_res['projName']; ?></a></h3>
-														<div class="campaign-description"><?php echo $proj_res['sm_desc']; ?></div>
-														<div class="campaign-author"><a class="author-icon" href="profile.php?other_usr=<?php echo $proj_res['usrID']; ?>">
-															<?php echo '<img src="'.getProfURL($owner_p).'" />'; ?></a>by <a class="author-name" href="profile.php?other_usr=<?php echo $proj_res['usrID']; ?>"><?php echo $owner_f; ?>		
-														</a></div>
-														<div class="process">
-															<div class="raised"><span style="width: <?php echo $proj_res['progress'];?>%;"></span></div>
-															<div class="process-info">
-																<div class="process-pledged"><span><?php
-																		$json=$proj_res['subs'];
-																		$json=json_decode($json, true);
-																		echo count($json['subs']);?></span>interest</div>
-
-																	<?php
-																		$size_id=$proj_res['tsizeID'];
-																		if($size_id==1){
-																			?>
-																			<!-- Small Team -->
-																			<div class="process-pledged"><span>
-																				<a data-tooltip="Small team">
-																				<i class="fa fa-user"></i>
-																				<i class="fa fa-user"></i></a>
-																			</span>team size</div>
-																			<?php
-																		}
-																		elseif ($size_id==2) {
-																			?>
-																			<!-- Medium Team -->
-																			<div class="process-pledged"><span>
-																				<a data-tooltip="Medium team">
-																				<i class="fa fa-user"></i>
-																				<i class="fa fa-user"></i>
-																				<i class="fa fa-user"></i></a>
-																			</span>team size</div>
-																			<?php
-																		}
-																		elseif ($size_id==3) {
-																			?>
-																			<!-- Large Team -->
-																			<div class="process-pledged"><span>
-																				<a data-tooltip="Large team">
-																				<i class="fa fa-user"></i>
-																				<i class="fa fa-user"></i>
-																				<i class="fa fa-user"></i>
-																				<i class="fa fa-user"></i></a>
-																			</span>team size</div>
-																			<?php
-																		}
-																		elseif ($size_id==4) {
-																			?>
-																			<!-- Extra Large Team -->
-																			<div class="process-pledged"><span>
-																				<a data-tooltip="Extra large team">
-																				<i class="fa fa-user"></i>
-																				<i class="fa fa-user"></i>
-																				<i class="fa fa-user"></i>
-																				<i class="fa fa-user-plus"></i></a>
-																			</span>team size</div>
-																			<?php
-																		}
-																	?>
-																	<?php
-																		$inv_id=$proj_res['commID'];
-																		if($inv_id==1){
-																			?>
-																			<!-- < 10 hrs/week -->
-																			<div class="process-time"><span>
-																				<a data-tooltip="< 10 hrs/week (approx.)">
-																				<i class="fa fa-clock-o"></i></a>
-																			</span>involvement</div>
-																			<?php
-																		}
-																		elseif ($inv_id==2) {
-																			?>
-																			<!-- 11 to 20 hrs/week -->
-																			<div class="process-time"><span>
-																				<a data-tooltip="11 to 20 hrs/week (approx.)">
-																				<i class="fa fa-clock-o"></i>
-																				<i class="fa fa-clock-o"></i></a>
-																			</span>involvement</div>
-																			<?php
-																		}
-																		elseif ($inv_id==3) {
-																			?>
-																			<!-- 21 to 30 hrs/week -->
-																			<div class="process-time"><span>
-																				<a data-tooltip="21 to 30 hrs/week (approx.)">
-																				<i class="fa fa-clock-o"></i>
-																				<i class="fa fa-clock-o"></i>
-																				<i class="fa fa-clock-o"></i></a>
-																			</span>involvement</div>
-																			<?php
-																		}
-																		elseif ($inv_id==4) {
-																			?>
-																			<!-- > 31 hrs/week -->
-																			<div class="process-time"><span>
-																				<a data-tooltip="> 31 hrs/week (approx.)">
-																				<i class="fa fa-clock-o"></i>
-																				<i class="fa fa-clock-o"></i>
-																				<i class="fa fa-clock-o"></i>
-																				<i class="fa fa-clock-o"></i></a>
-																			</span>involvement</div>
-																			<?php
-																		}
-																	?>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										<?php
-										$final_id=$proj_res['projID'];
-
-								}}while($proj_res=mysqli_fetch_assoc($proj_qry));
-
-							?>											
-						</div>
+					<div class="campaign-content" id="proj-res">
 					</div>
-					
-					<div class="latest-button wow fadeInUp" name="loading" data-wow-delay=".1s" ><a data-finalID="<?php echo $final_id;?>" id="load_more" class="btn-primary">Load more</a></div>
 
 				</div>
 			</div><!-- .latest -->
@@ -392,84 +209,22 @@
     <script type="text/javascript" src="libs/wow/wow.min.js"></script>
     <script type="text/javascript" src="libs/isotope/isotope.pkgd.min.js"></script>
     <script type="text/javascript" src="libs/bxslider/jquery.bxslider.min.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.24.0/babel.js"></script>
+
+	<script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+	<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+	
+	<!-- For Dev only! -->
+	<!-- <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+	<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script> -->
     <!-- orther script -->
     <script  type="text/javascript" src="js/main.js"></script>
+    <script type="text/babel" src="js/search.js"></script>
     <script type="text/javascript">
-    	var trend=<?php echo $trending_proj_id;?>;
-
-
-    	$(document).ready(function(){
-    		$(".trend").click(function(){
-    			var button=$(this);
-    			
-    			$.ajax({
-    				url: 'update_server.php',
-    				type: 'POST',
-    				data: {
-    					'clicked': 1,
-    					'projID': button.closest('.clearfix').data("id"),
-    					'usrID': <?php echo $_SESSION['usr'];?>,
-    				},
-    				success: function(data){
-    					
-    				}
-    			});
-    		});
-    		$(".content").click(function(){
-    			var button=$(this);
- 				
-    			$.ajax({
-    				url: 'update_server.php',
-    				type: 'POST',
-    				data: {
-    					'clicked': 1,
-    					'projID': button.closest('.col-sm-6').data("id2"),
-    					'usrID': <?php echo $_SESSION['usr'];?>,
-    				},
-    				success: function(data){
-
-    				}
-    			});
-    			
-    		});
-    	});
-
-
-    	$(document).on('click', '#load_more', function(){
-    		var button=$(this);
-    		var finID=button.attr("data-finalID");
-    		button.html("Loading...");
-    		$.ajax({
-    			url: 'load_more_req.php',
-    			type: 'POST',
-    			data: {
-    				'load': 1,
-    				'finID': finID,
-    				'trend': trend,
-    			},
-    			success: function(data){
-    				console.log(data);
-    				if(data==="0"){
-    					button.html("All showing");
-
-    				}
-    				else{
-    					var json=JSON.parse(data);
-    					
-    					$("#lib-pg").append(json.html);
-    					if(json.count==="0"){
-    						button.html("All showing");
-    					}
-    					else{
-    						$("#load_more").attr("data-finalID",json.final);
-
-    						button.html("Load more");
-    					}
-    					
-    				}
-    			}
-    		});
-    	});
+    	var apiKey="<?php echo $apiKey;?>";
+    	var queryTerm="<?php echo $queryTerm;?>";
+    	
     </script>
     
 </body>

@@ -15,4 +15,14 @@
 		return $cat_res[$col];
 	}
 
+	function searchTerm($term){
+		$reg="/[\]\[.!?,;:'%\/\\\\ ]/";
+		$res=preg_replace($reg, "%", $term);
+		if(substr($res, -1)==="%"){
+			$res=substr($res, 0, -1);
+		}
+		return strtolower($res);
+	}
+		
+
 ?>

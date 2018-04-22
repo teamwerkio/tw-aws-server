@@ -98,7 +98,7 @@
 						<ul>
 							<li>
 								<div class="search-icon">
-									<a href="#" class="ion-ios-search-strong"></a>
+									<a href="searchresults.php" class="ion-ios-search-strong"></a>
 									<div class="form-search"></div>
 									<form action="#" method="POST" id="searchForm">
 								  		<input type="text" value="" name="search" placeholder="Search..." />
