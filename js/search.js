@@ -189,19 +189,19 @@ $(document).ready(function(){
 		render(){
 			return(
 				<div className="field-select" style={{width: 280}}>
-					<ul name="em_ext" id="" style={{marginBottom: 0, borderRadius: 0}}>
-						<select value="" >Select a filter</select>
-						<select value="" onClick={this.alphabet.bind(this, true)}>Sort by A-Z</select>
-						<select value="" onClick={this.alphabet.bind(this, false)}>Sort by Z-A</select>
-						<select value="" onClick={this.time.bind(this, true)}>Sort by Newest-Oldest</select>
-						<select value="" onClick={this.time.bind(this, false)}>Sort by Oldest-Newest</select>
-						<select value="" onClick={this.size.bind(this, true)}>Sort by Team Size [High to Low]</select>
-						<select value="" onClick={this.size.bind(this, false)}>Sort by Team Size [Low to High]</select>
-						<select value="" onClick={this.involve.bind(this,false)}>Sort by Involvement [High to Low]</select>
-						<select value="" onClick={this.involve.bind(this,false)}>Sort by Involvement [Low to High]</select>
-						<select value="" onClick={this.interest.bind(this,true)}>Sort by Interest [High to Low]</select>
-						<select value="" onClick={this.interest.bind(this,false)}>Sort by Interest [Low to High]</select>
-					</ul>
+					<select name="em_ext" id="" style={{marginBottom: 0, borderRadius: 0}}>
+						<option value="" >Select a filter</option>
+						<option value="" onClick={this.alphabet.bind(this, true)}>Sort by A-Z</option>
+						<option value="" onClick={this.alphabet.bind(this, false)}>Sort by Z-A</option>
+						<option value="" onClick={this.time.bind(this, true)}>Sort by Newest-Oldest</option>
+						<option value="" onClick={this.time.bind(this, false)}>Sort by Oldest-Newest</option>
+						<option value="" onClick={this.size.bind(this, true)}>Sort by Team Size [High to Low]</option>
+						<option value="" onClick={this.size.bind(this, false)}>Sort by Team Size [Low to High]</option>
+						<option value="" onClick={this.involve.bind(this,false)}>Sort by Involvement [High to Low]</option>
+						<option value="" onClick={this.involve.bind(this,false)}>Sort by Involvement [Low to High]</option>
+						<option value="" onClick={this.interest.bind(this,true)}>Sort by Interest [High to Low]</option>
+						<option value="" onClick={this.interest.bind(this,false)}>Sort by Interest [Low to High]</option>
+					</select>
 				</div>
 			);
 		}
