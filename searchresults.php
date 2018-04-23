@@ -110,20 +110,7 @@
 
 			<div class='container' style="margin-bottom: 25px;">
 					<h2 style="margin-top: 13px; float: left;"><i class="fa fa-search"></i> Showing results for: <?php echo $_POST['search'];?></h2>
-					<div class="field-select" style="width: 280px; float: right;">
-						<select name="em_ext" id="" style="margin-bottom: 0px; border-radius: 0px;">
-							<option value="">Sort by A-Z</option>
-							<option value="">Sort by Z-A</option>
-							<option value="">Sort by Newest-Oldest</option>
-							<option value="">Sort by Oldest-Newest</option>
-							<option value="">Sort by Team Size [High to Low]</option>
-							<option value="">Sort by Team Size [Low to High]</option>
-							<option value="">Sort by Involvement [High to Low]</option>
-							<option value="">Sort by Involvement [Low to High]</option>
-							<option value="">Sort by Interest [High to Low]</option>
-							<option value="">Sort by Interest [Low to High]</option>
-						</select>
-					</div>
+					<div id="filter" style="float: right;"></div>
 				</div>
 
 			<div class="campaigns">
@@ -217,8 +204,8 @@
 	
 	<!-- For Dev only! -->
 <!-- 	<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
-	<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script> -->
-    <!-- orther script -->
+	<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+ -->    <!-- orther script -->
     <script  type="text/javascript" src="js/main.js"></script>
     <script type="text/babel" src="js/search.js"></script>
     <script type="text/javascript">

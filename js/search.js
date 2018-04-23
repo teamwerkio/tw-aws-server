@@ -95,7 +95,112 @@ $(document).ready(function(){
 				);
 		}
 	}
-	
+	class Filter extends React.Component{
+		constructor(props){
+			super(props);
+			this.state={
+				data: this.props.data,
+			}
+		}
+		involve(highToLow){
+			var arr=this.state.data.map((x,i) =>{
+				if (x.time=="10 hrs/week"){
+					return [1, i];
+				}
+				else if (x.time=="11 to 20 hrs/week"){return [2, i];}
+				else if (x.time=="21 to 30 hrs/week"){return [3, i];}
+				else {return [4, i];}
+			});
+			if (highToLow) {arr.sort((a,b) => {return b[0]-a[0];})}
+			else{arr.sort((a,b) =>{return a[0]-b[0];})}
+			var newData=arr.map(x => this.state.data[x[1]]);
+			ReactDOM.render(<Layout data={newData}/>,
+					document.getElementById('proj-res'));
+		}
+		size(highToLow){
+			var arr=this.state.data.map((x,i) =>{
+				if (x.tsize=="Small"){
+					return [1, i];
+				}
+				else if (x.tsize=="Medium"){return [2, i];}
+				else if (x.tsize=="Large"){return [3, i];}
+				else {return [4, i];}
+			});
+			if (highToLow) {arr.sort((a,b) => {return b[0]-a[0];})}
+			else{arr.sort((a,b) =>{return a[0]-b[0];})}
+			var newData=arr.map(x => this.state.data[x[1]]);
+			ReactDOM.render(<Layout data={newData}/>,
+					document.getElementById('proj-res'));
+		}
+		alphabet(aToZ){
+			var arr=this.state.data.map((x,i) =>[x.projName, i]);
+			if(aToZ){
+				arr.sort((a,b)	=>	{
+					if (a[0].toLowerCase() < b[0].toLowerCase()) {return -1;}
+					else if(a[0].toLowerCase() > b[0].toLowerCase()) {return 1;}
+					else {return 0;}
+				});
+			}
+			else{
+				arr.sort((a,b)	=>	{
+					if (a[0].toLowerCase() < b[0].toLowerCase()) {return 1;}
+					else if(a[0].toLowerCase() > b[0].toLowerCase()) {return -1;}
+					else {return 0;}
+				});
+			}
+			var newData=arr.map(x => this.state.data[x[1]]);
+			ReactDOM.render(<Layout data={newData}/>,
+					document.getElementById('proj-res'));
+
+		}
+		time(newToOld){
+			var arr=this.state.data.map((x,i) =>[x.projID, i]);
+			if (newToOld){
+				arr.sort((a,b)	=>	{return b[0]-a[0];});
+			}
+			else{
+				arr.sort((a,b)	=>	{return a[0]-b[0];});
+			}
+			
+			var newData=arr.map(x => this.state.data[x[1]]);
+			ReactDOM.render(<Layout data={newData}/>,
+					document.getElementById('proj-res'));
+		}
+		interest(highToLow){
+			var arr=this.state.data.map((x,i) =>[x.subs, i]);
+			if (highToLow) {
+				arr.sort((a,b)	=>	{return b[0]-a[0];});
+				console.log("1");
+			}
+			else{
+				arr.sort((a,b)	=>	{return a[0]-b[0];});
+				console.log("2");
+			}
+			
+			var newData=arr.map(x => this.state.data[x[1]]);
+			ReactDOM.render(<Layout data={newData}/>,
+					document.getElementById('proj-res'));
+		}
+		render(){
+			return(
+				<div className="field-select" style={{width: 280}}>
+					<select name="em_ext" id="" style={{marginBottom: 0, borderRadius: 0}}>
+						<option value="" >Select a filter</option>
+						<option value="" onClick={this.alphabet.bind(this, true)}>Sort by A-Z</option>
+						<option value="" onClick={this.alphabet.bind(this, false)}>Sort by Z-A</option>
+						<option value="" onClick={this.time.bind(this, true)}>Sort by Newest-Oldest</option>
+						<option value="" onClick={this.time.bind(this, false)}>Sort by Oldest-Newest</option>
+						<option value="" onClick={this.size.bind(this, true)}>Sort by Team Size [High to Low]</option>
+						<option value="" onClick={this.size.bind(this, false)}>Sort by Team Size [Low to High]</option>
+						<option value="" onClick={this.involve.bind(this,false)}>Sort by Involvement [High to Low]</option>
+						<option value="" onClick={this.involve.bind(this,false)}>Sort by Involvement [Low to High]</option>
+						<option value="" onClick={this.interest.bind(this,true)}>Sort by Interest [High to Low]</option>
+						<option value="" onClick={this.interest.bind(this,false)}>Sort by Interest [Low to High]</option>
+					</select>
+				</div>
+			);
+		}
+	}
 
 	class Project extends React.Component{
 		constructor(props){
@@ -175,8 +280,11 @@ $(document).ready(function(){
 			super();
 		}
 		render(){
+			const generateKey=(i) =>{
+				return `${i}_${ new Date().getTime() }`;
+			}
 			var dataArr=this.props.data;
-			var projects=dataArr.map((data, index) =><Project key={index} json={data}/>);
+			var projects=dataArr.map((data, index) =><Project key={generateKey(index)} json={data}/>);
 			return(
 				<div className="row" id="lib-pg">
 				{projects}
@@ -261,6 +369,8 @@ $(document).ready(function(){
 				}
 				ReactDOM.render(<Layout data={data}/>,
 					document.getElementById('proj-res'));
+				ReactDOM.render(<Filter data={data}/>,
+					document.getElementById('filter'));
 			},
 			error: function(jqXHR, textStatus, errorThrown){
 				console.log(jqXHR);
