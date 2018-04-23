@@ -190,17 +190,17 @@ $(document).ready(function(){
 			return(
 				<div className="field-select" style={{width: 280}}>
 					<select name="em_ext" id="" style={{marginBottom: 0, borderRadius: 0}}>
-						<option value="" >Select a filter</option>
-						<option value="" onClick={this.alphabet.bind(this, true)}>Sort by A-Z</option>
-						<option value="" onClick={this.alphabet.bind(this, false)}>Sort by Z-A</option>
-						<option value="" onClick={this.time.bind(this, true)}>Sort by Newest-Oldest</option>
-						<option value="" onClick={this.time.bind(this, false)}>Sort by Oldest-Newest</option>
-						<option value="" onClick={this.size.bind(this, true)}>Sort by Team Size [High to Low]</option>
-						<option value="" onClick={this.size.bind(this, false)}>Sort by Team Size [Low to High]</option>
-						<option value="" onClick={this.involve.bind(this,false)}>Sort by Involvement [High to Low]</option>
-						<option value="" onClick={this.involve.bind(this,false)}>Sort by Involvement [Low to High]</option>
-						<option value="" onClick={this.interest.bind(this,true)}>Sort by Interest [High to Low]</option>
-						<option value="" onClick={this.interest.bind(this,false)}>Sort by Interest [Low to High]</option>
+						<button value="" >Select a filter</button>
+						<button value="" onClick={this.alphabet.bind(this, true)}>Sort by A-Z</button>
+						<button value="" onClick={this.alphabet.bind(this, false)}>Sort by Z-A</button>
+						<button value="" onClick={this.time.bind(this, true)}>Sort by Newest-Oldest</button>
+						<button value="" onClick={this.time.bind(this, false)}>Sort by Oldest-Newest</button>
+						<button value="" onClick={this.size.bind(this, true)}>Sort by Team Size [High to Low]</button>
+						<button value="" onClick={this.size.bind(this, false)}>Sort by Team Size [Low to High]</button>
+						<button value="" onClick={this.involve.bind(this,false)}>Sort by Involvement [High to Low]</button>
+						<button value="" onClick={this.involve.bind(this,false)}>Sort by Involvement [Low to High]</button>
+						<button value="" onClick={this.interest.bind(this,true)}>Sort by Interest [High to Low]</button>
+						<button value="" onClick={this.interest.bind(this,false)}>Sort by Interest [Low to High]</button>
 					</select>
 				</div>
 			);
