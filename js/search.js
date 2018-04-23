@@ -189,7 +189,7 @@ $(document).ready(function(){
 		render(){
 			return(
 				<div className="field-select" style={{width: 280}}>
-					<select name="em_ext" id="" style={{marginBottom: 0, borderRadius: 0}}>
+					<ul name="em_ext" id="" style={{marginBottom: 0, borderRadius: 0}}>
 						<select value="" >Select a filter</select>
 						<select value="" onClick={this.alphabet.bind(this, true)}>Sort by A-Z</select>
 						<select value="" onClick={this.alphabet.bind(this, false)}>Sort by Z-A</select>
@@ -201,7 +201,7 @@ $(document).ready(function(){
 						<select value="" onClick={this.involve.bind(this,false)}>Sort by Involvement [Low to High]</select>
 						<select value="" onClick={this.interest.bind(this,true)}>Sort by Interest [High to Low]</select>
 						<select value="" onClick={this.interest.bind(this,false)}>Sort by Interest [Low to High]</select>
-					</select>
+					</ul>
 				</div>
 			);
 		}
