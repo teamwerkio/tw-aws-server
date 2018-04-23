@@ -188,7 +188,8 @@
 			</div>
 		</footer><!-- site-footer -->
 	</div><!-- #wrapper -->
-	<!-- jQuery -->    
+	<!-- jQuery -->
+	<script type="text/javascript" src="https://unpkg.com/popper.js/dist/umd/popper.min.js"></script>    
     <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
     <script type="text/javascript" src="libs/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="libs/owl-carousel/owl.carousel.min.js"></script>
@@ -196,7 +197,7 @@
     <script type="text/javascript" src="libs/wow/wow.min.js"></script>
     <script type="text/javascript" src="libs/isotope/isotope.pkgd.min.js"></script>
     <script type="text/javascript" src="libs/bxslider/jquery.bxslider.min.js"></script>
-	<script type="text/javascript" src="https://unpkg.com/popper.js/dist/umd/popper.min.js"></script>
+	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.24.0/babel.js"></script>
 
 	<script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>

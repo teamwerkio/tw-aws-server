@@ -188,40 +188,40 @@ $(document).ready(function(){
 		}
 		render(){
 			return(
-				// <div className="dropdown">
-				//   <option className="btn btn-secondary dropdown-toggle" style={{width: 280}} type="option" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				//     Dropdown
-				//   </option>
-				//   <div className="dropdown-menu" aria-labelledby="dropdownMenu2" style={{marginBottom: 0, borderRadius: 0}}>
-				//     <option className="dropdown-item" type="option" >Select a filter</option>
-				// 	<option className="dropdown-item" type="option" onClick={this.alphabet.bind(this, true)}>Sort by A-Z</option>
-				// 	<option className="dropdown-item" type="option" onClick={this.alphabet.bind(this, false)}>Sort by Z-A</option>
-				// 	<option className="dropdown-item" type="option" onClick={this.time.bind(this, true)}>Sort by Newest-Oldest</option>
-				// 	<option className="dropdown-item" type="option" onClick={this.time.bind(this, false)}>Sort by Oldest-Newest</option>
-				// 	<option className="dropdown-item" type="option" onClick={this.size.bind(this, true)}>Sort by Team Size [High to Low]</option>
-				// 	<option className="dropdown-item" type="option" onClick={this.size.bind(this, false)}>Sort by Team Size [Low to High]</option>
-				// 	<option className="dropdown-item" type="option" onClick={this.involve.bind(this,false)}>Sort by Involvement [High to Low]</option>
-				// 	<option className="dropdown-item" type="option" onClick={this.involve.bind(this,false)}>Sort by Involvement [Low to High]</option>
-				// 	<option className="dropdown-item" type="option" onClick={this.interest.bind(this,true)}>Sort by Interest [High to Low]</option>
-				// 	<option className="dropdown-item" type="option" onClick={this.interest.bind(this,false)}>Sort by Interest [Low to High]</option>
-				//   </div>
-				// </div>
-
-				<div className="field-select" style={{width: 280}}>
-					<select name="em_ext" id="" style={{marginBottom: 0, borderRadius: 0}}>
-						<option value="" >Select a filter</option>
-						<option value="" onClick={this.alphabet.bind(this, true)}>Sort by A-Z</option>
-						<option value="" onClick={this.alphabet.bind(this, false)}>Sort by Z-A</option>
-						<option value="" onClick={this.time.bind(this, true)}>Sort by Newest-Oldest</option>
-						<option value="" onClick={this.time.bind(this, false)}>Sort by Oldest-Newest</option>
-						<option value="" onClick={this.size.bind(this, true)}>Sort by Team Size [High to Low]</option>
-						<option value="" onClick={this.size.bind(this, false)}>Sort by Team Size [Low to High]</option>
-						<option value="" onClick={this.involve.bind(this,false)}>Sort by Involvement [High to Low]</option>
-						<option value="" onClick={this.involve.bind(this,false)}>Sort by Involvement [Low to High]</option>
-						<option value="" onClick={this.interest.bind(this,true)}>Sort by Interest [High to Low]</option>
-						<option value="" onClick={this.interest.bind(this,false)}>Sort by Interest [Low to High]</option>
-					</select>
+				<div className="dropdown">
+				  <button className="btn btn-secondary dropdown-toggle" style={{width: 280, backgroundColor:"#73b941", borderColor: "#73b941"}} type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				    Filter
+				  </button>
+				  <div className="dropdown-menu" aria-labelledby="dropdownMenu2" style={{marginBottom: 0, borderRadius: 0}}>
+					<button className="dropdown-item" type="button" onClick={this.alphabet.bind(this, true)}>Sort by A-Z</button>
+					<button className="dropdown-item" type="button" onClick={this.alphabet.bind(this, false)}>Sort by Z-A</button>
+					<button className="dropdown-item" type="button" onClick={this.time.bind(this, true)}>Sort by Newest-Oldest</button>
+					<button className="dropdown-item" type="button" onClick={this.time.bind(this, false)}>Sort by Oldest-Newest</button>
+					<button className="dropdown-item" type="button" onClick={this.size.bind(this, true)}>Sort by Team Size [High to Low]</button>
+					<button className="dropdown-item" type="button" onClick={this.size.bind(this, false)}>Sort by Team Size [Low to High]</button>
+					<button className="dropdown-item" type="button" onClick={this.involve.bind(this,false)}>Sort by Involvement [High to Low]</button>
+					<button className="dropdown-item" type="button" onClick={this.involve.bind(this,false)}>Sort by Involvement [Low to High]</button>
+					<button className="dropdown-item" type="button" onClick={this.interest.bind(this,true)}>Sort by Interest [High to Low]</button>
+					<button className="dropdown-item" type="button" onClick={this.interest.bind(this,false)}>Sort by Interest [Low to High]</button>
+				  </div>
 				</div>
+
+				// <div className="field-select" style={{width: 280}}>
+				// 	<select name="em_ext" id="" style={{marginBottom: 0, borderRadius: 0}}>
+				// 		<button value="" >Select a filter</button>
+				// 		<button type="button">h</button>
+				// 		<button value="" onClick={this.alphabet.bind(this, true)}>Sort by A-Z</button>
+				// 		<button value="" onClick={this.alphabet.bind(this, false)}>Sort by Z-A</button>
+				// 		<button value="" onClick={this.time.bind(this, true)}>Sort by Newest-Oldest</button>
+				// 		<button value="" onClick={this.time.bind(this, false)}>Sort by Oldest-Newest</button>
+				// 		<button value="" onClick={this.size.bind(this, true)}>Sort by Team Size [High to Low]</button>
+				// 		<button value="" onClick={this.size.bind(this, false)}>Sort by Team Size [Low to High]</button>
+				// 		<button value="" onClick={this.involve.bind(this,false)}>Sort by Involvement [High to Low]</button>
+				// 		<button value="" onClick={this.involve.bind(this,false)}>Sort by Involvement [Low to High]</button>
+				// 		<button value="" onClick={this.interest.bind(this,true)}>Sort by Interest [High to Low]</button>
+				// 		<button value="" onClick={this.interest.bind(this,false)}>Sort by Interest [Low to High]</button>
+				// 	</select>
+				// </div>
 			);
 		}
 	}
