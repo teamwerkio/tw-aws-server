@@ -103,6 +103,7 @@ $(document).ready(function(){
 			}
 		}
 		involve(highToLow){
+			console.log("here");
 			var arr=this.state.data.map((x,i) =>{
 				if (x.time=="10 hrs/week"){
 					return [1, i];
@@ -118,6 +119,7 @@ $(document).ready(function(){
 					document.getElementById('proj-res'));
 		}
 		size(highToLow){
+			console.log("here1");
 			var arr=this.state.data.map((x,i) =>{
 				if (x.tsize=="Small"){
 					return [1, i];
@@ -133,6 +135,7 @@ $(document).ready(function(){
 					document.getElementById('proj-res'));
 		}
 		alphabet(aToZ){
+			console.log("here2");
 			var arr=this.state.data.map((x,i) =>[x.projName, i]);
 			if(aToZ){
 				arr.sort((a,b)	=>	{
@@ -154,6 +157,7 @@ $(document).ready(function(){
 
 		}
 		time(newToOld){
+			console.log("here3");
 			var arr=this.state.data.map((x,i) =>[x.projID, i]);
 			if (newToOld){
 				arr.sort((a,b)	=>	{return b[0]-a[0];});
@@ -167,6 +171,7 @@ $(document).ready(function(){
 					document.getElementById('proj-res'));
 		}
 		interest(highToLow){
+			console.log("here4");
 			var arr=this.state.data.map((x,i) =>[x.subs, i]);
 			if (highToLow) {
 				arr.sort((a,b)	=>	{return b[0]-a[0];});
