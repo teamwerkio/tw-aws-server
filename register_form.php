@@ -12,8 +12,8 @@
 	$email=strtolower($_POST['email_signup']);
 	
 	$pitch=$_POST['pitch'];
-	$pass=hash('sha512', $_POST['pass_signup']);
-	$pass_v=hash('sha512', $_POST['pass_signup_verify']);
+	$pass=hash('sha3-512', $_POST['pass_signup']);
+	$pass_v=hash('sha3-512', $_POST['pass_signup_verify']);
 	$avatar="";
 	if(isset($_POST['avatar'])){
 		$avatar=$_POST['avatar'];
